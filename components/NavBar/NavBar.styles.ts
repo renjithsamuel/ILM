@@ -1,0 +1,83 @@
+import { themeValues } from "@/constants/ThemeConstants";
+import { makeStyles } from "@mui/styles";
+
+export const useNavBarStyles = makeStyles((theme) => ({
+  topNavBarRoot: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    paddingTop: theme.spacing(1),
+    width: "100vw",
+  },
+  topNavBarContainer: {
+    backgroundColor: themeValues.color.color1,
+    padding: theme.spacing(1.4),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    borderRadius: themeValues.borderRadius,
+    color: themeValues.color.textColor,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  searchInputWrap: {
+    color: themeValues.color.textColor,
+    borderRadius: theme.spacing(0.5),
+    backgroundColor: themeValues.color.color2,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: theme.spacing(1.5),
+  },
+  searchInput: {
+    all: "unset",
+    color: themeValues.color.color1,
+    outline: themeValues.color.borderColor2,
+    backgroundColor: themeValues.color.color2,
+    borderRadius: theme.spacing(0.5),
+    transition: themeValues.defaultTansition,
+    "&:focus": {
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+    },
+    "&::-webkit-input-placeholder": {
+      color: themeValues.color.color1,
+      opacity: 1,
+    },
+  },
+  sideNavContainer: {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: themeValues.sideNavWidth,
+    gap: theme.spacing(2),
+    padding: theme.spacing(1),
+    border: themeValues.thickborder,
+    borderColor: themeValues.color.color3,
+    borderTopColor: themeValues.color.transparent,
+    borderBottomLeftRadius: themeValues.borderRadius,
+    borderBottomRightRadius: themeValues.borderRadius,
+    marginLeft: theme.spacing(1.5),
+    transition: themeValues.longTransition,
+    overflow: "hidden",
+    // animation: "slide-down 1s ease",
+  },
+  sideMenuItem: {
+    border: themeValues.defaultborder,
+    borderColor: themeValues.color.color3,
+    borderRadius: themeValues.borderRadius,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "start",
+    gap: theme.spacing(2),
+    padding: theme.spacing(1),
+    fontWeight: themeValues.font.fontWeightThick,
+    transition: themeValues.defaultTansition,
+    "&:hover": {
+      backgroundColor: themeValues.color.color3,
+      cursor: "pointer",
+    },
+  },
+  currentSideMenu: {
+    backgroundColor: themeValues.color.color1,
+    color: themeValues.color.textColor,
+  },
+}));
