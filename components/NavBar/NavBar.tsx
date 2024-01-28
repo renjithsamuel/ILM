@@ -6,16 +6,24 @@ import { useNavBar } from "./NavBar.hooks";
 import { useUserContext } from "@/context/UserContext";
 import { SideNavItem } from "@/types/SideNav";
 import { IoSettingsOutline } from "react-icons/io5";
+import { ImLibrary } from "react-icons/im";
 import clsx from "clsx";
 import { sideMenuItems } from "@/constants/GlobalConstants";
+import { ReactNode } from "react";
 
 interface NavBarProps {
   showSearchBar: boolean;
   pageName?: string;
   menuItems: SideNavItem[];
+  children?: ReactNode;
 }
 
-export const NavBar = ({ showSearchBar, pageName, menuItems }: NavBarProps) => {
+export const NavBar = ({
+  showSearchBar,
+  pageName,
+  menuItems,
+  children,
+}: NavBarProps) => {
   const { handleSearch, currentSideMenu, handleSideMenuClick } = useNavBar();
   const classes = useNavBarStyles();
 
@@ -27,7 +35,10 @@ export const NavBar = ({ showSearchBar, pageName, menuItems }: NavBarProps) => {
       <Box className={classes.topNavBarRoot}>
         <Box className={classes.topNavBarContainer}>
           {/*  app label */}
-          <Typography variant="h5">Library</Typography>
+          <Box className={classes.libraryName}>
+            <ImLibrary size={themeValues.spacing(3)} />
+            <Typography variant="h5">Library</Typography>
+          </Box>
           {/* current page name */}
           {pageName && <Typography variant="h5">{pageName}</Typography>}
           {/* search bar */}
@@ -50,32 +61,37 @@ export const NavBar = ({ showSearchBar, pageName, menuItems }: NavBarProps) => {
         </Box>
       </Box>
       {/* side nav bar */}
-      <Box className={classes.sideNavContainer}>
-        {menuItems.map((menuItem, index) => {
-          return (
-            <Box
-              key={index}
-              onClick={() => handleSideMenuClick(menuItem.link)}
-              className={clsx(classes.sideMenuItem, {
-                [classes.currentSideMenu]: currentSideMenu === menuItem.link,
-              })}
-            >
-              <menuItem.icon />
-              <Typography variant="body1">{menuItem.name}</Typography>
-            </Box>
-          );
-        })}
-        <Box
-          className={clsx(classes.sideMenuItem, {
-            [classes.currentSideMenu]:
-              currentSideMenu === sideMenuItems.Settings.link,
+      <Box display={"flex"}>
+        <Box className={classes.sideNavContainer}>
+          {menuItems.map((menuItem, index) => {
+            return (
+              <Box
+                key={index}
+                onClick={() => handleSideMenuClick(menuItem.link)}
+                className={clsx(classes.sideMenuItem, {
+                  [classes.currentSideMenu]: currentSideMenu === menuItem.link,
+                })}
+              >
+                <menuItem.icon />
+                <Typography variant="body1">{menuItem.name}</Typography>
+              </Box>
+            );
           })}
-          sx={{ marginTop: themeValues.spacing(40) }}
-          onClick={() => handleSideMenuClick(sideMenuItems.Settings.link)}
-        >
-          <IoSettingsOutline />
-          <Typography variant="body1">{sideMenuItems.Settings.name}</Typography>
+          <Box
+            className={clsx(classes.sideMenuItem,classes.settingsMenu, {
+              [classes.currentSideMenu]:
+                currentSideMenu === sideMenuItems.Settings.link,
+            })}
+            onClick={() => handleSideMenuClick(sideMenuItems.Settings.link)}
+          >
+            <IoSettingsOutline />
+            <Typography variant="body1">
+              {sideMenuItems.Settings.name}
+            </Typography>
+          </Box>
         </Box>
+        {/* page main content */}
+        <Box>{children}</Box>
       </Box>
     </Box>
   );

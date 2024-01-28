@@ -8,6 +8,12 @@ export const useNavBarStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(1),
     width: "100vw",
   },
+  libraryName: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: theme.spacing(1.3),
+  },
   topNavBarContainer: {
     backgroundColor: themeValues.color.color1,
     padding: theme.spacing(1.4),
@@ -48,6 +54,7 @@ export const useNavBarStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     maxWidth: themeValues.sideNavWidth,
+    minWidth: "max-content",
     gap: theme.spacing(2),
     padding: theme.spacing(1),
     border: themeValues.thickborder,
@@ -58,6 +65,7 @@ export const useNavBarStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1.5),
     transition: themeValues.longTransition,
     overflow: "hidden",
+    height: "fit-content",
     // animation: "slide-down 1s ease",
   },
   sideMenuItem: {
@@ -79,5 +87,11 @@ export const useNavBarStyles = makeStyles((theme) => ({
   currentSideMenu: {
     backgroundColor: themeValues.color.color1,
     color: themeValues.color.textColor,
+  },
+  pageContent: {
+    padding: theme.spacing(1),
+  },
+  settingsMenu: {
+    marginTop: theme.spacing(35),
   },
 }));

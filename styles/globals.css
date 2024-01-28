@@ -12,7 +12,7 @@
   --icon-border-radius: 4px;
   --button-color: black;
   --button-hover-color: rgb(68, 68, 68);
-  --hover-color-chip: #d8d8d8;
+  --hover-color-chip: #d8d8d831;
   --devider-color: rgba(150, 150, 150, 0.625);
   --notification-color: #007bff;
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -40,6 +40,7 @@ a {
 
 .poppins {
   font-family: var(--font-family);
+  animation: name duration timing-function delay iteration-count direction fill-mode;
 }
 
 /* @keyframes slide-down {
@@ -61,8 +62,6 @@ a {
     max-height: 1000px;
   }
 }
-
-
 
 @keyframes slide-up {
   from {

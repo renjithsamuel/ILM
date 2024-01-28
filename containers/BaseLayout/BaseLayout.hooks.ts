@@ -23,6 +23,8 @@ type BaseLayoutHook = {
   user: User;
   isSuccess: boolean;
   isError: boolean;
+  isLoading: boolean;
+  isFetched: boolean;
   authenticated: boolean;
   menuItems: SideNavItem[];
   isAlertSnackbarOpen: AlertSnackbarHook["isAlertSnackbarOpen"];
@@ -61,15 +63,23 @@ export const useBaseLayout = ({
   //   data: getUserResponse,
   //   isError,
   //   isSuccess,
+  //   isLoading,
+  // isFetched,
   // } = useGetUserAPI(!!getEmail());
   // mocking
   const getUserResponse = { data: mockUser };
   const isError = false;
   const isSuccess = true;
+  const isLoading = false;
+  const isFetched = true;
+
 
   useEffect(() => {
     if (isSuccess) {
       // verify if token is present or not
+      
+      // todo remove this
+      setAuthenticated(true);
       if (Cookie.access_token && Cookie.email) {
         setAuthenticated(true);
       }
@@ -168,7 +178,9 @@ export const useBaseLayout = ({
   return {
     user,
     isSuccess,
+    isFetched,
     isError,
+    isLoading,
     authenticated,
     menuItems,
     alertSnackbarMessage,

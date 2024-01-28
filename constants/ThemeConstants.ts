@@ -14,11 +14,13 @@ export const themeValues = {
     borderColor2: "#ffffff",
     white: "#ffffff",
     black: "#000000",
+    lightGray: '#f1f1f1',
     transparent : 'transparent'
   },
   font: {
     fontWeightThick: "700",
   },
+  defaultFilterShadow  : 'drop-shadow(1px 2px 4px gray)',
   spacing: (value: number) => `${value * 8}px`,
   defaultTansition: "0.3s ease all",
   longTransition: "1s ease all",
