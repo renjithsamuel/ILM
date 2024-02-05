@@ -2,6 +2,11 @@ import { themeValues } from "@/constants/ThemeConstants";
 import { makeStyles } from "@mui/styles";
 
 export const useNavBarStyles = makeStyles((theme) => ({
+  navBarRoot: {
+    // position: "relative",
+    // height: '150vh',
+    // backgroundColor: themeValues.color.color2,
+  },
   topNavBarRoot: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
@@ -24,6 +29,7 @@ export const useNavBarStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    boxShadow: themeValues.shadow.boxShadowLight,
   },
   searchInputWrap: {
     color: themeValues.color.textColor,
@@ -32,18 +38,17 @@ export const useNavBarStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: theme.spacing(1.5),
+    padding: theme.spacing(1.3),
   },
   searchInput: {
     all: "unset",
     color: themeValues.color.color1,
     outline: themeValues.color.borderColor2,
     backgroundColor: themeValues.color.color2,
-    borderRadius: theme.spacing(0.5),
-    transition: themeValues.defaultTansition,
+    transition: themeValues.transition.defaultTansition,
     "&:focus": {
-      paddingLeft: theme.spacing(1),
-      paddingRight: theme.spacing(1),
+      paddingLeft: theme.spacing(0.5),
+      paddingRight: theme.spacing(0.5),
     },
     "&::-webkit-input-placeholder": {
       color: themeValues.color.color1,
@@ -51,10 +56,16 @@ export const useNavBarStyles = makeStyles((theme) => ({
     },
   },
   sideNavContainer: {
+    position: "sticky",
+    top: 0,
+    left: 0,
     display: "flex",
     flexDirection: "column",
-    maxWidth: themeValues.sideNavWidth,
-    minWidth: "max-content",
+    // width: themeValues.sideNavWidth,
+    minWidth: themeValues.sideNavWidth,
+    height: "fit-content",
+    // float: "left",
+    // minWidth: "max-content",
     gap: theme.spacing(2),
     padding: theme.spacing(1),
     border: themeValues.thickborder,
@@ -63,12 +74,13 @@ export const useNavBarStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: themeValues.borderRadius,
     borderBottomRightRadius: themeValues.borderRadius,
     marginLeft: theme.spacing(1.5),
-    transition: themeValues.longTransition,
+    transition: themeValues.transition.longTransition,
     overflow: "hidden",
-    height: "fit-content",
+    // boxShadow: themeValues.shadow.boxShadowboxy,
     // animation: "slide-down 1s ease",
   },
   sideMenuItem: {
+    color: themeValues.color.color1,
     border: themeValues.defaultborder,
     borderColor: themeValues.color.color3,
     borderRadius: themeValues.borderRadius,
@@ -78,9 +90,11 @@ export const useNavBarStyles = makeStyles((theme) => ({
     gap: theme.spacing(2),
     padding: theme.spacing(1),
     fontWeight: themeValues.font.fontWeightThick,
-    transition: themeValues.defaultTansition,
+    transition: themeValues.transition.defaultTansition,
     "&:hover": {
       backgroundColor: themeValues.color.color3,
+      color: themeValues.color.textColor,
+      boxShadow: themeValues.shadow.boxShadowHeavy,
       cursor: "pointer",
     },
   },
@@ -91,7 +105,5 @@ export const useNavBarStyles = makeStyles((theme) => ({
   pageContent: {
     padding: theme.spacing(1),
   },
-  settingsMenu: {
-    marginTop: theme.spacing(35),
-  },
+  settingsMenu: {},
 }));

@@ -1,4 +1,5 @@
 export interface IBook {
+  ID: string;
   title: string;
   author: string;
   subject: string;
@@ -9,6 +10,7 @@ export interface IBook {
 }
 
 export class Book implements IBook {
+  ID: string;
   title: string;
   author: string;
   subject: string;
@@ -18,6 +20,7 @@ export class Book implements IBook {
   coverImage: string;
 
   constructor(book: IBook) {
+    this.ID = book.ID;
     this.title = book.title;
     this.author = book.author;
     this.subject = book.subject;

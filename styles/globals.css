@@ -2,7 +2,7 @@
   --font-family: "Poppins", sans-serif;
   --primary-color: #ffffff;
   --secondary-color: #92d6fd;
-  --background-color: #f9f9fb;
+  --background-color: #fafafa;
   --text-color: #000;
   --link-color: #0071ff;
   --cover-color: #ddefff;
@@ -40,7 +40,8 @@ a {
 
 .poppins {
   font-family: var(--font-family);
-  animation: name duration timing-function delay iteration-count direction fill-mode;
+  animation: name duration timing-function delay iteration-count direction
+    fill-mode;
 }
 
 /* @keyframes slide-down {
@@ -73,3 +74,11 @@ a {
     opacity: 1;
   }
 }
+
+/* .bookContainer:hover .bookImage {
+  transform: scale(1.1);
+}
+
+.bookContainer:hover .bookTitle {
+  opacity: 1;
+} */

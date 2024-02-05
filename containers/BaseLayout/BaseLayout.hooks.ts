@@ -73,11 +73,10 @@ export const useBaseLayout = ({
   const isLoading = false;
   const isFetched = true;
 
-
   useEffect(() => {
     if (isSuccess) {
       // verify if token is present or not
-      
+
       // todo remove this
       setAuthenticated(true);
       if (Cookie.access_token && Cookie.email) {
@@ -170,8 +169,9 @@ export const useBaseLayout = ({
   // update current menu on path change
   useEffect(() => {
     if (router?.pathname) {
+      console.log(router?.pathname?.split("/"));
       const tempCurrentMenu = router?.pathname?.split("/")[1];
-      if (tempCurrentMenu) setCurrentSideMenu(tempCurrentMenu);
+      if (tempCurrentMenu) setCurrentSideMenu(`/${tempCurrentMenu}`);
     }
   }, [router?.pathname]);
 

@@ -1,16 +1,15 @@
 import { sideMenuItems } from "@/constants/GlobalConstants";
 import { BaseLayout } from "@/containers/BaseLayout/BaseLayout";
-import { BookShelf } from "@/containers/BookShelf/BookShelf";
-import { mockBooks } from "@/entity/Book/Book.mock";
+import { SingleBook } from "@/containers/SingleBook/SingleBook";
 
-export default function Dashboard() {
+export default function SingleBookPage() {
   return (
     <BaseLayout
       authenticatedOnly={true}
       showSearchBar={true}
       pageName={sideMenuItems.BookShelf.name}
     >
-      <BookShelf books={[...mockBooks,...mockBooks]}/>
+      <SingleBook/>
     </BaseLayout>
   );
 }

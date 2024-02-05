@@ -1,10 +1,12 @@
 import { globalConstants } from "@/constants/GlobalConstants";
 import { usePageContext } from "@/context/PageContext";
+import { useUserContext } from "@/context/UserContext";
+import { User } from "@/entity/User/User";
 import { debounce } from "@/utils/debounce";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 interface navBarHook {
+  user: User;
   currentSideMenu: string;
   handleSearch: (val: string) => void;
   handleSideMenuClick: (menulink: string) => void;
@@ -13,6 +15,7 @@ interface navBarHook {
 export const useNavBar = (): navBarHook => {
   const router = useRouter();
   const { setSearchText, currentSideMenu } = usePageContext();
+  const { user } = useUserContext();
 
   const handleSearch = debounce((value: string) => {
     if (value && value != "" && value.length > 0) {
@@ -23,15 +26,12 @@ export const useNavBar = (): navBarHook => {
 
   const handleSideMenuClick = (menulink: string) => {
     if (menulink && menulink != "" && menulink.length > 0) {
-      router.push(menulink);
+      router.replace(menulink);
     }
   };
 
-  useEffect(() => {
-    console.log("curr-menu", currentSideMenu);
-  }, [currentSideMenu]);
-  
   return {
+    user,
     currentSideMenu,
     handleSearch,
     handleSideMenuClick,
