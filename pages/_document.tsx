@@ -21,10 +21,10 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
     <Html lang="en">
       <title>ILM - Library</title>
       <Head>
-        <meta name="description" content="Integrated Library Management" />
+        {/* <meta name="description" content="Integrated Library Management" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content={theme.palette.primary.main} />
-        <meta name="emotion-insertion-point" content="" />
+        <meta name="emotion-insertion-point" content="" /> */}
         <link rel="icon" href="/logo.png" />
         {emotionStyleTags}
       </Head>

@@ -1,7 +1,7 @@
 import { sideMenuItems } from "@/constants/GlobalConstants";
 import { BaseLayout } from "@/containers/BaseLayout/BaseLayout";
 
-export default function Dashboard() {
+export default function DashboardPage() {
   return (
     <BaseLayout
       authenticatedOnly={true}

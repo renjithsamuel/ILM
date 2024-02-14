@@ -1,10 +1,11 @@
+import { BookGenre } from "@/constants/BookGenre";
 import { Book, IBook } from "./Book";
 
 const bookData: IBook = {
   ID: "3e74718b-3855-43ba-ae2c-4be8ccc79026",
   title: "The Great Gatsby",
   author: "F. Scott Fitzgerald",
-  subject: "Classic Literature",
+  genre: BookGenre.Travel,
   publishedDate: "1925",
   desc: "A novel about the American Dream",
   previewLink:
@@ -20,7 +21,7 @@ const mockBooksInterfaceArray: IBook[] = [
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79027",
     title: "The Great Gatsby",
     author: "F. Scott Fitzgerald",
-    subject: "Classic Literature",
+    genre: BookGenre.Adventure,
     publishedDate: "1925",
     desc: "A novel about the American Dream",
     previewLink:
@@ -32,7 +33,7 @@ const mockBooksInterfaceArray: IBook[] = [
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79028",
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
-    subject: "Fiction",
+    genre: BookGenre.ScienceFiction,
     publishedDate: "1960",
     desc: "A story of racial injustice and moral growth",
     previewLink:
@@ -44,7 +45,7 @@ const mockBooksInterfaceArray: IBook[] = [
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79029",
     title: "1984",
     author: "George Orwell",
-    subject: "Dystopian Fiction",
+    genre: BookGenre.Biography,
     publishedDate: "1949",
     desc: "A novel depicting a totalitarian society",
     previewLink:

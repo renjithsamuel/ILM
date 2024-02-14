@@ -1,8 +1,6 @@
 import { Book } from "@/entity/Book/Book";
 import { mockBook, mockBooks } from "@/entity/Book/Book.mock";
 import { useRouter } from "next/router"
-import { useEffect } from "react"
-
 interface SingleBookHookProps{
 
 }

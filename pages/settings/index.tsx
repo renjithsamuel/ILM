@@ -1,7 +1,7 @@
 import { sideMenuItems } from "@/constants/GlobalConstants";
 import { BaseLayout } from "@/containers/BaseLayout/BaseLayout";
 
-export default function Wishlists() {
+export default function SettingsPage() {
   return (
     <BaseLayout
       authenticatedOnly={true}
