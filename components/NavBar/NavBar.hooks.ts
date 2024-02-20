@@ -20,7 +20,6 @@ export const useNavBar = (): navBarHook => {
   const handleSearch = debounce((value: string) => {
     if (value && value != "" && value.length > 0) {
       setSearchText(value);
-      console.log(value);
     }
   }, globalConstants.debounceDelay);
 

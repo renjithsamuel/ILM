@@ -21,7 +21,7 @@ export const sideMenuItems = {
 export const bookKeyValues: BookKeyValues[] = [
   { name: "Title", key: "title", get: (book: Book) => book.title },
   { name: "Author", key: "author", get: (book: Book) => book.author },
-  { name: "Genre", key: "subject", get: (book: Book) => book.subject },
+  { name: "Genre", key: "subject", get: (book: Book) => book.genre },
   {
     name: "Published Date",
     key: "publishedDate",
@@ -29,3 +29,10 @@ export const bookKeyValues: BookKeyValues[] = [
   },
   { name: "Description", key: "desc", get: (book: Book) => book.desc },
 ];
+
+export enum UserBookDetailType {
+  Reserved = "reserved",
+  Pending = "pending",
+  CheckedOut = "checkedOut",
+  WishLists = "wishLists",
+}

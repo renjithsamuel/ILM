@@ -1,22 +1,22 @@
 import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
-import { useSingleUser } from "./SingleUser.hooks";
+import { useMyBooks } from "./MyBooks.hooks";
 import { Box, Typography } from "@mui/material";
-import { useSingleUserStyles } from "./SingleUser.styles";
+import { useMyBooksStyles } from "./MyBooks.styles";
 import { User } from "@/entity/User/User";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 import dayjs from "dayjs";
 import Link from "next/link";
 
-interface singleUserParams {
+interface myBooksParams {
   // book: Book;
 }
 
-export const SingleUser = ({}: singleUserParams) => {
-  const { user, userBookDetail } = useSingleUser({});
-  const classes = useSingleUserStyles();
+export const MyBooks = ({}: myBooksParams) => {
+  const { user, userBookDetail } = useMyBooks({});
+  const classes = useMyBooksStyles();
 
   return (
-    <Box className={classes.singleUserRoot}>
+    <Box className={classes.myBooksRoot}>
       {/* user cover image and profile */}
       <Box className={classes.userCover}>
         <Box className={classes.userImage}></Box>

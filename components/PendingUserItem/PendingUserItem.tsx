@@ -1,14 +1,14 @@
 import { Box, Tooltip } from "@material-ui/core";
 import { Typography } from "@mui/material";
 import { usePendingUserItemStyles } from "./PendingUserItem.styles";
-import { IBookDetails } from "@/entity/User/User";
 import { themeValues } from "@/constants/ThemeConstants";
 import Link from "next/link";
+import { IBookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 
 interface pendingUserItemParams {
   userID: string;
   userName: string;
-  bookDetails: IBookDetails;
+  bookDetails: IBookDetails | undefined;
 }
 
 export const PendingUserItem = ({
@@ -19,7 +19,7 @@ export const PendingUserItem = ({
   const classes = usePendingUserItemStyles();
   return (
     <>
-      <Link href={`/transactions/${userID}`}>
+      <Link href={`/users/${userID}`}>
         <Box className={classes.pendingUserItem}>
           <Typography variant="h6" className={classes.userName}>
             {userName}
@@ -37,7 +37,7 @@ export const PendingUserItem = ({
                       borderColor: bookCount.borderColor,
                     }}
                   >
-                    {bookCount.getbookCount(bookDetails)}
+                    {bookDetails && bookCount.getbookCount(bookDetails)}
                   </Typography>
                 </Tooltip>
               );

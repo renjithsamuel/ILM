@@ -131,6 +131,11 @@ export const useBaseLayout = ({
             icon: LiaBookSolid,
             link: sideMenuItems.MyBooks.link,
           },
+          {
+            name: sideMenuItems.WishLists.name,
+            icon: IoHeartSharp,
+            link: sideMenuItems.WishLists.link,
+          },
         ];
       } else {
         tempMenuItems = [
@@ -148,11 +153,6 @@ export const useBaseLayout = ({
             name: sideMenuItems.Transactions.name,
             icon: GrTransaction,
             link: sideMenuItems.Transactions.link,
-          },
-          {
-            name: sideMenuItems.WishLists.name,
-            icon: IoHeartSharp,
-            link: sideMenuItems.WishLists.link,
           },
         ];
       }

@@ -19,6 +19,8 @@ export const themeValues = {
   },
   font: {
     fontWeightThick: "700",
+    fontWeightLightThick: "600",
+
   },
   shadow: {
     boxShadowLight: "rgba(149, 157, 165, 0.2) 0px 8px 24px",

@@ -10,34 +10,22 @@ export interface IUser {
   dateOfBirth: Date;
   phoneNumber: number;
   address: string;
+  joinedDate: Date;
   country: string;
   password?: string;
-  bookDetails: IBookDetails;
-}
-
-export interface IBookDetails {
-  hasPendingBooks: boolean;
-  pendingBooksCount: number;
-  pendingBooksList: IBook[];
-  checkedOutBooksCount: number;
-  checkedOutBookList: IBook[];
-  reservedBooksCount: number;
-  reservedBookList: IBook[];
-  favoriteGenres: BookGenre[];
-  wishlistBooks: IBook[];
 }
 
 export class User implements IUser {
   readonly userID: string;
-  name: string;
+  name: string; 
   email: string;
   role: Role;
   dateOfBirth: Date;
   phoneNumber: number;
   address: string;
+  joinedDate: Date;
   country: string;
   password?: string;
-  bookDetails: IBookDetails;
 
   constructor(user: IUser) {
     this.userID = user.userID;
@@ -47,8 +35,8 @@ export class User implements IUser {
     this.dateOfBirth = user.dateOfBirth;
     this.phoneNumber = user.phoneNumber;
     this.address = user.address;
+    this.joinedDate = user.joinedDate;
     this.country = user.country;
     this.password = user.password;
-    this.bookDetails = user.bookDetails;
   }
 }

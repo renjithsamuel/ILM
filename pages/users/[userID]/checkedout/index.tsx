@@ -7,7 +7,7 @@ export default function SingleUserPage() {
     <BaseLayout
       authenticatedOnly={true}
       showSearchBar
-      pageName={sideMenuItems.WishLists.name}
+      pageName={sideMenuItems.Transactions.name}
     >
       <UserBooksList />
     </BaseLayout>

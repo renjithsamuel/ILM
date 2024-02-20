@@ -2,6 +2,7 @@ import { BookGenre } from "@/constants/BookGenre";
 
 export interface IBook {
   ID: string;
+  ISBN: string;
   title: string;
   author: string;
   genre: BookGenre;
@@ -14,6 +15,7 @@ export interface IBook {
 
 export class Book implements IBook {
   ID: string;
+  ISBN: string;
   title: string;
   author: string;
   genre: BookGenre;
@@ -26,6 +28,7 @@ export class Book implements IBook {
   constructor(book: IBook) {
     this.ID = book.ID;
     this.title = book.title;
+    this.ISBN = book.ISBN;
     this.author = book.author;
     this.genre = book.genre;
     this.publishedDate = book.publishedDate;

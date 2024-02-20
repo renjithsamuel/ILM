@@ -8,21 +8,39 @@ interface transactionsParams {
 }
 
 export const Transactions = ({}: transactionsParams) => {
-  const { pendingUsers } = useTransactions({});
+  const { pendingUsers, getBookDetails } = useTransactions({});
   const classes = useTransactionsStyles();
 
   return (
     <Box className={classes.transactionsRoot}>
-      {pendingUsers.map((user, index) => {
-        return (
-          <PendingUserItem
-            key={index}
-            userID={user.userID}
-            userName={user.name}
-            bookDetails={user.bookDetails}
-          />
-        );
-      })}
+      {/* <Box className={classes.sortByContainer}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={age}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Box> */}
+      <Box>
+        {pendingUsers.map((user, index) => {
+          return (
+            <PendingUserItem
+              key={index}
+              userID={user.userID}
+              userName={user.name}
+              bookDetails={getBookDetails(user.userID)}
+            />
+          );
+        })}
+      </Box>
     </Box>
   );
 };

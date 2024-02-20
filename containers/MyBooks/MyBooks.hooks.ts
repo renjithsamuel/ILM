@@ -1,25 +1,27 @@
+import { useUserContext } from "@/context/UserContext";
 import { User } from "@/entity/User/User";
 import { mockUser } from "@/entity/User/User.mock";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 import { mockbookDetails } from "@/entity/UserBookDetails/UserBookDetails.mock";
 import { useRouter } from "next/router";
 
-interface singleUserHookProps {}
+interface myBooksHookProps {}
 
-interface singleUserHook {
+interface myBooksHook {
   user: User;
   userBookDetail: BookDetails;
 }
 
-export const useSingleUser = ({}: singleUserHookProps): singleUserHook => {
-  const router = useRouter();
-  const userID = router.query.userID as string;
+export const useMyBooks = ({}: myBooksHookProps): myBooksHook => {
+  const { user } = useUserContext();
+
+  const userID = user.userID;
   // fetch user with userID
-  const mockSingleUser = mockUser;
+  const mockMyBooks = mockUser;
   const mockBookDetails = mockbookDetails;
 
   return {
-    user: mockSingleUser,
+    user: mockMyBooks,
     userBookDetail: mockBookDetails,
   };
 };

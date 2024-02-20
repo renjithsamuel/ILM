@@ -29,8 +29,6 @@ export const NavBar = ({
   const { handleSearch, currentSideMenu, user } = useNavBar();
   const classes = useNavBarStyles();
 
-  console.log(currentSideMenu);
-
   return (
     <Box className={classes.navBarRoot}>
       {/* top nav bar */}
@@ -63,10 +61,7 @@ export const NavBar = ({
         </Box>
       </Box>
       {/* side nav bar */}
-      <Box
-        display={"flex"}
-        width={"100%"}
-      >
+      <Box display={"flex"} width={"100%"}>
         <Box className={classes.sideNavContainer}>
           {menuItems.map((menuItem, index) => {
             return (
@@ -94,8 +89,8 @@ export const NavBar = ({
               sx={{
                 marginTop:
                   user.role == Role.Librarian
-                    ? themeValues.spacing(35)
-                    : themeValues.spacing(50),
+                    ? themeValues.spacing(45)
+                    : themeValues.spacing(45),
               }}
               // onClick={() => handleSideMenuClick(sideMenuItems.Settings.link)}
             >
