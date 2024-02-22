@@ -93,18 +93,30 @@ export const SingleBook = ({}: singleBookParams) => {
           </Box>
           {/*  book  Buttons*/}
           <Box className={classes.singleBookButtons}>
-            <Button variant="contained" className={classes.reserveNowBtn}>
-              Reserve Now
-            </Button>
-            <Button variant="contained" className={classes.wishlistBtn}>
-              <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
-                {"  "}Wishlist
-              </Typography>
-              <IoHeartSharp size={theme.spacing(2.2)} />
-              {"  "}
-            </Button>
+            {userType === Role.Patrons && book.inLibrary && (
+              <Button
+                variant="contained"
+                className={classes.reserveNowBtn}
+                disabled={book.booksLeft === 0 ? true : false}
+              >
+                Reserve Now
+              </Button>
+            )}
+            {userType === Role.Patrons && (
+              <Button variant="contained" className={classes.wishlistBtn}>
+                <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
+                  {"  "}Wishlist
+                </Typography>
+                <IoHeartSharp size={theme.spacing(2.2)} />
+                {"  "}
+              </Button>
+            )}
             {userType === Role.Librarian && book.inLibrary && (
-              <Button variant="contained" className={classes.reserveNowBtn}>
+              <Button
+                variant="contained"
+                className={classes.reserveNowBtn}
+                disabled={book.booksLeft === 0 ? true : false}
+              >
                 <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
                   {"  "}Checkout
                 </Typography>

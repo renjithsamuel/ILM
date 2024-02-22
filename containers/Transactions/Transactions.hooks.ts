@@ -1,3 +1,4 @@
+import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
 import { User } from "@/entity/User/User";
 import { mockUsers } from "@/entity/User/User.mock";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
@@ -10,16 +11,20 @@ interface transactionsHookProps {}
 interface transactionsHook {
   pendingUsers: User[];
   getBookDetails: (userID: string) => BookDetails | undefined;
-  sortByValue: string;
-  sortByOrder: "asc" | "desc";
+  sortByValue: UserBookDetailType;
+  sortByOrder: SortOrder;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
 }
 
 export const useTransactions =
   ({}: transactionsHookProps): transactionsHook => {
-    const [sortByValue, setSortByValue] = useState<string>("pending");
-    const [sortByOrder, setSortByOrder] = useState<"asc" | "desc">("asc");
+    const [sortByValue, setSortByValue] = useState<UserBookDetailType>(
+      UserBookDetailType.Pending
+    );
+    const [sortByOrder, setSortByOrder] = useState<
+      SortOrder.asc | SortOrder.desc
+    >(SortOrder.asc);
 
     // represents book details array
     const mockBookDetailsArrayMock = mockbookDetailsArray;
@@ -46,11 +51,13 @@ export const useTransactions =
 
     // sorting
     const handleSortValue = (event: SelectChangeEvent): void => {
-      event.target.value && setSortByValue(event.target.value);
+      event.target.value &&
+        setSortByValue(event.target.value as UserBookDetailType);
     };
     const handleSortOrder = (event: SelectChangeEvent): void => {
-      (event.target.value === "asc" || event.target.value === "desc") &&
-        setSortByOrder(event.target.value);
+      (event.target.value === SortOrder.asc ||
+        event.target.value === SortOrder.asc) &&
+        setSortByOrder(event.target.value as SortOrder);
     };
 
     return {
@@ -71,19 +78,19 @@ const sortHelper = (
 ): number => {
   let val;
   switch (sortByValue) {
-    case "pending":
-      if (sortByOrder === "asc")
+    case UserBookDetailType.Pending:
+      if (sortByOrder === SortOrder.asc)
         val = bookDetail1.pendingBooksCount - bookDetail2.pendingBooksCount;
       else val = bookDetail2.pendingBooksCount - bookDetail1.pendingBooksCount;
       break;
-    case "reserved":
-      if (sortByOrder === "asc")
+    case UserBookDetailType.Reserved:
+      if (sortByOrder === SortOrder.asc)
         val = bookDetail1.reservedBooksCount - bookDetail2.reservedBooksCount;
       else
         val = bookDetail2.reservedBooksCount - bookDetail1.reservedBooksCount;
       break;
-    case "checkedOut":
-      if (sortByOrder === "asc")
+    case UserBookDetailType.CheckedOut:
+      if (sortByOrder === SortOrder.asc)
         val =
           bookDetail1.checkedOutBooksCount - bookDetail2.checkedOutBooksCount;
       else
@@ -91,8 +98,24 @@ const sortHelper = (
           bookDetail2.checkedOutBooksCount - bookDetail1.checkedOutBooksCount;
       break;
 
+    case UserBookDetailType.Completed:
+      if (sortByOrder === SortOrder.asc)
+        val = bookDetail1.completedBooksCount - bookDetail2.completedBooksCount;
+      else
+        val = bookDetail2.completedBooksCount - bookDetail1.completedBooksCount;
+      break;
+
+    case UserBookDetailType.WishLists:
+      if (sortByOrder === SortOrder.asc)
+        val =
+          bookDetail1.wishlistBooks.length - bookDetail2.wishlistBooks.length;
+      else
+        val =
+          bookDetail2.wishlistBooks.length - bookDetail1.wishlistBooks.length;
+      break;
+
     default:
-      if (sortByOrder === "asc")
+      if (sortByOrder === SortOrder.asc)
         val = bookDetail1.pendingBooksCount - bookDetail2.pendingBooksCount;
       else val = bookDetail2.pendingBooksCount - bookDetail1.pendingBooksCount;
       break;

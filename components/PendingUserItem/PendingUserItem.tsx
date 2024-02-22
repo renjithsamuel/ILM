@@ -60,22 +60,36 @@ export const PendingUserItem = ({
 
 const bookCounts = [
   {
-    title: "books checked out",
+    title: "books Checked out",
     label: "checked out",
     getbookCount: (bookDetails: IBookDetails) =>
       bookDetails.checkedOutBooksCount,
     borderColor: "brown",
   },
   {
-    title: "books reserved",
+    title: "books Reserved",
     label: "reserved",
     getbookCount: (bookDetails: IBookDetails) => bookDetails.reservedBooksCount,
     borderColor: "green",
   },
   {
-    title: "books pending",
+    title: "books Pending",
     label: "pending",
     getbookCount: (bookDetails: IBookDetails) => bookDetails.pendingBooksCount,
     borderColor: themeValues.color.rubyRed,
+  },
+  {
+    title: "books Completed",
+    label: "Completed",
+    getbookCount: (bookDetails: IBookDetails) =>
+      bookDetails.completedBooksCount,
+    borderColor: themeValues.color.color1,
+  },
+  {
+    title: "books Wishlisted",
+    label: "Wishlisted",
+    getbookCount: (bookDetails: IBookDetails) =>
+      bookDetails.wishlistBooks.length,
+    borderColor: themeValues.color.color2,
   },
 ];

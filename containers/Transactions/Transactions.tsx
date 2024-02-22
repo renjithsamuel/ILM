@@ -2,6 +2,7 @@ import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useTransactions } from "./Transactions.hooks";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useTransactionsStyles } from "./Transactions.styles";
+import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
 
 interface transactionsParams {
   // book: Book;
@@ -33,9 +34,13 @@ export const Transactions = ({}: transactionsParams) => {
             label="Sort By"
             onChange={handleSortValue}
           >
-            <MenuItem value={"pending"}>Pending</MenuItem>
-            <MenuItem value={"reserved"}>Reserved</MenuItem>
-            <MenuItem value={"checkedOut"}>Checked Out</MenuItem>
+            <MenuItem value={UserBookDetailType.Pending}>Pending</MenuItem>
+            <MenuItem value={UserBookDetailType.Reserved}>Reserved</MenuItem>
+            <MenuItem value={UserBookDetailType.CheckedOut}>
+              Checked Out
+            </MenuItem>
+            <MenuItem value={UserBookDetailType.Completed}>Completed</MenuItem>
+            <MenuItem value={UserBookDetailType.WishLists}>Wishlist</MenuItem>
           </Select>
         </FormControl>
         {/* order */}
@@ -50,8 +55,8 @@ export const Transactions = ({}: transactionsParams) => {
             label="Order By"
             onChange={handleSortOrder}
           >
-            <MenuItem value={"asc"}>Ascending</MenuItem>
-            <MenuItem value={"desc"}>Descending</MenuItem>
+            <MenuItem value={SortOrder.asc}>Ascending</MenuItem>
+            <MenuItem value={SortOrder.desc}>Descending</MenuItem>
           </Select>
         </FormControl>
       </Box>

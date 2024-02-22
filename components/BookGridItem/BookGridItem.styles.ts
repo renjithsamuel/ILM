@@ -5,7 +5,7 @@ export const useBookGridItemStyles = makeStyles((theme) => ({
   bookItemContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "start",
     flexDirection: "column",
     height: "100%",
     minWidth: "min-content",

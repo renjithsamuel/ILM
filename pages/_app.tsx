@@ -62,3 +62,7 @@ export default function App({
 // book comments as feedback reports from users
 // search should work for both users and books
 // sort by in transactions page
+
+// checkout -> reserved list -> select user
+// initially only wishlist -> after settings payment btn -> reserve is avail -> show snackbar
+// search bar -> popup with sort for books or user -> in book or not in book -> etc...

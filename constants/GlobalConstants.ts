@@ -42,5 +42,21 @@ export enum UserBookDetailType {
   Pending = "pending",
   CheckedOut = "checkedOut",
   WishLists = "wishLists",
-  Completed = "completed"
+  Completed = "completed",
+}
+
+export enum BookSortValue {
+  wishlistCount = "wishlistCount",
+  views = "views",
+  booksLeft = "booksLeft",
+  title = "title",
+  author = "author",
+  genre = "genre",
+  publishedDate = "publishedDate",
+  shelfNumber = "shelfNumber",
+}
+
+export enum SortOrder {
+  asc = "ascending",
+  desc = "descending",
 }
