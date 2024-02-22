@@ -16,4 +16,8 @@ export const mockUser: User = {
   password: "securePassword123",
 };
 
-export const mockUsers: User[] = [mockUser, mockUser, mockUser];
+export const mockUsers: User[] = [
+  mockUser,
+  { ...mockUser, name: "John Doe 2", userID: "123457" },
+  { ...mockUser, name: "John Doe 3", userID: "123458" },
+];

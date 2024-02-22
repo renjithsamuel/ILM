@@ -15,12 +15,16 @@ export const themeValues = {
     white: "#ffffff",
     black: "#000000",
     lightGray: "#f1f1f1",
+    rubyRed: "#8B0000",
+    rubyRedDark: "#BA0021",
     transparent: "transparent",
   },
   font: {
     fontWeightThick: "700",
     fontWeightLightThick: "600",
-
+    fontSizeXLarge: "x-large",
+    fontSizeSmall: "small",
+    fontSizeMedium: "medium",
   },
   shadow: {
     boxShadowLight: "rgba(149, 157, 165, 0.2) 0px 8px 24px",

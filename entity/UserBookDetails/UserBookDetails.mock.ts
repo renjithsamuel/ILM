@@ -16,7 +16,40 @@ export const mockbookDetails: BookDetails = {
 };
 
 export const mockbookDetailsArray: BookDetails[] = [
-  mockbookDetails,
-  mockbookDetails,
-  mockbookDetails,
+  {
+    userID: "123456",
+    hasPendingBooks: true,
+    pendingBooksCount: 10,
+    pendingBooksList: [mockBook.ID],
+    checkedOutBooksCount: 30,
+    checkedOutBookList: [mockBook.ID],
+    reservedBooksCount: 10,
+    reservedBookList: [mockBook.ID],
+    wishlistBooks: [mockBook.ID],
+    favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+  },
+  {
+    userID: "123457",
+    hasPendingBooks: true,
+    pendingBooksCount: 20,
+    pendingBooksList: [mockBook.ID],
+    checkedOutBooksCount: 20,
+    checkedOutBookList: [mockBook.ID],
+    reservedBooksCount: 30,
+    reservedBookList: [mockBook.ID],
+    wishlistBooks: [mockBook.ID],
+    favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+  },
+  {
+    userID: "123458",
+    hasPendingBooks: true,
+    pendingBooksCount: 30,
+    pendingBooksList: [mockBook.ID],
+    checkedOutBooksCount: 10,
+    checkedOutBookList: [mockBook.ID],
+    reservedBooksCount: 20,
+    reservedBookList: [mockBook.ID],
+    wishlistBooks: [mockBook.ID],
+    favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+  },
 ];

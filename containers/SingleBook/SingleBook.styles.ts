@@ -5,7 +5,7 @@ export const useSingleBookStyles = makeStyles((theme) => ({
   singleBookRoot: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "start",
   },
   singleBookBg: {
     position: "relative",
@@ -18,6 +18,9 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     padding: theme.spacing(1),
     width: "65vw",
+    display: "flex",
+    gap: theme.spacing(2),
+    flexDirection: "column",
     borderRadius: themeValues.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowboxy,
     // glassmorphism
@@ -88,7 +91,7 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "start",
     gap: theme.spacing(1),
-    width: "40vw",
+    width: "30vw",
   },
   singleBookItemWrap: {
     display: "flex",
@@ -105,14 +108,52 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     wordWrap: "break-word",
     fontSize: themeValues.spacing(1.9),
   },
+  singleBookButtons: {
+    display: "flex",
+    flexDirection: "column",
+    gap: theme.spacing(2),
+  },
+  reserveNowBtn: {
+    color: themeValues.color.white,
+    backgroundColor: themeValues.color.color1,
+    "&:hover": {
+      color: themeValues.color.white,
+      backgroundColor: themeValues.color.color3,
+    },
+  },
+  wishlistBtn: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: theme.spacing(4),
+    backgroundColor: themeValues.color.rubyRed,
+    color: themeValues.color.white,
+    "&:hover": {
+      color: themeValues.color.white,
+      backgroundColor: themeValues.color.rubyRedDark,
+    },
+  },
   singleBookPreview: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "yellow",
+    backgroundColor: "white",
     margin: theme.spacing(1),
     width: "63vw",
     height: "40vh",
+    borderRadius: themeValues.borderRadiusHigh,
+    boxShadow: themeValues.shadow.boxShadowboxy,
+  },
+  singleBookComments: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    margin: theme.spacing(1),
+    width: "63vw",
+    height: "40vh",
+    borderRadius: themeValues.borderRadiusHigh,
+    boxShadow: themeValues.shadow.boxShadowboxy,
   },
   similarBooks: {
     margin: theme.spacing(2),
@@ -125,6 +166,11 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     gap: theme.spacing(3),
+  },
+  similarBooksText: {
+    fontSize: themeValues.font.fontSizeXLarge,
+    fontWeight: themeValues.font.fontWeightThick,
+    color: themeValues.color.color1,
   },
   noBooksText: {},
 }));

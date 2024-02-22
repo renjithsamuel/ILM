@@ -1,5 +1,5 @@
-import { Box, Tooltip } from "@material-ui/core";
-import { Typography } from "@mui/material";
+import { Tooltip } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import { usePendingUserItemStyles } from "./PendingUserItem.styles";
 import { themeValues } from "@/constants/ThemeConstants";
 import Link from "next/link";
@@ -28,18 +28,27 @@ export const PendingUserItem = ({
           <Box className={classes.bookCounts}>
             {bookCounts.map((bookCount, index) => {
               return (
-                <Tooltip title={bookCount.title} placement="top" key={index}>
-                  <Typography
-                    variant="h6"
-                    className={classes.eachCount}
-                    sx={{
-                      border: themeValues.defaultborder,
-                      borderColor: bookCount.borderColor,
-                    }}
-                  >
+                <Box
+                  key={index}
+                  sx={{
+                    border: themeValues.defaultborder,
+                    borderColor: bookCount.borderColor,
+                    "&:hover": {
+                      backgroundColor: bookCount.borderColor,
+                      color: themeValues.color.white,
+                    },
+                  }}
+                  className={classes.eachCount}
+                >
+                  <Typography variant="h6" className={classes.labelName}>
+                    {bookCount.label}
+                  </Typography>
+                  {/* <Tooltip title={bookCount.title} placement="top"> */}
+                  <Typography variant="h6">
                     {bookDetails && bookCount.getbookCount(bookDetails)}
                   </Typography>
-                </Tooltip>
+                  {/* </Tooltip> */}
+                </Box>
               );
             })}
           </Box>
@@ -52,18 +61,21 @@ export const PendingUserItem = ({
 const bookCounts = [
   {
     title: "books checked out",
+    label: "checked out",
     getbookCount: (bookDetails: IBookDetails) =>
       bookDetails.checkedOutBooksCount,
     borderColor: "brown",
   },
   {
     title: "books reserved",
+    label: "reserved",
     getbookCount: (bookDetails: IBookDetails) => bookDetails.reservedBooksCount,
     borderColor: "green",
   },
   {
     title: "books pending",
+    label: "pending",
     getbookCount: (bookDetails: IBookDetails) => bookDetails.pendingBooksCount,
-    borderColor: "pink",
+    borderColor: themeValues.color.rubyRed,
   },
 ];

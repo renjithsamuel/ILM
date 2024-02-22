@@ -75,10 +75,10 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     borderRadius: themeValues.borderRadiusHigh,
     transition: themeValues.transition.defaultTansition,
-    boxShadow: themeValues.shadow.boxShadowLight,
+    boxShadow: themeValues.shadow.boxShadowboxy,
     color: themeValues.color.color1,
     "&:hover": {
-      backgroundColor: themeValues.color.color3,
+      backgroundColor: themeValues.color.color1,
       color: themeValues.color.textColor,
       boxShadow: themeValues.shadow.boxShadowHeavy,
       cursor: "pointer",

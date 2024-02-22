@@ -11,6 +11,7 @@ export interface IBook {
   previewLink?: string;
   coverImage: string;
   shelfNumber?: number;
+  inLibrary: boolean;
 }
 
 export class Book implements IBook {
@@ -24,6 +25,7 @@ export class Book implements IBook {
   previewLink?: string;
   coverImage: string;
   shelfNumber?: number;
+  inLibrary: boolean;
 
   constructor(book: IBook) {
     this.ID = book.ID;
@@ -36,5 +38,6 @@ export class Book implements IBook {
     this.previewLink = book.previewLink;
     this.coverImage = book.coverImage;
     this.shelfNumber = book.shelfNumber;
+    this.inLibrary = book.inLibrary;
   }
 }
