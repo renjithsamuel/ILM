@@ -10,8 +10,11 @@ export interface IBook {
   desc: string;
   previewLink?: string;
   coverImage: string;
-  shelfNumber?: number;
+  shelfNumber: number;
   inLibrary: boolean;
+  views: number;
+  booksLeft: number;
+  wishlistCount: number;
 }
 
 export class Book implements IBook {
@@ -24,8 +27,11 @@ export class Book implements IBook {
   desc: string;
   previewLink?: string;
   coverImage: string;
-  shelfNumber?: number;
+  shelfNumber: number;
   inLibrary: boolean;
+  views: number;
+  booksLeft: number;
+  wishlistCount: number;
 
   constructor(book: IBook) {
     this.ID = book.ID;
@@ -39,5 +45,8 @@ export class Book implements IBook {
     this.coverImage = book.coverImage;
     this.shelfNumber = book.shelfNumber;
     this.inLibrary = book.inLibrary;
+    this.views = book.views;
+    this.booksLeft = book.booksLeft;
+    this.wishlistCount = book.wishlistCount;
   }
 }

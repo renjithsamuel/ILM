@@ -89,8 +89,8 @@ export const NavBar = ({
               sx={{
                 marginTop:
                   user.role == Role.Librarian
-                    ? themeValues.spacing(45)
-                    : themeValues.spacing(45),
+                    ? themeValues.spacing(40)
+                    : themeValues.spacing(40),
               }}
               // onClick={() => handleSideMenuClick(sideMenuItems.Settings.link)}
             >

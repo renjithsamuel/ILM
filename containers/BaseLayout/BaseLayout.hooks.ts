@@ -17,6 +17,7 @@ import { mockUser } from "@/entity/User/User.mock";
 import { GrTransaction } from "react-icons/gr";
 import { IoHeartSharp } from "react-icons/io5";
 import { RiDashboardFill } from "react-icons/ri";
+import { BsBookshelf } from "react-icons/bs";
 import { useRouter } from "next/router";
 
 type BaseLayoutHook = {
@@ -136,6 +137,11 @@ export const useBaseLayout = ({
             icon: IoHeartSharp,
             link: sideMenuItems.WishLists.link,
           },
+          {
+            name: sideMenuItems.AllBooks.name,
+            icon: BsBookshelf,
+            link: sideMenuItems.AllBooks.link,
+          },
         ];
       } else {
         tempMenuItems = [
@@ -153,6 +159,11 @@ export const useBaseLayout = ({
             name: sideMenuItems.Transactions.name,
             icon: GrTransaction,
             link: sideMenuItems.Transactions.link,
+          },
+          {
+            name: sideMenuItems.AllBooks.name,
+            icon: BsBookshelf,
+            link: sideMenuItems.AllBooks.link,
           },
         ];
       }

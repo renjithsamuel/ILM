@@ -3,11 +3,15 @@ import { makeStyles } from "@mui/styles";
 
 export const useBookGridItemStyles = makeStyles((theme) => ({
   bookItemContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
     height: "100%",
-    minWidth: 'min-content',
+    minWidth: "min-content",
     padding: theme.spacing(2),
     backgroundColor: themeValues.color.color4,
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     // border: themeValues.defaultborder,
     boxShadow: themeValues.shadow.boxShadowLight,
     color: themeValues.color.color1,
@@ -28,7 +32,24 @@ export const useBookGridItemStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   bookImage: {
-    borderRadius: themeValues.borderRadius,
+    borderRadius: themeValues.border.borderRadius,
+  },
+  bookCounts: {
+    display: "flex",
+    alignSelf: "center",
+    gap: theme.spacing(2),
+  },
+  bookCount: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: theme.spacing(0.5),
+    padding: theme.spacing(0.5),
+    borderRadius: themeValues.border.borderRadius,
+    border: themeValues.border.defaultborderGrey,
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
   bookContent: {
     display: "flex",

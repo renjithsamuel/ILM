@@ -13,7 +13,7 @@ export const useSimilarBookItemStyles = makeStyles((theme) => ({
     width: "7vw",
     height: "auto",
     overflow: "hidden",
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowLight,
     "&:hover .bookImage": {
       transform: "scale(1.1)",
@@ -28,7 +28,7 @@ export const useSimilarBookItemStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     transition: "transform 0.3s ease-in-out",
   },
   bookTitle: {

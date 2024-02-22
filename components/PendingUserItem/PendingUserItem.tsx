@@ -31,7 +31,7 @@ export const PendingUserItem = ({
                 <Box
                   key={index}
                   sx={{
-                    border: themeValues.defaultborder,
+                    border: themeValues.border.defaultborder,
                     borderColor: bookCount.borderColor,
                     "&:hover": {
                       backgroundColor: bookCount.borderColor,

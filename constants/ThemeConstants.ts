@@ -1,9 +1,12 @@
 export const themeValues = {
-  borderRadius: "6px",
-  borderRadiusHigh: "10px",
-  borderRadiusLow: "4px",
-  defaultborder: "1px solid black",
-  thickborder: "3px solid black",
+  border: {
+    borderRadius: "6px",
+    borderRadiusHigh: "10px",
+    borderRadiusLow: "4px",
+    defaultborder: "1px solid black",
+    thickborder: "3px solid black",
+    defaultborderGrey: "1px solid #D3D3D3",
+  },
   color: {
     color1: "#0c2465",
     color2: "#a2b0d6",

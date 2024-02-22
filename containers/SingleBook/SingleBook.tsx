@@ -1,11 +1,11 @@
 import { Book } from "@/entity/Book/Book";
-import { Box, Divider, Grid } from "@mui/material";
+import { Box, Divider, Grid, Tooltip, Typography } from "@mui/material";
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
 import Image from "next/image";
 import { bookKeyValues } from "@/constants/GlobalConstants";
 import { BookGridItem } from "@/components/BookGridItem/BookGridItem";
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { mockBooks } from "@/entity/Book/Book.mock";
 import { SimilarBookItem } from "@/components/SimilarBookItem/SimilarBookItem";
 import clsx from "clsx";
@@ -13,6 +13,11 @@ import Link from "next/link";
 import ReactPDF, { Document, Page } from "@react-pdf/renderer";
 import { IoHeartSharp } from "react-icons/io5";
 import theme from "@/styles/theme";
+import { MdOutlineShoppingCartCheckout } from "react-icons/md";
+import { Role } from "@/constants/Role";
+import { SiBookstack } from "react-icons/si";
+import { GoEye } from "react-icons/go";
+import { IoMdHeart } from "react-icons/io";
 
 interface singleBookParams {
   // book: Book;
@@ -20,7 +25,7 @@ interface singleBookParams {
 
 export const SingleBook = ({}: singleBookParams) => {
   const classes = useSingleBookStyles();
-  const { book } = useSingleBook({});
+  const { book, userType } = useSingleBook({});
 
   if (!book) {
     return <></>;
@@ -51,14 +56,40 @@ export const SingleBook = ({}: singleBookParams) => {
           <Divider />
           {/*  book  details*/}
           <Box className={classes.singleBookDetails}>
-            {bookKeyValues.map((keyValues, index) => (
-              <Box key={index} className={classes.singleBookItemWrap}>
-                <Box className={classes.bookItemKey}>{keyValues.name}</Box>
-                <Box className={classes.bookItemValue}>
-                  {keyValues.get(book)}
+            {bookKeyValues.map((keyValues, index) => {
+              if (keyValues.key === "shelfNumber" && !book.inLibrary) return;
+              return (
+                <Box key={index} className={classes.singleBookItemWrap}>
+                  <Box className={classes.bookItemKey}>{keyValues.name}</Box>
+                  <Box className={classes.bookItemValue}>
+                    {keyValues.get(book)}
+                  </Box>
                 </Box>
-              </Box>
-            ))}
+              );
+            })}
+            {/* book counts */}
+            <Box className={classes.bookCounts}>
+              {/* views */}
+              <Tooltip title={"views"} placement="bottom">
+                <Box className={classes.bookCount}>
+                  <GoEye /> {book.views}
+                </Box>
+              </Tooltip>
+              {/* stock */}
+              {book.inLibrary && (
+                <Tooltip title={"stock"} placement="bottom">
+                  <Box className={classes.bookCount}>
+                    <SiBookstack /> {book.booksLeft}
+                  </Box>
+                </Tooltip>
+              )}
+              {/* wishlist */}
+              <Tooltip title={"wishlists"} placement="bottom">
+                <Box className={classes.bookCount}>
+                  <IoMdHeart /> {book.wishlistCount}
+                </Box>
+              </Tooltip>
+            </Box>
           </Box>
           {/*  book  Buttons*/}
           <Box className={classes.singleBookButtons}>
@@ -66,10 +97,21 @@ export const SingleBook = ({}: singleBookParams) => {
               Reserve Now
             </Button>
             <Button variant="contained" className={classes.wishlistBtn}>
+              <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
+                {"  "}Wishlist
+              </Typography>
               <IoHeartSharp size={theme.spacing(2.2)} />
               {"  "}
-              <Typography variant="body1">{"  "}Wishlist</Typography>
             </Button>
+            {userType === Role.Librarian && book.inLibrary && (
+              <Button variant="contained" className={classes.reserveNowBtn}>
+                <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
+                  {"  "}Checkout
+                </Typography>
+                <MdOutlineShoppingCartCheckout size={theme.spacing(2.2)} />
+                {"  "}
+              </Button>
+            )}
           </Box>
         </Box>
         {/* book preview */}

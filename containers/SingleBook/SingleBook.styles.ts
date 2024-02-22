@@ -21,7 +21,7 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     display: "flex",
     gap: theme.spacing(2),
     flexDirection: "column",
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowboxy,
     // glassmorphism
     // background: "rgba(255, 255, 255, 0.37)",
@@ -45,7 +45,7 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     padding: theme.spacing(1),
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowLight,
     transition: themeValues.transition.defaultTansition,
     "&:hover": {
@@ -65,7 +65,7 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     transition: "transform 0.3s ease-in-out",
   },
   bookTitle: {
@@ -92,6 +92,24 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     alignItems: "start",
     gap: theme.spacing(1),
     width: "30vw",
+  },
+  bookCounts: {
+    marginTop: theme.spacing(1),
+    display: "flex",
+    alignSelf: "center",
+    gap: theme.spacing(2),
+  },
+  bookCount: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: theme.spacing(0.5),
+    padding: theme.spacing(0.5),
+    borderRadius: themeValues.border.borderRadius,
+    border: themeValues.border.defaultborderGrey,
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
   singleBookItemWrap: {
     display: "flex",
@@ -141,7 +159,7 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     width: "63vw",
     height: "40vh",
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowboxy,
   },
   singleBookComments: {
@@ -152,13 +170,13 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     width: "63vw",
     height: "40vh",
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowboxy,
   },
   similarBooks: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowboxy,
     width: "15vw",
     display: "flex",

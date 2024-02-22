@@ -15,6 +15,9 @@ const bookData: IBook = {
     "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
   shelfNumber: 12,
   inLibrary: true,
+  booksLeft: 2,
+  views: 2,
+  wishlistCount: 2,
 };
 
 export const mockBook = new Book(bookData);
@@ -34,6 +37,9 @@ const mockBooksInterfaceArray: IBook[] = [
       "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     shelfNumber: 12,
     inLibrary: true,
+    booksLeft: 2,
+    views: 2,
+    wishlistCount: 2,
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79028",
@@ -49,6 +55,9 @@ const mockBooksInterfaceArray: IBook[] = [
       "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     shelfNumber: 12,
     inLibrary: true,
+    booksLeft: 2,
+    views: 2,
+    wishlistCount: 2,
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79029",
@@ -63,7 +72,10 @@ const mockBooksInterfaceArray: IBook[] = [
     coverImage:
       "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     shelfNumber: 12,
-    inLibrary: true,
+    inLibrary: false,
+    booksLeft: 2,
+    views: 2,
+    wishlistCount: 2,
   },
 ];
 

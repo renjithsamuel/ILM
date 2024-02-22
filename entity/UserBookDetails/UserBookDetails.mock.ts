@@ -13,6 +13,8 @@ export const mockbookDetails: BookDetails = {
   reservedBookList: [mockBook.ID],
   wishlistBooks: [mockBook.ID],
   favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+  completedBooksCount: 2,
+  completedBooksList: [mockBook.ID],
 };
 
 export const mockbookDetailsArray: BookDetails[] = [
@@ -27,6 +29,8 @@ export const mockbookDetailsArray: BookDetails[] = [
     reservedBookList: [mockBook.ID],
     wishlistBooks: [mockBook.ID],
     favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+    completedBooksCount: 2,
+    completedBooksList: [mockBook.ID],
   },
   {
     userID: "123457",
@@ -39,6 +43,8 @@ export const mockbookDetailsArray: BookDetails[] = [
     reservedBookList: [mockBook.ID],
     wishlistBooks: [mockBook.ID],
     favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+    completedBooksCount: 2,
+    completedBooksList: [mockBook.ID],
   },
   {
     userID: "123458",
@@ -51,5 +57,7 @@ export const mockbookDetailsArray: BookDetails[] = [
     reservedBookList: [mockBook.ID],
     wishlistBooks: [mockBook.ID],
     favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+    completedBooksCount: 2,
+    completedBooksList: [mockBook.ID],
   },
 ];

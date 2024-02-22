@@ -15,6 +15,7 @@ export const sideMenuItems = {
   WishLists: { name: "Wishlists", link: "/wishlists" },
   Transactions: { name: "Transactions", link: "/transactions" },
   // both
+  AllBooks: { name: "All Books", link: "/allbooks" },
   Settings: { name: "Settings", link: "/settings" },
 };
 
@@ -41,4 +42,5 @@ export enum UserBookDetailType {
   Pending = "pending",
   CheckedOut = "checkedOut",
   WishLists = "wishLists",
+  Completed = "completed"
 }
