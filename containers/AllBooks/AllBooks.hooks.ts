@@ -61,6 +61,7 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   };
 };
 
+// todo can be updated with Object.values
 const sortHelper = (
   book1: Book,
   book2: Book,

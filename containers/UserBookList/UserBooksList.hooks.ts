@@ -18,15 +18,25 @@ interface userbookslistHook {
 export const useUserBooksList =
   ({}: userbookslistHookProps): userbookslistHook => {
     const [bookList, setBookList] = useState<Book[]>([]);
-
+    const [bookDetailsFrom, setBookDetailsFrom] = useState<UserBookDetailType>(
+      UserBookDetailType.WishLists
+    );
     const router = useRouter();
-    const bookDetailsFrom = router?.pathname?.split("/")[3];
-    const userID = router?.pathname?.split("/")[2];
+
+    const userID = router.query.userID;
     // get book details from userID
     const user = mockUsers.find((item) => item.userID === userID);
-    const bookDetails = mockbookDetailsArray.find(
-      (item) => item.userID === userID
-    );
+
+    const bookDetails = mockbookDetailsArray.find((item) => {
+      if (item.userID === userID) return item;
+    });
+
+    useEffect(() => {
+      const tempBookDetailsFrom = router?.pathname?.split("/")[3];
+      if (tempBookDetailsFrom) {
+        setBookDetailsFrom(tempBookDetailsFrom as UserBookDetailType);
+      }
+    }, [router?.pathname]);
 
     // get books from the user's book details list and give enabled thing -> bookDetailsFrom
     useEffect(() => {
@@ -66,10 +76,13 @@ export const useUserBooksList =
           filterBookItems(
             bookDetails,
             setBookList,
-            UserBookDetailType.CheckedOut
+            UserBookDetailType.WishLists
           );
       }
-    }, [bookDetailsFrom]);
+    }, [bookDetails, bookDetailsFrom]);
+
+    console.log("userID", userID);
+    console.log("bookDetailsFrom", bookDetailsFrom);
 
     return {
       bookList,
@@ -82,12 +95,17 @@ function filterBookItems(
   setBookList: (value: SetStateAction<Book[]>) => void,
   type: UserBookDetailType
 ) {
-  const thisBookDetails = getBookDetails(bookDetails, type);
-  const BookItems = thisBookDetails.map((bookDetailsItem) => {
-    return mockBooks.find(
-      (mockBookItem) => mockBookItem.ID === bookDetailsItem && mockBookItem
-    );
+  console.log("bookDetails", bookDetails);
+  const bookStringList = getBookDetails(bookDetails, type);
+  const BookItems = bookStringList.map((bookDetailsItem) => {
+    return mockBooks.find((mockBookItem) => {
+      if (mockBookItem.ID === bookDetailsItem) {
+        console.log("mockBookItem", mockBookItem);
+        return mockBookItem;
+      }
+    });
   });
+  console.log("BookItems", BookItems);
   if (BookItems) {
     // Filter out undefined values using a traditional for loop
     const filteredBooks: Book[] = [];
@@ -105,31 +123,32 @@ function getBookDetails(
   bookDetails: BookDetails | undefined,
   type: UserBookDetailType
 ): string[] {
-  let currBookDetails: string[] | undefined;
+  let currBooksStringList: string[] | undefined;
   switch (type) {
     case UserBookDetailType.Reserved:
-      currBookDetails = bookDetails?.reservedBookList;
+      currBooksStringList = bookDetails?.reservedBookList;
       break;
 
     case UserBookDetailType.Pending:
-      currBookDetails = bookDetails?.pendingBooksList;
+      currBooksStringList = bookDetails?.pendingBooksList;
       break;
 
     case UserBookDetailType.CheckedOut:
-      currBookDetails = bookDetails?.checkedOutBookList;
+      currBooksStringList = bookDetails?.checkedOutBookList;
       break;
 
     case UserBookDetailType.WishLists:
-      currBookDetails = bookDetails?.wishlistBooks;
+      currBooksStringList = bookDetails?.wishlistBooks;
       break;
 
     case UserBookDetailType.Completed:
-      currBookDetails = bookDetails?.completedBooksList;
+      currBooksStringList = bookDetails?.completedBooksList;
       break;
+
     default:
-      currBookDetails = bookDetails?.completedBooksList;
+      currBooksStringList = bookDetails?.wishlistBooks;
       break;
   }
 
-  return currBookDetails || ([] as string[]);
+  return currBooksStringList || ([] as string[]);
 }

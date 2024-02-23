@@ -2,7 +2,7 @@ import { BookGenre } from "@/constants/BookGenre";
 import { Book, IBook } from "./Book";
 
 const bookData: IBook = {
-  ID: "3e74718b-3855-43ba-ae2c-4be8ccc79026",
+  ID: "3e74718b-3855-43ba-ae2c-4be8ccc79027",
   ISBN: "123456",
   title: "The Great Gatsby",
   author: "F. Scott Fitzgerald",
