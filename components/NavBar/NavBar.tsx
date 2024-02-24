@@ -12,6 +12,7 @@ import { sideMenuItems } from "@/constants/GlobalConstants";
 import { ReactNode } from "react";
 import Link from "next/link";
 import { Role } from "@/constants/Role";
+import { SearchDialog } from "../SearchDialog/SearchDialog";
 
 interface NavBarProps {
   showSearchBar: boolean;
@@ -26,7 +27,15 @@ export const NavBar = ({
   menuItems,
   children,
 }: NavBarProps) => {
-  const { handleSearch, currentSideMenu, user } = useNavBar();
+  const {
+    handleSearch,
+    currentSideMenu,
+    user,
+    isSearchClicked,
+    handleSearchClick,
+    DialogBox,
+    setIsSearchClicked,
+  } = useNavBar();
   const classes = useNavBarStyles();
 
   return (
@@ -43,13 +52,17 @@ export const NavBar = ({
           {pageName && <Typography variant="h5">{pageName}</Typography>}
           {/* search bar */}
           {showSearchBar && (
-            <Box className={classes.searchInputWrap}>
+            <Box
+              className={classes.searchInputWrap}
+              onClick={handleSearchClick}
+            >
               <input
                 placeholder="Search"
                 type="text"
                 name="searchBar"
                 className={classes.searchInput}
-                onChange={(e) => handleSearch(e.target.value)}
+                onClick={handleSearchClick}
+                // onChange={(e) => handleSearch(e.target.value)}
               />
               {/* search Icon */}
               <IoIosSearch
@@ -101,8 +114,22 @@ export const NavBar = ({
             </Box>
           </Link>
         </Box>
+        {/* dialog for search */}
+        {isSearchClicked ? (
+          <Box sx={{ zIndex: 10 }}>
+            <SearchDialog setIsSearchClicked={setIsSearchClicked} />
+            {/* todo here you can dynamically send childern to render in dialog */}
+          </Box>
+        ) : !!DialogBox ? (
+          <Box sx={{ zIndex: 10 }}>
+            <DialogBox />
+            {/* todo here you can dynamically send childern to render in dialog */}
+          </Box>
+        ) : (
+          ""
+        )}
         {/* page main content */}
-        <Box>{children}</Box>
+        <Box sx={{ zIndex: 1 }}>{children}</Box>
       </Box>
     </Box>
   );

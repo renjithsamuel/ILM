@@ -15,6 +15,10 @@ type TPageContext = {
   setErrorMessage: Dispatch<SetStateAction<string>>;
   currentSideMenu: string;
   setCurrentSideMenu: Dispatch<SetStateAction<string>>;
+  DialogBox: (({}: any) => JSX.Element) | undefined;
+  setDialogBox: Dispatch<
+    SetStateAction<(({}: any) => JSX.Element) | undefined>
+  >;
 };
 
 export const PageContext = createContext<TPageContext>(
@@ -31,6 +35,9 @@ export const PageContextProvider: FC<UserContextProviderProps> = ({
   const [searchText, setSearchText] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [currentSideMenu, setCurrentSideMenu] = useState<string>("");
+  const [DialogBox, setDialogBox] = useState<
+    (({}: any) => JSX.Element) | undefined
+  >(undefined);
 
   return (
     <PageContext.Provider
@@ -41,6 +48,8 @@ export const PageContextProvider: FC<UserContextProviderProps> = ({
         setErrorMessage,
         currentSideMenu,
         setCurrentSideMenu,
+        DialogBox,
+        setDialogBox,
       }}
     >
       {children}

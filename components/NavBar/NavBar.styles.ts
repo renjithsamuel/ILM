@@ -12,12 +12,14 @@ export const useNavBarStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(1),
     paddingTop: theme.spacing(1),
     width: "100vw",
+    zIndex: 1,
   },
   libraryName: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     gap: theme.spacing(1.3),
+    marginRight: theme.spacing(27),
   },
   topNavBarContainer: {
     backgroundColor: themeValues.color.color1,
@@ -38,7 +40,7 @@ export const useNavBarStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: theme.spacing(1.3),
+    padding: theme.spacing(1),
   },
   searchInput: {
     all: "unset",
@@ -46,10 +48,14 @@ export const useNavBarStyles = makeStyles((theme) => ({
     outline: themeValues.color.borderColor2,
     backgroundColor: themeValues.color.color2,
     transition: themeValues.transition.defaultTansition,
-    "&:focus": {
-      paddingLeft: theme.spacing(0.5),
-      paddingRight: theme.spacing(0.5),
+    "&:hover": {
+      boxShadow: themeValues.shadow.boxShadowHeavy,
+      cursor: "pointer",
     },
+    // "&:focus": {
+    //   paddingLeft: theme.spacing(0.5),
+    //   paddingRight: theme.spacing(0.5),
+    // },
     "&::-webkit-input-placeholder": {
       color: themeValues.color.color1,
       opacity: 1,
