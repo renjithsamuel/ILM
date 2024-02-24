@@ -60,3 +60,23 @@ export enum SortOrder {
   asc = "ascending",
   desc = "descending",
 }
+
+export enum SearchSortValue {
+  wishlistCount = "wishlistCount",
+  bookViews = "bookViews",
+  booksLeft = "booksLeft",
+  title = "title",
+  author = "author",
+  genre = "genre",
+  publishedDate = "publishedDate",
+  shelfNumber = "shelfNumber",
+  username = "username",
+  email = "email",
+  userViews = "userViews",
+}
+
+export enum EntityTypes {
+  UserEntity = "user",
+  BookEntity = "book",
+  BookDetailsEntity = "bookDetails",
+}

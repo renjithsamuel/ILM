@@ -12,12 +12,13 @@ export interface IUser {
   address: string;
   joinedDate: Date;
   country: string;
+  views: number;
   password?: string;
 }
 
 export class User implements IUser {
   readonly userID: string;
-  name: string; 
+  name: string;
   email: string;
   role: Role;
   dateOfBirth: Date;
@@ -25,6 +26,7 @@ export class User implements IUser {
   address: string;
   joinedDate: Date;
   country: string;
+  views: number;
   password?: string;
 
   constructor(user: IUser) {
@@ -37,6 +39,7 @@ export class User implements IUser {
     this.address = user.address;
     this.joinedDate = user.joinedDate;
     this.country = user.country;
+    this.views = user.views;
     this.password = user.password;
   }
 }

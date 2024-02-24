@@ -31,8 +31,8 @@ export const AllBooks = ({}: allBooksParams) => {
 
   return (
     <Box className={classes.allBooksRoot}>
+      {/* sort by */}
       <Box className={classes.sortByContainer}>
-        {/* sort by */}
         <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
           <InputLabel id="demo-controlled-open-select-label">
             Sort By

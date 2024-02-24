@@ -14,6 +14,7 @@ export const mockUser: User = {
   address: "123 Main Street",
   country: "United States",
   password: "securePassword123",
+  views: 2,
 };
 
 export const mockUsers: User[] = [

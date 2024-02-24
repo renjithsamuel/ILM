@@ -48,6 +48,7 @@ export const useNavBarStyles = makeStyles((theme) => ({
     outline: themeValues.color.borderColor2,
     backgroundColor: themeValues.color.color2,
     transition: themeValues.transition.defaultTansition,
+    caretColor: themeValues.color.transparent,
     "&:hover": {
       boxShadow: themeValues.shadow.boxShadowHeavy,
       cursor: "pointer",
