@@ -18,6 +18,7 @@ import { Role } from "@/constants/Role";
 import { SiBookstack } from "react-icons/si";
 import { GoEye } from "react-icons/go";
 import { IoMdHeart } from "react-icons/io";
+import { MdOutlineDone } from "react-icons/md";
 import { ModifyCount } from "@/components/ModifyCount/ModifyCount";
 
 interface singleBookParams {
@@ -123,7 +124,10 @@ export const SingleBook = ({}: singleBookParams) => {
                 </Button>
               </Box>
             )}
-            {/* reserve btn  */}
+            {/* reserve btn  todo create a checkout ticket when someone reserves and will be deleted within 15 days and 
+              also once checked out the no of days activates updating checkedout date, everytime the transaction page loads 
+              need to update DB on the, fineamount and return date exceeding it 
+            */}
             {userType === Role.Patrons && book.inLibrary && (
               <Tooltip
                 title={
@@ -158,19 +162,32 @@ export const SingleBook = ({}: singleBookParams) => {
                 {"  "}
               </Button>
             )}
-            {/* checkout btn */}
-            {userType === Role.Librarian && book.inLibrary && (
-              <Button
-                variant="contained"
-                className={classes.reserveNowBtn}
-                disabled={book.booksLeft === 0 ? true : false}
-              >
+            {/* completed btn todo check for the checkedout array of user and open dialog to complete the report*/}
+            {userType === Role.Patrons && (
+              <Button variant="contained" className={classes.reserveNowBtn}>
                 <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
-                  {"  "}Checkout
+                  {"Completed"}
                 </Typography>
-                <MdOutlineShoppingCartCheckout size={theme.spacing(2.2)} />
+                <MdOutlineDone size={theme.spacing(2.2)} />
                 {"  "}
               </Button>
+            )}
+            {/* checkout btn  */}
+            {/* todo when checking out go to /transactions/{isbn} capture it and add in search filed */}
+            {userType === Role.Librarian && book.inLibrary && (
+              <Link href={`/transactions?${book.ISBN}`}>
+                <Button
+                  variant="contained"
+                  className={classes.reserveNowBtn}
+                  disabled={book.booksLeft === 0 ? true : false}
+                >
+                  <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
+                    {"  "}Checkout
+                  </Typography>
+                  <MdOutlineShoppingCartCheckout size={theme.spacing(2.2)} />
+                  {"  "}
+                </Button>
+              </Link>
             )}
           </Box>
         </Box>

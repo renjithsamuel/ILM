@@ -6,8 +6,8 @@ export const usePendingUserItemStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    margin: theme.spacing(2),
-    padding: theme.spacing(4),
+    margin: theme.spacing(1),
+    padding: theme.spacing(2),
     borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowLight,
     transition: themeValues.transition.defaultTansition,
@@ -19,9 +19,13 @@ export const usePendingUserItemStyles = makeStyles((theme) => ({
   userName: {
     color: themeValues.color.color1,
   },
+  email: {
+    color: themeValues.color.color1,
+    opacity: 0.7,
+  },
   bookCounts: {
     display: "flex",
-    gap: theme.spacing(4),
+    gap: theme.spacing(2),
   },
   eachCount: {
     display: "flex",
@@ -35,6 +39,7 @@ export const usePendingUserItemStyles = makeStyles((theme) => ({
     transition: themeValues.transition.defaultTansition,
   },
   labelName: {
-    fontSize: themeValues.font.fontSizeMedium,
+    fontSize: themeValues.font.fontSizeSmall,
+    // fontSize: themeValues.font.fontSizeMedium,
   },
 }));

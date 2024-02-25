@@ -13,7 +13,12 @@ export const sideMenuItems = {
   // librarian
   Dashboard: { name: "Dashboard", link: "/dashboard" },
   WishLists: { name: "Wishlists", link: "/wishlists" },
+  Users: { name: "Users", link: "/users" },
   Transactions: { name: "Transactions", link: "/transactions" },
+  PredictiveAnalysis: {
+    name: "Predictive Analysis",
+    link: "/predictive-analysis",
+  },
   // both
   AllBooks: { name: "All Books", link: "/allbooks" },
   Settings: { name: "Settings", link: "/settings" },
@@ -79,6 +84,13 @@ export enum SearchSortValue {
   username = "username",
   email = "email",
   userViews = "userViews",
+}
+
+export enum TransactionSortValue {
+  returnedOn = "Returned On",
+  checkedoutOn = "Checkedout On",
+  reservedOn = "Reserved On",
+  fineAmount = "Fine Amount",
 }
 
 export enum EntityTypes {

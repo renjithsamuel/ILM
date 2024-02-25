@@ -8,11 +8,16 @@ export const useModifyCountStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "start",
     padding: theme.spacing(3),
-    gap: theme.spacing(1),
+    gap: theme.spacing(2),
     borderRadius: themeValues.border.borderRadius,
     maxWidth: "20vw",
-    maxHeight: "25vh",
+    maxHeight: "35vh",
     position: "relative",
+  },
+  countLabel: {
+    alignSelf: "center",
+    fontSize: themeValues.font.fontSizeLarge,
+    fontWeight: themeValues.font.fontWeightThick,
   },
   countBtns: {
     display: "flex",

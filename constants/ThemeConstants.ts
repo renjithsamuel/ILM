@@ -26,6 +26,7 @@ export const themeValues = {
     fontWeightThick: "700",
     fontWeightLightThick: "600",
     fontSizeXLarge: "x-large",
+    fontSizeLarge: "large",
     fontSizeSmall: "small",
     fontSizeMedium: "medium",
   },

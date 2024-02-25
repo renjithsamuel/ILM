@@ -1,7 +1,5 @@
 import { Role } from "@/constants/Role";
 import { User } from "./User";
-import { BookGenre } from "@/constants/BookGenre";
-import { mockBook } from "../Book/Book.mock";
 
 export const mockUser: User = {
   userID: "123456",

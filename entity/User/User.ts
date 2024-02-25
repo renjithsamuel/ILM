@@ -55,3 +55,5 @@ export class User implements IUser {
     this.updatedAt = user.updatedAt;
   }
 }
+
+// can revoke membership

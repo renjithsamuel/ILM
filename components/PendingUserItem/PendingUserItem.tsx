@@ -9,6 +9,7 @@ import { UserBookDetailType } from "@/constants/GlobalConstants";
 interface pendingUserItemParams {
   userID: string;
   userName: string;
+  email: string;
   bookDetails: IBookDetails | undefined;
   sortByValue: UserBookDetailType;
 }
@@ -16,6 +17,7 @@ interface pendingUserItemParams {
 export const PendingUserItem = ({
   userID,
   userName,
+  email,
   bookDetails,
   sortByValue,
 }: pendingUserItemParams) => {
@@ -24,9 +26,14 @@ export const PendingUserItem = ({
     <>
       <Link href={`/users/${userID}`}>
         <Box className={classes.pendingUserItem}>
-          <Typography variant="h6" className={classes.userName}>
-            {userName}
-          </Typography>
+          <Box>
+            <Typography variant="h6" className={classes.userName}>
+              {userName}
+            </Typography>
+            <Typography variant="body2" className={classes.email}>
+              {email}
+            </Typography>
+          </Box>
 
           <Box className={classes.bookCounts}>
             {bookCounts.map((bookCount, index) => {
@@ -35,11 +42,11 @@ export const PendingUserItem = ({
                   key={index}
                   sx={{
                     bgcolor:
-                      (sortByValue === bookCount.detailType)
+                      sortByValue === bookCount.detailType
                         ? bookCount.borderColor
                         : "",
                     color:
-                      (sortByValue === bookCount.detailType)
+                      sortByValue === bookCount.detailType
                         ? themeValues.color.white
                         : themeValues.color.color1,
                     border: themeValues.border.defaultborder,
@@ -51,11 +58,11 @@ export const PendingUserItem = ({
                   }}
                   className={classes.eachCount}
                 >
-                  <Typography variant="h6" className={classes.labelName}>
+                  <Typography variant="body1" className={classes.labelName}>
                     {bookCount.label}
                   </Typography>
                   {/* <Tooltip title={bookCount.title} placement="top"> */}
-                  <Typography variant="h6">
+                  <Typography variant="body1">
                     {bookDetails && bookCount.getbookCount(bookDetails)}
                   </Typography>
                   {/* </Tooltip> */}

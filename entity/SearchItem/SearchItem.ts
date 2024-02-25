@@ -19,13 +19,13 @@ export class SearchItem implements ISearchItem {
   bookDescription?: string;
   emailID?: string;
 
-  constructor(user: ISearchItem) {
-    this.entityID = user.entityID;
-    this.entityType = user.entityType;
-    this.views = user.views;
-    this.bookname = user.bookname;
-    this.username = user.username;
-    this.bookDescription = user.bookDescription;
-    this.emailID = user.emailID;
+  constructor(searchItem: ISearchItem) {
+    this.entityID = searchItem.entityID;
+    this.entityType = searchItem.entityType;
+    this.views = searchItem.views;
+    this.bookname = searchItem.bookname;
+    this.username = searchItem.username;
+    this.bookDescription = searchItem.bookDescription;
+    this.emailID = searchItem.emailID;
   }
 }

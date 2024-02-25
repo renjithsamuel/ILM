@@ -10,3 +10,7 @@ export default function DashboardPage() {
     ></BaseLayout>
   );
 }
+
+// book views
+// book checkouts
+// book fines

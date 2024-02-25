@@ -19,7 +19,7 @@ export const useAllBooksStyles = makeStyles((theme) => ({
   sortByContainer: {
     display: "flex",
     width: "25vw",
-    alignSelf: "center",
+    alignSelf: "start",
     gap: theme.spacing(2),
   },
   noBooksText: {

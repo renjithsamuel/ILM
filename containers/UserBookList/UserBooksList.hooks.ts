@@ -3,8 +3,6 @@ import { Role } from "@/constants/Role";
 import { useUserContext } from "@/context/UserContext";
 import { Book } from "@/entity/Book/Book";
 import { mockBooks } from "@/entity/Book/Book.mock";
-import { User } from "@/entity/User/User";
-import { mockUser, mockUsers } from "@/entity/User/User.mock";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 import { mockbookDetailsArray } from "@/entity/UserBookDetails/UserBookDetails.mock";
 import { useRouter } from "next/router";
@@ -107,12 +105,10 @@ function filterBookItems(
   setBookList: (value: SetStateAction<Book[]>) => void,
   type: UserBookDetailType
 ) {
-  console.log("bookDetails", bookDetails);
   const bookStringList = getBookDetails(bookDetails, type);
   const BookItems = bookStringList.map((bookDetailsItem) => {
     return mockBooks.find((mockBookItem) => {
       if (mockBookItem.ID === bookDetailsItem) {
-        console.log("mockBookItem", mockBookItem);
         return mockBookItem;
       }
     });

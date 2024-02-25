@@ -18,12 +18,12 @@ interface allBooksHookProps {}
 
 interface allBooksHook {
   bookList: Book[];
+  sortByPresence: SortPresence;
   sortByOrder: SortOrder;
   sortByValue: BookSortValue;
-  sortByPresence: SortPresence;
-  handleSortPresence: (event: SelectChangeEvent) => void;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
+  handleSortPresence: (event: SelectChangeEvent) => void;
 }
 
 export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
@@ -31,10 +31,10 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   const [sortByValue, setSortByValue] = useState<BookSortValue>(
     BookSortValue.wishlistCount
   );
+  const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
   const [sortByPresence, setSortByPresence] = useState<SortPresence>(
     SortPresence.both
   );
-  const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
   // get all books
   // give full freedom to sort from
@@ -52,11 +52,11 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   }, [sortByOrder, sortByPresence, sortByValue]);
 
   // sorting
-  const handleSortValue = (event: SelectChangeEvent): void => {
-    event.target.value && setSortByValue(event.target.value as BookSortValue);
-  };
   const handleSortPresence = (event: SelectChangeEvent): void => {
     event.target.value && setSortByPresence(event.target.value as SortPresence);
+  };
+  const handleSortValue = (event: SelectChangeEvent): void => {
+    event.target.value && setSortByValue(event.target.value as BookSortValue);
   };
   const handleSortOrder = (event: SelectChangeEvent): void => {
     (event.target.value === SortOrder.asc ||
@@ -66,12 +66,12 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
 
   return {
     bookList,
+    sortByPresence,
     sortByOrder,
     sortByValue,
-    sortByPresence,
-    handleSortPresence,
     handleSortOrder,
     handleSortValue,
+    handleSortPresence,
   };
 };
 

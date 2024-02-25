@@ -1,16 +1,16 @@
 import { sideMenuItems } from "@/constants/GlobalConstants";
-import { AllBooks } from "@/containers/AllBooks/AllBooks";
+import { AllUsers } from "@/containers/AllUsers/AllUsers";
 import { BaseLayout } from "@/containers/BaseLayout/BaseLayout";
-import { UserBooksList } from "@/containers/UserBookList/UserBooksList";
+import { SingleUser } from "@/containers/SingleUser/SingleUser";
 
 export default function SingleUserPage() {
   return (
     <BaseLayout
       authenticatedOnly={true}
       showSearchBar
-      pageName={sideMenuItems.AllBooks.name}
+      pageName={sideMenuItems.Users.name}
     >
-      <AllBooks />
+      <AllUsers />
     </BaseLayout>
   );
 }

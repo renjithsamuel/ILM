@@ -1,122 +1,79 @@
-import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
-import { Role } from "@/constants/Role";
-import { User } from "@/entity/User/User";
+import {
+  SortOrder,
+  TransactionSortValue,
+  globalConstants,
+} from "@/constants/GlobalConstants";
+import { mockBooks } from "@/entity/Book/Book.mock";
+import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
+import { mockCheckoutTickets } from "@/entity/CheckoutTicket/CheckoutTicket.mock";
 import { mockUsers } from "@/entity/User/User.mock";
-import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
-import { mockbookDetailsArray } from "@/entity/UserBookDetails/UserBookDetails.mock";
+import { debounce } from "@/utils/debounce";
 import { SelectChangeEvent } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 interface transactionsHookProps {}
 
 interface transactionsHook {
-  pendingUsers: User[];
-  getBookDetails: (userID: string) => BookDetails | undefined;
-  sortByValue: UserBookDetailType;
+  checkedOutList: CheckoutTicket[];
   sortByOrder: SortOrder;
+  sortByValue: TransactionSortValue;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
+  handleSearch: (val: string) => void;
+  searchText: string;
 }
 
 export const useTransactions =
   ({}: transactionsHookProps): transactionsHook => {
-    const [sortByValue, setSortByValue] = useState<UserBookDetailType>(
-      UserBookDetailType.Pending
+    const router = useRouter();
+    const [checkedOutList, setCheckedOutList] = useState<CheckoutTicket[]>([]);
+    const [searchText, setSearchText] = useState<string>("");
+    const [sortByValue, setSortByValue] = useState<TransactionSortValue>(
+      TransactionSortValue.reservedOn
     );
     const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
-    // represents book details array
-    const mockBookDetailsArrayMock = mockbookDetailsArray;
-    // fetch users
-    const mockUserMock = mockUsers.filter((item) => item.role === Role.Patrons).sort((a, b) => {
-      const aBookDetails = mockBookDetailsArrayMock.find(
-        (bkDetails) => bkDetails.userID === a.userID
-      );
-      const bBookDetails = mockBookDetailsArrayMock.find(
-        (bkDetails) => bkDetails.userID === b.userID
-      );
-      return aBookDetails && bBookDetails
-        ? sortHelper(aBookDetails, bBookDetails, sortByOrder, sortByValue)
-        : -1;
-    });
+    // can come from single book page direct search here
+    useEffect(() => {
+      if (router.asPath) {
+        const querySearchText = router.asPath.split("?")[1];
+        console.log(router.asPath);
+        if (querySearchText) {
+          setSearchText(querySearchText);
+        }
+      }
+    }, [router.asPath]);
 
-    // const get
-    const getBookDetails = (userID: string) => {
-      const bookDetails = mockBookDetailsArrayMock.find(
-        (bkDetails) => bkDetails.userID === userID
-      );
-      return bookDetails && bookDetails;
-    };
-
-    // sorting
     const handleSortValue = (event: SelectChangeEvent): void => {
       event.target.value &&
-        setSortByValue(event.target.value as UserBookDetailType);
+        setSortByValue(event.target.value as TransactionSortValue);
     };
     const handleSortOrder = (event: SelectChangeEvent): void => {
       event.target.value && setSortByOrder(event.target.value as SortOrder);
     };
 
+    const handleSearch = (value: any) => {
+      setSearchText(value);
+    };
+
+    useEffect(() => {
+      let tempCheckoutList: CheckoutTicket[] = mockCheckoutTickets;
+      tempCheckoutList = tempCheckoutList.map((item) => {
+        item.user = mockUsers.find((user) => user.userID === item.userID);
+        item.book = mockBooks.find((book) => book.ID === item.bookID);
+        return item;
+      });
+      tempCheckoutList && setCheckedOutList(tempCheckoutList);
+    }, []);
+
     return {
-      pendingUsers: mockUserMock,
-      getBookDetails,
-      sortByValue,
+      checkedOutList,
+      searchText,
       sortByOrder,
-      handleSortValue,
+      sortByValue,
       handleSortOrder,
+      handleSortValue,
+      handleSearch,
     };
   };
-
-const sortHelper = (
-  bookDetail1: BookDetails,
-  bookDetail2: BookDetails,
-  sortByOrder: string,
-  sortByValue: string
-): number => {
-  let val;
-  switch (sortByValue) {
-    case UserBookDetailType.Pending:
-      if (sortByOrder === SortOrder.asc)
-        val = bookDetail1.pendingBooksCount - bookDetail2.pendingBooksCount;
-      else val = bookDetail2.pendingBooksCount - bookDetail1.pendingBooksCount;
-      break;
-    case UserBookDetailType.Reserved:
-      if (sortByOrder === SortOrder.asc)
-        val = bookDetail1.reservedBooksCount - bookDetail2.reservedBooksCount;
-      else
-        val = bookDetail2.reservedBooksCount - bookDetail1.reservedBooksCount;
-      break;
-    case UserBookDetailType.CheckedOut:
-      if (sortByOrder === SortOrder.asc)
-        val =
-          bookDetail1.checkedOutBooksCount - bookDetail2.checkedOutBooksCount;
-      else
-        val =
-          bookDetail2.checkedOutBooksCount - bookDetail1.checkedOutBooksCount;
-      break;
-
-    case UserBookDetailType.Completed:
-      if (sortByOrder === SortOrder.asc)
-        val = bookDetail1.completedBooksCount - bookDetail2.completedBooksCount;
-      else
-        val = bookDetail2.completedBooksCount - bookDetail1.completedBooksCount;
-      break;
-
-    case UserBookDetailType.WishLists:
-      if (sortByOrder === SortOrder.asc)
-        val =
-          bookDetail1.wishlistBooks.length - bookDetail2.wishlistBooks.length;
-      else
-        val =
-          bookDetail2.wishlistBooks.length - bookDetail1.wishlistBooks.length;
-      break;
-
-    default:
-      if (sortByOrder === SortOrder.asc)
-        val = bookDetail1.pendingBooksCount - bookDetail2.pendingBooksCount;
-      else val = bookDetail2.pendingBooksCount - bookDetail1.pendingBooksCount;
-      break;
-  }
-
-  return val;
-};

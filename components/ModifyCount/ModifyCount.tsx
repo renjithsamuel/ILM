@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, TextField } from "@mui/material";
+import { Box, Button, Dialog, TextField, Typography } from "@mui/material";
 import { useModifyCountStyles } from "./ModifyCount.styles";
 import { useModifyCount } from "./ModifyCount.hooks";
 import { Dispatch, SetStateAction } from "react";
@@ -8,7 +8,9 @@ interface modifyCountParams {
 }
 
 export const ModifyCount = ({ setIsModifyCountOpen }: modifyCountParams) => {
-  const { fullScreen, openDialog, handleCloseDialog } = useModifyCount({setIsModifyCountOpen});
+  const { fullScreen, openDialog, handleCloseDialog } = useModifyCount({
+    setIsModifyCountOpen,
+  });
   const classes = useModifyCountStyles();
   return (
     <>
@@ -20,11 +22,13 @@ export const ModifyCount = ({ setIsModifyCountOpen }: modifyCountParams) => {
         sx={{ backdropFilter: "blur(2px)" }}
       >
         <Box className={classes.modifyCountRoot}>
+          <Box className={classes.countLabel}>{"Modify Book Count"}</Box>
           <Box>
             <TextField
               required
               id="outlined-required"
               label="Count"
+              type="number"
               defaultValue={0}
             />
           </Box>
