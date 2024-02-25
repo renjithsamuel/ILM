@@ -13,7 +13,11 @@ import { useAllBooksStyles } from "./AllBooks.styles";
 import { Book } from "@/entity/Book/Book";
 import { BookGridItem } from "@/components/BookGridItem/BookGridItem";
 import { FormatTextUtil } from "@/utils/formatText";
-import { BookSortValue, SortOrder } from "@/constants/GlobalConstants";
+import {
+  BookSortValue,
+  SortOrder,
+  SortPresence,
+} from "@/constants/GlobalConstants";
 
 interface allBooksParams {
   // book: Book;
@@ -22,10 +26,12 @@ interface allBooksParams {
 export const AllBooks = ({}: allBooksParams) => {
   const {
     bookList,
-    handleSortOrder,
-    handleSortValue,
     sortByOrder,
     sortByValue,
+    sortByPresence,
+    handleSortPresence,
+    handleSortOrder,
+    handleSortValue,
   } = useAllBooks({});
   const classes = useAllBooksStyles();
 
@@ -72,6 +78,23 @@ export const AllBooks = ({}: allBooksParams) => {
           >
             <MenuItem value={SortOrder.asc}>Ascending</MenuItem>
             <MenuItem value={SortOrder.desc}>Descending</MenuItem>
+          </Select>
+        </FormControl>
+        {/* Presence */}
+        <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+          <InputLabel id="demo-controlled-open-select-label">
+            Presence
+          </InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            value={sortByPresence}
+            label="Order By"
+            onChange={handleSortPresence}
+          >
+            <MenuItem value={SortPresence.both}>Both</MenuItem>
+            <MenuItem value={SortPresence.inLibrary}>In Library</MenuItem>
+            <MenuItem value={SortPresence.others}>Others</MenuItem>
           </Select>
         </FormControl>
       </Box>

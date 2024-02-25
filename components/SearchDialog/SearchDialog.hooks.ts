@@ -2,6 +2,7 @@ import {
   EntityTypes,
   SearchSortValue,
   SortOrder,
+  SortPresence,
   globalConstants,
 } from "@/constants/GlobalConstants";
 import { SearchItem } from "@/entity/SearchItem/SearchItem";
@@ -21,13 +22,15 @@ interface searchDialogHook {
   sortByOrder: SortOrder;
   sortByValue: SearchSortValue;
   searchResultList: SearchItem[];
-  sortByEntity: EntityTypes | undefined;
+  sortByEntity: EntityTypes;
+  sortByPresence: SortPresence;
+  handleSortPresence: () => void;
   handleClickOpenDialog: () => void;
   handleCloseDialog: () => void;
   handleSearch: (val: string) => void;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
-  handleSortEntity: (event: SelectChangeEvent) => void
+  handleSortEntity: (event: SelectChangeEvent) => void;
 }
 
 export const useSearchDialog = ({
@@ -44,9 +47,12 @@ export const useSearchDialog = ({
     SearchSortValue.wishlistCount
   );
   const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
-  const [sortByEntity, setSortByEntity] = useState<
-    EntityTypes | undefined
-  >();
+  const [sortByEntity, setSortByEntity] = useState<EntityTypes>(
+    EntityTypes.BookAndUser
+  );
+  const [sortByPresence, setSortByPresence] = useState<SortPresence>(
+    SortPresence.both
+  );
 
   const handleClickOpenDialog = () => {
     setOpenDialog(true);
@@ -68,33 +74,44 @@ export const useSearchDialog = ({
   // give full freedom to sort from
   useEffect(() => {
     setSearchResultList(mockSearchItems);
-  }, [sortByOrder, sortByValue]);
+  }, [sortByOrder, sortByValue, sortByEntity]);
+
+  useEffect(() => {
+    if (sortByEntity !== EntityTypes.BookEntity) {
+      setSortByPresence(SortPresence.both);
+    }
+  }, [sortByEntity]);
 
   // sorting
   const handleSortValue = (event: SelectChangeEvent): void => {
     event.target.value && setSortByValue(event.target.value as SearchSortValue);
   };
   const handleSortOrder = (event: SelectChangeEvent): void => {
-    (event.target.value === SortOrder.asc ||
-      event.target.value === SortOrder.desc) &&
-      setSortByOrder(event.target.value as SortOrder);
+    event.target.value && setSortByOrder(event.target.value as SortOrder);
+  };
+  const handleSortPresence = (): void => {
+    setSortByPresence((prev) => {
+      return prev !== SortPresence.inLibrary
+        ? SortPresence.inLibrary
+        : SortPresence.both;
+    });
   };
 
   const handleSortEntity = (event: SelectChangeEvent): void => {
-    (event.target.value === EntityTypes.UserEntity ||
-      event.target.value === EntityTypes.BookEntity) &&
-      setSortByEntity(event.target.value as EntityTypes);
+    event.target.value && setSortByEntity(event.target.value as EntityTypes);
   };
 
   return {
     fullScreen,
     openDialog,
-    handleSearch,
     sortByOrder,
     sortByValue,
     searchResultList,
     sortByEntity,
+    sortByPresence,
+    handleSortPresence,
     handleSortEntity,
+    handleSearch,
     handleClickOpenDialog,
     handleCloseDialog,
     handleSortValue,

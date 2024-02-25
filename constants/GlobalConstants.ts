@@ -61,6 +61,12 @@ export enum SortOrder {
   desc = "descending",
 }
 
+export enum SortPresence {
+  both = "both",
+  inLibrary = "inLibrary",
+  others = "others",
+}
+
 export enum SearchSortValue {
   wishlistCount = "wishlistCount",
   bookViews = "bookViews",
@@ -78,5 +84,6 @@ export enum SearchSortValue {
 export enum EntityTypes {
   UserEntity = "user",
   BookEntity = "book",
+  BookAndUser = "userAndBook",
   BookDetailsEntity = "bookDetails",
 }

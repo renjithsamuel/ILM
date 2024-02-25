@@ -1,5 +1,5 @@
 import { Book } from "@/entity/Book/Book";
-import { Box, Divider, Grid, Tooltip, Typography } from "@mui/material";
+import { Box, Dialog, Divider, Grid, Tooltip, Typography } from "@mui/material";
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
 import Image from "next/image";
@@ -18,6 +18,7 @@ import { Role } from "@/constants/Role";
 import { SiBookstack } from "react-icons/si";
 import { GoEye } from "react-icons/go";
 import { IoMdHeart } from "react-icons/io";
+import { ModifyCount } from "@/components/ModifyCount/ModifyCount";
 
 interface singleBookParams {
   // book: Book;
@@ -25,14 +26,29 @@ interface singleBookParams {
 
 export const SingleBook = ({}: singleBookParams) => {
   const classes = useSingleBookStyles();
-  const { book, userType } = useSingleBook({});
+  const {
+    book,
+    userType,
+    user,
+    wishlisted,
+    isModifyCountOpen,
+    handleModifyCount,
+    handleAddToLibrary,
+    setIsModifyCountOpen,
+  } = useSingleBook({});
 
   if (!book) {
     return <></>;
   }
+  // todo when book count is Zero update inLibrary to false
 
   return (
     <Box className={classes.singleBookRoot}>
+      {/* modify count popup */}
+      {isModifyCountOpen && (
+        <ModifyCount setIsModifyCountOpen={setIsModifyCountOpen} />
+      )}
+
       <Box className={classes.singleBookContent}>
         <Box className={classes.singleBookMainContent}>
           {/* book image */}
@@ -93,24 +109,56 @@ export const SingleBook = ({}: singleBookParams) => {
           </Box>
           {/*  book  Buttons*/}
           <Box className={classes.singleBookButtons}>
-            {userType === Role.Patrons && book.inLibrary && (
-              <Button
-                variant="contained"
-                className={classes.reserveNowBtn}
-                disabled={book.booksLeft === 0 ? true : false}
-              >
-                Reserve Now
-              </Button>
+            {/* modify count or add to library */}
+            {userType === Role.Librarian && (
+              <Box>
+                <Button
+                  variant="contained"
+                  className={classes.reserveNowBtn}
+                  onClick={() => {
+                    book.inLibrary ? handleModifyCount() : handleAddToLibrary();
+                  }}
+                >
+                  {!book.inLibrary ? "Add to Library" : "Modify Count"}
+                </Button>
+              </Box>
             )}
+            {/* reserve btn  */}
+            {userType === Role.Patrons && book.inLibrary && (
+              <Tooltip
+                title={
+                  !user.isPaymentDone
+                    ? "membership required"
+                    : book.booksLeft === 0
+                    ? "out of stock"
+                    : ""
+                }
+                placement="top"
+              >
+                <Box>
+                  <Button
+                    variant="contained"
+                    className={classes.reserveNowBtn}
+                    disabled={
+                      book.booksLeft === 0 || !user.isPaymentDone ? true : false
+                    }
+                  >
+                    Reserve Now
+                  </Button>
+                </Box>
+              </Tooltip>
+            )}
+            {/* wishlist btn */}
             {userType === Role.Patrons && (
               <Button variant="contained" className={classes.wishlistBtn}>
                 <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
-                  {"  "}Wishlist
+                  {wishlisted ? "Wishlisted" : "Wishlist"}
                 </Typography>
                 <IoHeartSharp size={theme.spacing(2.2)} />
                 {"  "}
               </Button>
             )}
+            {/* checkout btn */}
             {userType === Role.Librarian && book.inLibrary && (
               <Button
                 variant="contained"

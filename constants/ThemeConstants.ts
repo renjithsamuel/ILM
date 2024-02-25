@@ -30,6 +30,7 @@ export const themeValues = {
     fontSizeMedium: "medium",
   },
   shadow: {
+    vignetteEffectBackground : 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))',
     boxShadowLight: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
     boxShadowHeavy:
       "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px",

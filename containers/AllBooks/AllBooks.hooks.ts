@@ -1,6 +1,7 @@
 import {
   BookSortValue,
   SortOrder,
+  SortPresence,
   UserBookDetailType,
 } from "@/constants/GlobalConstants";
 import { Book } from "@/entity/Book/Book";
@@ -19,6 +20,8 @@ interface allBooksHook {
   bookList: Book[];
   sortByOrder: SortOrder;
   sortByValue: BookSortValue;
+  sortByPresence: SortPresence;
+  handleSortPresence: (event: SelectChangeEvent) => void;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
 }
@@ -28,23 +31,32 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   const [sortByValue, setSortByValue] = useState<BookSortValue>(
     BookSortValue.wishlistCount
   );
-  const [sortByOrder, setSortByOrder] = useState<
-    SortOrder.asc | SortOrder.desc
-  >(SortOrder.asc);
+  const [sortByPresence, setSortByPresence] = useState<SortPresence>(
+    SortPresence.both
+  );
+  const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
   // get all books
   // give full freedom to sort from
   useEffect(() => {
-    const tempBookList: Book[] = mockBooks.sort((a, b) => {
+    let tempBookList: Book[] = mockBooks.sort((a, b) => {
       return a && b && sortHelper(a, b, sortByOrder, sortByValue);
+    });
+    tempBookList = tempBookList.filter((item) => {
+      if (sortByPresence === SortPresence.both) return true;
+      else if (sortByPresence === SortPresence.inLibrary) return item.inLibrary;
+      else return !item.inLibrary;
     });
     tempBookList && tempBookList.length > 0 && setBookList(tempBookList);
     console.log(sortByOrder, sortByValue, tempBookList);
-  }, [sortByOrder, sortByValue]);
+  }, [sortByOrder, sortByPresence, sortByValue]);
 
   // sorting
   const handleSortValue = (event: SelectChangeEvent): void => {
     event.target.value && setSortByValue(event.target.value as BookSortValue);
+  };
+  const handleSortPresence = (event: SelectChangeEvent): void => {
+    event.target.value && setSortByPresence(event.target.value as SortPresence);
   };
   const handleSortOrder = (event: SelectChangeEvent): void => {
     (event.target.value === SortOrder.asc ||
@@ -56,6 +68,8 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
     bookList,
     sortByOrder,
     sortByValue,
+    sortByPresence,
+    handleSortPresence,
     handleSortOrder,
     handleSortValue,
   };

@@ -15,10 +15,20 @@ export const mockUser: User = {
   country: "United States",
   password: "securePassword123",
   views: 2,
+  fineAmount: 200,
+  isPaymentDone: true,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 export const mockUsers: User[] = [
   mockUser,
-  { ...mockUser, name: "John Doe 2", userID: "123457" },
-  { ...mockUser, name: "John Doe 3", userID: "123458" },
+  {
+    ...mockUser,
+    name: "John Doe 2",
+    role: Role.Patrons,
+    userID: "123457",
+    isPaymentDone: false,
+  },
+  { ...mockUser, name: "John Doe 3", role: Role.Patrons, userID: "123458" },
 ];

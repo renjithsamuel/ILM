@@ -1,4 +1,6 @@
 import { UserBookDetailType } from "@/constants/GlobalConstants";
+import { Role } from "@/constants/Role";
+import { useUserContext } from "@/context/UserContext";
 import { Book } from "@/entity/Book/Book";
 import { mockBooks } from "@/entity/Book/Book.mock";
 import { User } from "@/entity/User/User";
@@ -22,13 +24,23 @@ export const useUserBooksList =
       UserBookDetailType.WishLists
     );
     const router = useRouter();
-
-    const userID = router.query.userID;
+    const { user: contextUser } = useUserContext();
+    const userID = router.query.userID as string;
     // get book details from userID
-    const user = mockUsers.find((item) => item.userID === userID);
-
     const bookDetails = mockbookDetailsArray.find((item) => {
-      if (item.userID === userID) return item;
+      // if its from user side wishlist return userID matching from context
+      if (
+        contextUser.role === Role.Patrons &&
+        !userID &&
+        contextUser.userID === item.userID
+      )
+        return item;
+      // if its from librarian side wishlist return userID matching from query
+      if (
+        userID &&
+        item.userID === userID
+      )
+        return item;
     });
 
     useEffect(() => {

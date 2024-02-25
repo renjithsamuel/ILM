@@ -32,12 +32,7 @@ export const usePendingUserItemStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(1),
     borderRadius: themeValues.border.borderRadiusHigh,
     gap: theme.spacing(2),
-    color: themeValues.color.color1,
     transition: themeValues.transition.defaultTansition,
-    "&:hover": {
-      boxShadow: themeValues.shadow.boxShadowHeavy,
-      cursor: "default",
-    },
   },
   labelName: {
     fontSize: themeValues.font.fontSizeMedium,

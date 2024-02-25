@@ -68,6 +68,7 @@ export const Transactions = ({}: transactionsParams) => {
               userID={user.userID}
               userName={user.name}
               bookDetails={getBookDetails(user.userID)}
+              sortByValue={sortByValue}
             />
           );
         })}

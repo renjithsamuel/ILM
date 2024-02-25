@@ -13,12 +13,14 @@ export const mockSearchItemUser: SearchItem = {
   entityID: "123456",
   entityType: EntityTypes.UserEntity,
   views: 2,
-  username: "The Great Gatsby",
+  username: "John Doe",
   emailID: "john.doe@example.com",
 };
 
 export const mockSearchItems: SearchItem[] = [
   mockSearchItemBook,
   { ...mockSearchItemUser },
+  { ...mockSearchItemBook },
+  { ...mockSearchItemBook },
   { ...mockSearchItemBook },
 ];

@@ -14,11 +14,9 @@ export const useMyBooksStyles = makeStyles((theme) => ({
   userCover: {
     width: "75vw",
     height: "25vh",
-
     borderRadius: themeValues.border.borderRadiusLow,
     zIndex: 0,
-
-    backgroundColor: "blue",
+    backgroundColor: themeValues.color.color1,
   },
   userImage: {
     width: "10vw",
@@ -29,8 +27,7 @@ export const useMyBooksStyles = makeStyles((theme) => ({
     zIndex: 1,
     boxShadow: themeValues.shadow.boxShadowHeavy,
     borderRadius: themeValues.border.borderRadiusLow,
-
-    backgroundColor: "red",
+    backgroundColor: themeValues.color.color2,
   },
   userDetailsContainer: {
     width: "20vw",

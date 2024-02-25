@@ -15,6 +15,8 @@ export interface IBook {
   views: number;
   booksLeft: number;
   wishlistCount: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export class Book implements IBook {
@@ -32,6 +34,8 @@ export class Book implements IBook {
   views: number;
   booksLeft: number;
   wishlistCount: number;
+  createdAt: Date;
+  updatedAt: Date;
 
   constructor(book: IBook) {
     this.ID = book.ID;
@@ -48,5 +52,7 @@ export class Book implements IBook {
     this.views = book.views;
     this.booksLeft = book.booksLeft;
     this.wishlistCount = book.wishlistCount;
+    this.createdAt = book.createdAt;
+    this.updatedAt = book.updatedAt;
   }
 }

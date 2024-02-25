@@ -2,6 +2,7 @@ import { Tooltip } from "@material-ui/core";
 import {
   Box,
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
@@ -9,6 +10,7 @@ import {
   DialogTitle,
   Divider,
   FormControl,
+  FormControlLabel,
   InputLabel,
   MenuItem,
   Select,
@@ -25,6 +27,7 @@ import {
   EntityTypes,
   SearchSortValue,
   SortOrder,
+  SortPresence,
 } from "@/constants/GlobalConstants";
 import { SearchItem } from "@/entity/SearchItem/SearchItem";
 import { SearchItemComponent } from "../SearchItem/SearchItem";
@@ -41,6 +44,8 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
     sortByValue,
     searchResultList,
     sortByEntity,
+    sortByPresence,
+    handleSortPresence,
     handleSearch,
     handleClickOpenDialog,
     handleCloseDialog,
@@ -89,30 +94,32 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
                 label="Sort By"
                 onChange={handleSortValue}
               >
-                <MenuItem value={SearchSortValue.userViews}>
-                  user views
-                </MenuItem>
-                <MenuItem value={SearchSortValue.username}>username</MenuItem>
-                <MenuItem value={SearchSortValue.email}>email</MenuItem>
-                <MenuItem value={SearchSortValue.wishlistCount}>
-                  wishlist count
-                </MenuItem>
-                <MenuItem value={SearchSortValue.bookViews}>
-                  book views
-                </MenuItem>
-
-                <MenuItem value={SearchSortValue.booksLeft}>
-                  books left
-                </MenuItem>
-                <MenuItem value={SearchSortValue.title}>title</MenuItem>
-                <MenuItem value={SearchSortValue.author}>author</MenuItem>
-                <MenuItem value={SearchSortValue.genre}>genre</MenuItem>
-                <MenuItem value={SearchSortValue.publishedDate}>
-                  published date
-                </MenuItem>
-                <MenuItem value={SearchSortValue.shelfNumber}>
-                  shelf number
-                </MenuItem>
+                {sortByEntity === EntityTypes.UserEntity
+                  ? sortByValueItems.userSortByValues.map((item, index) => {
+                      return (
+                        <MenuItem value={item.value} key={index}>
+                          {item.label}
+                        </MenuItem>
+                      );
+                    })
+                  : sortByEntity === EntityTypes.BookEntity
+                  ? sortByValueItems.bookSortByValues.map((item, index) => {
+                      return (
+                        <MenuItem value={item.value} key={index}>
+                          {item.label}
+                        </MenuItem>
+                      );
+                    })
+                  : [
+                      ...sortByValueItems.bookSortByValues,
+                      ...sortByValueItems.userSortByValues,
+                    ].map((item, index) => {
+                      return (
+                        <MenuItem value={item.value} key={index}>
+                          {item.label}
+                        </MenuItem>
+                      );
+                    })}
               </Select>
             </FormControl>
             {/* order */}
@@ -143,6 +150,7 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
                 label="Order By"
                 onChange={handleSortEntity}
               >
+                <MenuItem value={EntityTypes.BookAndUser}>Both</MenuItem>
                 <MenuItem value={EntityTypes.BookEntity}>Book</MenuItem>
                 <MenuItem value={EntityTypes.UserEntity}>User</MenuItem>
               </Select>
@@ -151,15 +159,88 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
           {/* devider */}
           <Divider />
           {/* search items */}
-          {searchResultList &&
-            searchResultList.length > 0 &&
-            searchResultList.map((searchItem, index) => {
-              return (
-                <SearchItemComponent searchItem={searchItem} handleCloseDialog={handleCloseDialog} key={index} />
-              );
-            })}
+          <Box className={classes.searchItems}>
+            {searchResultList &&
+              searchResultList.length > 0 &&
+              searchResultList.map((searchItem, index) => {
+                return (
+                  <SearchItemComponent
+                    searchItem={searchItem}
+                    handleCloseDialog={handleCloseDialog}
+                    key={index}
+                  />
+                );
+              })}
+          </Box>
+          {sortByEntity === EntityTypes.BookEntity && (
+            <Box
+              className={classes.sortByPresence}
+              onClick={handleSortPresence}
+            >
+              <Checkbox
+                sx={{
+                  padding: 0,
+                }}
+                checked={sortByPresence === SortPresence.inLibrary}
+                disabled={sortByEntity !== EntityTypes.BookEntity}
+                onChange={handleSortPresence}
+              />
+              <Typography variant="body1">{"In Library"}</Typography>
+            </Box>
+          )}
         </Box>
       </Dialog>
     </>
   );
+};
+
+const sortByValueItems = {
+  userSortByValues: [
+    {
+      value: SearchSortValue.userViews,
+      label: "user views",
+    },
+    {
+      value: SearchSortValue.username,
+      label: "username",
+    },
+    {
+      value: SearchSortValue.email,
+      label: "email",
+    },
+  ],
+  bookSortByValues: [
+    {
+      value: SearchSortValue.bookViews,
+      label: "book views",
+    },
+    {
+      value: SearchSortValue.wishlistCount,
+      label: "wishlist count",
+    },
+    {
+      value: SearchSortValue.booksLeft,
+      label: "books left",
+    },
+    {
+      value: SearchSortValue.title,
+      label: "title",
+    },
+    {
+      value: SearchSortValue.author,
+      label: "author",
+    },
+    {
+      value: SearchSortValue.genre,
+      label: "genre",
+    },
+    {
+      value: SearchSortValue.publishedDate,
+      label: "published date",
+    },
+    {
+      value: SearchSortValue.shelfNumber,
+      label: "shelf number",
+    },
+  ],
 };

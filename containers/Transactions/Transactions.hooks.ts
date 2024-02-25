@@ -1,4 +1,5 @@
 import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
+import { Role } from "@/constants/Role";
 import { User } from "@/entity/User/User";
 import { mockUsers } from "@/entity/User/User.mock";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
@@ -22,14 +23,12 @@ export const useTransactions =
     const [sortByValue, setSortByValue] = useState<UserBookDetailType>(
       UserBookDetailType.Pending
     );
-    const [sortByOrder, setSortByOrder] = useState<
-      SortOrder.asc | SortOrder.desc
-    >(SortOrder.asc);
+    const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
     // represents book details array
     const mockBookDetailsArrayMock = mockbookDetailsArray;
     // fetch users
-    const mockUserMock = mockUsers.sort((a, b) => {
+    const mockUserMock = mockUsers.filter((item) => item.role === Role.Patrons).sort((a, b) => {
       const aBookDetails = mockBookDetailsArrayMock.find(
         (bkDetails) => bkDetails.userID === a.userID
       );
@@ -55,9 +54,7 @@ export const useTransactions =
         setSortByValue(event.target.value as UserBookDetailType);
     };
     const handleSortOrder = (event: SelectChangeEvent): void => {
-      (event.target.value === SortOrder.asc ||
-        event.target.value === SortOrder.asc) &&
-        setSortByOrder(event.target.value as SortOrder);
+      event.target.value && setSortByOrder(event.target.value as SortOrder);
     };
 
     return {
