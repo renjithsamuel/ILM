@@ -115,18 +115,11 @@ export const NavBar = ({
           </Link>
         </Box>
         {/* dialog for search */}
-        {isSearchClicked ? (
+        {isSearchClicked && (
           <Box sx={{ zIndex: 10 }}>
             <SearchDialog setIsSearchClicked={setIsSearchClicked} />
             {/* todo here you can dynamically send childern to render in dialog */}
           </Box>
-        ) : !!DialogBox ? (
-          <Box sx={{ zIndex: 10 }}>
-            <DialogBox />
-            {/* todo here you can dynamically send childern to render in dialog */}
-          </Box>
-        ) : (
-          ""
         )}
         {/* page main content */}
         <Box sx={{ zIndex: 1 }}>{children}</Box>

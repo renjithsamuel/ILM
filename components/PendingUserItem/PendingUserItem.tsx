@@ -27,7 +27,11 @@ export const PendingUserItem = ({
       <Link href={`/users/${userID}`}>
         <Box className={classes.pendingUserItem}>
           <Box>
-            <Typography variant="h6" className={classes.userName}>
+            <Typography
+              variant="h6"
+              className={classes.userName}
+              sx={{ fontWeight: themeValues.font.fontWeightThick }}
+            >
               {userName}
             </Typography>
             <Typography variant="body2" className={classes.email}>

@@ -9,8 +9,8 @@ export interface ICheckoutTicket {
   numberOfDays: number;
   fineAmount: number;
   reservatedOn: Date;
-  checkedOutOn: Date;
-  returnedDate: Date;
+  checkedOutOn?: Date;
+  returnedDate?: Date;
   book?: Book;
   user?: User;
   createdAt: Date;
@@ -25,8 +25,8 @@ export class CheckoutTicket implements ICheckoutTicket {
   numberOfDays: number;
   fineAmount: number;
   reservatedOn: Date;
-  checkedOutOn: Date;
-  returnedDate: Date;
+  checkedOutOn?: Date;
+  returnedDate?: Date;
   book?: Book;
   user?: User;
   createdAt: Date;

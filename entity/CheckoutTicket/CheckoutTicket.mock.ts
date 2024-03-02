@@ -9,7 +9,7 @@ export const mockCheckoutTicket: CheckoutTicket = {
   fineAmount: 0,
   reservatedOn: new Date(),
   checkedOutOn: new Date(),
-  returnedDate: new Date(),
+  returnedDate: undefined,
   createdAt: new Date(),
   updatedAt: new Date(),
 };

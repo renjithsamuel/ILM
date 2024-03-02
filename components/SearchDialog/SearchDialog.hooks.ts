@@ -9,8 +9,13 @@ import { SearchItem } from "@/entity/SearchItem/SearchItem";
 import { debounce } from "@/utils/debounce";
 import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/styles";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect, useReducer, useState } from "react";
 import { mockSearchItems } from "@/entity/SearchItem/SearchItem.mock";
+import {
+  initialSearchDialogValues,
+  searchDialogReducer,
+} from "@/reducers/SearchDialog/searchDialog.reducer";
+import { SearchDialogTypes } from "@/reducers/SearchDialog/searchDialog.types";
 
 interface searchDialogHookProps {
   setIsSearchClicked: (value: SetStateAction<boolean>) => void;
@@ -39,33 +44,32 @@ export const useSearchDialog = ({
   // for search dialog box
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const [openDialog, setOpenDialog] = useState<boolean>(true);
-  const [searchText, setSearchText] = useState<string>("");
-
-  const [searchResultList, setSearchResultList] = useState<SearchItem[]>([]);
-  const [sortByValue, setSortByValue] = useState<SearchSortValue>(
-    SearchSortValue.wishlistCount
-  );
-  const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
-  const [sortByEntity, setSortByEntity] = useState<EntityTypes>(
-    EntityTypes.BookAndUser
-  );
-  const [sortByPresence, setSortByPresence] = useState<SortPresence>(
-    SortPresence.both
+  const [state, dispatch] = useReducer(
+    searchDialogReducer,
+    initialSearchDialogValues
   );
 
   const handleClickOpenDialog = () => {
-    setOpenDialog(true);
+    dispatch({
+      type: SearchDialogTypes.SetOpenDialog,
+      payload: { openDialog: true },
+    });
   };
 
   const handleCloseDialog = () => {
-    setOpenDialog(false);
+    dispatch({
+      type: SearchDialogTypes.SetOpenDialog,
+      payload: { openDialog: false },
+    });
     setIsSearchClicked(false);
   };
 
   const handleSearch = debounce((value: string) => {
     if (value && value != "" && value.length > 0) {
-      setSearchText(value);
+      dispatch({
+        type: SearchDialogTypes.SetSearchText,
+        payload: { searchText: value },
+      });
     }
   }, globalConstants.debounceDelay);
 
@@ -73,42 +77,59 @@ export const useSearchDialog = ({
   // get all books
   // give full freedom to sort from
   useEffect(() => {
-    setSearchResultList(mockSearchItems);
-  }, [sortByOrder, sortByValue, sortByEntity]);
+    dispatch({
+      type: SearchDialogTypes.SetSearchResultList,
+      payload: { searchResults: mockSearchItems },
+    });
+  }, [state.sortByOrder, state.sortByValue, state.sortByEntity]);
 
   useEffect(() => {
-    if (sortByEntity !== EntityTypes.BookEntity) {
-      setSortByPresence(SortPresence.both);
+    if (state.sortByEntity !== EntityTypes.BookEntity) {
+      dispatch({
+        type: SearchDialogTypes.SetSortByPresence,
+        payload: { sortByPresence: SortPresence.both },
+      });
     }
-  }, [sortByEntity]);
+  }, [state.sortByEntity]);
 
   // sorting
   const handleSortValue = (event: SelectChangeEvent): void => {
-    event.target.value && setSortByValue(event.target.value as SearchSortValue);
+    event.target.value &&
+      dispatch({
+        type: SearchDialogTypes.SetSortByValue,
+        payload: { sortByValue: event.target.value as SearchSortValue },
+      });
   };
   const handleSortOrder = (event: SelectChangeEvent): void => {
-    event.target.value && setSortByOrder(event.target.value as SortOrder);
+    event.target.value &&
+      dispatch({
+        type: SearchDialogTypes.SetSortByOrder,
+        payload: { sortByOrder: event.target.value as SortOrder },
+      });
   };
   const handleSortPresence = (): void => {
-    setSortByPresence((prev) => {
-      return prev !== SortPresence.inLibrary
+    const tempSortPresence =
+      state.sortByPresence !== SortPresence.inLibrary
         ? SortPresence.inLibrary
         : SortPresence.both;
+
+    dispatch({
+      type: SearchDialogTypes.SetSortByPresence,
+      payload: { sortByPresence: tempSortPresence },
     });
   };
 
   const handleSortEntity = (event: SelectChangeEvent): void => {
-    event.target.value && setSortByEntity(event.target.value as EntityTypes);
+    event.target.value &&
+      dispatch({
+        type: SearchDialogTypes.SetSortByEntity,
+        payload: { sortByEntity: event.target.value as EntityTypes },
+      });
   };
 
   return {
     fullScreen,
-    openDialog,
-    sortByOrder,
-    sortByValue,
-    searchResultList,
-    sortByEntity,
-    sortByPresence,
+    ...state,
     handleSortPresence,
     handleSortEntity,
     handleSearch,
@@ -118,3 +139,18 @@ export const useSearchDialog = ({
     handleSortOrder,
   };
 };
+
+// const [openDialog, setOpenDialog] = useState<boolean>(true);
+// const [searchText, setSearchText] = useState<string>("");
+
+// const [searchResultList, setSearchResultList] = useState<SearchItem[]>([]);
+// const [sortByValue, setSortByValue] = useState<SearchSortValue>(
+//   SearchSortValue.wishlistCount
+// );
+// const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
+// const [sortByEntity, setSortByEntity] = useState<EntityTypes>(
+//   EntityTypes.BookAndUser
+// );
+// const [sortByPresence, setSortByPresence] = useState<SortPresence>(
+//   SortPresence.both
+// );

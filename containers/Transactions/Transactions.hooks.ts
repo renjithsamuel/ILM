@@ -30,7 +30,7 @@ export const useTransactions =
     const [checkedOutList, setCheckedOutList] = useState<CheckoutTicket[]>([]);
     const [searchText, setSearchText] = useState<string>("");
     const [sortByValue, setSortByValue] = useState<TransactionSortValue>(
-      TransactionSortValue.reservedOn
+      TransactionSortValue.fineAmount
     );
     const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 

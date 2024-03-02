@@ -43,6 +43,8 @@ export const themeValues = {
       "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
     boxShadowboxy:
       "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+    boxShadowboxyWhite:
+      "rgba(255, 255, 255, 0.8) 0px 6px 24px 0px, rgba(255, 255, 255, 0.8) 0px 0px 0px 1px",
   },
   spacing: (value: number) => `${value * 8}px`,
   transition: {

@@ -10,7 +10,7 @@ interface navBarHook {
   user: User;
   currentSideMenu: string;
   isSearchClicked: boolean;
-  DialogBox: (({}: any) => JSX.Element) | undefined;
+  DialogBox: JSX.Element | undefined;
   handleSearch: (val: string) => void;
   handleSideMenuClick: (menulink: string) => void;
   handleSearchClick: () => void;
