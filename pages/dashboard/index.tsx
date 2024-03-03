@@ -1,5 +1,6 @@
 import { sideMenuItems } from "@/constants/GlobalConstants";
 import { BaseLayout } from "@/containers/BaseLayout/BaseLayout";
+import { Dashboard } from "@/containers/Dashboard/Dashboard";
 
 export default function DashboardPage() {
   return (
@@ -7,10 +8,8 @@ export default function DashboardPage() {
       authenticatedOnly={true}
       showSearchBar
       pageName={sideMenuItems.Dashboard.name}
-    ></BaseLayout>
+    >
+      <Dashboard />
+    </BaseLayout>
   );
 }
-
-// book views
-// book checkouts
-// book fines
