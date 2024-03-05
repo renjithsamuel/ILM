@@ -15,8 +15,10 @@ import { LiaBookSolid } from "react-icons/lia";
 import { Role } from "@/constants/Role";
 import { mockUser } from "@/entity/User/User.mock";
 import { GrTransaction } from "react-icons/gr";
-import { IoHeartSharp } from "react-icons/io5";
+import { IoAnalyticsOutline, IoHeartSharp } from "react-icons/io5";
 import { RiDashboardFill } from "react-icons/ri";
+import { BsBookshelf } from "react-icons/bs";
+import { FaUsers } from "react-icons/fa";
 import { useRouter } from "next/router";
 
 type BaseLayoutHook = {
@@ -136,6 +138,11 @@ export const useBaseLayout = ({
             icon: IoHeartSharp,
             link: sideMenuItems.WishLists.link,
           },
+          {
+            name: sideMenuItems.AllBooks.name,
+            icon: BsBookshelf,
+            link: sideMenuItems.AllBooks.link,
+          },
         ];
       } else {
         tempMenuItems = [
@@ -145,24 +152,35 @@ export const useBaseLayout = ({
             link: sideMenuItems.Dashboard.link,
           },
           {
-            name: sideMenuItems.BookShelf.name,
-            icon: ImBooks,
-            link: sideMenuItems.BookShelf.link,
+            name: sideMenuItems.Users.name,
+            icon: FaUsers,
+            link: sideMenuItems.Users.link,
           },
           {
             name: sideMenuItems.Transactions.name,
             icon: GrTransaction,
             link: sideMenuItems.Transactions.link,
           },
+          {
+            name: sideMenuItems.AllBooks.name,
+            icon: BsBookshelf,
+            link: sideMenuItems.AllBooks.link,
+          },
+          {
+            name: sideMenuItems.PredictiveAnalysis.name,
+            icon: IoAnalyticsOutline,
+            link: sideMenuItems.PredictiveAnalysis.link,
+          },
         ];
       }
       setMenuItems(tempMenuItems);
+      // if no menu is selected select all books
       if (
         !currentSideMenu ||
         currentSideMenu === "" ||
         currentSideMenu.length === 0
       )
-        setCurrentSideMenu(menuItems[0]?.link);
+        setCurrentSideMenu(sideMenuItems.AllBooks.link);
     }
   }, [user]);
 

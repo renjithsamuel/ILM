@@ -12,6 +12,10 @@ export interface IBookDetails {
   reservedBookList: string[];
   favoriteGenres: BookGenre[];
   wishlistBooks: string[];
+  completedBooksCount: number;
+  completedBooksList: string[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export class BookDetails implements IBookDetails {
@@ -25,6 +29,10 @@ export class BookDetails implements IBookDetails {
   reservedBookList: string[];
   favoriteGenres: BookGenre[];
   wishlistBooks: string[];
+  completedBooksCount: number;
+  completedBooksList: string[];
+  createdAt: Date;
+  updatedAt: Date;
 
   constructor(bookDetails: IBookDetails) {
     this.userID = bookDetails.userID;
@@ -37,5 +45,9 @@ export class BookDetails implements IBookDetails {
     this.reservedBookList = bookDetails.reservedBookList;
     this.favoriteGenres = bookDetails.favoriteGenres;
     this.wishlistBooks = bookDetails.wishlistBooks;
+    this.completedBooksCount = bookDetails.completedBooksCount;
+    this.completedBooksList = bookDetails.completedBooksList;
+    this.createdAt = bookDetails.createdAt;
+    this.updatedAt = bookDetails.updatedAt;
   }
 }

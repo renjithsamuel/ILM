@@ -1,7 +1,5 @@
 import { Role } from "@/constants/Role";
 import { User } from "./User";
-import { BookGenre } from "@/constants/BookGenre";
-import { mockBook } from "../Book/Book.mock";
 
 export const mockUser: User = {
   userID: "123456",
@@ -14,6 +12,21 @@ export const mockUser: User = {
   address: "123 Main Street",
   country: "United States",
   password: "securePassword123",
+  views: 2,
+  fineAmount: 200,
+  isPaymentDone: true,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
-export const mockUsers: User[] = [mockUser, mockUser, mockUser];
+export const mockUsers: User[] = [
+  mockUser,
+  {
+    ...mockUser,
+    name: "John Doe 2",
+    role: Role.Patrons,
+    userID: "123457",
+    isPaymentDone: false,
+  },
+  { ...mockUser, name: "John Doe 3", role: Role.Patrons, userID: "123458" },
+];

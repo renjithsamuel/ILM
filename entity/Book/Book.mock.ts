@@ -2,7 +2,8 @@ import { BookGenre } from "@/constants/BookGenre";
 import { Book, IBook } from "./Book";
 
 const bookData: IBook = {
-  ID: "3e74718b-3855-43ba-ae2c-4be8ccc79026",
+  ID: "3e74718b-3855-43ba-ae2c-4be8ccc79027",
+  ISBN: "123456",
   title: "The Great Gatsby",
   author: "F. Scott Fitzgerald",
   genre: BookGenre.Travel,
@@ -12,6 +13,14 @@ const bookData: IBook = {
     "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
   coverImage:
     "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+  shelfNumber: 12,
+  inLibrary: true,
+  booksLeft: 2,
+  views: 2,
+  wishlistCount: 2,
+  rating: 4.1,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 export const mockBook = new Book(bookData);
@@ -19,6 +28,7 @@ export const mockBook = new Book(bookData);
 const mockBooksInterfaceArray: IBook[] = [
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79027",
+    ISBN: "123456",
     title: "The Great Gatsby",
     author: "F. Scott Fitzgerald",
     genre: BookGenre.Adventure,
@@ -28,9 +38,18 @@ const mockBooksInterfaceArray: IBook[] = [
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
       "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    shelfNumber: 12,
+    inLibrary: true,
+    booksLeft: 3,
+    views: 1,
+    wishlistCount: 1,
+    rating: 4.1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79028",
+    ISBN: "123456",
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
     genre: BookGenre.ScienceFiction,
@@ -40,9 +59,18 @@ const mockBooksInterfaceArray: IBook[] = [
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
       "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    shelfNumber: 12,
+    inLibrary: true,
+    booksLeft: 0,
+    views: 2,
+    wishlistCount: 2,
+    rating: 4.1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79029",
+    ISBN: "123456",
     title: "1984",
     author: "George Orwell",
     genre: BookGenre.Biography,
@@ -52,6 +80,14 @@ const mockBooksInterfaceArray: IBook[] = [
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
       "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    shelfNumber: 12,
+    inLibrary: false,
+    booksLeft: 1,
+    views: 3,
+    rating: 4.1,
+    wishlistCount: 3,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ];
 

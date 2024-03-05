@@ -14,11 +14,9 @@ export const useSingleUserStyles = makeStyles((theme) => ({
   userCover: {
     width: "75vw",
     height: "25vh",
-
-    borderRadius: themeValues.borderRadiusLow,
+    borderRadius: themeValues.border.borderRadiusLow,
     zIndex: 0,
-
-    backgroundColor: "blue",
+    backgroundColor: themeValues.color.color1,
   },
   userImage: {
     width: "10vw",
@@ -28,9 +26,8 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     top: 40,
     zIndex: 1,
     boxShadow: themeValues.shadow.boxShadowHeavy,
-    borderRadius: themeValues.borderRadiusLow,
-
-    backgroundColor: "red",
+    borderRadius: themeValues.border.borderRadiusLow,
+    backgroundColor: themeValues.color.color2,
   },
   userDetailsContainer: {
     width: "20vw",
@@ -40,22 +37,34 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     boxShadow: themeValues.shadow.boxShadowLight,
-    borderRadius: themeValues.borderRadiusHigh,
-
+    borderRadius: themeValues.border.borderRadiusHigh,
     // backgroundColor: "red",
   },
   userDetailBox: {
+    width: "100%",
     display: "flex",
-    alignSelf: "center",
-    gap: theme.spacing(3),
-    padding: theme.spacing(2),
+    justifyContent: "space-between",
+    gap: theme.spacing(4),
+    padding: theme.spacing(1.5),
   },
   userDetailKey: {
+    width: "50%",
     fontWeight: themeValues.font.fontWeightLightThick,
     fontSize: themeValues.spacing(2),
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "end",
     alignSelf: "start",
+    textAlign: "right",
   },
-  userDetailValue: {},
+  userDetailValue: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "start",
+    fontSize: themeValues.spacing(1.9),
+    width: "50%",
+    textAlign: "left",
+  },
   bookDetailsContainer: {
     width: "80vw",
     height: "25vh",
@@ -73,12 +82,12 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     alignSelf: "center",
     gap: theme.spacing(2),
     padding: theme.spacing(2),
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     transition: themeValues.transition.defaultTansition,
-    boxShadow: themeValues.shadow.boxShadowLight,
+    boxShadow: themeValues.shadow.boxShadowboxy,
     color: themeValues.color.color1,
     "&:hover": {
-      backgroundColor: themeValues.color.color3,
+      backgroundColor: themeValues.color.color1,
       color: themeValues.color.textColor,
       boxShadow: themeValues.shadow.boxShadowHeavy,
       cursor: "pointer",

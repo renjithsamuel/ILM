@@ -14,11 +14,9 @@ export const useMyBooksStyles = makeStyles((theme) => ({
   userCover: {
     width: "75vw",
     height: "25vh",
-
-    borderRadius: themeValues.borderRadiusLow,
+    borderRadius: themeValues.border.borderRadiusLow,
     zIndex: 0,
-
-    backgroundColor: "blue",
+    backgroundColor: themeValues.color.color1,
   },
   userImage: {
     width: "10vw",
@@ -28,9 +26,8 @@ export const useMyBooksStyles = makeStyles((theme) => ({
     top: 40,
     zIndex: 1,
     boxShadow: themeValues.shadow.boxShadowHeavy,
-    borderRadius: themeValues.borderRadiusLow,
-
-    backgroundColor: "red",
+    borderRadius: themeValues.border.borderRadiusLow,
+    backgroundColor: themeValues.color.color2,
   },
   userDetailsContainer: {
     width: "20vw",
@@ -40,7 +37,7 @@ export const useMyBooksStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     boxShadow: themeValues.shadow.boxShadowLight,
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
 
     // backgroundColor: "red",
   },
@@ -73,7 +70,7 @@ export const useMyBooksStyles = makeStyles((theme) => ({
     alignSelf: "center",
     gap: theme.spacing(2),
     padding: theme.spacing(2),
-    borderRadius: themeValues.borderRadiusHigh,
+    borderRadius: themeValues.border.borderRadiusHigh,
     transition: themeValues.transition.defaultTansition,
     boxShadow: themeValues.shadow.boxShadowLight,
     color: themeValues.color.color1,

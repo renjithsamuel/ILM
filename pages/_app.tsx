@@ -55,10 +55,3 @@ export default function App({
     </ErrorBoundary>
   );
 }
-
-// recommendation -> chips as
-// return report
-// social media like follow and user profiles-> see what the did in the app
-// book comments as feedback reports from users
-// search should work for both users and books
-// sort by in transactions page

@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -28,6 +31,7 @@
     "react-dom": "^18",
     "react-icons": "^5.0.1",
     "react-query": "^3.39.3",
+    "recharts": "^2.12.2",
     "yup": "^1.3.3"
   },
   "devDependencies": {
