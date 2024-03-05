@@ -51,11 +51,15 @@ export const useBookGridItemStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  bookRating: {
+    marginTop: theme.spacing(0),
+    marginBottom: theme.spacing(1),
+  },
   bookContent: {
     display: "flex",
     flexDirection: "column",
     gap: theme.spacing(1),
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
   },
   keyValueContainer: {
     display: "flex",

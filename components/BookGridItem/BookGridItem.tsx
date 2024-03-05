@@ -1,5 +1,5 @@
 import { Book } from "@/entity/Book/Book";
-import { Box, Divider, Tooltip } from "@mui/material";
+import { Box, Divider, Rating, Tooltip } from "@mui/material";
 import { useBookGridItemStyles } from "./BookGridItem.styles";
 import Image from "next/image";
 import { bookKeyValues } from "@/constants/GlobalConstants";
@@ -8,6 +8,7 @@ import { useBookGridItem } from "./BookGridItem.hooks";
 import { SiBookstack } from "react-icons/si";
 import { GoEye } from "react-icons/go";
 import { IoMdHeart } from "react-icons/io";
+import { themeValues } from "@/constants/ThemeConstants";
 
 interface BookGridItemProps {
   book: Book;
@@ -29,6 +30,15 @@ export const BookGridItem = ({ book }: BookGridItemProps) => {
           height={120}
           alt={book.title || `book`}
           className={classes.bookImage}
+        />
+      </Box>
+      <Box className={classes.bookRating}>
+        <Rating
+          name="read-only"
+          value={book.rating}
+          readOnly
+          precision={0.5}
+          color={themeValues.color.color1}
         />
       </Box>
       <Box className={classes.bookCounts}>
@@ -53,6 +63,7 @@ export const BookGridItem = ({ book }: BookGridItemProps) => {
           </Box>
         </Tooltip>
       </Box>
+
       <Box className={classes.bookContent}>
         <Divider />
         {bookKeyValues.map((keyValues, index) => {

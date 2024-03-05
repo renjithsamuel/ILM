@@ -93,6 +93,12 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     gap: theme.spacing(1),
     width: "30vw",
   },
+  bookRating: {
+    display: "flex",
+    alignSelf: "center",
+    marginTop: theme.spacing(0),
+    marginBottom: theme.spacing(0),
+  },
   bookCounts: {
     marginTop: theme.spacing(1),
     display: "flex",

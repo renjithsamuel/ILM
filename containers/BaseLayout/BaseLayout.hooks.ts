@@ -174,12 +174,13 @@ export const useBaseLayout = ({
         ];
       }
       setMenuItems(tempMenuItems);
+      // if no menu is selected select all books
       if (
         !currentSideMenu ||
         currentSideMenu === "" ||
         currentSideMenu.length === 0
       )
-        setCurrentSideMenu(menuItems[0]?.link);
+        setCurrentSideMenu(sideMenuItems.AllBooks.link);
     }
   }, [user]);
 

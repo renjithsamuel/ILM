@@ -1,5 +1,5 @@
 import { Book } from "@/entity/Book/Book";
-import { Box, Dialog, Divider, Grid, Tooltip, Typography } from "@mui/material";
+import { Box, Dialog, Divider, Grid, Rating, Tooltip, Typography } from "@mui/material";
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
 import Image from "next/image";
@@ -20,6 +20,7 @@ import { GoEye } from "react-icons/go";
 import { IoMdHeart } from "react-icons/io";
 import { MdOutlineDone } from "react-icons/md";
 import { ModifyCount } from "@/components/ModifyCount/ModifyCount";
+import { themeValues } from "@/constants/ThemeConstants";
 
 interface singleBookParams {
   // book: Book;
@@ -84,6 +85,16 @@ export const SingleBook = ({}: singleBookParams) => {
                 </Box>
               );
             })}
+            {/* book rating  */}
+            <Box className={classes.bookRating}>
+              <Rating
+                name="read-only"
+                value={book.rating}
+                readOnly
+                precision={0.5}
+                color={themeValues.color.color1}
+              />
+            </Box>
             {/* book counts */}
             <Box className={classes.bookCounts}>
               {/* views */}
