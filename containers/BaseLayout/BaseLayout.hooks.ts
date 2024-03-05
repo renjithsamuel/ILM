@@ -152,11 +152,6 @@ export const useBaseLayout = ({
             link: sideMenuItems.Dashboard.link,
           },
           {
-            name: sideMenuItems.BookShelf.name,
-            icon: ImBooks,
-            link: sideMenuItems.BookShelf.link,
-          },
-          {
             name: sideMenuItems.Users.name,
             icon: FaUsers,
             link: sideMenuItems.Users.link,

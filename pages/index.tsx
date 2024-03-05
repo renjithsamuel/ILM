@@ -1,3 +1,5 @@
+import { sideMenuItems } from "@/constants/GlobalConstants";
+import { AllBooks } from "@/containers/AllBooks/AllBooks";
 import { BaseLayout } from "@/containers/BaseLayout/BaseLayout";
 
 export default function Home() {
@@ -5,7 +7,9 @@ export default function Home() {
     <BaseLayout
       authenticatedOnly={false}
       showSearchBar
-      pageName={"Home"}
-    ></BaseLayout>
+      pageName={sideMenuItems.AllBooks.name}
+    >
+      <AllBooks />
+    </BaseLayout>
   );
 }
