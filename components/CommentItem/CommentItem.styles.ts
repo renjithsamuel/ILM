@@ -1,14 +1,14 @@
 import { themeValues } from "@/constants/ThemeConstants";
 import { makeStyles } from "@mui/styles";
 
-export const useSearchItemStyles = makeStyles((theme) => ({
-  searchItemRoot: {
-    width: "90%",
+export const useCommentItemStyles = makeStyles((theme) => ({
+  commentItemRoot: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "start",
+    margin: theme.spacing(1),
     padding: theme.spacing(2),
-    gap: theme.spacing(1),
+    gap: theme.spacing(3),
     borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowLight,
     transition: themeValues.transition.defaultTansition,
@@ -18,24 +18,26 @@ export const useSearchItemStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
-  bookItemDetails: {
+  userImageWrap: {
     display: "flex",
-    flexDirection: "column",
-    alignItems: "start",
+    alignItems: "center",
     justifyContent: "center",
-    gap: theme.spacing(0.2),
+    objectFit: "cover",
   },
-  username: {
-    color: themeValues.color.black,
+  userImage: {
+    border: themeValues.border.defaultborder,
+    borderRadius: "50%",
   },
-  emailID: {
-    color: themeValues.color.black,
-    opacity: 0.9,
+  commentHeadingAndUserName: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "start",
+    gap: theme.spacing(1),
   },
-  bookName: {
-    color: themeValues.color.black,
+  commentDetails: {
+    color: themeValues.color.color1,
   },
-  bookDescription: { color: themeValues.color.black, opacity: 0.9 },
-  entityType: {},
-  entityChip: {},
+  ratingWrap: {
+    justifySelf: "end",
+  },
 }));

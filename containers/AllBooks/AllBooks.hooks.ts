@@ -17,8 +17,8 @@ import { SetStateAction, useEffect, useState } from "react";
 interface allBooksHookProps {}
 
 interface allBooksHook {
-  bookList: Book[];
   sortByPresence: SortPresence;
+  bookList: Book[];
   sortByOrder: SortOrder;
   sortByValue: BookSortValue;
   handleSortOrder: (event: SelectChangeEvent) => void;
@@ -84,6 +84,18 @@ const sortHelper = (
 ): number => {
   let val: number;
   switch (sortByValue) {
+    case BookSortValue.reviewCount:
+      if (sortByOrder === SortOrder.asc)
+        val = book1.reviewCount > book2.reviewCount ? 1 : -1;
+      else val = book2.reviewCount > book1.reviewCount ? 1 : -1;
+      break;
+
+    case BookSortValue.rating:
+      if (sortByOrder === SortOrder.asc)
+        val = book1.rating > book2.rating ? 1 : -1;
+      else val = book2.rating > book1.rating ? 1 : -1;
+      break;
+
     case BookSortValue.author:
       if (sortByOrder === SortOrder.asc)
         val = book1.author > book2.author ? 1 : -1;

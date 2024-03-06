@@ -1,5 +1,14 @@
 import { Book } from "@/entity/Book/Book";
-import { Box, Dialog, Divider, Grid, Rating, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  Divider,
+  Grid,
+  List,
+  Rating,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
 import Image from "next/image";
@@ -21,6 +30,9 @@ import { IoMdHeart } from "react-icons/io";
 import { MdOutlineDone } from "react-icons/md";
 import { ModifyCount } from "@/components/ModifyCount/ModifyCount";
 import { themeValues } from "@/constants/ThemeConstants";
+import { BiSolidMessageDetail } from "react-icons/bi";
+import { AddComment } from "@/components/AddComment/AddComment";
+import { CommentItem } from "@/components/CommentItem/CommentItem";
 
 interface singleBookParams {
   // book: Book;
@@ -29,11 +41,14 @@ interface singleBookParams {
 export const SingleBook = ({}: singleBookParams) => {
   const classes = useSingleBookStyles();
   const {
+    commentList,
     book,
     userType,
     user,
     wishlisted,
     isModifyCountOpen,
+    isAddCommentOpen,
+    handleAddComment,
     handleModifyCount,
     handleAddToLibrary,
     setIsModifyCountOpen,
@@ -46,6 +61,8 @@ export const SingleBook = ({}: singleBookParams) => {
 
   return (
     <Box className={classes.singleBookRoot}>
+      {/* add comment popup */}
+      {isAddCommentOpen && <AddComment handleAddComment={handleAddComment} />}
       {/* modify count popup */}
       {isModifyCountOpen && (
         <ModifyCount setIsModifyCountOpen={setIsModifyCountOpen} />
@@ -117,6 +134,12 @@ export const SingleBook = ({}: singleBookParams) => {
                   <IoMdHeart /> {book.wishlistCount}
                 </Box>
               </Tooltip>
+              {/* reviews */}
+              <Tooltip title={"reviews"} placement="bottom">
+                <Box className={classes.bookCount}>
+                  <BiSolidMessageDetail /> {book.reviewCount}
+                </Box>
+              </Tooltip>
             </Box>
           </Box>
           {/*  book  Buttons*/}
@@ -174,15 +197,21 @@ export const SingleBook = ({}: singleBookParams) => {
               </Button>
             )}
             {/* completed btn todo check for the checkedout array of user and open dialog to complete the report*/}
-            {userType === Role.Patrons && (
-              <Button variant="contained" className={classes.reserveNowBtn}>
-                <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
-                  {"Completed"}
-                </Typography>
-                <MdOutlineDone size={theme.spacing(2.2)} />
-                {"  "}
-              </Button>
-            )}
+            {/* todo remove for librarian */}
+            {userType === Role.Patrons ||
+              (userType === Role.Librarian && (
+                <Button
+                  variant="contained"
+                  className={classes.reserveNowBtn}
+                  onClick={handleAddComment}
+                >
+                  <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
+                    {"Completed"}
+                  </Typography>
+                  <MdOutlineDone size={theme.spacing(2.2)} />
+                  {"  "}
+                </Button>
+              ))}
             {/* checkout btn  */}
             {/* todo when checking out go to /transactions/{isbn} capture it and add in search filed */}
             {userType === Role.Librarian && book.inLibrary && (
@@ -216,18 +245,18 @@ export const SingleBook = ({}: singleBookParams) => {
           >
           </Document> */}
         </Box>
-        <Box className={classes.singleBookComments}>
-          Book Comments, Currently Under Work
-          {/* <iframe
-            src="https://www.thebookcollector.co.uk/sites/default/files/the-book-collector-example-2018-04.pdf"
-            width="100%"
-            height="600px"
-          ></iframe> */}
-          {/* <Document
-            file="https://www.thebookcollector.co.uk/sites/default/files/the-book-collector-example-2018-04.pdf"
-            onLoadSuccess={onDocumentLoadSuccess}
-          >
-          </Document> */}
+        <Box>
+          <Typography variant="h6" className={classes.commentsLabel}>
+            {"Comments"}
+          </Typography>
+          <Box className={classes.singleBookComments}>
+            {/* Book Comments, Currently Under Work */}
+            <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+              {commentList.map((item, index) => (
+                <CommentItem review={item} key={index} />
+              ))}
+            </List>
+          </Box>
         </Box>
       </Box>
       <Box className={classes.similarBooks}>

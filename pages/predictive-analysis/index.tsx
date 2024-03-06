@@ -1,6 +1,6 @@
 import { sideMenuItems } from "@/constants/GlobalConstants";
 import { BaseLayout } from "@/containers/BaseLayout/BaseLayout";
-import { UserBooksList } from "@/containers/UserBookList/UserBooksList";
+import { PredictiveAnalysis } from "@/containers/PredictiveAnalysis/PredictiveAnalysis";
 
 export default function SingleUserPage() {
   return (
@@ -9,7 +9,7 @@ export default function SingleUserPage() {
       showSearchBar
       pageName={sideMenuItems.PredictiveAnalysis.name}
     >
-      <UserBooksList />
+      <PredictiveAnalysis />
     </BaseLayout>
   );
 }

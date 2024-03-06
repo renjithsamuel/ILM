@@ -11,7 +11,7 @@ export const useBookGridItem =
     const router = useRouter();
     const handleBookItemClick = (ID: string) => {
       if (ID) {
-        router.replace(`/bookshelf/${ID}`);
+        router.replace(`/allbooks/${ID}`);
       }
     };
     return {

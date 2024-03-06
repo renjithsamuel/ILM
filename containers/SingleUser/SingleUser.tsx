@@ -6,6 +6,7 @@ import { User } from "@/entity/User/User";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 import dayjs from "dayjs";
 import Link from "next/link";
+import Image from "next/image";
 
 interface singleUserParams {
   // book: Book;
@@ -19,7 +20,15 @@ export const SingleUser = ({}: singleUserParams) => {
     <Box className={classes.singleUserRoot}>
       {/* user cover image and profile */}
       <Box className={classes.userCover}>
-        <Box className={classes.userImage}></Box>
+        <Box className={classes.userImageWrap}>
+          <Image
+            src={user?.profileImageUrl}
+            width={135}
+            height={130}
+            alt={user.name || `user`}
+            className={classes.userImage}
+          />
+        </Box>
       </Box>
       {/* user details */}
       <Box className={classes.userDetailsContainer}>

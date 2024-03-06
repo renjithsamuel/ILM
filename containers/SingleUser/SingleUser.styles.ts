@@ -18,7 +18,10 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     zIndex: 0,
     backgroundColor: themeValues.color.color1,
   },
-  userImage: {
+  userImageWrap: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     width: "10vw",
     height: "20vh",
     position: "relative",
@@ -28,6 +31,11 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     boxShadow: themeValues.shadow.boxShadowHeavy,
     borderRadius: themeValues.border.borderRadiusLow,
     backgroundColor: themeValues.color.color2,
+  },
+  userImage: {
+    objectFit: "cover",
+    opacity: 0.8,
+    borderRadius: themeValues.border.borderRadiusLow,
   },
   userDetailsContainer: {
     width: "20vw",

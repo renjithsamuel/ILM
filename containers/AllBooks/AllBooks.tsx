@@ -58,10 +58,12 @@ export const AllBooks = ({}: allBooksParams) => {
             <MenuItem value={BookSortValue.title}>title</MenuItem>
             <MenuItem value={BookSortValue.author}>author</MenuItem>
             <MenuItem value={BookSortValue.genre}>genre</MenuItem>
+            <MenuItem value={BookSortValue.rating}>rating</MenuItem>
             <MenuItem value={BookSortValue.publishedDate}>
               published date
             </MenuItem>
             <MenuItem value={BookSortValue.shelfNumber}>shelf number</MenuItem>
+            <MenuItem value={BookSortValue.reviewCount}>reviews</MenuItem>
           </Select>
         </FormControl>
         {/* order */}

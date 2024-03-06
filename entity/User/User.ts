@@ -4,6 +4,7 @@ import { BookGenre } from "@/constants/BookGenre";
 
 export interface IUser {
   userID: string;
+  profileImageUrl: string;
   name: string;
   email: string;
   role: Role;
@@ -23,6 +24,7 @@ export interface IUser {
 export class User implements IUser {
   readonly userID: string;
   name: string;
+  profileImageUrl: string;
   email: string;
   role: Role;
   dateOfBirth: Date;
@@ -39,6 +41,7 @@ export class User implements IUser {
 
   constructor(user: IUser) {
     this.userID = user.userID;
+    this.profileImageUrl = user.profileImageUrl;
     this.name = user.name;
     this.email = user.email;
     this.role = user.role;

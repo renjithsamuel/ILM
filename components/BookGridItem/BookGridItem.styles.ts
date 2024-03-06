@@ -16,7 +16,7 @@ export const useBookGridItemStyles = makeStyles((theme) => ({
     boxShadow: themeValues.shadow.boxShadowLight,
     color: themeValues.color.color1,
     transition: themeValues.transition.defaultTansition,
-    animation: "slide-up 0.4s ease",
+    animation: themeValues.animation.slideUp,
     "&:hover": {
       // backgroundColor: themeValues.color.lightGray,
       // filter: themeValues.defaultFilterShadow,

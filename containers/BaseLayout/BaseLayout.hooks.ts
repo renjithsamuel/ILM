@@ -143,6 +143,11 @@ export const useBaseLayout = ({
             icon: BsBookshelf,
             link: sideMenuItems.AllBooks.link,
           },
+          {
+            name: sideMenuItems.Users.name,
+            icon: FaUsers,
+            link: sideMenuItems.Users.link,
+          },
         ];
       } else {
         tempMenuItems = [

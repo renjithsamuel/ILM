@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 
 export const useCheckoutItemStyles = makeStyles((theme) => ({
   accordionActualSummaryRoot: {
+    animation: themeValues.animation.slideUp,
     boxShadow: themeValues.shadow.boxShadowboxy,
     // backgroundColor: themeValues.color.lightGray,
     borderRadius: themeValues.border.borderRadius,

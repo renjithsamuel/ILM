@@ -7,9 +7,9 @@ export default function SingleBookPage() {
     <BaseLayout
       authenticatedOnly={true}
       showSearchBar={true}
-      pageName={sideMenuItems.BookShelf.name}
+      pageName={sideMenuItems.AllBooks.name}
     >
-      <SingleBook/>
+      <SingleBook />
     </BaseLayout>
   );
 }

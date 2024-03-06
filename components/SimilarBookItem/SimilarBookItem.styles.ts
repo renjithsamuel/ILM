@@ -7,6 +7,7 @@ export const useSimilarBookItemStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    animation: themeValues.animation.slideUp,
   },
   bookContainer: {
     position: "relative",
