@@ -31,7 +31,8 @@ export const themeValues = {
     fontSizeMedium: "medium",
   },
   shadow: {
-    vignetteEffectBackground : 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))',
+    vignetteEffectBackground:
+      "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))",
     boxShadowLight: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
     boxShadowHeavy:
       "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px",
@@ -51,13 +52,13 @@ export const themeValues = {
     defaultTansition: "0.3s ease all",
     longTransition: "1s ease all",
   },
-  animation : {
-    slideUp : "slide-up 0.4s ease",
+  animation: {
+    slideUp: "slide-up 0.4s ease",
   },
   gradient: {
     color1:
       "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%)",
   },
   oneByThree: "33.33%",
-  sideNavWidth: "12%",
+  sideNavWidth: "14%",
 };

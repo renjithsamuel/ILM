@@ -45,6 +45,9 @@ export const AddComment = ({ handleAddComment }: addCommentParams) => {
             type="text"
             fullWidth
             variant="standard"
+            inputProps={{
+              maxLength: 50,
+            }}
             className={classes.commentHeading}
           />
           <TextField
@@ -53,6 +56,9 @@ export const AddComment = ({ handleAddComment }: addCommentParams) => {
             multiline
             fullWidth
             minRows={8}
+            inputProps={{
+              maxLength: 600,
+            }}
             className={classes.comment}
           />
           <Rating

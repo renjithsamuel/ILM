@@ -4,6 +4,7 @@ import {
   Dialog,
   Divider,
   Grid,
+  List,
   Rating,
   Tooltip,
   Typography,
@@ -31,6 +32,7 @@ import { ModifyCount } from "@/components/ModifyCount/ModifyCount";
 import { themeValues } from "@/constants/ThemeConstants";
 import { BiSolidMessageDetail } from "react-icons/bi";
 import { AddComment } from "@/components/AddComment/AddComment";
+import { CommentItem } from "@/components/CommentItem/CommentItem";
 
 interface singleBookParams {
   // book: Book;
@@ -39,6 +41,7 @@ interface singleBookParams {
 export const SingleBook = ({}: singleBookParams) => {
   const classes = useSingleBookStyles();
   const {
+    commentList,
     book,
     userType,
     user,
@@ -242,18 +245,18 @@ export const SingleBook = ({}: singleBookParams) => {
           >
           </Document> */}
         </Box>
-        <Box className={classes.singleBookComments}>
-          Book Comments, Currently Under Work
-          {/* <iframe
-            src="https://www.thebookcollector.co.uk/sites/default/files/the-book-collector-example-2018-04.pdf"
-            width="100%"
-            height="600px"
-          ></iframe> */}
-          {/* <Document
-            file="https://www.thebookcollector.co.uk/sites/default/files/the-book-collector-example-2018-04.pdf"
-            onLoadSuccess={onDocumentLoadSuccess}
-          >
-          </Document> */}
+        <Box>
+          <Typography variant="h6" className={classes.commentsLabel}>
+            {"Comments"}
+          </Typography>
+          <Box className={classes.singleBookComments}>
+            {/* Book Comments, Currently Under Work */}
+            <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+              {commentList.map((item, index) => (
+                <CommentItem review={item} key={index} />
+              ))}
+            </List>
+          </Box>
         </Box>
       </Box>
       <Box className={classes.similarBooks}>

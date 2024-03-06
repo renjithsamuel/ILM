@@ -92,13 +92,22 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                     : "nil"}
                 </Typography>
               </Tooltip>
-              <Box className={classes.summaryIcon}>
+              {/* summary icon */}
+              <Box>
                 {checkoutItem.returnedDate ? (
-                  <MdDone size={themeValues.spacing(2)} />
+                  <Tooltip title={"returned"} placement="top">
+                    <Box className={classes.summaryIcon}>
+                      <MdDone size={themeValues.spacing(2)} />
+                    </Box>
+                  </Tooltip>
                 ) : checkoutItem.checkedOutOn ? (
-                  <MdOutlineShoppingCartCheckout
-                    size={themeValues.spacing(2)}
-                  />
+                  <Tooltip title={"checked out"} placement="top">
+                    <Box className={classes.summaryIcon}>
+                      <MdOutlineShoppingCartCheckout
+                        size={themeValues.spacing(2)}
+                      />
+                    </Box>
+                  </Tooltip>
                 ) : (
                   ""
                 )}
@@ -113,7 +122,7 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
               {/* top 2 boxes */}
               <Box
                 component={Link}
-                href={`/bookshelf/${checkoutItem.book?.ID}`}
+                href={`/allbooks/${checkoutItem.book?.ID}`}
                 className={classes.detailsBox}
               >
                 {/* book details */}

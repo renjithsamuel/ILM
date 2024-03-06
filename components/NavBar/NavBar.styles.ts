@@ -98,6 +98,7 @@ export const useNavBarStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     fontWeight: themeValues.font.fontWeightThick,
     transition: themeValues.transition.defaultTansition,
+    // animation: themeValues.animation.slideUp,
     "&:hover": {
       backgroundColor: themeValues.color.color3,
       color: themeValues.color.textColor,

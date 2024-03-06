@@ -4,6 +4,7 @@ import { User } from "./User";
 export const mockUser: User = {
   userID: "123456",
   name: "John Doe",
+  profileImageUrl: `https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black.png`,
   email: "john.doe@example.com",
   role: Role.Librarian,
   dateOfBirth: new Date("1990-01-01"),

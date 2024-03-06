@@ -168,6 +168,10 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowboxy,
   },
+  commentsLabel: {
+    marginLeft: theme.spacing(2),
+    fontWeight: themeValues.font.fontWeightThick,
+  },
   singleBookComments: {
     display: "flex",
     justifyContent: "center",
@@ -175,7 +179,8 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     margin: theme.spacing(1),
     width: "63vw",
-    height: "40vh",
+    maxHeight: "100vh",
+    overflow: "scroll",
     borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowboxy,
   },

@@ -15,7 +15,7 @@ export const SimilarBookItem = ({ book }: SimilarBookItemProps) => {
 
   return (
     <Box className={clsx(classes.similarBookItemRoot)}>
-      <Link href={`/bookshelf/${book.ID}`}>
+      <Link href={`/allbooks/${book.ID}`}>
         <div className={clsx(classes.bookContainer, "bookContainer")}>
           <Image
             src={book.coverImage}

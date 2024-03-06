@@ -5,12 +5,15 @@ import { usePageContext } from "@/context/PageContext";
 import { useUserContext } from "@/context/UserContext";
 import { Book } from "@/entity/Book/Book";
 import { mockBook, mockBooks } from "@/entity/Book/Book.mock";
+import { Review } from "@/entity/Review/Review";
+import { mockReviews } from "@/entity/Review/Review.mock";
 import { User } from "@/entity/User/User";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 interface SingleBookHookProps {}
 
 interface SingleBookHook {
+  commentList: Review[];
   book: Book | undefined;
   userType: Role;
   user: User;
@@ -27,6 +30,7 @@ interface SingleBookHook {
 export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const router = useRouter();
   const bookID = router.query.id as string;
+  const [commentList, setCommentList] = useState<Review[]>([]);
   const [book, setBook] = useState<Book | undefined>();
   const [isModifyCountOpen, setIsModifyCountOpen] = useState<boolean>();
   const [isAddCommentOpen, setIsAddCommentOpen] = useState<boolean>();
@@ -38,6 +42,10 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     const tempBook = mockBooks.find((item) => bookID === item.ID && item);
     if (tempBook) setBook(tempBook);
   }, [bookID]);
+
+  useEffect(() => {
+    setCommentList(mockReviews);
+  }, []);
 
   const userType = user.role;
   const wishlisted = true;
@@ -52,6 +60,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const handleAddToLibrary = () => {};
 
   return {
+    commentList,
     user,
     book,
     userType,

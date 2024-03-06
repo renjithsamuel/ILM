@@ -20,7 +20,7 @@ export const PredictiveAnalysisItem = ({
   const classes = usePredictiveAnalysisItemStyles();
   return (
     <>
-      <Link href={`/bookshelf/${book.ID}`}>
+      <Link href={`/allbooks/${book.ID}`}>
         <Box className={classes.predictiveAnalysisItemRoot}>
           <Box className={classes.predictLeft}>
             {/* Book Image */}
@@ -65,14 +65,6 @@ export const PredictiveAnalysisItem = ({
                   <GoEye /> {book.views}
                 </Box>
               </Tooltip>
-              {/* stock */}
-              {book.inLibrary && (
-                <Tooltip title={"stock"} placement="top">
-                  <Box className={classes.bookCount}>
-                    <SiBookstack /> {book.booksLeft}
-                  </Box>
-                </Tooltip>
-              )}
               {/* wishlist */}
               <Tooltip title={"wishlists"} placement="top">
                 <Box className={classes.bookCount}>
@@ -85,12 +77,22 @@ export const PredictiveAnalysisItem = ({
                   <BiSolidMessageDetail /> {book.reviewCount}
                 </Box>
               </Tooltip>
+              {/* stock */}
+              {book.inLibrary && (
+                <Tooltip title={"stock"} placement="top">
+                  <Box className={classes.bookCount}>
+                    <SiBookstack /> {book.booksLeft}
+                  </Box>
+                </Tooltip>
+              )}
               {/* approximate demand */}
-              <Tooltip title={"approximate demand"} placement="top">
-                <Box className={classes.bookCount}>
-                  <GoChecklist /> {book?.approximateDemand}
-                </Box>
-              </Tooltip>
+              {book.inLibrary && (
+                <Tooltip title={"approximate demand"} placement="top">
+                  <Box className={classes.bookCount}>
+                    <GoChecklist /> {book?.approximateDemand}
+                  </Box>
+                </Tooltip>
+              )}
             </Box>
           </Box>
         </Box>

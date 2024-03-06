@@ -13,13 +13,13 @@ export const sideMenuItems = {
   // librarian
   Dashboard: { name: "Dashboard", link: "/dashboard" },
   WishLists: { name: "Wishlists", link: "/wishlists" },
-  Users: { name: "Users", link: "/users" },
   Transactions: { name: "Transactions", link: "/transactions" },
   PredictiveAnalysis: {
     name: "Predictive Analysis",
     link: "/predictive-analysis",
   },
   // both
+  Users: { name: "Users", link: "/users" },
   AllBooks: { name: "All Books", link: "/allbooks" },
   Settings: { name: "Settings", link: "/settings" },
 };
@@ -43,6 +43,7 @@ export const bookKeyValues: BookKeyValues[] = [
 ];
 
 export enum UserBookDetailType {
+  Name = "name",
   Reserved = "reserved",
   Pending = "pending",
   CheckedOut = "checkedOut",
