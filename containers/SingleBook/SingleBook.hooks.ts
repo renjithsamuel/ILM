@@ -16,6 +16,8 @@ interface SingleBookHook {
   user: User;
   wishlisted: boolean;
   isModifyCountOpen: boolean | undefined;
+  isAddCommentOpen: boolean | undefined;
+  handleAddComment: () => void;
   handleModifyCount: () => void;
   handleAddToLibrary: () => void;
   setIsModifyCountOpen: Dispatch<SetStateAction<boolean | undefined>>;
@@ -27,6 +29,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const bookID = router.query.id as string;
   const [book, setBook] = useState<Book | undefined>();
   const [isModifyCountOpen, setIsModifyCountOpen] = useState<boolean>();
+  const [isAddCommentOpen, setIsAddCommentOpen] = useState<boolean>();
   const { user } = useUserContext();
 
   const { setDialogBox, DialogBox } = usePageContext();
@@ -42,6 +45,10 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const handleModifyCount = () => {
     setIsModifyCountOpen(!isModifyCountOpen);
   };
+
+  const handleAddComment = () => {
+    setIsAddCommentOpen(!isAddCommentOpen);
+  };
   const handleAddToLibrary = () => {};
 
   return {
@@ -50,6 +57,8 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     userType,
     wishlisted,
     isModifyCountOpen,
+    isAddCommentOpen,
+    handleAddComment,
     setIsModifyCountOpen,
     handleModifyCount,
     handleAddToLibrary,

@@ -12,6 +12,7 @@ export const useSearchItemStyles = makeStyles((theme) => ({
     borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowLight,
     transition: themeValues.transition.defaultTansition,
+    animation: themeValues.animation.slideUp,
     "&:hover": {
       boxShadow: themeValues.shadow.boxShadowAttatched,
       cursor: "pointer",

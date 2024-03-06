@@ -9,6 +9,7 @@ import { SiBookstack } from "react-icons/si";
 import { GoEye } from "react-icons/go";
 import { IoMdHeart } from "react-icons/io";
 import { themeValues } from "@/constants/ThemeConstants";
+import { BiSolidMessageDetail } from "react-icons/bi";
 
 interface BookGridItemProps {
   book: Book;
@@ -60,6 +61,12 @@ export const BookGridItem = ({ book }: BookGridItemProps) => {
         <Tooltip title={"wishlists"} placement="top">
           <Box className={classes.bookCount}>
             <IoMdHeart /> {book.wishlistCount}
+          </Box>
+        </Tooltip>
+        {/* reviews */}
+        <Tooltip title={"reviews"} placement="top">
+          <Box className={classes.bookCount}>
+            <BiSolidMessageDetail /> {book.reviewCount}
           </Box>
         </Tooltip>
       </Box>

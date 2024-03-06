@@ -18,9 +18,11 @@ const bookData: IBook = {
   booksLeft: 2,
   views: 2,
   wishlistCount: 2,
+  reviewCount: 40,
   rating: 4.1,
   createdAt: new Date(),
   updatedAt: new Date(),
+  approximateDemand: 20,
 };
 
 export const mockBook = new Book(bookData);
@@ -43,9 +45,11 @@ const mockBooksInterfaceArray: IBook[] = [
     booksLeft: 3,
     views: 1,
     wishlistCount: 1,
+    reviewCount: 20,
     rating: 4.1,
     createdAt: new Date(),
     updatedAt: new Date(),
+    approximateDemand: 20,
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79028",
@@ -64,9 +68,11 @@ const mockBooksInterfaceArray: IBook[] = [
     booksLeft: 0,
     views: 2,
     wishlistCount: 2,
-    rating: 4.1,
+    reviewCount: 30,
+    rating: 4.5,
     createdAt: new Date(),
     updatedAt: new Date(),
+    approximateDemand: 20,
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79029",
@@ -84,10 +90,12 @@ const mockBooksInterfaceArray: IBook[] = [
     inLibrary: false,
     booksLeft: 1,
     views: 3,
-    rating: 4.1,
+    rating: 3.5,
     wishlistCount: 3,
+    reviewCount: 50,
     createdAt: new Date(),
     updatedAt: new Date(),
+    approximateDemand: 20,
   },
 ];
 

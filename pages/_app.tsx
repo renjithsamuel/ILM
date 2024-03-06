@@ -55,3 +55,8 @@ export default function App({
     </ErrorBoundary>
   );
 }
+
+// pending
+// settings
+// predictive analysis
+// rating

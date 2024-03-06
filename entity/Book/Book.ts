@@ -15,9 +15,11 @@ export interface IBook {
   views: number;
   booksLeft: number;
   wishlistCount: number;
+  reviewCount: number;
   rating: number;
   createdAt: Date;
   updatedAt: Date;
+  approximateDemand?: number;
   // ratings need to be added
 }
 
@@ -36,9 +38,11 @@ export class Book implements IBook {
   views: number;
   booksLeft: number;
   wishlistCount: number;
+  reviewCount: number;
   rating: number;
   createdAt: Date;
   updatedAt: Date;
+  approximateDemand?: number;
 
   constructor(book: IBook) {
     this.ID = book.ID;
@@ -55,7 +59,9 @@ export class Book implements IBook {
     this.views = book.views;
     this.booksLeft = book.booksLeft;
     this.wishlistCount = book.wishlistCount;
+    this.reviewCount = book.reviewCount;
     this.rating = book.rating;
+    this.approximateDemand = book.approximateDemand;
     this.createdAt = book.createdAt;
     this.updatedAt = book.updatedAt;
   }

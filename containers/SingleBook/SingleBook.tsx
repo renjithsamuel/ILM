@@ -1,5 +1,13 @@
 import { Book } from "@/entity/Book/Book";
-import { Box, Dialog, Divider, Grid, Rating, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  Divider,
+  Grid,
+  Rating,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
 import Image from "next/image";
@@ -21,6 +29,8 @@ import { IoMdHeart } from "react-icons/io";
 import { MdOutlineDone } from "react-icons/md";
 import { ModifyCount } from "@/components/ModifyCount/ModifyCount";
 import { themeValues } from "@/constants/ThemeConstants";
+import { BiSolidMessageDetail } from "react-icons/bi";
+import { AddComment } from "@/components/AddComment/AddComment";
 
 interface singleBookParams {
   // book: Book;
@@ -34,6 +44,8 @@ export const SingleBook = ({}: singleBookParams) => {
     user,
     wishlisted,
     isModifyCountOpen,
+    isAddCommentOpen,
+    handleAddComment,
     handleModifyCount,
     handleAddToLibrary,
     setIsModifyCountOpen,
@@ -46,6 +58,8 @@ export const SingleBook = ({}: singleBookParams) => {
 
   return (
     <Box className={classes.singleBookRoot}>
+      {/* add comment popup */}
+      {isAddCommentOpen && <AddComment handleAddComment={handleAddComment} />}
       {/* modify count popup */}
       {isModifyCountOpen && (
         <ModifyCount setIsModifyCountOpen={setIsModifyCountOpen} />
@@ -117,6 +131,12 @@ export const SingleBook = ({}: singleBookParams) => {
                   <IoMdHeart /> {book.wishlistCount}
                 </Box>
               </Tooltip>
+              {/* reviews */}
+              <Tooltip title={"reviews"} placement="bottom">
+                <Box className={classes.bookCount}>
+                  <BiSolidMessageDetail /> {book.reviewCount}
+                </Box>
+              </Tooltip>
             </Box>
           </Box>
           {/*  book  Buttons*/}
@@ -174,15 +194,21 @@ export const SingleBook = ({}: singleBookParams) => {
               </Button>
             )}
             {/* completed btn todo check for the checkedout array of user and open dialog to complete the report*/}
-            {userType === Role.Patrons && (
-              <Button variant="contained" className={classes.reserveNowBtn}>
-                <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
-                  {"Completed"}
-                </Typography>
-                <MdOutlineDone size={theme.spacing(2.2)} />
-                {"  "}
-              </Button>
-            )}
+            {/* todo remove for librarian */}
+            {userType === Role.Patrons ||
+              (userType === Role.Librarian && (
+                <Button
+                  variant="contained"
+                  className={classes.reserveNowBtn}
+                  onClick={handleAddComment}
+                >
+                  <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
+                    {"Completed"}
+                  </Typography>
+                  <MdOutlineDone size={theme.spacing(2.2)} />
+                  {"  "}
+                </Button>
+              ))}
             {/* checkout btn  */}
             {/* todo when checking out go to /transactions/{isbn} capture it and add in search filed */}
             {userType === Role.Librarian && book.inLibrary && (

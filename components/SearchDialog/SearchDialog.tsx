@@ -211,6 +211,14 @@ const sortByValueItems = {
   ],
   bookSortByValues: [
     {
+      value: SearchSortValue.reviewCount,
+      label: "book reviews",
+    },
+    {
+      value: SearchSortValue.bookViews,
+      label: "book rating",
+    },
+    {
       value: SearchSortValue.bookViews,
       label: "book views",
     },

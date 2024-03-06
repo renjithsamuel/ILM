@@ -51,6 +51,9 @@ export const themeValues = {
     defaultTansition: "0.3s ease all",
     longTransition: "1s ease all",
   },
+  animation : {
+    slideUp : "slide-up 0.4s ease",
+  },
   gradient: {
     color1:
       "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%)",

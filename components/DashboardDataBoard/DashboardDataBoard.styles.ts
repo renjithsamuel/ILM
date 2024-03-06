@@ -5,6 +5,7 @@ export const useDashboardDataBoardStyles = makeStyles((theme) => ({
   dashboardDataBoardTop: {
     display: "flex",
     gap: theme.spacing(3),
+    animation: themeValues.animation.slideUp,
   },
   dataChips: {
     width: "60%",

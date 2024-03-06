@@ -59,6 +59,9 @@ export enum BookSortValue {
   genre = "genre",
   publishedDate = "publishedDate",
   shelfNumber = "shelfNumber",
+  rating = "rating",
+  approximateDemand = "approximateDemand",
+  reviewCount = "reviewCount",
 }
 
 export enum SortOrder {
@@ -84,6 +87,8 @@ export enum SearchSortValue {
   username = "username",
   email = "email",
   userViews = "userViews",
+  rating = "rating",
+  reviewCount = "reviewCount",
 }
 
 export enum TransactionSortValue {
