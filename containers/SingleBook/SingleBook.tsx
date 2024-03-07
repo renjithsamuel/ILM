@@ -168,8 +168,8 @@ export const SingleBook = ({}: singleBookParams) => {
                   !user.isPaymentDone
                     ? "membership required"
                     : book.booksLeft === 0
-                    ? "out of stock"
-                    : ""
+                      ? "out of stock"
+                      : ""
                 }
                 placement="top"
               >

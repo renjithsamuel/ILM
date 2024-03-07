@@ -12,7 +12,7 @@ export const BookShelf = ({ books }: BookShelfProps) => {
 
   return (
     <Box className={classes.booksContainerRoot}>
-      <Typography className={classes.bookShelfTexts} >
+      <Typography className={classes.bookShelfTexts}>
         Recommendations
       </Typography>
       <Grid container spacing={3} className={classes.booksContainer}>

@@ -103,23 +103,23 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
                       );
                     })
                   : sortByEntity === EntityTypes.BookEntity
-                  ? sortByValueItems.bookSortByValues.map((item, index) => {
-                      return (
-                        <MenuItem value={item.value} key={index}>
-                          {item.label}
-                        </MenuItem>
-                      );
-                    })
-                  : [
-                      ...sortByValueItems.bookSortByValues,
-                      ...sortByValueItems.userSortByValues,
-                    ].map((item, index) => {
-                      return (
-                        <MenuItem value={item.value} key={index}>
-                          {item.label}
-                        </MenuItem>
-                      );
-                    })}
+                    ? sortByValueItems.bookSortByValues.map((item, index) => {
+                        return (
+                          <MenuItem value={item.value} key={index}>
+                            {item.label}
+                          </MenuItem>
+                        );
+                      })
+                    : [
+                        ...sortByValueItems.bookSortByValues,
+                        ...sortByValueItems.userSortByValues,
+                      ].map((item, index) => {
+                        return (
+                          <MenuItem value={item.value} key={index}>
+                            {item.label}
+                          </MenuItem>
+                        );
+                      })}
               </Select>
             </FormControl>
             {/* order */}

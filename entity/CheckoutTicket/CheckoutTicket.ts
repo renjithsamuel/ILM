@@ -2,7 +2,7 @@ import { Book } from "../Book/Book";
 import { User } from "../User/User";
 
 export interface ICheckoutTicket {
-  ID : string;
+  ID: string;
   bookID: string;
   userID: string;
   isCheckedOut: boolean;
@@ -19,7 +19,7 @@ export interface ICheckoutTicket {
 }
 
 export class CheckoutTicket implements ICheckoutTicket {
-  ID : string;
+  ID: string;
   bookID: string;
   userID: string;
   isCheckedOut: boolean;

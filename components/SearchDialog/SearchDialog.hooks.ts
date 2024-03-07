@@ -46,7 +46,7 @@ export const useSearchDialog = ({
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [state, dispatch] = useReducer(
     searchDialogReducer,
-    initialSearchDialogValues
+    initialSearchDialogValues,
   );
 
   const handleClickOpenDialog = () => {

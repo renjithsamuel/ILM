@@ -3,10 +3,10 @@ name: ILM-Frontend
 on:
   push:
     branches:
-      - '*'
+      - "*"
 
 jobs:
-  build:
+  pipeline:
     runs-on: ubuntu-latest
 
     steps:

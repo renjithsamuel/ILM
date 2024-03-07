@@ -46,7 +46,8 @@ export const MyBooks = ({}: myBooksParams) => {
                   {bookDetail.label}
                 </Typography>
                 <Typography variant="body1" className={classes.bookDetailValue}>
-                  {userBookDetail && bookDetail.getBookDetailsValue(userBookDetail)}
+                  {userBookDetail &&
+                    bookDetail.getBookDetailsValue(userBookDetail)}
                 </Typography>
               </Box>
             </Link>
@@ -72,22 +73,26 @@ const userDetailsArray = [
 const bookDetailsArray = [
   {
     label: "Books Reserved",
-    getBookDetailsValue: (bkDetails: BookDetails) => bkDetails.reservedBooksCount,
+    getBookDetailsValue: (bkDetails: BookDetails) =>
+      bkDetails.reservedBooksCount,
     getLink: (user: User) => `/users/${user.userID}/reserved`,
   },
   {
     label: "Books Pending",
-    getBookDetailsValue: (bkDetails: BookDetails) => bkDetails.pendingBooksCount,
+    getBookDetailsValue: (bkDetails: BookDetails) =>
+      bkDetails.pendingBooksCount,
     getLink: (user: User) => `/users/${user.userID}/pending`,
   },
   {
     label: "Books Checked Out",
-    getBookDetailsValue: (bkDetails: BookDetails) => bkDetails.checkedOutBooksCount,
+    getBookDetailsValue: (bkDetails: BookDetails) =>
+      bkDetails.checkedOutBooksCount,
     getLink: (user: User) => `/users/${user.userID}/checkedout`,
   },
   {
     label: "Wishlisted Books",
-    getBookDetailsValue: (bkDetails: BookDetails) => bkDetails.wishlistBooks.length,
+    getBookDetailsValue: (bkDetails: BookDetails) =>
+      bkDetails.wishlistBooks.length,
     getLink: (user: User) => `/users/${user.userID}/wishlists`,
   },
 ];

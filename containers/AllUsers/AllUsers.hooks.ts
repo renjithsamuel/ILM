@@ -18,60 +18,61 @@ interface allUsersHook {
   handleSortValue: (event: SelectChangeEvent) => void;
 }
 
-export const useAllUsers =
-  ({}: allUsersHookProps): allUsersHook => {
-    const [sortByValue, setSortByValue] = useState<UserBookDetailType>(
-      UserBookDetailType.Pending
-    );
-    const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
+export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
+  const [sortByValue, setSortByValue] = useState<UserBookDetailType>(
+    UserBookDetailType.Pending,
+  );
+  const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
-    // represents book details array
-    const mockBookDetailsArrayMock = mockbookDetailsArray;
-    // fetch users
-    const mockUserMock = mockUsers.filter((item) => item.role === Role.Patrons).sort((a, b) => {
+  // represents book details array
+  const mockBookDetailsArrayMock = mockbookDetailsArray;
+  // fetch users
+  const mockUserMock = mockUsers
+    .filter((item) => item.role === Role.Patrons)
+    .sort((a, b) => {
       const aBookDetails = mockBookDetailsArrayMock.find(
-        (bkDetails) => bkDetails.userID === a.userID
+        (bkDetails) => bkDetails.userID === a.userID,
       );
       const bBookDetails = mockBookDetailsArrayMock.find(
-        (bkDetails) => bkDetails.userID === b.userID
+        (bkDetails) => bkDetails.userID === b.userID,
       );
       return aBookDetails && bBookDetails
         ? sortHelper(aBookDetails, bBookDetails, sortByOrder, sortByValue)
         : -1;
     });
 
-    // const get
-    const getBookDetails = (userID: string) => {
-      const bookDetails = mockBookDetailsArrayMock.find(
-        (bkDetails) => bkDetails.userID === userID
-      );
-      return bookDetails && bookDetails;
-    };
-
-    // sorting
-    const handleSortValue = (event: SelectChangeEvent): void => {
-      event.target.value &&
-        setSortByValue(event.target.value as UserBookDetailType);
-    };
-    const handleSortOrder = (event: SelectChangeEvent): void => {
-      event.target.value && setSortByOrder(event.target.value as SortOrder);
-    };
-
-    return {
-      pendingUsers: mockUserMock,
-      getBookDetails,
-      sortByValue,
-      sortByOrder,
-      handleSortValue,
-      handleSortOrder,
-    };
+  // const get
+  const getBookDetails = (userID: string) => {
+    const bookDetails = mockBookDetailsArrayMock.find(
+      (bkDetails) => bkDetails.userID === userID,
+    );
+    return bookDetails && bookDetails;
   };
+
+  // sorting
+  const handleSortValue = (event: SelectChangeEvent): void => {
+    event.target.value &&
+      setSortByValue(event.target.value as UserBookDetailType);
+  };
+  const handleSortOrder = (event: SelectChangeEvent): void => {
+    event.target.value && setSortByOrder(event.target.value as SortOrder);
+  };
+
+  return {
+    pendingUsers: mockUserMock,
+    getBookDetails,
+    sortByValue,
+    sortByOrder,
+    handleSortValue,
+    handleSortOrder,
+  };
+};
 
 const sortHelper = (
   bookDetail1: BookDetails,
   bookDetail2: BookDetails,
   sortByOrder: string,
-  sortByValue: string
+  sortByValue: string,
 ): number => {
   let val;
   switch (sortByValue) {

@@ -3,14 +3,9 @@ import { mockUsers } from "@/entity/User/User.mock";
 
 interface dashboardDataBoardHookProps {}
 
-interface dashboardDataBoardHook {
-
-}
+interface dashboardDataBoardHook {}
 
 export const useDashboardDataBoard =
   ({}: dashboardDataBoardHookProps): dashboardDataBoardHook => {
- 
-    return {
-
-    };
+    return {};
   };

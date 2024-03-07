@@ -18,7 +18,7 @@ export const usePredictiveAnalysis =
   ({}: predictiveAnalysisHookProps): predictiveAnalysisHook => {
     const [bookList, setBookList] = useState<Book[]>([]);
     const [sortByValue, setSortByValue] = useState<BookSortValue>(
-      BookSortValue.wishlistCount
+      BookSortValue.wishlistCount,
     );
     const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 

@@ -29,11 +29,11 @@ interface allBooksHook {
 export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   const [bookList, setBookList] = useState<Book[]>([]);
   const [sortByValue, setSortByValue] = useState<BookSortValue>(
-    BookSortValue.wishlistCount
+    BookSortValue.wishlistCount,
   );
   const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
   const [sortByPresence, setSortByPresence] = useState<SortPresence>(
-    SortPresence.both
+    SortPresence.both,
   );
 
   // get all books
@@ -80,7 +80,7 @@ const sortHelper = (
   book1: Book,
   book2: Book,
   sortByOrder: SortOrder,
-  sortByValue: BookSortValue
+  sortByValue: BookSortValue,
 ): number => {
   let val: number;
   switch (sortByValue) {

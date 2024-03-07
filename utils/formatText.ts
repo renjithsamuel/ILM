@@ -1,30 +1,30 @@
 export class FormatTextUtil {
   public static formatTicketText = (text: string): string => {
-    if (typeof text !== 'string') {
+    if (typeof text !== "string") {
       return text;
     }
-    text = text.replace(/_/g, ' ');
-    const words = text.split(' ');
+    text = text.replace(/_/g, " ");
+    const words = text.split(" ");
 
     for (let i = 0; i < words.length; i++) {
       words[i] =
         words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
     }
 
-    text = words.join(' ');
+    text = words.join(" ");
 
     return text;
   };
 
   public static formatFirstWord = (text: string): string => {
-    if (typeof text !== 'string' || text?.length === 0) {
+    if (typeof text !== "string" || text?.length === 0) {
       return text;
     }
-    const words = text?.split(' ');
+    const words = text?.split(" ");
     if (words?.length > 0) {
       words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
     }
 
-    return words.join(' ');
+    return words.join(" ");
   };
 }

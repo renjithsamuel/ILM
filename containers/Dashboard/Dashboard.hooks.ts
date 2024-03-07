@@ -4,14 +4,12 @@ import { mockBooks } from "@/entity/Book/Book.mock";
 interface dashboardHookProps {}
 
 interface dashboardHook {
-  highDemandBooks : Book[],
+  highDemandBooks: Book[];
 }
 
-export const useDashboard =
-  ({}: dashboardHookProps): dashboardHook => {
-
-    const highDemandBooks  = mockBooks;
-    return {
-      highDemandBooks,
-    };
+export const useDashboard = ({}: dashboardHookProps): dashboardHook => {
+  const highDemandBooks = mockBooks;
+  return {
+    highDemandBooks,
   };
+};

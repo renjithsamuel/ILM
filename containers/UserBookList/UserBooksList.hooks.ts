@@ -19,7 +19,7 @@ export const useUserBooksList =
   ({}: userbookslistHookProps): userbookslistHook => {
     const [bookList, setBookList] = useState<Book[]>([]);
     const [bookDetailsFrom, setBookDetailsFrom] = useState<UserBookDetailType>(
-      UserBookDetailType.WishLists
+      UserBookDetailType.WishLists,
     );
     const router = useRouter();
     const { user: contextUser } = useUserContext();
@@ -34,11 +34,7 @@ export const useUserBooksList =
       )
         return item;
       // if its from librarian side wishlist return userID matching from query
-      if (
-        userID &&
-        item.userID === userID
-      )
-        return item;
+      if (userID && item.userID === userID) return item;
     });
 
     useEffect(() => {
@@ -55,7 +51,7 @@ export const useUserBooksList =
           filterBookItems(
             bookDetails,
             setBookList,
-            UserBookDetailType.CheckedOut
+            UserBookDetailType.CheckedOut,
           );
           break;
         case UserBookDetailType.Pending:
@@ -65,28 +61,28 @@ export const useUserBooksList =
           filterBookItems(
             bookDetails,
             setBookList,
-            UserBookDetailType.Reserved
+            UserBookDetailType.Reserved,
           );
           break;
         case UserBookDetailType.WishLists:
           filterBookItems(
             bookDetails,
             setBookList,
-            UserBookDetailType.WishLists
+            UserBookDetailType.WishLists,
           );
           break;
         case UserBookDetailType.Completed:
           filterBookItems(
             bookDetails,
             setBookList,
-            UserBookDetailType.Completed
+            UserBookDetailType.Completed,
           );
           break;
         default:
           filterBookItems(
             bookDetails,
             setBookList,
-            UserBookDetailType.WishLists
+            UserBookDetailType.WishLists,
           );
       }
     }, [bookDetails, bookDetailsFrom]);
@@ -103,7 +99,7 @@ export const useUserBooksList =
 function filterBookItems(
   bookDetails: BookDetails | undefined,
   setBookList: (value: SetStateAction<Book[]>) => void,
-  type: UserBookDetailType
+  type: UserBookDetailType,
 ) {
   const bookStringList = getBookDetails(bookDetails, type);
   const BookItems = bookStringList.map((bookDetailsItem) => {
@@ -129,7 +125,7 @@ function filterBookItems(
 
 function getBookDetails(
   bookDetails: BookDetails | undefined,
-  type: UserBookDetailType
+  type: UserBookDetailType,
 ): string[] {
   let currBooksStringList: string[] | undefined;
   switch (type) {

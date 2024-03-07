@@ -100,5 +100,5 @@ const mockBooksInterfaceArray: IBook[] = [
 ];
 
 export const mockBooks: Book[] = mockBooksInterfaceArray.map(
-  (book) => new Book(book)
+  (book) => new Book(book),
 );

@@ -3,14 +3,9 @@ import { mockUsers } from "@/entity/User/User.mock";
 
 interface predictiveAnalysisItemHookProps {}
 
-interface predictiveAnalysisItemHook {
-
-}
+interface predictiveAnalysisItemHook {}
 
 export const usePredictiveAnalysisItem =
   ({}: predictiveAnalysisItemHookProps): predictiveAnalysisItemHook => {
- 
-    return {
-
-    };
+    return {};
   };

@@ -3,14 +3,9 @@ import { mockUsers } from "@/entity/User/User.mock";
 
 interface pendingUserItemHookProps {}
 
-interface pendingUserItemHook {
-
-}
+interface pendingUserItemHook {}
 
 export const usePendingUserItem =
   ({}: pendingUserItemHookProps): pendingUserItemHook => {
- 
-    return {
-
-    };
+    return {};
   };

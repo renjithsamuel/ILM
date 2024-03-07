@@ -3,14 +3,9 @@ import { mockUsers } from "@/entity/User/User.mock";
 
 interface checkoutItemHookProps {}
 
-interface checkoutItemHook {
-
-}
+interface checkoutItemHook {}
 
 export const useCheckoutItem =
   ({}: checkoutItemHookProps): checkoutItemHook => {
- 
-    return {
-
-    };
+    return {};
   };

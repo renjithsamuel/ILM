@@ -9,7 +9,7 @@ export default function SingleUserPage() {
       showSearchBar
       pageName={sideMenuItems.Transactions.name}
     >
-      <SingleUser/>
+      <SingleUser />
     </BaseLayout>
   );
 }

@@ -7,7 +7,7 @@ export const useBookShelfStyles = makeStyles((theme) => ({
   },
   booksContainer: {
     // backgroundColor: "red",
-    width : '80vw',
+    width: "80vw",
     padding: theme.spacing(1.5),
     marginBottom: theme.spacing(1),
   },

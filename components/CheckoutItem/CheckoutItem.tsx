@@ -85,11 +85,11 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                         .format("DD-MM-YYYY")
                         .toString()
                     : checkoutItem.checkedOutOn
-                    ? dayjs(checkoutItem.checkedOutOn)
-                        .add(checkoutItem.numberOfDays, "day")
-                        .format("DD-MM-YYYY")
-                        .toString()
-                    : "nil"}
+                      ? dayjs(checkoutItem.checkedOutOn)
+                          .add(checkoutItem.numberOfDays, "day")
+                          .format("DD-MM-YYYY")
+                          .toString()
+                      : "nil"}
                 </Typography>
               </Tooltip>
               {/* summary icon */}
@@ -218,11 +218,11 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                         .format("DD-MM-YYYY")
                         .toString()
                     : checkoutItem.checkedOutOn
-                    ? dayjs(checkoutItem.checkedOutOn)
-                        .add(checkoutItem.numberOfDays, "day")
-                        .format("DD-MM-YYYY")
-                        .toString()
-                    : "nil"}
+                      ? dayjs(checkoutItem.checkedOutOn)
+                          .add(checkoutItem.numberOfDays, "day")
+                          .format("DD-MM-YYYY")
+                          .toString()
+                      : "nil"}
                 </Typography>
               </Box>
             </Box>

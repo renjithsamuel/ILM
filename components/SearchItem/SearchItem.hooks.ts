@@ -3,14 +3,8 @@ import { mockUsers } from "@/entity/User/User.mock";
 
 interface searchItemHookProps {}
 
-interface searchItemHook {
+interface searchItemHook {}
 
-}
-
-export const useSearchItem =
-  ({}: searchItemHookProps): searchItemHook => {
- 
-    return {
-
-    };
-  };
+export const useSearchItem = ({}: searchItemHookProps): searchItemHook => {
+  return {};
+};
