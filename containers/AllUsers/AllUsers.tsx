@@ -61,10 +61,10 @@ export const AllUsers = ({}: allUsersParams) => {
         </FormControl>
       </Box>
       <Box>
-        {pendingUsers.map((user, index) => {
+        {pendingUsers.map((user) => {
           return (
             <PendingUserItem
-              key={index}
+              key={user.userID}
               userID={user.userID}
               userName={user.name}
               email={user.email}

@@ -252,8 +252,8 @@ export const SingleBook = ({}: singleBookParams) => {
           <Box className={classes.singleBookComments}>
             {/* Book Comments, Currently Under Work */}
             <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-              {commentList.map((item, index) => (
-                <CommentItem review={item} key={index} />
+              {commentList.map((item) => (
+                <CommentItem review={item} key={item.ID} />
               ))}
             </List>
           </Box>
@@ -266,7 +266,7 @@ export const SingleBook = ({}: singleBookParams) => {
         </Typography>
         {mockBooks?.length > 0 ? (
           mockBooks.map((book: Book, index) => (
-            <Grid item key={index} xs={6} sm={4} md={3}>
+            <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <SimilarBookItem book={book} />
             </Grid>
           ))

@@ -114,8 +114,8 @@ export const Transactions = ({}: transactionsParams) => {
         </Box>
         {/* accordion wrap */}
         <Box>
-          {checkedOutList.map((item, index) => (
-            <CheckoutItem key={index} checkoutItem={item} />
+          {checkedOutList.map((item) => (
+            <CheckoutItem key={item.ID} checkoutItem={item} />
           ))}
         </Box>
       </Box>

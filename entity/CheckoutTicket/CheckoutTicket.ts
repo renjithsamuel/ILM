@@ -2,6 +2,7 @@ import { Book } from "../Book/Book";
 import { User } from "../User/User";
 
 export interface ICheckoutTicket {
+  ID : string;
   bookID: string;
   userID: string;
   isCheckedOut: boolean;
@@ -18,6 +19,7 @@ export interface ICheckoutTicket {
 }
 
 export class CheckoutTicket implements ICheckoutTicket {
+  ID : string;
   bookID: string;
   userID: string;
   isCheckedOut: boolean;
@@ -33,6 +35,7 @@ export class CheckoutTicket implements ICheckoutTicket {
   updatedAt: Date;
 
   constructor(checkoutTicket: ICheckoutTicket) {
+    this.ID = checkoutTicket.ID;
     this.bookID = checkoutTicket.bookID;
     this.userID = checkoutTicket.userID;
     this.isCheckedOut = checkoutTicket.isCheckedOut;

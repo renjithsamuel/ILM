@@ -35,9 +35,9 @@ export const Dashboard = ({}: dashboardParams) => {
           >
             {"High Demand"}
           </Typography>
-          {highDemandBooks.map((book, index) => (
-            <Grid item key={index} xs={6} sm={4} md={3}>
-              <DashboardDemandBook book={book} key={index} />
+          {highDemandBooks.map((book) => (
+            <Grid item key={book.ID} xs={6} sm={4} md={3}>
+              <DashboardDemandBook book={book} />
             </Grid>
           ))}
         </Box>

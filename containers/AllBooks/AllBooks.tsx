@@ -102,8 +102,8 @@ export const AllBooks = ({}: allBooksParams) => {
       </Box>
       <Grid container spacing={2} className={classes.booksContainer}>
         {bookList?.length > 0 ? (
-          bookList.map((book: Book, index) => (
-            <Grid item key={index} xs={6} sm={4} md={3}>
+          bookList.map((book: Book) => (
+            <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <BookGridItem book={book} />
             </Grid>
           ))

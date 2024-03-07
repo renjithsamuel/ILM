@@ -12,7 +12,7 @@ import { Role } from "@/constants/Role";
 interface settingsParams {}
 
 export const Settings = ({}: settingsParams) => {
-  const { user } = useSettings({});
+  const { user, theme, handleTheme } = useSettings({});
   const classes = useSettingsStyles();
 
   return (
@@ -20,6 +20,16 @@ export const Settings = ({}: settingsParams) => {
       <Box className={classes.settingsRoot}>
         {/* top cover and profile image */}
         <Box className={classes.userCover}>
+          {/* theme button
+          <Button
+            type="button"
+            onClick={() => {
+              handleTheme();
+            }}
+          >
+            {theme}
+          </Button> */}
+          {/* userimage */}
           <Box className={classes.userImage}></Box>
         </Box>
         {/* setting Item */}

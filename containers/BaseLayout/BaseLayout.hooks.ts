@@ -134,14 +134,14 @@ export const useBaseLayout = ({
             link: sideMenuItems.MyBooks.link,
           },
           {
-            name: sideMenuItems.WishLists.name,
-            icon: IoHeartSharp,
-            link: sideMenuItems.WishLists.link,
-          },
-          {
             name: sideMenuItems.AllBooks.name,
             icon: BsBookshelf,
             link: sideMenuItems.AllBooks.link,
+          },
+          {
+            name: sideMenuItems.WishLists.name,
+            icon: IoHeartSharp,
+            link: sideMenuItems.WishLists.link,
           },
           {
             name: sideMenuItems.Users.name,
@@ -157,9 +157,9 @@ export const useBaseLayout = ({
             link: sideMenuItems.Dashboard.link,
           },
           {
-            name: sideMenuItems.Users.name,
-            icon: FaUsers,
-            link: sideMenuItems.Users.link,
+            name: sideMenuItems.AllBooks.name,
+            icon: BsBookshelf,
+            link: sideMenuItems.AllBooks.link,
           },
           {
             name: sideMenuItems.Transactions.name,
@@ -167,9 +167,9 @@ export const useBaseLayout = ({
             link: sideMenuItems.Transactions.link,
           },
           {
-            name: sideMenuItems.AllBooks.name,
-            icon: BsBookshelf,
-            link: sideMenuItems.AllBooks.link,
+            name: sideMenuItems.Users.name,
+            icon: FaUsers,
+            link: sideMenuItems.Users.link,
           },
           {
             name: sideMenuItems.PredictiveAnalysis.name,

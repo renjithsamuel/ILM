@@ -1,6 +1,7 @@
 import { CheckoutTicket } from "./CheckoutTicket";
 
 export const mockCheckoutTicket: CheckoutTicket = {
+  ID: "3e74718b-3855-43ba-ae2c-4be8ccc79027",
   userID: "123456",
   bookID: "3e74718b-3855-43ba-ae2c-4be8ccc79027",
   isCheckedOut: true,
