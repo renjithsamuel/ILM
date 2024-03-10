@@ -33,6 +33,8 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     backgroundColor: themeValues.color.color2,
   },
   userImage: {
+    width: "10vw",
+    height: "20vh",
     objectFit: "cover",
     opacity: 0.8,
     borderRadius: themeValues.border.borderRadiusLow,

@@ -16,13 +16,17 @@ export const queryClient = new QueryClient({
 });
 
 export const PublicAxios = axios.create({
-  baseURL: "http://localhost:8000/ilm/v1/",
+  baseURL: "http://localhost:8000/ilm-service/v1/",
+  headers: {
+    "Content-Type":  "application/json",
+  },
 });
 
 export const PrivateAxios = axios.create({
-  baseURL: "http://localhost:8000/ilm/v1/",
+  baseURL: "http://localhost:8000/ilm-service/v1/",
+  // baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
   headers: {
     authorization: `Bearer ${Cookie.access_token}`,
-    Session: `${Cookie.session}`,
+    "Content-Type":  "application/json",
   },
 });

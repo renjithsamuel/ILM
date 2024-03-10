@@ -1,5 +1,9 @@
 import { useGetUserAPI } from "@/api/User/getUser";
-import { globalConstants, sideMenuItems } from "@/constants/GlobalConstants";
+import {
+  PageSeparation,
+  globalConstants,
+  sideMenuItems,
+} from "@/constants/GlobalConstants";
 import { usePageContext } from "@/context/PageContext";
 import { useUserContext } from "@/context/UserContext";
 import { User } from "@/entity/User/User";
@@ -29,6 +33,7 @@ type BaseLayoutHook = {
   isFetched: boolean;
   authenticated: boolean;
   menuItems: SideNavItem[];
+  inUnauthorizedPage: boolean;
   isAlertSnackbarOpen: AlertSnackbarHook["isAlertSnackbarOpen"];
   alertSnackbarMessage: AlertSnackbarHook["alertSnackbarMessage"];
   handleCloseAlertSnackbar: AlertSnackbarHook["handleCloseAlertSnackbar"];
@@ -43,7 +48,7 @@ export const useBaseLayout = ({
 }: BaseLayoutParams): BaseLayoutHook => {
   const router = useRouter();
   const [menuItems, setMenuItems] = useState<SideNavItem[]>([]);
-
+  const [inUnauthorizedPage, setInUnauthorizedPage] = useState<boolean>(false);
   const { setUser, setAuthenticated, authenticated, user } = useUserContext();
 
   const { errorMessage, setErrorMessage, setCurrentSideMenu, currentSideMenu } =
@@ -80,8 +85,8 @@ export const useBaseLayout = ({
       // verify if token is present or not
 
       // todo remove this
-      setAuthenticated(true);
-      if (Cookie.access_token && Cookie.email) {
+      // setAuthenticated(true);
+      if (Cookie.access_token) {
         setAuthenticated(true);
       }
       // else show pop up to login
@@ -198,6 +203,30 @@ export const useBaseLayout = ({
     }
   }, [router?.pathname]);
 
+  useEffect(() => {
+    if (router?.pathname && isSuccess) {
+      let tempCurrentMenu = router?.pathname?.split("/")[1];
+      tempCurrentMenu = `/${tempCurrentMenu}`;
+      // check for valid user's valid page?
+      console.log(PageSeparation.LibrarianPages.includes(tempCurrentMenu));
+      console.log(PageSeparation.PatronPages.includes(tempCurrentMenu));
+
+      if (user.role === Role.Librarian) {
+        if (!PageSeparation.LibrarianPages.includes(tempCurrentMenu)) {
+          setInUnauthorizedPage(true);
+        } else {
+          setInUnauthorizedPage(false);
+        }
+      } else {
+        if (!PageSeparation.PatronPages.includes(tempCurrentMenu)) {
+          setInUnauthorizedPage(true);
+        } else {
+          setInUnauthorizedPage(false);
+        }
+      }
+    }
+  }, [router?.pathname, isSuccess, user]);
+
   return {
     user,
     isSuccess,
@@ -207,7 +236,8 @@ export const useBaseLayout = ({
     authenticated,
     menuItems,
     alertSnackbarMessage,
-    handleCloseAlertSnackbar,
+    inUnauthorizedPage,
     isAlertSnackbarOpen,
+    handleCloseAlertSnackbar,
   };
 };

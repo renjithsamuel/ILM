@@ -10,9 +10,9 @@ export const sideMenuItems = {
   // patrons
   BookShelf: { name: "Book Shelf", link: "/bookshelf" },
   MyBooks: { name: "My Books", link: "/mybooks" },
+  WishLists: { name: "Wishlists", link: "/wishlists" },
   // librarian
   Dashboard: { name: "Dashboard", link: "/dashboard" },
-  WishLists: { name: "Wishlists", link: "/wishlists" },
   Transactions: { name: "Transactions", link: "/transactions" },
   PredictiveAnalysis: {
     name: "Predictive Analysis",
@@ -22,6 +22,27 @@ export const sideMenuItems = {
   Users: { name: "Users", link: "/users" },
   AllBooks: { name: "All Books", link: "/allbooks" },
   Settings: { name: "Settings", link: "/settings" },
+};
+
+export const PageSeparation = {
+  LibrarianPages: [
+    "/",
+    "/dashboard",
+    "/transactions",
+    "/predictive-analysis",
+    "/users",
+    "/allbooks",
+    "/settings",
+  ],
+  PatronPages: [
+        "/",
+    "/bookshelf",
+    "/mybooks",
+    "/wishlists",
+    "/users",
+    "/allbooks",
+    "/settings",
+  ],
 };
 
 export const bookKeyValues: BookKeyValues[] = [

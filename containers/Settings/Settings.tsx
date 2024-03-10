@@ -86,3 +86,7 @@ const settingsItemsArr = (user: User) => {
   }
   return null;
 };
+
+// change role?
+// give payment qr code with popup
+// delete user

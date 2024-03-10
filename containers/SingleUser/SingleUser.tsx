@@ -1,12 +1,13 @@
 import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useSingleUser } from "./SingleUser.hooks";
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { useSingleUserStyles } from "./SingleUser.styles";
 import { User } from "@/entity/User/User";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 import dayjs from "dayjs";
 import Link from "next/link";
 import Image from "next/image";
+import { themeValues } from "@/constants/ThemeConstants";
 
 interface singleUserParams {
   // book: Book;
@@ -21,13 +22,19 @@ export const SingleUser = ({}: singleUserParams) => {
       {/* user cover image and profile */}
       <Box className={classes.userCover}>
         <Box className={classes.userImageWrap}>
-          <Image
+          {/* <Image
             src={user?.profileImageUrl}
             width={135}
             height={130}
             alt={user.name || `user`}
             className={classes.userImage}
-          />
+          /> */}
+          <Avatar
+            sx={{ bgcolor: themeValues.color.color1 }}
+            className={classes.userImage}
+          >
+            {user.name}
+          </Avatar>
         </Box>
       </Box>
       {/* user details */}
