@@ -1,6 +1,5 @@
 import { Role } from "@/constants/Role";
 import { IBook } from "../Book/Book";
-import { BookGenre } from "@/constants/BookGenre";
 
 export interface IUser {
   userID: string;

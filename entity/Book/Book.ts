@@ -1,11 +1,9 @@
-import { BookGenre } from "@/constants/BookGenre";
-
 export interface IBook {
   ID: string;
   ISBN: string;
   title: string;
   author: string;
-  genre: BookGenre;
+  genre: string;
   publishedDate: string;
   desc: string;
   previewLink?: string;
@@ -17,9 +15,9 @@ export interface IBook {
   wishlistCount: number;
   reviewCount: number;
   rating: number;
+  approximateDemand?: number;
   createdAt: Date;
   updatedAt: Date;
-  approximateDemand?: number;
   // ratings need to be added
 }
 
@@ -28,7 +26,7 @@ export class Book implements IBook {
   ISBN: string;
   title: string;
   author: string;
-  genre: BookGenre;
+  genre: string;
   publishedDate: string;
   desc: string;
   previewLink?: string;

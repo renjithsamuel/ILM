@@ -1,4 +1,3 @@
-import { BookGenre } from "@/constants/BookGenre";
 import { Book, IBook } from "./Book";
 
 const bookData: IBook = {
@@ -6,7 +5,7 @@ const bookData: IBook = {
   ISBN: "123456",
   title: "The Great Gatsby",
   author: "F. Scott Fitzgerald",
-  genre: BookGenre.Travel,
+  genre: "travel",
   publishedDate: "1925",
   desc: "A novel about the American Dream",
   previewLink:
@@ -33,7 +32,7 @@ const mockBooksInterfaceArray: IBook[] = [
     ISBN: "123456",
     title: "The Great Gatsby",
     author: "F. Scott Fitzgerald",
-    genre: BookGenre.Adventure,
+    genre: "adventure",
     publishedDate: "1925",
     desc: "A novel about the American Dream",
     previewLink:
@@ -56,7 +55,7 @@ const mockBooksInterfaceArray: IBook[] = [
     ISBN: "123456",
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
-    genre: BookGenre.ScienceFiction,
+    genre: "fiction",
     publishedDate: "1960",
     desc: "A story of racial injustice and moral growth",
     previewLink:
@@ -79,7 +78,7 @@ const mockBooksInterfaceArray: IBook[] = [
     ISBN: "123456",
     title: "1984",
     author: "George Orwell",
-    genre: BookGenre.Biography,
+    genre: "biography",
     publishedDate: "1949",
     desc: "A novel depicting a totalitarian society",
     previewLink:
