@@ -1,4 +1,5 @@
 import { useLoginUserAPI } from "@/api/User/loginUser";
+import { useRegisterUserAPI } from "@/api/User/registerUser";
 import { usePageContext } from "@/context/PageContext";
 import { User } from "@/entity/User/User";
 import { mockUsers } from "@/entity/User/User.mock";
@@ -38,6 +39,12 @@ export const useLoginDialog = ({}: loginDialogHookProps): loginDialogHook => {
     isSuccess: isLoginSuccess,
   } = useLoginUserAPI();
 
+  const {
+    mutateAsync: registerUser,
+    isLoading: isRegisterError,
+    isSuccess: isRegisterSuccess,
+  } = useRegisterUserAPI();
+
   const { setErrorMessage } = usePageContext();
 
   const handleCloseDialog = () => {
@@ -71,6 +78,11 @@ export const useLoginDialog = ({}: loginDialogHookProps): loginDialogHook => {
       const response = await loginUser({ user: values });
       if (response.data.token) Cookie.access_token = response.data.token;
     } else {
+      const registerResponse = await registerUser({ user: values });
+      if (registerResponse.status === 409) {
+        setErrorMessage("user already exists");
+        return;
+      }
     }
   };
 
@@ -81,10 +93,20 @@ export const useLoginDialog = ({}: loginDialogHookProps): loginDialogHook => {
   }, [isLoginSuccess]);
 
   useEffect(() => {
+    if (isRegisterSuccess) {
+      setIsLogin(true);
+    }
+  }, [isRegisterSuccess]);
+
+  useEffect(() => {
     if (isLoginError) {
       setErrorMessage("login failed");
+      return;
     }
-  }, [isLoginError]);
+    if (isRegisterError) {
+      setErrorMessage("register failed");
+    }
+  }, [isLoginError, isRegisterError]);
 
   const handlePasswordVisiblity = () => {
     if (isVisible) {

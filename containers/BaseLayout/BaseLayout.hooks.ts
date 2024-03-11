@@ -80,6 +80,8 @@ export const useBaseLayout = ({
   const isLoading = false;
   const isFetched = true;
 
+  console.log("Cookie.access_token  ", Cookie.access_token);
+
   useEffect(() => {
     if (isSuccess) {
       // verify if token is present or not
@@ -95,7 +97,7 @@ export const useBaseLayout = ({
         setUser(new User(getUserResponse.data));
       }
     }
-  }, [isSuccess]);
+  }, [getUserResponse.data, isSuccess]);
 
   const {
     alertSnackbarMessage,

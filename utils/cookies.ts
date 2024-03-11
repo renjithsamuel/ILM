@@ -4,7 +4,6 @@ import { setCookie, getCookie, deleteCookie } from "cookies-next";
 export class Cookie {
   private static keys = {
     ACCESS_TOKEN: "access_token",
-    SESSION: "session",
     EMAIL: "email",
   };
 
@@ -20,22 +19,7 @@ export class Cookie {
   }
 
   public static set access_token(access_token: string) {
-    setCookie(access_token, Cookie.access_token);
-  }
-
-  public static get session(): string {
-    if (NextUtil.isSSR) {
-      return "";
-    }
-    const session = getCookie(Cookie.keys.SESSION) as string;
-    if (!session) {
-      console.error("session not found");
-    }
-    return session;
-  }
-
-  public static set session(session: string) {
-    setCookie(session, Cookie.session);
+    setCookie(Cookie.keys.ACCESS_TOKEN, access_token);
   }
 
   public static get email(): string {
@@ -54,7 +38,6 @@ export class Cookie {
   }
 
   static logout(): void {
-    deleteCookie(Cookie.keys.SESSION);
     deleteCookie(Cookie.keys.ACCESS_TOKEN);
     deleteCookie(Cookie.keys.EMAIL);
   }
