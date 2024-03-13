@@ -27,4 +27,15 @@ export class FormatTextUtil {
 
     return words.join(" ");
   };
+
+  public static formatNumberToK = (number: number): string => {
+    if (typeof number !== "number" || number <= 499) {
+      return String(number);
+    } else if (number >= 500 && number < 1000000) {
+      const formattedNumber = (number / 1000).toFixed(1);
+      return `${formattedNumber}k`;
+    } else {
+      return `${(number / 1000000).toFixed(1)}M`;
+    }
+  };
 }

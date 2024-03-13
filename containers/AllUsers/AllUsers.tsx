@@ -11,7 +11,6 @@ interface allUsersParams {
 export const AllUsers = ({}: allUsersParams) => {
   const {
     pendingUsers,
-    getBookDetails,
     sortByOrder,
     sortByValue,
     handleSortValue,
@@ -61,18 +60,20 @@ export const AllUsers = ({}: allUsersParams) => {
         </FormControl>
       </Box>
       <Box>
-        {pendingUsers.map((user) => {
-          return (
-            <PendingUserItem
-              key={user.userID}
-              userID={user.userID}
-              userName={user.name}
-              email={user.email}
-              bookDetails={getBookDetails(user.userID)}
-              sortByValue={sortByValue}
-            />
-          );
-        })}
+        {pendingUsers &&
+          pendingUsers.length > 0 &&
+          pendingUsers?.map((user) => {
+            return (
+              <PendingUserItem
+                key={user.userID}
+                userID={user.userID}
+                userName={user.name}
+                email={user.email}
+                bookDetails={user.bookDetails}
+                sortByValue={sortByValue}
+              />
+            );
+          })}
       </Box>
     </Box>
   );

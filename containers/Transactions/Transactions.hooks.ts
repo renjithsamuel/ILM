@@ -1,8 +1,10 @@
+import { useGetAllCheckoutsAPI } from "@/api/Checkout/getAllCheckouts";
 import {
   SortOrder,
   TransactionSortValue,
   globalConstants,
 } from "@/constants/GlobalConstants";
+import { usePageContext } from "@/context/PageContext";
 import { mockBooks } from "@/entity/Book/Book.mock";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
 import { mockCheckoutTickets } from "@/entity/CheckoutTicket/CheckoutTicket.mock";
@@ -15,7 +17,7 @@ import { useEffect, useState } from "react";
 interface transactionsHookProps {}
 
 interface transactionsHook {
-  checkedOutList: CheckoutTicket[];
+  checkedOutList: CheckoutTicket[] | undefined;
   sortByOrder: SortOrder;
   sortByValue: TransactionSortValue;
   handleSortOrder: (event: SelectChangeEvent) => void;
@@ -27,12 +29,27 @@ interface transactionsHook {
 export const useTransactions =
   ({}: transactionsHookProps): transactionsHook => {
     const router = useRouter();
-    const [checkedOutList, setCheckedOutList] = useState<CheckoutTicket[]>([]);
+    const { setSnackBarError } = usePageContext();
     const [searchText, setSearchText] = useState<string>("");
     const [sortByValue, setSortByValue] = useState<TransactionSortValue>(
-      TransactionSortValue.fineAmount,
+      TransactionSortValue.fineAmount
     );
     const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
+
+    const { data: ticketsData, isError: isTicketError } =
+      useGetAllCheckoutsAPI();
+
+    console.log("ticketsData", ticketsData?.data);
+
+    useEffect(() => {
+      if (isTicketError) {
+        setSnackBarError({
+          ErrorMessage: "get checkout tickets failed",
+          ErrorSeverity: "error",
+        });
+        return;
+      }
+    }, [isTicketError]);
 
     // can come from single book page direct search here
     useEffect(() => {
@@ -57,18 +74,8 @@ export const useTransactions =
       setSearchText(value);
     };
 
-    useEffect(() => {
-      let tempCheckoutList: CheckoutTicket[] = mockCheckoutTickets;
-      tempCheckoutList = tempCheckoutList.map((item) => {
-        item.user = mockUsers.find((user) => user.userID === item.userID);
-        item.book = mockBooks.find((book) => book.ID === item.bookID);
-        return item;
-      });
-      tempCheckoutList && setCheckedOutList(tempCheckoutList);
-    }, []);
-
     return {
-      checkedOutList,
+      checkedOutList: ticketsData?.data,
       searchText,
       sortByOrder,
       sortByValue,

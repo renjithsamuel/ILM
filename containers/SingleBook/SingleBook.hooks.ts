@@ -1,3 +1,5 @@
+import { useGetBookAPI } from "@/api/Book/getBook";
+import { useCreateCheckoutAPI } from "@/api/Checkout/createCheckout";
 import { ModifyCount } from "@/components/ModifyCount/ModifyCount";
 import { SearchDialog } from "@/components/SearchDialog/SearchDialog";
 import { Role } from "@/constants/Role";
@@ -23,25 +25,55 @@ interface SingleBookHook {
   handleAddComment: () => void;
   handleModifyCount: () => void;
   handleAddToLibrary: () => void;
+  handleCheckoutFlow: (bookID: string) => Promise<void>;
   setIsModifyCountOpen: Dispatch<SetStateAction<boolean | undefined>>;
 }
 
 // todo whenever users gets to this page, increment the views
 export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const router = useRouter();
+  const { setSnackBarError } = usePageContext();
   const bookID = router.query.id as string;
   const [commentList, setCommentList] = useState<Review[]>([]);
-  const [book, setBook] = useState<Book | undefined>();
   const [isModifyCountOpen, setIsModifyCountOpen] = useState<boolean>();
   const [isAddCommentOpen, setIsAddCommentOpen] = useState<boolean>();
   const { user } = useUserContext();
 
-  const { setDialogBox, DialogBox } = usePageContext();
   // get book
+  const { data: bookData, isError: isBookError } = useGetBookAPI(bookID);
+
+  const {
+    mutateAsync: createCheckout,
+    isError: isCheckoutError,
+    isSuccess: isCheckoutSuccess,
+  } = useCreateCheckoutAPI();
+
   useEffect(() => {
-    const tempBook = mockBooks.find((item) => bookID === item.ID && item);
-    if (tempBook) setBook(tempBook);
-  }, [bookID]);
+    if (isBookError) {
+      setSnackBarError({
+        ErrorMessage: "get book failed",
+        ErrorSeverity: "error",
+      });
+    }
+  }, [isBookError]);
+
+  useEffect(() => {
+    if (isCheckoutError) {
+      setSnackBarError({
+        ErrorMessage: "create reservation failed",
+        ErrorSeverity: "error",
+      });
+    }
+  }, [isCheckoutError]);
+
+  useEffect(() => {
+    if (isCheckoutSuccess) {
+      setSnackBarError({
+        ErrorMessage: "reserved book",
+        ErrorSeverity: "success",
+      });
+    }
+  }, [isCheckoutSuccess]);
 
   useEffect(() => {
     setCommentList(mockReviews);
@@ -59,10 +91,21 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   };
   const handleAddToLibrary = () => {};
 
+  const handleCheckoutFlow = async (bookID: string) => {
+    if (bookID && user.userID) {
+      const numberOfDays = 15;
+      createCheckout({
+        bookID: bookID,
+        userID: user.userID,
+        numberOfDays: numberOfDays,
+      });
+    }
+  };
+
   return {
     commentList,
     user,
-    book,
+    book: bookData?.data,
     userType,
     wishlisted,
     isModifyCountOpen,
@@ -71,5 +114,6 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     setIsModifyCountOpen,
     handleModifyCount,
     handleAddToLibrary,
+    handleCheckoutFlow,
   };
 };

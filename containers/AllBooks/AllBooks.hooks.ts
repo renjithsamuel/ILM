@@ -1,9 +1,11 @@
+import { useGetAllBooksAPI } from "@/api/Book/getAllBooks";
 import {
   BookSortValue,
   SortOrder,
   SortPresence,
   UserBookDetailType,
 } from "@/constants/GlobalConstants";
+import { usePageContext } from "@/context/PageContext";
 import { Book } from "@/entity/Book/Book";
 import { mockBooks } from "@/entity/Book/Book.mock";
 import { User } from "@/entity/User/User";
@@ -18,7 +20,7 @@ interface allBooksHookProps {}
 
 interface allBooksHook {
   sortByPresence: SortPresence;
-  bookList: Book[];
+  bookList: Book[] | undefined;
   sortByOrder: SortOrder;
   sortByValue: BookSortValue;
   handleSortOrder: (event: SelectChangeEvent) => void;
@@ -27,29 +29,26 @@ interface allBooksHook {
 }
 
 export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
-  const [bookList, setBookList] = useState<Book[]>([]);
+  const { setSnackBarError } = usePageContext();
   const [sortByValue, setSortByValue] = useState<BookSortValue>(
-    BookSortValue.wishlistCount,
+    BookSortValue.wishlistCount
   );
   const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
   const [sortByPresence, setSortByPresence] = useState<SortPresence>(
-    SortPresence.both,
+    SortPresence.both
   );
 
-  // get all books
-  // give full freedom to sort from
+  // fetch all books
+  const { data: bookListData, isError: isBooksError } = useGetAllBooksAPI();
+
   useEffect(() => {
-    let tempBookList: Book[] = mockBooks.sort((a, b) => {
-      return a && b && sortHelper(a, b, sortByOrder, sortByValue);
-    });
-    tempBookList = tempBookList.filter((item) => {
-      if (sortByPresence === SortPresence.both) return true;
-      else if (sortByPresence === SortPresence.inLibrary) return item.inLibrary;
-      else return !item.inLibrary;
-    });
-    tempBookList && tempBookList.length > 0 && setBookList(tempBookList);
-    console.log(sortByOrder, sortByValue, tempBookList);
-  }, [sortByOrder, sortByPresence, sortByValue]);
+    if (isBooksError) {
+      setSnackBarError({
+        ErrorMessage: "get books failed!",
+        ErrorSeverity: "error",
+      });
+    }
+  }, [isBooksError]);
 
   // sorting
   const handleSortPresence = (event: SelectChangeEvent): void => {
@@ -65,7 +64,7 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   };
 
   return {
-    bookList,
+    bookList: bookListData?.data,
     sortByPresence,
     sortByOrder,
     sortByValue,
@@ -73,80 +72,4 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
     handleSortValue,
     handleSortPresence,
   };
-};
-
-// todo can be updated with Object.values
-const sortHelper = (
-  book1: Book,
-  book2: Book,
-  sortByOrder: SortOrder,
-  sortByValue: BookSortValue,
-): number => {
-  let val: number;
-  switch (sortByValue) {
-    case BookSortValue.reviewCount:
-      if (sortByOrder === SortOrder.asc)
-        val = book1.reviewCount > book2.reviewCount ? 1 : -1;
-      else val = book2.reviewCount > book1.reviewCount ? 1 : -1;
-      break;
-
-    case BookSortValue.rating:
-      if (sortByOrder === SortOrder.asc)
-        val = book1.rating > book2.rating ? 1 : -1;
-      else val = book2.rating > book1.rating ? 1 : -1;
-      break;
-
-    case BookSortValue.author:
-      if (sortByOrder === SortOrder.asc)
-        val = book1.author > book2.author ? 1 : -1;
-      else val = book2.author > book1.author ? 1 : -1;
-      break;
-
-    case BookSortValue.booksLeft:
-      if (sortByOrder === SortOrder.asc)
-        val = book2.booksLeft - book1.booksLeft;
-      else val = book1.booksLeft - book2.booksLeft;
-      break;
-
-    case BookSortValue.genre:
-      if (sortByOrder === SortOrder.asc)
-        val = book1.genre > book2.genre ? 1 : -1;
-      else val = book2.genre > book1.genre ? 1 : -1;
-      break;
-
-    case BookSortValue.publishedDate:
-      if (sortByOrder === SortOrder.asc)
-        val = book1.publishedDate > book2.publishedDate ? 1 : -1;
-      else val = book2.publishedDate > book1.publishedDate ? 1 : -1;
-      break;
-
-    case BookSortValue.shelfNumber:
-      if (sortByOrder === SortOrder.asc)
-        val = book1.shelfNumber - book2.shelfNumber;
-      else val = book2.shelfNumber - book1.shelfNumber;
-      break;
-
-    case BookSortValue.title:
-      if (sortByOrder === SortOrder.asc)
-        val = book1.title > book2.title ? 1 : -1;
-      else val = book2.title > book1.title ? 1 : -1;
-      break;
-
-    case BookSortValue.views:
-      if (sortByOrder === SortOrder.asc) val = book2.views - book1.views;
-      else val = book1.views - book2.views;
-      break;
-
-    case BookSortValue.wishlistCount:
-      if (sortByOrder === SortOrder.asc)
-        val = book2.wishlistCount - book1.wishlistCount;
-      else val = book1.wishlistCount - book2.wishlistCount;
-      break;
-
-    default:
-      val = 0;
-      break;
-  }
-
-  return val;
 };

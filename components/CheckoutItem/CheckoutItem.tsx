@@ -234,7 +234,7 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                 className={classes.actionBtn}
                 disabled={
                   checkoutItem.book?.booksLeft === 0 ||
-                  checkoutItem.checkedOutOn
+                  !!checkoutItem.reservatedOn || !checkoutItem.checkedOutOn
                     ? true
                     : false
                 }
@@ -253,7 +253,11 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
               <Button
                 variant="contained"
                 className={classes.actionBtn}
-                disabled={checkoutItem.returnedDate ? true : false}
+                disabled={
+                  !!checkoutItem.checkedOutOn || !checkoutItem.returnedDate
+                    ? true
+                    : false
+                }
               >
                 <Typography
                   variant="body2"

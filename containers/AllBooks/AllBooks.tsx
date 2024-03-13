@@ -101,7 +101,7 @@ export const AllBooks = ({}: allBooksParams) => {
         </FormControl>
       </Box>
       <Grid container spacing={2} className={classes.booksContainer}>
-        {bookList?.length > 0 ? (
+        {bookList && bookList?.length > 0 ? (
           bookList.map((book: Book) => (
             <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <BookGridItem book={book} />

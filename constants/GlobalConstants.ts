@@ -1,5 +1,6 @@
 import { Book } from "@/entity/Book/Book";
 import { BookKeyValues } from "@/types/GlobalTypes";
+import dayjs from "dayjs";
 
 export const globalConstants = {
   debounceDelay: 250,
@@ -35,7 +36,7 @@ export const PageSeparation = {
     "/settings",
   ],
   PatronPages: [
-        "/",
+    "/",
     "/bookshelf",
     "/mybooks",
     "/wishlists",
@@ -46,22 +47,61 @@ export const PageSeparation = {
 };
 
 export const bookKeyValues: BookKeyValues[] = [
-  { name: "Title", key: "title", get: (book: Book) => book.title },
+  {
+    name: "Title",
+    key: "title",
+    get: (book: Book) => book?.title?.slice(0, 30) + "..",
+  },
   { name: "Author", key: "author", get: (book: Book) => book.author },
   { name: "Genre", key: "subject", get: (book: Book) => book.genre },
-
   {
     name: "Published Date",
     key: "publishedDate",
-    get: (book: Book) => book.publishedDate,
+    get: (book: Book) => dayjs(book.publishedDate).format("MMMM D, YYYY"),
   },
   {
     name: "Shelf",
     key: "shelfNumber",
     get: (book: Book) => book?.shelfNumber?.toString() ?? "Not Available",
   },
-  { name: "Description", key: "desc", get: (book: Book) => book.desc },
+  {
+    name: "Description",
+    key: "desc",
+    get: (book: Book) => {
+      const words = book?.desc?.split(" ");
+      return words?.slice(0, 8).join(" ") + ".";
+    },
+  },
 ];
+
+export const singleBookKeyValues: BookKeyValues[] = [
+  {
+    name: "Title",
+    key: "title",
+    get: (book: Book) => book?.title?.slice(0, 50) + "..",
+  },
+  { name: "Author", key: "author", get: (book: Book) => book.author },
+  { name: "Genre", key: "subject", get: (book: Book) => book.genre },
+  {
+    name: "Published Date",
+    key: "publishedDate",
+    get: (book: Book) => dayjs(book.publishedDate).format("MMMM D, YYYY"),
+  },
+  {
+    name: "Shelf",
+    key: "shelfNumber",
+    get: (book: Book) => book?.shelfNumber?.toString() ?? "Not Available",
+  },
+  {
+    name: "Description",
+    key: "desc",
+    get: (book: Book) => {
+      const words = book?.desc?.split(" ");
+      return words?.slice(0, 20).join(" ") + ".";
+    },
+  },
+];
+
 
 export enum UserBookDetailType {
   Name = "name",

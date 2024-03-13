@@ -38,6 +38,7 @@ export const useBookGridItemStyles = makeStyles((theme) => ({
     display: "flex",
     alignSelf: "center",
     gap: theme.spacing(2),
+    fontSize: themeValues.font.fontSizeSmall,
   },
   bookCount: {
     display: "flex",

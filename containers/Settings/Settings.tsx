@@ -12,7 +12,7 @@ import { Role } from "@/constants/Role";
 interface settingsParams {}
 
 export const Settings = ({}: settingsParams) => {
-  const { user, theme, handleTheme } = useSettings({});
+  const { user, theme, handleTheme, handleLogout } = useSettings({});
   const classes = useSettingsStyles();
 
   return (
@@ -60,6 +60,9 @@ export const Settings = ({}: settingsParams) => {
                   variant="contained"
                   className={classes.ActionButton}
                   disabled={item.isButtonDisabled(user)}
+                  onClick={() => {
+                    if (item.name === "Logout") handleLogout();
+                  }}
                 >
                   {item.getButtonName(user)}
                 </Button>
@@ -83,8 +86,16 @@ const settingsItemsArr = (user: User) => {
           user.isPaymentDone ? "Paid" : "Pay now",
       },
     ];
+  } else {
+    return [
+      {
+        name: "Logout",
+        description: "",
+        isButtonDisabled: (user: User) => false,
+        getButtonName: (user: User) => "Logout",
+      },
+    ];
   }
-  return null;
 };
 
 // change role?

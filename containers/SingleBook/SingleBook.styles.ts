@@ -127,8 +127,9 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     fontSize: themeValues.spacing(2),
   },
   bookItemValue: {
-    width: "30vw",
+    width: "18vw",
     height: "auto",
+    overflow: "hidden",
     wordWrap: "break-word",
     fontSize: themeValues.spacing(1.9),
   },

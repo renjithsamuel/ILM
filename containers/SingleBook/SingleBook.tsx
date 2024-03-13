@@ -12,7 +12,10 @@ import {
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
 import Image from "next/image";
-import { bookKeyValues } from "@/constants/GlobalConstants";
+import {
+  bookKeyValues,
+  singleBookKeyValues,
+} from "@/constants/GlobalConstants";
 import { BookGridItem } from "@/components/BookGridItem/BookGridItem";
 import { Button } from "@material-ui/core";
 import { mockBooks } from "@/entity/Book/Book.mock";
@@ -33,6 +36,7 @@ import { themeValues } from "@/constants/ThemeConstants";
 import { BiSolidMessageDetail } from "react-icons/bi";
 import { AddComment } from "@/components/AddComment/AddComment";
 import { CommentItem } from "@/components/CommentItem/CommentItem";
+import { FormatTextUtil } from "@/utils/formatText";
 
 interface singleBookParams {
   // book: Book;
@@ -52,6 +56,7 @@ export const SingleBook = ({}: singleBookParams) => {
     handleModifyCount,
     handleAddToLibrary,
     setIsModifyCountOpen,
+    handleCheckoutFlow,
   } = useSingleBook({});
 
   if (!book) {
@@ -65,7 +70,7 @@ export const SingleBook = ({}: singleBookParams) => {
       {isAddCommentOpen && <AddComment handleAddComment={handleAddComment} />}
       {/* modify count popup */}
       {isModifyCountOpen && (
-        <ModifyCount setIsModifyCountOpen={setIsModifyCountOpen} />
+        <ModifyCount setIsModifyCountOpen={setIsModifyCountOpen} book={book} />
       )}
 
       <Box className={classes.singleBookContent}>
@@ -91,7 +96,7 @@ export const SingleBook = ({}: singleBookParams) => {
           <Divider />
           {/*  book  details*/}
           <Box className={classes.singleBookDetails}>
-            {bookKeyValues.map((keyValues, index) => {
+            {singleBookKeyValues.map((keyValues, index) => {
               if (keyValues.key === "shelfNumber" && !book.inLibrary) return;
               return (
                 <Box key={index} className={classes.singleBookItemWrap}>
@@ -117,27 +122,30 @@ export const SingleBook = ({}: singleBookParams) => {
               {/* views */}
               <Tooltip title={"views"} placement="bottom">
                 <Box className={classes.bookCount}>
-                  <GoEye /> {book.views}
+                  <GoEye /> {FormatTextUtil.formatNumberToK(book.views)}
                 </Box>
               </Tooltip>
               {/* stock */}
               {book.inLibrary && (
                 <Tooltip title={"stock"} placement="bottom">
                   <Box className={classes.bookCount}>
-                    <SiBookstack /> {book.booksLeft}
+                    <SiBookstack />{" "}
+                    {FormatTextUtil.formatNumberToK(book.booksLeft)}
                   </Box>
                 </Tooltip>
               )}
               {/* wishlist */}
               <Tooltip title={"wishlists"} placement="bottom">
                 <Box className={classes.bookCount}>
-                  <IoMdHeart /> {book.wishlistCount}
+                  <IoMdHeart />{" "}
+                  {FormatTextUtil.formatNumberToK(book.wishlistCount)}
                 </Box>
               </Tooltip>
               {/* reviews */}
               <Tooltip title={"reviews"} placement="bottom">
                 <Box className={classes.bookCount}>
-                  <BiSolidMessageDetail /> {book.reviewCount}
+                  <BiSolidMessageDetail />{" "}
+                  {FormatTextUtil.formatNumberToK(book.reviewCount)}
                 </Box>
               </Tooltip>
             </Box>
@@ -162,30 +170,34 @@ export const SingleBook = ({}: singleBookParams) => {
               also once checked out the no of days activates updating checkedout date, everytime the transaction page loads 
               need to update DB on the, fineamount and return date exceeding it 
             */}
-            {userType === Role.Patrons && book.inLibrary && (
-              <Tooltip
-                title={
-                  !user.isPaymentDone
-                    ? "membership required"
-                    : book.booksLeft === 0
-                      ? "out of stock"
-                      : ""
-                }
-                placement="top"
-              >
-                <Box>
-                  <Button
-                    variant="contained"
-                    className={classes.reserveNowBtn}
-                    disabled={
-                      book.booksLeft === 0 || !user.isPaymentDone ? true : false
-                    }
-                  >
-                    Reserve Now
-                  </Button>
-                </Box>
-              </Tooltip>
-            )}
+            {(userType === Role.Librarian || userType === Role.Patrons) &&
+              book.inLibrary && (
+                <Tooltip
+                  title={
+                    !user.isPaymentDone
+                      ? "membership required"
+                      : book.booksLeft === 0
+                        ? "out of stock"
+                        : ""
+                  }
+                  placement="top"
+                >
+                  <Box>
+                    <Button
+                      variant="contained"
+                      className={classes.reserveNowBtn}
+                      disabled={
+                        book.booksLeft === 0 || !user.isPaymentDone
+                          ? true
+                          : false
+                      }
+                      onClick={() => handleCheckoutFlow(book.ID)}
+                    >
+                      Reserve Now
+                    </Button>
+                  </Box>
+                </Tooltip>
+              )}
             {/* wishlist btn */}
             {userType === Role.Patrons && (
               <Button variant="contained" className={classes.wishlistBtn}>

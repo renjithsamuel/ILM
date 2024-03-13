@@ -8,6 +8,7 @@ import { Cookie } from "@/utils/cookies";
 import { createLoginValidation } from "@/validations/loginValidation";
 import { createRegisterValidation } from "@/validations/registerValidation";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { ErrorMessage } from "formik";
 import { useEffect, useReducer, useState } from "react";
 import { AnySchema } from "yup";
 
@@ -45,7 +46,7 @@ export const useLoginDialog = ({}: loginDialogHookProps): loginDialogHook => {
     isSuccess: isRegisterSuccess,
   } = useRegisterUserAPI();
 
-  const { setErrorMessage } = usePageContext();
+  const { setSnackBarError } = usePageContext();
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
@@ -80,7 +81,10 @@ export const useLoginDialog = ({}: loginDialogHookProps): loginDialogHook => {
     } else {
       const registerResponse = await registerUser({ user: values });
       if (registerResponse.status === 409) {
-        setErrorMessage("user already exists");
+        setSnackBarError({
+          ErrorMessage: "user already exists",
+          ErrorSeverity: "error",
+        });
         return;
       }
     }
@@ -89,22 +93,36 @@ export const useLoginDialog = ({}: loginDialogHookProps): loginDialogHook => {
   useEffect(() => {
     if (isLoginSuccess) {
       handleCloseDialog();
+      setSnackBarError({
+        ErrorMessage: "login success",
+        ErrorSeverity: "success",
+      });
     }
   }, [isLoginSuccess]);
 
   useEffect(() => {
     if (isRegisterSuccess) {
       setIsLogin(true);
+      setSnackBarError({
+        ErrorMessage: "register success, please login",
+        ErrorSeverity: "success",
+      });
     }
   }, [isRegisterSuccess]);
 
   useEffect(() => {
     if (isLoginError) {
-      setErrorMessage("login failed");
+      setSnackBarError({
+        ErrorMessage: "login failed",
+        ErrorSeverity: "error",
+      });
       return;
     }
     if (isRegisterError) {
-      setErrorMessage("register failed");
+      setSnackBarError({
+        ErrorMessage: "register failed",
+        ErrorSeverity: "error",
+      });
     }
   }, [isLoginError, isRegisterError]);
 

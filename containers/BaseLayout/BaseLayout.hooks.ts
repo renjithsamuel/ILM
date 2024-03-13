@@ -51,44 +51,45 @@ export const useBaseLayout = ({
   const [inUnauthorizedPage, setInUnauthorizedPage] = useState<boolean>(false);
   const { setUser, setAuthenticated, authenticated, user } = useUserContext();
 
-  const { errorMessage, setErrorMessage, setCurrentSideMenu, currentSideMenu } =
-    usePageContext();
+  const {
+    snackBarError,
+    setSnackBarError,
+    setCurrentSideMenu,
+    currentSideMenu,
+  } = usePageContext();
 
-  const getEmail = (): string => {
-    let email = "";
+  const getAccessToken = (): string => {
+    let access_token = "";
 
     try {
-      email = Cookie.email;
+      access_token = Cookie.access_token;
     } catch (e) {
       if (authenticatedOnly) throw e;
     }
 
-    return email;
+    return access_token;
   };
 
-  // const {
-  //   data: getUserResponse,
-  //   isError,
-  //   isSuccess,
-  //   isLoading,
-  // isFetched,
-  // } = useGetUserAPI(!!getEmail());
+  const {
+    data: getUserResponse,
+    isError,
+    isSuccess,
+    isLoading,
+    isFetched,
+  } = useGetUserAPI(!!getAccessToken());
   // mocking
-  const getUserResponse = { data: mockUser };
-  const isError = false;
-  const isSuccess = true;
-  const isLoading = false;
-  const isFetched = true;
-
-  console.log("Cookie.access_token  ", Cookie.access_token);
+  // const getUserResponse = { data: mockUser };
+  // const isError = false;
+  // const isSuccess = true;
+  // const isLoading = false;
+  // const isFetched = true;
 
   useEffect(() => {
     if (isSuccess) {
       // verify if token is present or not
 
-      // todo remove this
       // setAuthenticated(true);
-      if (Cookie.access_token) {
+      if (!!getAccessToken()) {
         setAuthenticated(true);
       }
       // else show pop up to login
@@ -97,7 +98,7 @@ export const useBaseLayout = ({
         setUser(new User(getUserResponse.data));
       }
     }
-  }, [getUserResponse.data, isSuccess]);
+  }, [getUserResponse?.data, isSuccess]);
 
   const {
     alertSnackbarMessage,
@@ -114,14 +115,20 @@ export const useBaseLayout = ({
 
   // call alert snackbar from where ever you want
   useEffect(() => {
-    if (errorMessage !== "" && errorMessage?.length > 0) {
-      openAlertSnackbar(errorMessage, "error");
-      setErrorMessage("");
+    if (
+      snackBarError?.ErrorMessage &&
+      snackBarError?.ErrorMessage?.length > 0
+    ) {
+      openAlertSnackbar(
+        snackBarError?.ErrorMessage,
+        snackBarError?.ErrorSeverity
+      );
+      setSnackBarError(undefined);
       setTimeout(() => {
         handleCloseAlertSnackbar(undefined, "timeout");
       }, globalConstants.snackBarDelay);
     }
-  }, [errorMessage]);
+  }, [snackBarError?.ErrorMessage]);
 
   // todo wrap this inside use effect and update based on use role
   // side nav bar contents
@@ -199,19 +206,18 @@ export const useBaseLayout = ({
   // update current menu on path change
   useEffect(() => {
     if (router?.pathname) {
-      console.log(router?.pathname?.split("/"));
       const tempCurrentMenu = router?.pathname?.split("/")[1];
       if (tempCurrentMenu) setCurrentSideMenu(`/${tempCurrentMenu}`);
     }
   }, [router?.pathname]);
 
   useEffect(() => {
-    if (router?.pathname && isSuccess) {
+    if (router?.pathname && isSuccess && user) {
       let tempCurrentMenu = router?.pathname?.split("/")[1];
       tempCurrentMenu = `/${tempCurrentMenu}`;
       // check for valid user's valid page?
       console.log(PageSeparation.LibrarianPages.includes(tempCurrentMenu));
-      console.log(PageSeparation.PatronPages.includes(tempCurrentMenu));
+      console.log(user);
 
       if (user.role === Role.Librarian) {
         if (!PageSeparation.LibrarianPages.includes(tempCurrentMenu)) {

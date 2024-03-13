@@ -11,7 +11,7 @@ const bookData: IBook = {
   previewLink:
     "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
   coverImage:
-    "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg",
   shelfNumber: 12,
   inLibrary: true,
   booksLeft: 2,
@@ -38,7 +38,7 @@ const mockBooksInterfaceArray: IBook[] = [
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
-      "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg",
     shelfNumber: 12,
     inLibrary: true,
     booksLeft: 3,
@@ -61,7 +61,7 @@ const mockBooksInterfaceArray: IBook[] = [
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
-      "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg",
     shelfNumber: 12,
     inLibrary: true,
     booksLeft: 0,
@@ -84,7 +84,7 @@ const mockBooksInterfaceArray: IBook[] = [
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
-      "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg",
     shelfNumber: 12,
     inLibrary: false,
     booksLeft: 1,
@@ -99,5 +99,5 @@ const mockBooksInterfaceArray: IBook[] = [
 ];
 
 export const mockBooks: Book[] = mockBooksInterfaceArray.map(
-  (book) => new Book(book),
+  (book) => new Book(book)
 );

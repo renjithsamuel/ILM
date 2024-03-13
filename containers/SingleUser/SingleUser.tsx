@@ -33,7 +33,7 @@ export const SingleUser = ({}: singleUserParams) => {
             sx={{ bgcolor: themeValues.color.color1 }}
             className={classes.userImage}
           >
-            {user.name}
+            {user?.name}
           </Avatar>
         </Box>
       </Box>
@@ -46,7 +46,7 @@ export const SingleUser = ({}: singleUserParams) => {
                 {userDetail.label}
               </Typography>
               <Typography variant="body1" className={classes.userDetailValue}>
-                {userDetail.getUserValue(user)}
+                {user && userDetail.getUserValue(user)}
               </Typography>
             </Box>
           );
@@ -91,30 +91,30 @@ const bookDetailsArray = [
     label: "Books Reserved",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.reservedBooksCount,
-    getLink: (user: User) => `/users/${user.userID}/reserved`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/reserved`,
   },
   {
     label: "Books Pending",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.pendingBooksCount,
-    getLink: (user: User) => `/users/${user.userID}/pending`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/pending`,
   },
   {
     label: "Books Checked Out",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.checkedOutBooksCount,
-    getLink: (user: User) => `/users/${user.userID}/checkedout`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/checkedout`,
   },
   {
     label: "Wishlisted Books",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.wishlistBooks.length,
-    getLink: (user: User) => `/users/${user.userID}/wishlists`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/wishlists`,
   },
   {
     label: "Completed Books",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.completedBooksList.length,
-    getLink: (user: User) => `/users/${user.userID}/completed`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/completed`,
   },
 ];

@@ -57,13 +57,15 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
     return <UnAuthorizedPage />;
   }
 
-  if (isFetched && authenticatedOnly) {
+  if (authenticatedOnly) {
     return (
       <Box>
         {/* <LoginDialog /> */}
-        {(authenticatedOnly && !isFetched && isLoading) ? <ConnectingToServerDialog/> 
-          : (!authenticated || !isSuccess) && <LoginDialog />
-        }
+        {false ? (
+          <ConnectingToServerDialog />
+        ) : (
+          (!authenticated || !isSuccess) && <LoginDialog />
+        )}
         <NavBar showSearchBar pageName={pageName} menuItems={menuItems}>
           {children}
         </NavBar>
