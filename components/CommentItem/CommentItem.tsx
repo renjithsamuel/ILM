@@ -32,14 +32,10 @@ export const CommentItem = ({ review }: commentItemParams) => {
       >
         {/* Book Image */}
         <Box className={classes.userImageWrap}>
-          <Image
-            // src={user.image}
-            src={"/logo.png"}
-            width={60}
-            height={60}
-            alt={user.name || `user`}
-            className={classes.userImage}
-          />
+          <Avatar className={classes.userImage}>
+            {user?.name &&
+              FormatTextUtil.formatFirstWord(user?.name.slice(0, 1))}
+          </Avatar>
         </Box>
         {/* user name - comment heading - comment  */}
         <Box className={classes.commentDetails}>
@@ -48,18 +44,20 @@ export const CommentItem = ({ review }: commentItemParams) => {
               variant="body1"
               sx={{ fontWeight: themeValues.font.fontWeightThick }}
             >
-              {user.name}
+              {user && FormatTextUtil.formatFirstWord(user.name)}
             </Typography>
             {" - "}
             <Typography variant="body1" sx={{ wordWrap: "break-word" }}>
               {FormatTextUtil.formatFirstWord(review.commentHeading).slice(
                 0,
-                50,
+                50
               ) + "..."}
             </Typography>
           </Box>
           <Divider sx={{ m: 1 }} />
-          <Typography variant="body2">{review.comment as string}</Typography>
+          <Typography variant="body2">
+            {FormatTextUtil.formatFirstWord(review.comment as string)}
+          </Typography>
         </Box>
         {/* rating */}
         <Box className={classes.ratingWrap}>

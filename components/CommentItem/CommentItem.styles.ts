@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 
 export const useCommentItemStyles = makeStyles((theme) => ({
   commentItemRoot: {
+    position: "relative",
     display: "flex",
     alignItems: "center",
     justifyContent: "start",
@@ -27,6 +28,10 @@ export const useCommentItemStyles = makeStyles((theme) => ({
   userImage: {
     border: themeValues.border.defaultborder,
     borderRadius: "50%",
+    objectFit: "cover",
+    opacity: 0.8,
+    backgroundColor: themeValues.color.color1,
+    color: themeValues.color.white,
   },
   commentHeadingAndUserName: {
     display: "flex",
@@ -38,6 +43,8 @@ export const useCommentItemStyles = makeStyles((theme) => ({
     color: themeValues.color.color1,
   },
   ratingWrap: {
+    position: "absolute",
+    right: 0,
     justifySelf: "end",
   },
 }));

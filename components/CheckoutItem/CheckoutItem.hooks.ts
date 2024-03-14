@@ -36,6 +36,7 @@ export const useCheckoutItem = ({
     isSuccess: isDeleteCheckoutSuccess,
   } = useDeleteCheckoutAPI();
 
+  // todo update checked out books for this user
   const handleCheckout = () => {
     updateCheckoutTicket({
       checkOutTicket: {
@@ -46,6 +47,7 @@ export const useCheckoutItem = ({
     });
   };
 
+  // todo update returned books for this user
   const handleReturn = () => {
     updateCheckoutTicket({
       checkOutTicket: {
@@ -69,6 +71,7 @@ export const useCheckoutItem = ({
     setIsExtendOpen(!isExtendOpen);
   };
 
+  // todo update reserved books for this user
   const handleDeleteCheckout = () => {
     deleteCheckoutTicket({ checkoutID: checkoutItem.ID });
   };

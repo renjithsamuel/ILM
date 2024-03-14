@@ -45,6 +45,7 @@ interface singleBookParams {
 export const SingleBook = ({}: singleBookParams) => {
   const classes = useSingleBookStyles();
   const {
+    checkoutData,
     commentList,
     book,
     userType,
@@ -57,6 +58,7 @@ export const SingleBook = ({}: singleBookParams) => {
     handleAddToLibrary,
     setIsModifyCountOpen,
     handleCheckoutFlow,
+    handleAddToWishList,
   } = useSingleBook({});
 
   if (!book) {
@@ -67,7 +69,14 @@ export const SingleBook = ({}: singleBookParams) => {
   return (
     <Box className={classes.singleBookRoot}>
       {/* add comment popup */}
-      {isAddCommentOpen && <AddComment handleAddComment={handleAddComment} />}
+      {isAddCommentOpen && checkoutData && (
+        <AddComment
+          handleAddComment={handleAddComment}
+          user={user}
+          book={book}
+          checkout={checkoutData}
+        />
+      )}
       {/* modify count popup */}
       {isModifyCountOpen && (
         <ModifyCount setIsModifyCountOpen={setIsModifyCountOpen} book={book} />
@@ -199,8 +208,12 @@ export const SingleBook = ({}: singleBookParams) => {
                 </Tooltip>
               )}
             {/* wishlist btn */}
-            {userType === Role.Patrons && (
-              <Button variant="contained" className={classes.wishlistBtn}>
+            {(userType === Role.Librarian || userType === Role.Patrons) && (
+              <Button
+                variant="contained"
+                className={classes.wishlistBtn}
+                onClick={handleAddToWishList}
+              >
                 <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
                   {wishlisted ? "Wishlisted" : "Wishlist"}
                 </Typography>
@@ -264,9 +277,15 @@ export const SingleBook = ({}: singleBookParams) => {
           <Box className={classes.singleBookComments}>
             {/* Book Comments, Currently Under Work */}
             <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-              {commentList.map((item) => (
-                <CommentItem review={item} key={item.ID} />
-              ))}
+              {commentList && commentList.length > 0 ? (
+                commentList.map((item) => (
+                  <CommentItem review={item} key={item.ID} />
+                ))
+              ) : (
+                <Typography variant="h4" className={classes.noBooksText}>
+                  No Books
+                </Typography>
+              )}
             </List>
           </Box>
         </Box>

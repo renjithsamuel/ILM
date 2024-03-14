@@ -11,7 +11,7 @@ export const useAddCommentStyles = makeStyles((theme) => ({
     gap: theme.spacing(2),
     borderRadius: themeValues.border.borderRadius,
     width: "30vw",
-    height: "65vh",
+    height: "auto",
     position: "relative",
   },
   commentHeading: {

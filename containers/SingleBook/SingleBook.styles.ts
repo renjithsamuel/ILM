@@ -202,5 +202,7 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     fontWeight: themeValues.font.fontWeightThick,
     color: themeValues.color.color1,
   },
-  noBooksText: {},
+  noBooksText: {
+    marginLeft: theme.spacing(25),
+  },
 }));

@@ -19,6 +19,7 @@ interface singleUserHook {
   userBookDetail: BookDetails | undefined;
 }
 
+// todo whenever users gets to this page, increment the views
 export const useSingleUser = ({}: singleUserHookProps): singleUserHook => {
   const { setSnackBarError } = usePageContext();
   const router = useRouter();
