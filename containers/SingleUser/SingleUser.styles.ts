@@ -26,7 +26,7 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     height: "20vh",
     position: "relative",
     left: -25,
-    top: 40,
+    top: 50,
     zIndex: 1,
     boxShadow: themeValues.shadow.boxShadowHeavy,
     borderRadius: themeValues.border.borderRadiusLow,
@@ -37,6 +37,8 @@ export const useSingleUserStyles = makeStyles((theme) => ({
     height: "20vh",
     objectFit: "cover",
     opacity: 0.8,
+    backgroundColor: themeValues.color.color1,
+    color: themeValues.color.white,
     borderRadius: themeValues.border.borderRadiusLow,
   },
   userDetailsContainer: {

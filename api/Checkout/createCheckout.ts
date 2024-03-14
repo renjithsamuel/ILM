@@ -15,7 +15,7 @@ export type CreateCheckoutResponse = {
   message: string;
 };
 
-export const loginUserAPI = async (
+export const createCheckoutAPI = async (
   request: CreateCheckoutRequest
 ): Promise<AxiosResponse<CreateCheckoutResponse>> => {
   return PrivateAxios.post(`/checkouts`, request);
@@ -32,7 +32,7 @@ export const useCreateCheckoutAPI = (): UseMutationResult<
     AxiosResponse<CreateCheckoutResponse>,
     AxiosError<CreateCheckoutResponse>,
     CreateCheckoutRequest
-  >(loginUserAPI, {
+  >(createCheckoutAPI, {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKeys.CREATE_CHECKOUT);
       queryClient.invalidateQueries(QueryKeys.GET_ALL_CHECKOUTS);

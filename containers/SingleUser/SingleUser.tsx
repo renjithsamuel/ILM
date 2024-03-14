@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import Image from "next/image";
 import { themeValues } from "@/constants/ThemeConstants";
+import { FormatTextUtil } from "@/utils/formatText";
 
 interface singleUserParams {
   // book: Book;
@@ -29,11 +30,8 @@ export const SingleUser = ({}: singleUserParams) => {
             alt={user.name || `user`}
             className={classes.userImage}
           /> */}
-          <Avatar
-            sx={{ bgcolor: themeValues.color.color1 }}
-            className={classes.userImage}
-          >
-            {user?.name}
+          <Avatar className={classes.userImage}>
+            {user?.name && FormatTextUtil.formatFirstWord(user?.name)}
           </Avatar>
         </Box>
       </Box>
@@ -75,14 +73,17 @@ export const SingleUser = ({}: singleUserParams) => {
 };
 
 const userDetailsArray = [
-  { label: "User Name", getUserValue: (user: User) => user.name },
   {
-    label: "Date Of Birth",
-    getUserValue: (user: User) => dayjs(user.dateOfBirth).format("DD-MM-YYYY"),
+    label: "User Name",
+    getUserValue: (user: User) => FormatTextUtil.formatFirstWord(user.name),
   },
   {
-    label: "Member Since",
+    label: "Joined On",
     getUserValue: (user: User) => dayjs(user.joinedDate).format("DD-MM-YYYY"),
+  },
+  {
+    label: "Role",
+    getUserValue: (user: User) => FormatTextUtil.formatFirstWord(user.role),
   },
 ];
 

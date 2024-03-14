@@ -9,7 +9,7 @@ export interface ICheckoutTicket {
   isReturned: boolean;
   numberOfDays: number;
   fineAmount: number;
-  reservatedOn: Date;
+  reservedOn: Date;
   checkedOutOn?: Date;
   returnedDate?: Date;
   book?: Book;
@@ -26,7 +26,7 @@ export class CheckoutTicket implements ICheckoutTicket {
   isReturned: boolean;
   numberOfDays: number;
   fineAmount: number;
-  reservatedOn: Date;
+  reservedOn: Date;
   checkedOutOn?: Date;
   returnedDate?: Date;
   book?: Book;
@@ -42,7 +42,7 @@ export class CheckoutTicket implements ICheckoutTicket {
     this.isReturned = checkoutTicket.isReturned;
     this.numberOfDays = checkoutTicket.numberOfDays;
     this.fineAmount = checkoutTicket.fineAmount;
-    this.reservatedOn = checkoutTicket.reservatedOn;
+    this.reservedOn = checkoutTicket.reservedOn;
     this.checkedOutOn = checkoutTicket.checkedOutOn;
     this.returnedDate = checkoutTicket.returnedDate;
     this.book = checkoutTicket.book;

@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export class FormatTextUtil {
   public static formatTicketText = (text: string): string => {
     if (typeof text !== "string") {
@@ -37,5 +39,12 @@ export class FormatTextUtil {
     } else {
       return `${(number / 1000000).toFixed(1)}M`;
     }
+  };
+
+  public static formatDate = (date: Date): string => {
+    if (!date || new Date(date).toISOString() === "0001-01-01T00:00:00.000Z") {
+      return "nil";
+    }
+    return dayjs(date).format("D MMMM, YYYY").toString();
   };
 }

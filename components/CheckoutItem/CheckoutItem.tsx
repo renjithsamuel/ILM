@@ -17,15 +17,36 @@ import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
 import { themeValues } from "@/constants/ThemeConstants";
 import dayjs from "dayjs";
 import Link from "next/link";
+import { FormatTextUtil } from "@/utils/formatText";
+import { useCheckoutItem } from "./CheckoutItem.hooks";
+import { ExtendCheckout } from "../ExtendCheckout/ExtendCheckout";
 
 interface checkoutItemParams {
   checkoutItem: CheckoutTicket;
 }
 
 export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
+  const {
+    isExtendOpen,
+    handleCheckout,
+    handleReturn,
+    handleExtendOpen,
+    handleExtend,
+    handleDeleteCheckout,
+  } = useCheckoutItem({
+    checkoutItem,
+  });
   const classes = useCheckoutItemStyles();
   return (
     <>
+      {/* add comment popup */}
+      {isExtendOpen && (
+        <ExtendCheckout
+          handleExtendOpen={handleExtendOpen}
+          handleExtend={handleExtend}
+          numberOfDays={checkoutItem.numberOfDays}
+        />
+      )}
       <Accordion>
         <AccordionSummary
           expandIcon={<MdExpandMore />}
@@ -63,44 +84,46 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
               >
                 <Typography variant="body1">
                   {checkoutItem.checkedOutOn
-                    ? dayjs(checkoutItem.checkedOutOn)
-                        .format("DD-MM-YYYY")
-                        .toString()
-                    : dayjs(checkoutItem.reservatedOn)
-                        .format("DD-MM-YYYY")
-                        .toString()}
+                    ? FormatTextUtil.formatDate(checkoutItem.checkedOutOn)
+                    : FormatTextUtil.formatDate(checkoutItem.reservedOn)}
                 </Typography>
               </Tooltip>
               {" - "}
               {/* returned date? returned date : checkoutDate ? checkoutDate + numberOfDays : nil  */}
               <Tooltip
                 title={
-                  checkoutItem.returnedDate ? "returned on" : "expected return"
+                  checkoutItem.returnedDate &&
+                  new Date(checkoutItem.returnedDate)?.toISOString() !==
+                    "0001-01-01T00:00:00.000Z"
+                    ? "Returned on"
+                    : "Expected Return On"
                 }
                 placement="top"
               >
                 <Typography variant="body1">
-                  {checkoutItem.returnedDate
-                    ? dayjs(checkoutItem.returnedDate)
-                        .format("DD-MM-YYYY")
-                        .toString()
-                    : checkoutItem.checkedOutOn
+                  {checkoutItem.returnedDate &&
+                  new Date(checkoutItem.returnedDate)?.toISOString() !==
+                    "0001-01-01T00:00:00.000Z"
+                    ? FormatTextUtil.formatDate(checkoutItem.returnedDate)
+                    : checkoutItem.checkedOutOn &&
+                        new Date(checkoutItem.checkedOutOn)?.toISOString() !==
+                          "0001-01-01T00:00:00.000Z"
                       ? dayjs(checkoutItem.checkedOutOn)
                           .add(checkoutItem.numberOfDays, "day")
-                          .format("DD-MM-YYYY")
+                          .format("D MMMM, YYYY")
                           .toString()
                       : "nil"}
                 </Typography>
               </Tooltip>
               {/* summary icon */}
               <Box>
-                {checkoutItem.returnedDate ? (
+                {checkoutItem.isReturned ? (
                   <Tooltip title={"returned"} placement="top">
                     <Box className={classes.summaryIcon}>
                       <MdDone size={themeValues.spacing(2)} />
                     </Box>
                   </Tooltip>
-                ) : checkoutItem.checkedOutOn ? (
+                ) : checkoutItem.isCheckedOut ? (
                   <Tooltip title={"checked out"} placement="top">
                     <Box className={classes.summaryIcon}>
                       <MdOutlineShoppingCartCheckout
@@ -122,7 +145,7 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
               {/* top 2 boxes */}
               <Box
                 component={Link}
-                href={`/allbooks/${checkoutItem.book?.ID}`}
+                href={`/allbooks/${checkoutItem.book?.ISBN}`}
                 className={classes.detailsBox}
               >
                 {/* book details */}
@@ -185,12 +208,19 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
               <Box className={classes.dateBox}>
                 {/* reserved */}
                 <Typography variant="body1" className={classes.dateKey}>
+                  {"No Of Days "}
+                </Typography>
+                <Typography variant="body1" className={classes.dateValue}>
+                  {checkoutItem.numberOfDays}
+                </Typography>
+              </Box>
+              <Box className={classes.dateBox}>
+                {/* reserved */}
+                <Typography variant="body1" className={classes.dateKey}>
                   {"Reserved On "}
                 </Typography>
                 <Typography variant="body1" className={classes.dateValue}>
-                  {dayjs(checkoutItem.reservatedOn)
-                    .format("DD-MM-YYYY")
-                    .toString()}
+                  {FormatTextUtil.formatDate(checkoutItem.reservedOn)}
                 </Typography>
               </Box>
               <Box className={classes.dateBox}>
@@ -200,27 +230,29 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                 </Typography>
                 <Typography variant="body1" className={classes.dateValue}>
                   {checkoutItem.checkedOutOn &&
-                    dayjs(checkoutItem.checkedOutOn)
-                      .format("DD-MM-YYYY")
-                      .toString()}
+                    FormatTextUtil.formatDate(checkoutItem.checkedOutOn)}
                 </Typography>
               </Box>
               <Box className={classes.dateBox}>
                 {/* expected or actual return date */}
                 <Typography variant="body1" className={classes.dateKey}>
-                  {checkoutItem.returnedDate
+                  {checkoutItem.returnedDate &&
+                  new Date(checkoutItem.returnedDate)?.toISOString() !==
+                    "0001-01-01T00:00:00.000Z"
                     ? "Returned on"
                     : "Expected Return On"}
                 </Typography>
                 <Typography variant="body1" className={classes.dateValue}>
-                  {checkoutItem.returnedDate
-                    ? dayjs(checkoutItem.returnedDate)
-                        .format("DD-MM-YYYY")
-                        .toString()
-                    : checkoutItem.checkedOutOn
+                  {checkoutItem.returnedDate &&
+                  new Date(checkoutItem.returnedDate)?.toISOString() !==
+                    "0001-01-01T00:00:00.000Z"
+                    ? FormatTextUtil.formatDate(checkoutItem.returnedDate)
+                    : checkoutItem.checkedOutOn &&
+                        new Date(checkoutItem.checkedOutOn)?.toISOString() !==
+                          "0001-01-01T00:00:00.000Z"
                       ? dayjs(checkoutItem.checkedOutOn)
                           .add(checkoutItem.numberOfDays, "day")
-                          .format("DD-MM-YYYY")
+                          .format("D MMMM, YYYY")
                           .toString()
                       : "nil"}
                 </Typography>
@@ -234,10 +266,22 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                 className={classes.actionBtn}
                 disabled={
                   checkoutItem.book?.booksLeft === 0 ||
-                  !!checkoutItem.reservatedOn || !checkoutItem.checkedOutOn
+                  // not getting reserved on will disable the button
+                  !(
+                    checkoutItem.reservedOn &&
+                    new Date(checkoutItem.reservedOn)?.toISOString() !==
+                      "0001-01-01T00:00:00.000Z"
+                  ) || // or
+                  // getting checked out on will disable the button
+                  !!(
+                    checkoutItem.checkedOutOn &&
+                    new Date(checkoutItem.checkedOutOn)?.toISOString() !==
+                      "0001-01-01T00:00:00.000Z"
+                  )
                     ? true
                     : false
                 }
+                onClick={handleCheckout}
               >
                 <Typography
                   variant="body2"
@@ -254,10 +298,22 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                 variant="contained"
                 className={classes.actionBtn}
                 disabled={
-                  !!checkoutItem.checkedOutOn || !checkoutItem.returnedDate
+                  // not getting checked out on will make it disabled
+                  !(
+                    checkoutItem.checkedOutOn &&
+                    new Date(checkoutItem.checkedOutOn)?.toISOString() !==
+                      "0001-01-01T00:00:00.000Z"
+                  ) ||
+                  // getting returned date will make it disabled
+                  !!(
+                    checkoutItem.returnedDate &&
+                    new Date(checkoutItem.returnedDate)?.toISOString() !==
+                      "0001-01-01T00:00:00.000Z"
+                  )
                     ? true
                     : false
                 }
+                onClick={handleReturn}
               >
                 <Typography
                   variant="body2"
@@ -273,7 +329,12 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
               <Button
                 variant="contained"
                 className={classes.actionBtn}
-                disabled={checkoutItem.returnedDate ? true : false}
+                disabled={
+                  checkoutItem.isReturned || !checkoutItem.isCheckedOut
+                    ? true
+                    : false
+                }
+                onClick={handleExtendOpen}
               >
                 <Typography
                   variant="body2"
@@ -290,6 +351,7 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                 variant="contained"
                 className={classes.actionBtn}
                 disabled={checkoutItem.isCheckedOut}
+                onClick={handleDeleteCheckout}
               >
                 <Typography
                   variant="body2"

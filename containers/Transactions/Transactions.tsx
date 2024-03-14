@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 import { useTransactionsStyles } from "./Transactions.styles";
 import {
   MdDone,
@@ -114,10 +114,15 @@ export const Transactions = ({}: transactionsParams) => {
         </Box>
         {/* accordion wrap */}
         <Box>
-          {checkedOutList &&
+          {checkedOutList && checkedOutList.length > 0 ?
             checkedOutList.map((item) => (
               <CheckoutItem key={item.ID} checkoutItem={item} />
-            ))}
+            )) 
+              : 
+              <Typography variant="h4" className={classes.noBooksText}>
+              No Transactions
+            </Typography>
+          }
         </Box>
       </Box>
     </>

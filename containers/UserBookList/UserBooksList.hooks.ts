@@ -61,10 +61,9 @@ export const useUserBooksList =
     useEffect(() => {
       if (contextUser.role && contextUser.role === Role.Patrons && !userID) {
         // if it's from the user's side wishlist, return userID matching from context
-        contextUser?.bookDetails?.userID &&
-          setRequiredUserID(contextUser?.bookDetails?.userID);
+        contextUser?.userID && setRequiredUserID(contextUser?.userID);
       }
-    }, [contextUser?.bookDetails?.userID, contextUser.role]);
+    }, [contextUser?.userID, contextUser.role, userID]);
 
     useEffect(() => {
       if (userID) {

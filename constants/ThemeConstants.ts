@@ -8,6 +8,7 @@ const lightThemeValues = {
     defaultborder: "1px solid black",
     thickborder: "3px solid black",
     defaultborderGrey: "1px solid #D3D3D3",
+    defaultborderGreyThick: "4px solid #D3D3D3",
   },
   color: {
     color1: "#0c2465",

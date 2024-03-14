@@ -9,19 +9,14 @@ interface myBooksHookProps {}
 
 interface myBooksHook {
   user: User;
-  userBookDetail: BookDetails;
+  userBookDetail: BookDetails | undefined;
 }
 
 export const useMyBooks = ({}: myBooksHookProps): myBooksHook => {
   const { user } = useUserContext();
 
-  const userID = user.userID;
-  // fetch user with userID
-  const mockMyBooks = mockUser;
-  const mockBookDetails = mockbookDetails;
-
   return {
-    user: mockMyBooks,
-    userBookDetail: mockBookDetails,
+    user: user,
+    userBookDetail: user.bookDetails,
   };
 };
