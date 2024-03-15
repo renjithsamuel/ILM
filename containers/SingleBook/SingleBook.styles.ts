@@ -176,14 +176,14 @@ export const useSingleBookStyles = makeStyles((theme) => ({
   singleBookComments: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
+    alignItems: "start",
+    backgroundColor: "none",
     margin: theme.spacing(1),
-    width: "63vw",
-    maxHeight: "100vh",
-    overflow: "scroll",
+    width: "auto",
+    maxHeight: "auto",
+    overflow: "visible",
     borderRadius: themeValues.border.borderRadiusHigh,
-    boxShadow: themeValues.shadow.boxShadowboxy,
+    // boxShadow: themeValues.shadow.boxShadowboxy,
   },
   similarBooks: {
     margin: theme.spacing(2),
@@ -203,6 +203,20 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     color: themeValues.color.color1,
   },
   noBooksText: {
-    marginLeft: theme.spacing(25),
+    padding: theme.spacing(10),
+    width: "auto",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: "600",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "28px",
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      fontSize: "25px",
+    },
+    [theme.breakpoints.between("xs", "sm")]: {
+      fontSize: "20px",
+    },
   },
 }));

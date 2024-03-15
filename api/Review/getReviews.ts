@@ -31,7 +31,7 @@ export const useGetAllReviewsByBookIDAPI = (
   enabled = true
 ): UseQueryResult<GetAllReviewsByBookIDResponse, AxiosError> => {
   return useQuery<GetAllReviewsByBookIDResponse, AxiosError>(
-    [QueryKeys.GET_REVIEWS],
+    [QueryKeys.GET_REVIEWS, bookID],
     () => getAllReviewsByBookIDAPI(bookID),
     {
       enabled: enabled && !!bookID,

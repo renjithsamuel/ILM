@@ -22,7 +22,7 @@ export const useGetUserByIDAPI = (
   enabled = true
 ): UseQueryResult<GetUserByIDResponse, AxiosError> => {
   return useQuery<GetUserByIDResponse, AxiosError>(
-    [QueryKeys.GET_USER_BY_ID],
+    [QueryKeys.GET_USER_BY_ID, userID],
     () => getUserByIDAPI(userID),
     {
       enabled,

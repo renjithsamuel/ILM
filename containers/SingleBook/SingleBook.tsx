@@ -45,6 +45,7 @@ interface singleBookParams {
 export const SingleBook = ({}: singleBookParams) => {
   const classes = useSingleBookStyles();
   const {
+    isBookCompleted,
     checkoutData,
     commentList,
     book,
@@ -225,17 +226,34 @@ export const SingleBook = ({}: singleBookParams) => {
             {/* todo remove for librarian */}
             {userType === Role.Patrons ||
               (userType === Role.Librarian && (
-                <Button
-                  variant="contained"
-                  className={classes.reserveNowBtn}
-                  onClick={handleAddComment}
+                <Tooltip
+                  title={
+                    isBookCompleted
+                      ? "Comment Already Added"
+                      : !checkoutData?.isReturned
+                        ? "Read Book To Add Comment"
+                        : ""
+                  }
+                  placement="right"
                 >
-                  <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
-                    {"Completed"}
-                  </Typography>
-                  <MdOutlineDone size={theme.spacing(2.2)} />
-                  {"  "}
-                </Button>
+                  <Box>
+                    <Button
+                      variant="contained"
+                      className={classes.reserveNowBtn}
+                      disabled={!checkoutData?.isReturned}
+                      onClick={handleAddComment}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{ mr: theme.spacing(0.6) }}
+                      >
+                        {"Completed"}
+                      </Typography>
+                      <MdOutlineDone size={theme.spacing(2.2)} />
+                      {"  "}
+                    </Button>
+                  </Box>
+                </Tooltip>
               ))}
             {/* checkout btn  */}
             {/* todo when checking out go to /transactions/{isbn} capture it and add in search filed */}
@@ -276,14 +294,14 @@ export const SingleBook = ({}: singleBookParams) => {
           </Typography>
           <Box className={classes.singleBookComments}>
             {/* Book Comments, Currently Under Work */}
-            <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+            <List sx={{ width: "100%", bgcolor: "transparent" }}>
               {commentList && commentList.length > 0 ? (
                 commentList.map((item) => (
                   <CommentItem review={item} key={item.ID} />
                 ))
               ) : (
                 <Typography variant="h4" className={classes.noBooksText}>
-                  No Books
+                  No Comments
                 </Typography>
               )}
             </List>

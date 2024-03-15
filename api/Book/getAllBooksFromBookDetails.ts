@@ -32,7 +32,7 @@ export const useGetAllBooksFromBookDetailsAPI = (
   enabled = true
 ): UseQueryResult<GetAllBooksFromBookDetailsResponse, AxiosError> => {
   return useQuery<GetAllBooksFromBookDetailsResponse, AxiosError>(
-    [QueryKeys.GET_ALL_BOOKS_FROM_BOOK_DETAILS],
+    [QueryKeys.GET_ALL_BOOKS_FROM_BOOK_DETAILS, { ...request }],
     () => getAllBooksFromBookDetailsAPI(request),
     {
       enabled,

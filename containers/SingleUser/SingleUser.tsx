@@ -94,12 +94,12 @@ const bookDetailsArray = [
       bkDetails.reservedBooksCount,
     getLink: (user: User | undefined) => `/users/${user?.userID}/reserved`,
   },
-  {
-    label: "Books Pending",
-    getBookDetailsValue: (bkDetails: BookDetails) =>
-      bkDetails.pendingBooksCount,
-    getLink: (user: User | undefined) => `/users/${user?.userID}/pending`,
-  },
+  // {
+  //   label: "Books Pending",
+  //   getBookDetailsValue: (bkDetails: BookDetails) =>
+  //     bkDetails.pendingBooksCount,
+  //   getLink: (user: User | undefined) => `/users/${user?.userID}/pending`,
+  // },
   {
     label: "Books Checked Out",
     getBookDetailsValue: (bkDetails: BookDetails) =>

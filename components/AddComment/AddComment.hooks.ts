@@ -1,3 +1,5 @@
+import { useUpdateBookAPI } from "@/api/Book/updateBook";
+import { useUpdateBookDetailsAPI } from "@/api/BookDetails/updateBookDetails";
 import { useCreateReviewAPI } from "@/api/Review/createReview";
 import { usePageContext } from "@/context/PageContext";
 import { Book } from "@/entity/Book/Book";
@@ -23,7 +25,7 @@ interface addCommentHook {
   ratingValue: number | null;
   handleRatingValue: (newValue: number | null) => void;
   handleCloseDialog: () => void;
-  handleCreateReview: (values: any) => void;
+  handleCreateReview: (values: any) => Promise<void>;
 }
 
 export const useAddComment = ({
@@ -45,6 +47,20 @@ export const useAddComment = ({
     isSuccess: isCreateReviewSuccess,
   } = useCreateReviewAPI();
 
+  // update book
+  const {
+    mutateAsync: updateBook,
+    isError: isUpdateBookError,
+    isSuccess: isUpdateBookSuccess,
+  } = useUpdateBookAPI();
+
+  // book details
+  const {
+    mutateAsync: updateBookDetails,
+    isError: isUpdateBookDetailsError,
+    isSuccess: isUpdateBookDetailsSuccess,
+  } = useUpdateBookDetailsAPI();
+
   // increase no of rating count in book and completed books list add this for this user
   // create review
   useEffect(() => {
@@ -65,7 +81,26 @@ export const useAddComment = ({
     }
   }, [isCreateReviewSuccess]);
 
-  const handleCreateReview = (values: any) => {
+  // update book details
+  useEffect(() => {
+    if (isUpdateBookDetailsError) {
+      setSnackBarError({
+        ErrorMessage: "update failed",
+        ErrorSeverity: "error",
+      });
+    }
+  }, [isUpdateBookDetailsError]);
+
+  useEffect(() => {
+    if (isUpdateBookDetailsSuccess) {
+      setSnackBarError({
+        ErrorMessage: "updated details",
+        ErrorSeverity: "success",
+      });
+    }
+  }, [isUpdateBookDetailsSuccess]);
+
+  const handleCreateReview = async (values: any) => {
     if (!values) return;
     createReview({
       review: {
@@ -76,6 +111,28 @@ export const useAddComment = ({
         userID: user.userID,
       },
     });
+    // update review count and add userid to reviewList
+    updateBook({
+      book: {
+        ...book,
+        reviewCount: book.reviewCount + 1,
+        reviewsList: [...(book?.reviewsList || []), user.userID],
+      },
+    });
+    // update user book details with completed book
+    if (!!user.bookDetails) {
+      updateBookDetails({
+        bookDetails: {
+          ...user.bookDetails,
+          completedBooksList: [
+            ...(user.bookDetails?.completedBooksList || []),
+            book.ISBN,
+          ],
+          completedBooksCount: user.bookDetails?.completedBooksCount + 1,
+        },
+      });
+    }
+    // other cleanup
     handleRatingValue(0);
     handleCloseDialog();
   };

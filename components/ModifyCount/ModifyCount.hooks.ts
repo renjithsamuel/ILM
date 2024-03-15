@@ -1,5 +1,5 @@
 import { queryClient } from "@/api";
-import { useUpdateBookQuantityAPI } from "@/api/Book/updateBookQuantity";
+import { useUpdateBookAPI } from "@/api/Book/updateBook";
 import { QueryKeys } from "@/constants/Querykeys";
 import { usePageContext } from "@/context/PageContext";
 import { Book } from "@/entity/Book/Book";
@@ -35,7 +35,7 @@ export const useModifyCount = ({
     mutateAsync: updateBookQuantity,
     isError: isUpdateBookQuantityError,
     isSuccess: isUpdateBookQuantitySuccess,
-  } = useUpdateBookQuantityAPI();
+  } = useUpdateBookAPI();
 
   const handleCloseDialog = () => {
     setOpenDialog(false);

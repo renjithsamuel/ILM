@@ -22,7 +22,7 @@ export const useGetBookAPI = (
   enabled = true
 ): UseQueryResult<GetBookResponse, AxiosError> => {
   return useQuery<GetBookResponse, AxiosError>(
-    [QueryKeys.GET_BOOK],
+    [QueryKeys.GET_BOOK, ISBN],
     () => getBookAPI(ISBN),
     {
       enabled,

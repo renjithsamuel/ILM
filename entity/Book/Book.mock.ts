@@ -1,3 +1,4 @@
+import { mockUser } from "../User/User.mock";
 import { Book, IBook } from "./Book";
 
 const bookData: IBook = {
@@ -22,6 +23,9 @@ const bookData: IBook = {
   createdAt: new Date(),
   updatedAt: new Date(),
   approximateDemand: 20,
+  reviewsList: [mockUser.userID],
+  wishList: [mockUser.userID],
+  viewsList: [mockUser.userID],
 };
 
 export const mockBook = new Book(bookData);
@@ -49,6 +53,9 @@ const mockBooksInterfaceArray: IBook[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
     approximateDemand: 20,
+    reviewsList: [mockUser.userID],
+    wishList: [mockUser.userID],
+    viewsList: [mockUser.userID],
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79028",
@@ -72,6 +79,9 @@ const mockBooksInterfaceArray: IBook[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
     approximateDemand: 20,
+    reviewsList: [mockUser.userID],
+    wishList: [mockUser.userID],
+    viewsList: [mockUser.userID],
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79029",
@@ -95,6 +105,9 @@ const mockBooksInterfaceArray: IBook[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
     approximateDemand: 20,
+    reviewsList: [mockUser.userID],
+    wishList: [mockUser.userID],
+    viewsList: [mockUser.userID],
   },
 ];
 

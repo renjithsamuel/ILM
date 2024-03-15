@@ -24,6 +24,7 @@ export const useAllBooksStyles = makeStyles((theme) => ({
   },
   noBooksText: {
     width: "80vw",
+    marginTop: theme.spacing(20),
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

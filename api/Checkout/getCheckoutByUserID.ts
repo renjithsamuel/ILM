@@ -37,7 +37,7 @@ export const useGetCheckoutByUserIDAPI = (
   enabled = true
 ): UseQueryResult<GetCheckoutByUserIDResponse, AxiosError> => {
   return useQuery<GetCheckoutByUserIDResponse, AxiosError>(
-    [QueryKeys.GET_CHECKOUT],
+    [QueryKeys.GET_CHECKOUT, bookID, userID],
     () => getCheckoutByUserIDAPI({ bookID, userID }),
     {
       enabled: enabled && !!bookID,

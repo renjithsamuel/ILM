@@ -5,34 +5,33 @@ import { PrivateAxios, PublicAxios } from "../index";
 import { UserLogin } from "@/types/UserLogin";
 import { Book } from "@/entity/Book/Book";
 
-export type UpdateBookQuantityRequest = { book: Book };
+export type UpdateBookRequest = { book: Book };
 
-export type UpdateBookQuantityResponse = {
+export type UpdateBookResponse = {
   message: string;
 };
 
-export const updateBookQuantityAPI = async ({
+export const updateBookAPI = async ({
   book,
-}: UpdateBookQuantityRequest): Promise<
-  AxiosResponse<UpdateBookQuantityResponse>
+}: UpdateBookRequest): Promise<
+  AxiosResponse<UpdateBookResponse>
 > => {
   return PrivateAxios.put(`/books`, book);
 };
 
-export const useUpdateBookQuantityAPI = (): UseMutationResult<
-  AxiosResponse<UpdateBookQuantityResponse>,
-  AxiosError<UpdateBookQuantityResponse>,
-  UpdateBookQuantityRequest
+export const useUpdateBookAPI = (): UseMutationResult<
+  AxiosResponse<UpdateBookResponse>,
+  AxiosError<UpdateBookResponse>,
+  UpdateBookRequest
 > => {
   const queryClient = useQueryClient();
 
   return useMutation<
-    AxiosResponse<UpdateBookQuantityResponse>,
-    AxiosError<UpdateBookQuantityResponse>,
-    UpdateBookQuantityRequest
-  >(updateBookQuantityAPI, {
+    AxiosResponse<UpdateBookResponse>,
+    AxiosError<UpdateBookResponse>,
+    UpdateBookRequest
+  >(updateBookAPI, {
     onSuccess: () => {
-      queryClient.invalidateQueries(QueryKeys.UPDATE_BOOK_QUANTITY);
       queryClient.invalidateQueries(QueryKeys.GET_BOOK);
       queryClient.invalidateQueries(QueryKeys.GET_ALL_BOOKS);
     },
