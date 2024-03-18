@@ -130,7 +130,7 @@ export const useBaseLayout = ({
     }
   }, [snackBarError?.ErrorMessage]);
 
-  // todo wrap this inside use effect and update based on use role
+  //  update based on use role
   // side nav bar contents
   useEffect(() => {
     if (user && isSuccess) {

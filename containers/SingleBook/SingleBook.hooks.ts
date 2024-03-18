@@ -56,7 +56,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     !!bookID
   );
   // get checkout
-  const { data: checkoutData, isError: isGetCheckoutError } =
+  const { data: checkoutsData, isError: isGetCheckoutError } =
     useGetCheckoutByUserIDAPI(
       bookData?.data.ID,
       user.userID,
@@ -90,8 +90,11 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   };
 
   const handleAddComment = () => {
-    console.log("checkoutData?.data", checkoutData?.data);
-    if (!checkoutData?.data) {
+    console.log("checkoutData?.data", checkoutsData?.data);
+    if (
+      !checkoutsData?.data ||
+      (!!checkoutsData?.data && checkoutsData?.data?.length) < 0
+    ) {
       setSnackBarError({
         ErrorMessage: "Adding comment is only after reading the book",
         ErrorSeverity: "info",
@@ -115,30 +118,42 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     }
   };
 
-  // todo update reserved books for this user
   // reserve books
   const handleCheckoutFlow = async (bookID: string) => {
-    if (bookID && user.userID) {
-      const numberOfDays = 15;
-      const res = await createCheckout({
-        bookID: bookID,
-        userID: user.userID,
-        numberOfDays: numberOfDays,
-      });
-      if (res.status >= 300) return;
-      // update reserved book for this user
-      user.bookDetails &&
-        bookData?.data &&
-        updateBookDetails({
-          bookDetails: {
-            ...user.bookDetails,
-            reservedBookList: [
-              ...(user.bookDetails.reservedBookList || []),
-              bookData.data.ISBN,
-            ],
-            reservedBooksCount: user.bookDetails.reservedBooksCount + 1,
-          },
+    try {
+      if (bookID && user.userID) {
+        const numberOfDays = 15;
+        const res = await createCheckout({
+          bookID: bookID,
+          userID: user.userID,
+          numberOfDays: numberOfDays,
         });
+
+        // Update reserved book for this user
+        if (res.status === 409) {
+          throw new Error("This Book is pending in a different checkout!");
+        } else if (res.status >= 300) {
+          throw new Error("Error while checking out!");
+        }
+
+        user.bookDetails &&
+          bookData?.data &&
+          updateBookDetails({
+            bookDetails: {
+              ...user.bookDetails,
+              reservedBookList: [
+                ...(user.bookDetails.reservedBookList || []),
+                bookData.data.ISBN,
+              ],
+              reservedBooksCount: user.bookDetails.reservedBooksCount + 1,
+            },
+          });
+      }
+    } catch (err) {
+      setSnackBarError({
+        ErrorMessage: err as string,
+        ErrorSeverity: "warning",
+      });
     }
   };
 
@@ -236,8 +251,8 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   useEffect(() => {
     if (isCheckoutError) {
       setSnackBarError({
-        ErrorMessage: "create reservation failed",
-        ErrorSeverity: "error",
+        ErrorMessage: "checkout failed",
+        ErrorSeverity: "warning",
       });
     }
   }, [isCheckoutError]);
@@ -290,8 +305,10 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     }
   }, [isGetReviewError]);
 
+  // checkout data
+  const checkoutReturned = checkoutsData?.data.find((item) => item.isReturned);
   return {
-    checkoutData: checkoutData?.data,
+    checkoutData: checkoutReturned,
     commentList: reviewsData?.data,
     user,
     book: bookData?.data,

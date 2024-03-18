@@ -12,9 +12,9 @@ export type GetCheckoutByUserIDRequest = {
   userID: string;
 };
 
-export type GetCheckoutByUserIDResponse = AxiosResponse<CheckoutTicket>;
+export type GetCheckoutByUserIDResponse = AxiosResponse<CheckoutTicket[]>;
 export type GetCheckoutByUserIDAPIResponse = {
-  checkoutTicket: ICheckoutTicket;
+  checkoutTickets: ICheckoutTicket[];
 };
 
 export const getCheckoutByUserIDAPI = async ({
@@ -25,9 +25,13 @@ export const getCheckoutByUserIDAPI = async ({
     `/checkouts/${bookID}/${userID}`
   );
 
+  const checkoutTickets = response.data.checkoutTickets.map(
+    (item) => new CheckoutTicket(item)
+  );
+
   return {
     ...response,
-    data: new CheckoutTicket(response.data.checkoutTicket),
+    data: checkoutTickets,
   };
 };
 
@@ -37,7 +41,7 @@ export const useGetCheckoutByUserIDAPI = (
   enabled = true
 ): UseQueryResult<GetCheckoutByUserIDResponse, AxiosError> => {
   return useQuery<GetCheckoutByUserIDResponse, AxiosError>(
-    [QueryKeys.GET_CHECKOUT, bookID, userID],
+    [QueryKeys.GET_CHECKOUT_WITH_USERID, bookID, userID],
     () => getCheckoutByUserIDAPI({ bookID, userID }),
     {
       enabled: enabled && !!bookID,
