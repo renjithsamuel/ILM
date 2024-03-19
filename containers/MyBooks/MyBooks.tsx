@@ -86,12 +86,6 @@ const bookDetailsArray = [
     getLink: (user: User) => `/users/${user.userID}/reserved`,
   },
   {
-    label: "Books Pending",
-    getBookDetailsValue: (bkDetails: BookDetails) =>
-      bkDetails.pendingBooksCount,
-    getLink: (user: User) => `/users/${user.userID}/pending`,
-  },
-  {
     label: "Books Checked Out",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.checkedOutBooksCount,
@@ -102,5 +96,11 @@ const bookDetailsArray = [
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.wishlistBooks.length,
     getLink: (user: User) => `/users/${user.userID}/wishlists`,
+  },
+  {
+    label: "Completed Books",
+    getBookDetailsValue: (bkDetails: BookDetails) =>
+      bkDetails.completedBooksList.length,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/completed`,
   },
 ];

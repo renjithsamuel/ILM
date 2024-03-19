@@ -5,6 +5,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TablePagination,
   Typography,
 } from "@mui/material";
 import { usePredictiveAnalysisStyles } from "./PredictiveAnalysis.styles";
@@ -20,6 +21,11 @@ export const PredictiveAnalysis = ({}: predictiveAnalysisParams) => {
     bookList,
     sortByOrder,
     sortByValue,
+    pageNumber,
+    rowsPerPage,
+    totalPages,
+    handleRowsPerPage,
+    handlePageNumber,
     handleSortOrder,
     handleSortValue,
   } = usePredictiveAnalysis({});
@@ -80,6 +86,16 @@ export const PredictiveAnalysis = ({}: predictiveAnalysisParams) => {
             </Typography>
           )}
         </Grid>
+        <Box className={classes.paginationWrap}>
+          <TablePagination
+            component="div"
+            count={totalPages}
+            page={pageNumber}
+            onPageChange={handlePageNumber}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleRowsPerPage}
+          />
+        </Box>
       </Box>
     </>
   );

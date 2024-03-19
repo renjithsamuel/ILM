@@ -26,7 +26,7 @@ export const BookGridItem = ({ book }: BookGridItemProps) => {
         className={classes.bookImageWrap}
         onClick={() => handleBookItemClick(book.ISBN)}
       >
-        <Image
+        <img
           src={book.coverImage}
           width={90}
           height={120}

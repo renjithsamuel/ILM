@@ -1,4 +1,3 @@
-import { Tooltip } from "@material-ui/core";
 import { Avatar, Box, Button, Chip, Typography } from "@mui/material";
 import { themeValues } from "@/constants/ThemeConstants";
 import Link from "next/link";

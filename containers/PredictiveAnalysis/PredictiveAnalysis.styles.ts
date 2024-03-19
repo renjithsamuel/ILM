@@ -40,4 +40,12 @@ export const usePredictiveAnalysisStyles = makeStyles((theme) => ({
       fontSize: "20px",
     },
   },
+  paginationWrap: {
+    width: "80vw",
+    position: "sticky",
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));

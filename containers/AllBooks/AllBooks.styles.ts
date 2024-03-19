@@ -16,12 +16,6 @@ export const useAllBooksStyles = makeStyles((theme) => ({
     padding: theme.spacing(1.5),
     marginBottom: theme.spacing(1),
   },
-  sortByContainer: {
-    display: "flex",
-    width: "25vw",
-    alignSelf: "start",
-    gap: theme.spacing(2),
-  },
   noBooksText: {
     width: "80vw",
     marginTop: theme.spacing(20),

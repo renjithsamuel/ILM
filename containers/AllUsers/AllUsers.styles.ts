@@ -17,4 +17,12 @@ export const useAllUsersStyles = makeStyles((theme) => ({
     alignSelf: "start",
     gap: theme.spacing(2),
   },
+  paginationWrap: {
+    width: "80vw",
+    position: "sticky",
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));

@@ -1,4 +1,3 @@
-import { Tooltip } from "@material-ui/core";
 import { Box, Typography } from "@mui/material";
 import { usePendingUserItemStyles } from "./PendingUserItem.styles";
 import { themeValues } from "@/constants/ThemeConstants";

@@ -6,7 +6,6 @@ import { User } from "@/entity/User/User";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 import dayjs from "dayjs";
 import Link from "next/link";
-import Image from "next/image";
 import { themeValues } from "@/constants/ThemeConstants";
 import { FormatTextUtil } from "@/utils/formatText";
 
@@ -94,12 +93,6 @@ const bookDetailsArray = [
       bkDetails.reservedBooksCount,
     getLink: (user: User | undefined) => `/users/${user?.userID}/reserved`,
   },
-  // {
-  //   label: "Books Pending",
-  //   getBookDetailsValue: (bkDetails: BookDetails) =>
-  //     bkDetails.pendingBooksCount,
-  //   getLink: (user: User | undefined) => `/users/${user?.userID}/pending`,
-  // },
   {
     label: "Books Checked Out",
     getBookDetailsValue: (bkDetails: BookDetails) =>

@@ -1,4 +1,3 @@
-import { Tooltip } from "@material-ui/core";
 import { Box, Chip, Typography } from "@mui/material";
 import { useSearchItemStyles } from "./SearchItem.styles";
 import { themeValues } from "@/constants/ThemeConstants";

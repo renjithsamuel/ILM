@@ -1,4 +1,3 @@
-import { Tooltip } from "@material-ui/core";
 import {
   Box,
   Button,
@@ -8,10 +7,7 @@ import {
 } from "@mui/material";
 import { useConnectingToServerDialogStyles } from "./ConnectingToServerDialog.styles";
 import { themeValues } from "@/constants/ThemeConstants";
-import { IBookDetails } from "@/entity/UserBookDetails/UserBookDetails";
-import { UserBookDetailType } from "@/constants/GlobalConstants";
 import { useConnectingToServerDialog } from "./ConnectingToServerDialog.hooks";
-import theme from "@/styles/theme";
 
 interface loginDialogParams {}
 

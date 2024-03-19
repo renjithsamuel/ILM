@@ -32,7 +32,7 @@ export const useGetCheckoutByIDAPI = (
   enabled = true
 ): UseQueryResult<GetCheckoutByIDResponse, AxiosError> => {
   return useQuery<GetCheckoutByIDResponse, AxiosError>(
-    [QueryKeys.GET_CHECKOUT, checkoutID],
+    [QueryKeys.GET_CHECKOUT_BY_ID, checkoutID],
     () => getCheckoutByIDAPI({ checkoutID }),
     {
       enabled,

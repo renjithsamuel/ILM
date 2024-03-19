@@ -20,6 +20,16 @@ interface transactionsHook {
   checkedOutList: CheckoutTicket[] | undefined;
   sortByOrder: SortOrder;
   sortByValue: TransactionSortValue;
+  pageNumber: number;
+  rowsPerPage: number;
+  totalPages: number;
+  handleRowsPerPage: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handlePageNumber: (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    val: number
+  ) => void;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
   handleSearch: (val: string) => void;
@@ -29,6 +39,11 @@ interface transactionsHook {
 export const useTransactions =
   ({}: transactionsHookProps): transactionsHook => {
     const router = useRouter();
+
+    // pagination related
+    const [pageNumber, setPageNumber] = useState<number>(1);
+    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
     const { setSnackBarError } = usePageContext();
     const [searchText, setSearchText] = useState<string>("");
     const [sortByValue, setSortByValue] = useState<TransactionSortValue>(
@@ -74,11 +89,35 @@ export const useTransactions =
       setSearchText(value);
     };
 
+    // pagination
+    const handleRowsPerPage = (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ): void => {
+      if (event.target.value) {
+        setRowsPerPage(Number.parseInt(event.target.value, 10));
+        setPageNumber(1); // Reset page number when rows per page changes
+      }
+    };
+
+    const handlePageNumber = (
+      event: React.MouseEvent<HTMLButtonElement> | null,
+      val: number
+    ): void => {
+      if (val) {
+        setPageNumber(val);
+      }
+    };
+
     return {
       checkedOutList: ticketsData?.data,
+      totalPages : -1,
       searchText,
       sortByOrder,
       sortByValue,
+      pageNumber,
+      rowsPerPage,
+      handleRowsPerPage,
+      handlePageNumber,
       handleSortOrder,
       handleSortValue,
       handleSearch,

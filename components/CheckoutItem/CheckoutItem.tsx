@@ -10,9 +10,9 @@ import {
   AccordionSummary,
   Box,
   Button,
+  Tooltip,
   Typography,
 } from "@mui/material";
-import { Tooltip } from "@material-ui/core";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
 import { themeValues } from "@/constants/ThemeConstants";
 import dayjs from "dayjs";

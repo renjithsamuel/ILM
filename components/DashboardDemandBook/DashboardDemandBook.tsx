@@ -1,6 +1,5 @@
 import { Book } from "@/entity/Book/Book";
-import { Box } from "@material-ui/core";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useDashboardDemandBookStyles } from "./DashboardDemandBook.styles";
 import clsx from "clsx";
@@ -17,7 +16,7 @@ export const DashboardDemandBook = ({ book }: DashboardDemandBookProps) => {
     <Box className={clsx(classes.dashboardDemandBookRoot)}>
       <Link href={`/allbooks/${book.ID}`}>
         <div className={clsx(classes.bookContainer, "bookContainer")}>
-          <Image
+          <img
             src={book.coverImage}
             width={150}
             height={200}

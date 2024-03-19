@@ -1,6 +1,7 @@
 import { Book } from "@/entity/Book/Book";
 import {
   Box,
+  Button,
   Dialog,
   Divider,
   Grid,
@@ -11,13 +12,10 @@ import {
 } from "@mui/material";
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
-import Image from "next/image";
 import {
-  bookKeyValues,
   singleBookKeyValues,
 } from "@/constants/GlobalConstants";
 import { BookGridItem } from "@/components/BookGridItem/BookGridItem";
-import { Button } from "@material-ui/core";
 import { mockBooks } from "@/entity/Book/Book.mock";
 import { SimilarBookItem } from "@/components/SimilarBookItem/SimilarBookItem";
 import clsx from "clsx";
@@ -88,7 +86,7 @@ export const SingleBook = ({}: singleBookParams) => {
           {/* book image */}
           <Link href={book?.previewLink || ""} target="_blank">
             <Box className={classes.singleBookImage}>
-              <Image
+              <img
                 src={book?.coverImage}
                 width={150}
                 height={220}

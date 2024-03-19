@@ -15,12 +15,26 @@ interface allUsersHook {
   pendingUsers: User[] | undefined;
   sortByValue: UserBookDetailType;
   sortByOrder: SortOrder;
+  totalPages: number;
+  pageNumber: number;
+  rowsPerPage: number;
+  handleRowsPerPage: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handlePageNumber: (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    val: number
+  ) => void;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
 }
 
 export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
   const { setSnackBarError } = usePageContext();
+  // pagination related
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
   const [sortByValue, setSortByValue] = useState<UserBookDetailType>(
     UserBookDetailType.Pending
   );
@@ -45,6 +59,25 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
     event.target.value && setSortByOrder(event.target.value as SortOrder);
   };
 
+  // pagination
+  const handleRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    if (event.target.value) {
+      setRowsPerPage(Number.parseInt(event.target.value, 10));
+      setPageNumber(1); // Reset page number when rows per page changes
+    }
+  };
+
+  const handlePageNumber = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    val: number
+  ): void => {
+    if (val) {
+      setPageNumber(val);
+    }
+  };
+
   useEffect(() => {
     if (isPendingUsersError) {
       setSnackBarError({
@@ -57,8 +90,13 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
   return {
     pendingUsers: pendingUsersData?.data,
     // pendingUsers: mockUserMock,
+    totalPages : -1,
     sortByValue,
     sortByOrder,
+    pageNumber,
+    rowsPerPage,
+    handleRowsPerPage,
+    handlePageNumber,
     handleSortValue,
     handleSortOrder,
   };

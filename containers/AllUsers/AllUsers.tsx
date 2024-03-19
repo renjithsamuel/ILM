@@ -1,6 +1,6 @@
 import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useAllUsers } from "./AllUsers.hooks";
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem, Select, TablePagination } from "@mui/material";
 import { useAllUsersStyles } from "./AllUsers.styles";
 import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
 
@@ -13,6 +13,11 @@ export const AllUsers = ({}: allUsersParams) => {
     pendingUsers,
     sortByOrder,
     sortByValue,
+    pageNumber,
+    rowsPerPage,
+    totalPages,
+    handleRowsPerPage,
+    handlePageNumber,
     handleSortValue,
     handleSortOrder,
   } = useAllUsers({});
@@ -74,6 +79,16 @@ export const AllUsers = ({}: allUsersParams) => {
               />
             );
           })}
+      </Box>
+      <Box className={classes.paginationWrap}>
+        <TablePagination
+          component="div"
+          count={totalPages}
+          page={pageNumber}
+          onPageChange={handlePageNumber}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleRowsPerPage}
+        />
       </Box>
     </Box>
   );

@@ -22,7 +22,7 @@ export const getCheckoutByUserIDAPI = async ({
   userID,
 }: GetCheckoutByUserIDRequest): Promise<GetCheckoutByUserIDResponse> => {
   const response = await PrivateAxios.get<GetCheckoutByUserIDAPIResponse>(
-    `/checkouts/${bookID}/${userID}`
+    `/allcheckouts/${bookID}/${userID}`
   );
 
   const checkoutTickets = response.data.checkoutTickets.map(

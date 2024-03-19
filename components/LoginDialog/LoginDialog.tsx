@@ -1,4 +1,3 @@
-import { Tooltip } from "@material-ui/core";
 import {
   Box,
   Button,
@@ -10,11 +9,8 @@ import {
 } from "@mui/material";
 import { useLoginDialogStyles } from "./LoginDialog.styles";
 import { themeValues } from "@/constants/ThemeConstants";
-import { IBookDetails } from "@/entity/UserBookDetails/UserBookDetails";
-import { UserBookDetailType } from "@/constants/GlobalConstants";
 import { useLoginDialog } from "./LoginDialog.hooks";
-import theme from "@/styles/theme";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field} from "formik";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { IoEye } from "react-icons/io5";
 import { Role } from "@/constants/Role";

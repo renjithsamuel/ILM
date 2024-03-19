@@ -37,22 +37,20 @@ export default function App({
   return (
     <ErrorBoundary>
       <NoSsr>
-        <CssBaseline>
-          <ThemeProvider theme={customTheme}>
-            <CacheProvider value={emotionCache}>
-              <QueryClientProvider client={queryClient}>
-                <main className={poppins.className}>
-                  <PageContextProvider>
-                    <UserContextProvider>
-                      {" "}
-                      <Component {...pageProps} />
-                    </UserContextProvider>
-                  </PageContextProvider>
-                </main>
-              </QueryClientProvider>
-            </CacheProvider>
-          </ThemeProvider>
-        </CssBaseline>
+        <ThemeProvider theme={customTheme}>
+          <CacheProvider value={emotionCache}>
+            <QueryClientProvider client={queryClient}>
+              <main className={poppins.className}>
+                <PageContextProvider>
+                  <UserContextProvider>
+                    {" "}
+                    <Component {...pageProps} />
+                  </UserContextProvider>
+                </PageContextProvider>
+              </main>
+            </QueryClientProvider>
+          </CacheProvider>
+        </ThemeProvider>
       </NoSsr>
     </ErrorBoundary>
   );

@@ -25,7 +25,7 @@ export const PredictiveAnalysisItem = ({
           <Box className={classes.predictLeft}>
             {/* Book Image */}
             <Box className={classes.bookImageWrap}>
-              <Image
+              <img
                 src={book.coverImage}
                 width={50}
                 height={60}
