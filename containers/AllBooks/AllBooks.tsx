@@ -18,6 +18,8 @@ import {
   SortOrder,
   SortPresence,
 } from "@/constants/GlobalConstants";
+import { TablePagination } from "@material-ui/core";
+import { GoogleOrderByValues } from "@/constants/GoogleAPI";
 
 interface allBooksParams {
   // book: Book;
@@ -29,9 +31,14 @@ export const AllBooks = ({}: allBooksParams) => {
     sortByOrder,
     sortByValue,
     sortByPresence,
+    pageNumber,
+    rowsPerPage,
+    totalItems,
     handleSortPresence,
     handleSortOrder,
     handleSortValue,
+    handleRowsPerPage,
+    handlePageNumber,
   } = useAllBooks({});
   const classes = useAllBooksStyles();
 
@@ -113,6 +120,29 @@ export const AllBooks = ({}: allBooksParams) => {
           </Typography>
         )}
       </Grid>
+      <Box className={classes.paginationWrap}>
+        <TablePagination
+          component="div"
+          count={totalItems}
+          page={pageNumber}
+          onPageChange={handlePageNumber}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleRowsPerPage}
+        />
+      </Box>
     </Box>
   );
 };
+
+{
+  /* <MenuItem value={GoogleOrderByValues.author}>author</MenuItem> */
+}
+{
+  /* <MenuItem value={GoogleOrderByValues.newest}>newest</MenuItem> */
+}
+{
+  /* <MenuItem value={GoogleOrderByValues.oldest}>oldest</MenuItem> */
+}
+{
+  /* <MenuItem value={GoogleOrderByValues.relevance}>relevance</MenuItem> */
+}

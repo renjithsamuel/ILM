@@ -4,7 +4,7 @@ export interface IBook {
   title: string;
   author: string;
   genre: string;
-  publishedDate: string;
+  publishedDate: Date;
   desc: string;
   previewLink?: string;
   coverImage: string;
@@ -30,7 +30,7 @@ export class Book implements IBook {
   title: string;
   author: string;
   genre: string;
-  publishedDate: string;
+  publishedDate: Date;
   desc: string;
   previewLink?: string;
   coverImage: string;

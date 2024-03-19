@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { ThemeProvider } from "@mui/styles";
 import customTheme from "@/styles/theme";
-import { NoSsr } from "@mui/material";
+import { CssBaseline, NoSsr } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Poppins } from "next/font/google";
 import createEmotionCache from "@/utils/createEmotionCache";
@@ -36,22 +36,24 @@ export default function App({
 }: MyAppProps) {
   return (
     <ErrorBoundary>
-      <ThemeProvider theme={customTheme}>
-        <CacheProvider value={emotionCache}>
-          <QueryClientProvider client={queryClient}>
-            <main className={poppins.className}>
-              <PageContextProvider>
-                <UserContextProvider>
-                  <NoSsr>
-                    {" "}
-                    <Component {...pageProps} />
-                  </NoSsr>
-                </UserContextProvider>
-              </PageContextProvider>
-            </main>
-          </QueryClientProvider>
-        </CacheProvider>
-      </ThemeProvider>
+      <NoSsr>
+        <CssBaseline>
+          <ThemeProvider theme={customTheme}>
+            <CacheProvider value={emotionCache}>
+              <QueryClientProvider client={queryClient}>
+                <main className={poppins.className}>
+                  <PageContextProvider>
+                    <UserContextProvider>
+                      {" "}
+                      <Component {...pageProps} />
+                    </UserContextProvider>
+                  </PageContextProvider>
+                </main>
+              </QueryClientProvider>
+            </CacheProvider>
+          </ThemeProvider>
+        </CssBaseline>
+      </NoSsr>
     </ErrorBoundary>
   );
 }
