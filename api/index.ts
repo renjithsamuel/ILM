@@ -16,15 +16,15 @@ export const queryClient = new QueryClient({
 });
 
 export const PublicAxios = axios.create({
-  baseURL: "http://localhost:8000/ilm-service/v1/",
+  // baseURL: "http://localhost:8000/ilm-service/v1/",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
 export const PrivateAxios = axios.create({
-  baseURL: "http://localhost:8000/ilm-service/v1/",
-  // baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
   headers: {
     authorization: `Bearer ${Cookie.access_token}`,
     "Content-Type": "application/json",
@@ -32,7 +32,8 @@ export const PrivateAxios = axios.create({
 });
 
 export const GoogleBooksAxios = axios.create({
-  baseURL: "https://www.googleapis.com/books",
+  baseURL: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+  // baseURL: "https://www.googleapis.com/books",
   headers: {
     "Content-Type": "application/json",
   },
