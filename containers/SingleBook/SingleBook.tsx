@@ -4,15 +4,21 @@ import {
   Button,
   Dialog,
   Divider,
+  FormControl,
   Grid,
+  InputLabel,
   List,
+  MenuItem,
   Rating,
+  Select,
+  TablePagination,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
 import {
+  ReviewSortValue,
   singleBookKeyValues,
 } from "@/constants/GlobalConstants";
 import { BookGridItem } from "@/components/BookGridItem/BookGridItem";
@@ -58,6 +64,14 @@ export const SingleBook = ({}: singleBookParams) => {
     setIsModifyCountOpen,
     handleCheckoutFlow,
     handleAddToWishList,
+    // pagination and sorting
+    totalPages,
+    sortByValue,
+    pageNumber,
+    rowsPerPage,
+    handleRowsPerPage,
+    handlePageNumber,
+    handleSortValue,
   } = useSingleBook({});
 
   if (!book) {
@@ -238,7 +252,7 @@ export const SingleBook = ({}: singleBookParams) => {
                     <Button
                       variant="contained"
                       className={classes.reserveNowBtn}
-                      disabled={!checkoutData?.isReturned}
+                      disabled={isBookCompleted || !checkoutData?.isReturned}
                       onClick={handleAddComment}
                     >
                       <Typography
@@ -286,10 +300,38 @@ export const SingleBook = ({}: singleBookParams) => {
           >
           </Document> */}
         </Box>
+        {/* comments */}
         <Box>
-          <Typography variant="h6" className={classes.commentsLabel}>
-            {"Comments"}
-          </Typography>
+          <Box className={classes.commentLabelWrap}>
+            <Typography variant="h6" className={classes.commentsLabel}>
+              {"Comments"}
+            </Typography>
+            <Box className={classes.sortByContainer}>
+              {/* sort by */}
+              <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+                <InputLabel id="demo-controlled-open-select-label">
+                  Sort By
+                </InputLabel>
+                <Select
+                  labelId="demo-controlled-open-select-label"
+                  id="demo-controlled-open-select"
+                  value={sortByValue}
+                  label="Sort By"
+                  onChange={handleSortValue}
+                >
+                  <MenuItem value={ReviewSortValue.likes}>
+                    {ReviewSortValue.likes}
+                  </MenuItem>
+                  <MenuItem value={ReviewSortValue.newest}>
+                    {ReviewSortValue.newest}
+                  </MenuItem>
+                  <MenuItem value={ReviewSortValue.oldest}>
+                    {ReviewSortValue.oldest}
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Box>
           <Box className={classes.singleBookComments}>
             {/* Book Comments, Currently Under Work */}
             <List sx={{ width: "100%", bgcolor: "transparent" }}>
@@ -303,6 +345,16 @@ export const SingleBook = ({}: singleBookParams) => {
                 </Typography>
               )}
             </List>
+          </Box>
+          <Box className={classes.paginationWrap}>
+            <TablePagination
+              component="div"
+              count={totalPages}
+              page={pageNumber}
+              onPageChange={handlePageNumber}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleRowsPerPage}
+            />
           </Box>
         </Box>
       </Box>

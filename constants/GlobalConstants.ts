@@ -102,7 +102,6 @@ export const singleBookKeyValues: BookKeyValues[] = [
   },
 ];
 
-
 export enum UserBookDetailType {
   Name = "name",
   Reserved = "reserved",
@@ -146,19 +145,36 @@ export enum SearchSortValue {
   genre = "genre",
   publishedDate = "publishedDate",
   shelfNumber = "shelfNumber",
+  rating = "rating",
+  reviewCount = "reviewCount",
   username = "username",
   email = "email",
   userViews = "userViews",
-  rating = "rating",
-  reviewCount = "reviewCount",
+}
+
+export enum SearchByValue {
+  title = "title",
+  author = "author",
+  genre = "genre",
+  isbn = "isbn", // todo handle this
+  username = "username",
+  email = "email",
 }
 
 export enum TransactionSortValue {
-  returnedOn = "Returned On",
-  checkedoutOn = "Checkedout On",
-  reservedOn = "Reserved On",
-  fineAmount = "Fine Amount",
+  returnedOn = "returnedOn",
+  checkedoutOn = "checkedoutOn",
+  reservedOn = "reservedOn",
+  fineAmount = "fineAmount",
 }
+
+export enum ReviewSortValue {
+  likes = "likes",
+  newest = "newest",
+  oldest = "oldest",
+}
+
+// todo add search for review and checkout
 
 export enum EntityTypes {
   UserEntity = "user",

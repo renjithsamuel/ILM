@@ -33,6 +33,12 @@ export const useAllBooksStyles = makeStyles((theme) => ({
       fontSize: "20px",
     },
   },
+  sortByContainer: {
+    display: "flex",
+    width: "25vw",
+    alignSelf: "start",
+    gap: theme.spacing(2),
+  },
   paginationWrap: {
     width: "80vw",
     position: "sticky",

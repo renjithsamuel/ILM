@@ -4,6 +4,7 @@ import { useUpdateBookDetailsAPI } from "@/api/BookDetails/updateBookDetails";
 import { useCreateCheckoutAPI } from "@/api/Checkout/createCheckout";
 import { useGetCheckoutByUserIDAPI } from "@/api/Checkout/getCheckoutByUserID";
 import { useGetAllReviewsByBookIDAPI } from "@/api/Review/getReviews";
+import { ReviewSortValue, SortOrder } from "@/constants/GlobalConstants";
 import { Role } from "@/constants/Role";
 import { usePageContext } from "@/context/PageContext";
 import { useUserContext } from "@/context/UserContext";
@@ -11,6 +12,7 @@ import { Book } from "@/entity/Book/Book";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
 import { Review } from "@/entity/Review/Review";
 import { User } from "@/entity/User/User";
+import { SelectChangeEvent } from "@mui/material";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 interface SingleBookHookProps {}
@@ -31,6 +33,19 @@ interface SingleBookHook {
   setIsModifyCountOpen: Dispatch<SetStateAction<boolean | undefined>>;
   handleAddToWishList: () => void;
   isBookCompleted: boolean;
+  // pagination and sorting
+  sortByValue: ReviewSortValue;
+  totalPages: number;
+  pageNumber: number;
+  rowsPerPage: number;
+  handleRowsPerPage: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handlePageNumber: (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    val: number
+  ) => void;
+  handleSortValue: (event: SelectChangeEvent) => void;
 }
 
 // todo whenever users gets to this page, increment the views
@@ -41,6 +56,16 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   // const [commentList, setCommentList] = useState<Review[]>([]);
   const [isModifyCountOpen, setIsModifyCountOpen] = useState<boolean>();
   const [isAddCommentOpen, setIsAddCommentOpen] = useState<boolean>();
+  const [isBookCompleted, setIsBookCompleted] = useState<boolean>(false);
+
+  // pagination related
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
+  const [sortByValue, setSortByValue] = useState<ReviewSortValue>(
+    ReviewSortValue.newest
+  );
+
   const { user } = useUserContext();
 
   // update book
@@ -64,7 +89,15 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     );
   // get all reviews
   const { data: reviewsData, isError: isGetReviewError } =
-    useGetAllReviewsByBookIDAPI(bookData?.data.ID, !!bookData?.data.ID);
+    useGetAllReviewsByBookIDAPI(
+      {
+        bookID: bookData?.data.ID,
+        sortBy: sortByValue,
+        limit: rowsPerPage,
+        page: pageNumber,
+      },
+      !!bookData?.data.ID
+    );
 
   const {
     mutateAsync: createCheckout,
@@ -233,9 +266,16 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   }, []);
 
   // isBookCompleted?
-  const isBookCompleted: boolean =
-    !!bookData?.data &&
-    !!user.bookDetails?.completedBooksList.includes(bookData?.data.ISBN);
+  useEffect(() => {
+    if (!!bookData?.data) {
+      const tempIsBookCompleted: boolean =
+        !!user.bookDetails?.completedBooksList.includes(bookData?.data.ISBN);
+      console.log("tempIsBookCompleted", tempIsBookCompleted);
+      if (tempIsBookCompleted != undefined) {
+        setIsBookCompleted(tempIsBookCompleted);
+      }
+    }
+  }, [user.bookDetails?.completedBooksList, bookData?.data]);
 
   // book
   useEffect(() => {
@@ -307,9 +347,35 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
 
   // checkout data
   const checkoutReturned = checkoutsData?.data.find((item) => item.isReturned);
+
+  // sorting
+  const handleSortValue = (event: SelectChangeEvent): void => {
+    event.target.value && setSortByValue(event.target.value as ReviewSortValue);
+  };
+
+  // pagination
+  const handleRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    if (event.target.value) {
+      setRowsPerPage(Number.parseInt(event.target.value, 10));
+      setPageNumber(1); // Reset page number when rows per page changes
+    }
+  };
+
+  const handlePageNumber = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    val: number
+  ): void => {
+    if (val) {
+      setPageNumber(val);
+    }
+  };
+
   return {
     checkoutData: checkoutReturned,
-    commentList: reviewsData?.data,
+    commentList: reviewsData?.data.reviews,
+    totalPages: reviewsData?.data.totalPages ?? -1,
     user,
     book: bookData?.data,
     userType,
@@ -323,5 +389,13 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     handleAddToLibrary,
     handleCheckoutFlow,
     handleAddToWishList,
+    // pagination and sorting
+
+    sortByValue,
+    pageNumber,
+    rowsPerPage,
+    handleRowsPerPage,
+    handlePageNumber,
+    handleSortValue,
   };
 };

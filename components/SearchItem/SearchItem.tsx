@@ -56,7 +56,7 @@ export const SearchItemComponent = ({
       <Box
         className={classes.searchItemRoot}
         component={Link}
-        href={`/allbooks/${searchItem.entityID}`}
+        href={`/allbooks/${searchItem?.ISBN}`}
         onClick={handleCloseDialog}
       >
         <Box>

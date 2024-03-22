@@ -21,4 +21,6 @@ export enum QueryKeys {
   // Review Related
   GET_REVIEW = "GET_REVIEW",
   GET_REVIEWS = "GET_REVIEWS",
+  // Search Related
+  SEARCH_DIALOG = "SEARCH_DIALOG",
 }

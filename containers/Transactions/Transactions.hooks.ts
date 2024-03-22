@@ -51,8 +51,14 @@ export const useTransactions =
     );
     const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
-    const { data: ticketsData, isError: isTicketError } =
-      useGetAllCheckoutsAPI();
+    const { data: ticketsData, isError: isTicketError } = useGetAllCheckoutsAPI(
+      {
+        orderBy: sortByOrder,
+        sortBy: sortByValue,
+        limit: rowsPerPage,
+        page: pageNumber,
+      }
+    );
 
     console.log("ticketsData", ticketsData?.data);
 
@@ -109,8 +115,8 @@ export const useTransactions =
     };
 
     return {
-      checkedOutList: ticketsData?.data,
-      totalPages : -1,
+      checkedOutList: ticketsData?.data.checkoutTickets,
+      totalPages: ticketsData?.data.totalPages ?? -1,
       searchText,
       sortByOrder,
       sortByValue,

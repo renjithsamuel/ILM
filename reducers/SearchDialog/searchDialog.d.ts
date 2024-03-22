@@ -2,6 +2,7 @@ import { SearchItem } from "@/entity/SearchItem/SearchItem";
 import { SearchDialogTypes } from "./searchDialog.types";
 import {
   EntityTypes,
+  SearchByValue,
   SearchSortValue,
   SortOrder,
   SortPresence,
@@ -23,20 +24,24 @@ declare namespace RSearchDialog {
     searchText: string;
     openDialog: boolean;
     searchResultList: SearchItem[];
+    searchByValue: SearchByValue;
     sortByValue: SearchSortValue;
     sortByOrder: SortOrder;
     sortByEntity: EntityTypes;
-    sortByPresence: SortPresence;
+    pageNumber: number;
+    rowsPerPage: number;
   }
 
   type SearchDialogPayload = {
     [SearchDialogTypes.SetSearchText]: { searchText: string };
     [SearchDialogTypes.SetOpenDialog]: { openDialog: boolean };
     [SearchDialogTypes.SetSearchResultList]: { searchResults: SearchItem[] };
+    [SearchDialogTypes.SetSearchByValue]: { searchByValue: SearchByValue };
     [SearchDialogTypes.SetSortByValue]: { sortByValue: SearchSortValue };
     [SearchDialogTypes.SetSortByOrder]: { sortByOrder: SortOrder };
     [SearchDialogTypes.SetSortByEntity]: { sortByEntity: EntityTypes };
-    [SearchDialogTypes.SetSortByPresence]: { sortByPresence: SortPresence };
+    [SearchDialogTypes.SetPageNumber]: { pageNumber: number };
+    [SearchDialogTypes.SetRowsPerPage]: { rowsPerPage: number };
   };
 
   type SearchDialogActions =

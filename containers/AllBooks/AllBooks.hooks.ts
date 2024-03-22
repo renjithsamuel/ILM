@@ -8,19 +8,20 @@ import { GoogleOrderByValues } from "@/constants/GoogleAPI";
 import { usePageContext } from "@/context/PageContext";
 import { Book } from "@/entity/Book/Book";
 import { SelectChangeEvent } from "@mui/material";
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 interface allBooksHookProps {}
 
 interface allBooksHook {
   totalItems: number;
-  bookList: Book[] | undefined;
+  bookList: Book[];
   isGetNewAllBooksLoading: boolean;
   pageNumber: number;
   rowsPerPage: number;
+  sortByOrder: SortOrder;
+  sortByValue: BookSortValue;
+  handleSortOrder: (event: SelectChangeEvent) => void;
+  handleSortValue: (event: SelectChangeEvent) => void;
   handleRowsPerPage: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -34,15 +35,28 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   const { setSnackBarError } = usePageContext();
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const [sortByGoogleValue, setSortByGoogleValue] =
-    useState<GoogleOrderByValues>(GoogleOrderByValues.newest);
+  const [bookList, setBookList] = useState<Book[]>([]);
+  const [sortByValue, setSortByValue] = useState<BookSortValue>(
+    BookSortValue.wishlistCount
+  );
+  const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
   // Fetch books from Google API
-  const { data: getNewAllBooksData, isLoading : isGetNewAllBooksLoading,isError: isgetNewAllBooksDataError } =
-    useGetNewBooksGoogleAPI({
-      limit: rowsPerPage,
-      orderBy: sortByGoogleValue,
-      page: pageNumber,
-    });
+  const {
+    data: getNewAllBooksData,
+    isLoading: isGetNewAllBooksLoading,
+    isError: isgetNewAllBooksDataError,
+  } = useGetNewBooksGoogleAPI({
+    limit: rowsPerPage,
+    sortBy: sortByValue,
+    orderBy: sortByOrder,
+    page: pageNumber,
+  });
+
+  useMemo(() => {
+    if (!!getNewAllBooksData?.data.books) {
+      setBookList(getNewAllBooksData?.data.books);
+    }
+  }, [getNewAllBooksData?.data.books]);
 
   const handleRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -62,6 +76,16 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
     }
   };
 
+  const handleSortValue = useCallback((event: SelectChangeEvent): void => {
+    event.target.value && setSortByValue(event.target.value as BookSortValue);
+  }, []);
+
+  const handleSortOrder = useCallback((event: SelectChangeEvent): void => {
+    (event.target.value === SortOrder.asc ||
+      event.target.value === SortOrder.desc) &&
+      setSortByOrder(event.target.value as SortOrder);
+  }, []);
+
   // Handle error
 
   useEffect(() => {
@@ -74,11 +98,15 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   }, [isgetNewAllBooksDataError]);
 
   return {
-    bookList: getNewAllBooksData?.data.books,
+    bookList,
     totalItems: getNewAllBooksData?.data.totalPages || -1,
     isGetNewAllBooksLoading,
     pageNumber,
     rowsPerPage,
+    sortByOrder,
+    sortByValue,
+    handleSortOrder,
+    handleSortValue,
     handleRowsPerPage,
     handlePageNumber,
   };

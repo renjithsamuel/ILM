@@ -219,4 +219,23 @@ export const useSingleBookStyles = makeStyles((theme) => ({
       fontSize: "20px",
     },
   },
+  sortByContainer: {
+    display: "flex",
+    width: "auto",
+    alignSelf: "start",
+    gap: theme.spacing(2),
+  },
+  paginationWrap: {
+    width: "80vw",
+    position: "sticky",
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  commentLabelWrap: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 }));

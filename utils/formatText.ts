@@ -30,6 +30,14 @@ export class FormatTextUtil {
     return words.join(" ");
   };
 
+  public static sliceText = (text: string): string => {
+    if (typeof text !== "string" || text?.length === 0) {
+      return text;
+    }
+    const words = text.split(" ");
+    return words?.slice(0, 8).join(" ") + ".";
+  };
+
   public static formatNumberToK = (number: number): string => {
     if (typeof number !== "number" || number <= 499) {
       return String(number);

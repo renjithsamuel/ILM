@@ -3,16 +3,13 @@ import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
 import { Role } from "@/constants/Role";
 import { usePageContext } from "@/context/PageContext";
 import { User } from "@/entity/User/User";
-import { mockUsers } from "@/entity/User/User.mock";
-import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
-import { mockbookDetailsArray } from "@/entity/UserBookDetails/UserBookDetails.mock";
 import { SelectChangeEvent } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface allUsersHookProps {}
 
 interface allUsersHook {
-  pendingUsers: User[] | undefined;
+  pendingUsers: User[];
   sortByValue: UserBookDetailType;
   sortByOrder: SortOrder;
   totalPages: number;
@@ -31,6 +28,7 @@ interface allUsersHook {
 
 export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
   const { setSnackBarError } = usePageContext();
+  const [pendingUsers, setPendingUsers] = useState<User[]>([]);
   // pagination related
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
@@ -46,9 +44,18 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
     isSuccess: isPendingUsersSuccess,
     isError: isPendingUsersError,
     isLoading: isPendingUsersLoading,
-  } = useGetAllUsersAPI();
+  } = useGetAllUsersAPI({
+    orderBy: sortByOrder,
+    sortBy: sortByValue,
+    limit: rowsPerPage,
+    page: pageNumber,
+  });
 
-  console.log("pendingUsersData", pendingUsersData?.data);
+  useMemo(() => {
+    if (!!pendingUsersData?.data.users) {
+      setPendingUsers(pendingUsersData?.data.users);
+    }
+  }, [pendingUsersData?.data.users]);
 
   // sorting
   const handleSortValue = (event: SelectChangeEvent): void => {
@@ -88,9 +95,9 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
   }, [isPendingUsersError]);
 
   return {
-    pendingUsers: pendingUsersData?.data,
+    pendingUsers,
     // pendingUsers: mockUserMock,
-    totalPages : -1,
+    totalPages: pendingUsersData?.data.totalPages ?? -1,
     sortByValue,
     sortByOrder,
     pageNumber,
