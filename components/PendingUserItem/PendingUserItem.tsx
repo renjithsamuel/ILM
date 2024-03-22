@@ -96,13 +96,6 @@ const bookCounts = [
     borderColor: "green",
   },
   {
-    title: "books Pending",
-    label: "pending",
-    detailType: UserBookDetailType.Pending,
-    getbookCount: (bookDetails: IBookDetails) => bookDetails.pendingBooksCount,
-    borderColor: themeValues.color.rubyRed,
-  },
-  {
     title: "books Completed",
     label: "Completed",
     detailType: UserBookDetailType.Completed,
@@ -116,6 +109,6 @@ const bookCounts = [
     detailType: UserBookDetailType.WishLists,
     getbookCount: (bookDetails: IBookDetails) =>
       bookDetails.wishlistBooks.length,
-    borderColor: themeValues.color.color2,
+    borderColor: themeValues.color.rubyRed,
   },
 ];

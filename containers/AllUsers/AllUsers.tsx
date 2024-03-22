@@ -38,7 +38,6 @@ export const AllUsers = ({}: allUsersParams) => {
             label="Sort By"
             onChange={handleSortValue}
           >
-            <MenuItem value={UserBookDetailType.Pending}>Pending</MenuItem>
             <MenuItem value={UserBookDetailType.Reserved}>Reserved</MenuItem>
             <MenuItem value={UserBookDetailType.CheckedOut}>
               Checked Out

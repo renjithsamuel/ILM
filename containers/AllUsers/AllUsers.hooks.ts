@@ -34,7 +34,7 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const [sortByValue, setSortByValue] = useState<UserBookDetailType>(
-    UserBookDetailType.Pending
+    UserBookDetailType.WishLists
   );
   const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 

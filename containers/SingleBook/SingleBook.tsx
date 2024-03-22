@@ -227,7 +227,7 @@ export const SingleBook = ({}: singleBookParams) => {
                 className={classes.wishlistBtn}
                 onClick={handleAddToWishList}
               >
-                <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
+                <Typography variant="body2" sx={{ mr: theme.spacing(0.3) }}>
                   {wishlisted ? "Wishlisted" : "Wishlist"}
                 </Typography>
                 <IoHeartSharp size={theme.spacing(2.2)} />

@@ -78,7 +78,7 @@ export const searchDialogReducer: Reducer<
     case SearchDialogTypes.SetRowsPerPage:
       return {
         ...state,
-        pageNumber: payload.rowsPerPage,
+        rowsPerPage: payload.rowsPerPage,
       };
 
     default:

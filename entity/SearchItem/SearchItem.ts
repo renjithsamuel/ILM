@@ -2,6 +2,7 @@ import { EntityTypes } from "@/constants/GlobalConstants";
 
 export interface ISearchItem {
   entityID: string;
+  author?: string;
   ISBN?: string;
   entityType: EntityTypes;
   views: number;
@@ -14,6 +15,7 @@ export interface ISearchItem {
 export class SearchItem implements ISearchItem {
   entityID: string;
   ISBN?: string;
+  author?: string;
   entityType: EntityTypes;
   views: number;
   bookname?: string;
@@ -24,6 +26,7 @@ export class SearchItem implements ISearchItem {
   constructor(searchItem: ISearchItem) {
     this.entityID = searchItem.entityID;
     this.ISBN = searchItem.ISBN;
+    this.author = searchItem.author;
     this.entityType = searchItem.entityType;
     this.views = searchItem.views;
     this.bookname = searchItem.bookname;

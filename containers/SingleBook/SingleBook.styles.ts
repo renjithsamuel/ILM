@@ -150,7 +150,6 @@ export const useSingleBookStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    gap: theme.spacing(4),
     backgroundColor: themeValues.color.rubyRed,
     color: themeValues.color.white,
     "&:hover": {

@@ -114,6 +114,7 @@ export const useSearchDialog = ({
               bookDescription: FormatTextUtil.sliceText(book.desc),
               bookname: book.title,
               ISBN: book.ISBN,
+              author: book.author,
             });
           });
           // dispatch

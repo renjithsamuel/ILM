@@ -75,7 +75,11 @@ export const useSearchDialogStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   paginationWrap: {
-    width: "100%",
+    zIndex: 1,
+    backgroundColor: themeValues.color.white,
+    borderRadius: themeValues.border.borderRadiusHigh,
+    boxShadow: themeValues.shadow.boxShadowboxy,
+    width: "auto",
     position: "sticky",
     bottom: 0,
     display: "flex",

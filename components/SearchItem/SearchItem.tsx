@@ -5,6 +5,7 @@ import Link from "next/link";
 import { IBookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 import { SearchItem } from "@/entity/SearchItem/SearchItem";
 import { EntityTypes } from "@/constants/GlobalConstants";
+import { FormatTextUtil } from "@/utils/formatText";
 
 interface searchItemParams {
   searchItem: SearchItem;
@@ -63,11 +64,14 @@ export const SearchItemComponent = ({
           {/* Left */}
           {/* Book Name */}
           <Typography className={classes.bookName} variant="body1">
-            {searchItem.bookname}
+            {!!searchItem.bookname &&
+              FormatTextUtil.sliceText(searchItem.bookname)}
           </Typography>
           {/* Book description */}
           <Typography className={classes.bookDescription} variant="body2">
-            {searchItem.bookDescription}
+            {searchItem.author !== ""
+              ? searchItem.author
+              : searchItem.bookDescription}
           </Typography>
         </Box>
         <Box className={classes.entityType}>
