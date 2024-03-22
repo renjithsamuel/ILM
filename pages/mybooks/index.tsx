@@ -9,7 +9,7 @@ export default function SingleUserPage() {
       showSearchBar
       pageName={sideMenuItems.MyBooks.name}
     >
-      <MyBooks/>
+      <MyBooks />
     </BaseLayout>
   );
 }

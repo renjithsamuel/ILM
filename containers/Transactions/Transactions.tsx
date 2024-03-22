@@ -1,4 +1,12 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TablePagination,
+  Typography,
+} from "@mui/material";
 import { useTransactionsStyles } from "./Transactions.styles";
 import {
   MdDone,
@@ -19,9 +27,14 @@ interface transactionsParams {}
 export const Transactions = ({}: transactionsParams) => {
   const {
     checkedOutList,
+    totalPages,
     searchText,
     sortByOrder,
     sortByValue,
+    pageNumber,
+    rowsPerPage,
+    handleRowsPerPage,
+    handlePageNumber,
     handleSortOrder,
     handleSortValue,
     handleSearch,
@@ -114,9 +127,25 @@ export const Transactions = ({}: transactionsParams) => {
         </Box>
         {/* accordion wrap */}
         <Box>
-          {checkedOutList.map((item, index) => (
-            <CheckoutItem key={index} checkoutItem={item} />
-          ))}
+          {checkedOutList && checkedOutList.length > 0 ? (
+            checkedOutList.map((item) => (
+              <CheckoutItem key={item.ID} checkoutItem={item} />
+            ))
+          ) : (
+            <Typography variant="h4" className={classes.noBooksText}>
+              No Transactions
+            </Typography>
+          )}
+        </Box>
+        <Box className={classes.paginationWrap}>
+          <TablePagination
+            component="div"
+            count={totalPages}
+            page={pageNumber}
+            onPageChange={handlePageNumber}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleRowsPerPage}
+          />
         </Box>
       </Box>
     </>

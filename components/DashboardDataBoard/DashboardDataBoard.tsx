@@ -1,10 +1,6 @@
-import { Tooltip } from "@material-ui/core";
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import { useDashboardDataBoardStyles } from "./DashboardDataBoard.styles";
 import { themeValues } from "@/constants/ThemeConstants";
-import Link from "next/link";
-import { IBookDetails } from "@/entity/UserBookDetails/UserBookDetails";
-import { UserBookDetailType } from "@/constants/GlobalConstants";
 import theme from "@/styles/theme";
 
 interface dashboardDataBoardParams {}

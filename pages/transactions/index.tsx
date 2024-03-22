@@ -9,7 +9,7 @@ export default function TransactionsPage() {
       showSearchBar
       pageName={sideMenuItems.Transactions.name}
     >
-      <Transactions/>
+      <Transactions />
     </BaseLayout>
   );
 }

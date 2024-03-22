@@ -10,6 +10,7 @@ import { GoEye } from "react-icons/go";
 import { IoMdHeart } from "react-icons/io";
 import { themeValues } from "@/constants/ThemeConstants";
 import { BiSolidMessageDetail } from "react-icons/bi";
+import { FormatTextUtil } from "@/utils/formatText";
 
 interface BookGridItemProps {
   book: Book;
@@ -23,9 +24,9 @@ export const BookGridItem = ({ book }: BookGridItemProps) => {
     <Box className={classes.bookItemContainer}>
       <Box
         className={classes.bookImageWrap}
-        onClick={() => handleBookItemClick(book.ID)}
+        onClick={() => handleBookItemClick(book.ISBN)}
       >
-        <Image
+        <img
           src={book.coverImage}
           width={90}
           height={120}
@@ -46,27 +47,28 @@ export const BookGridItem = ({ book }: BookGridItemProps) => {
         {/* views */}
         <Tooltip title={"views"} placement="top">
           <Box className={classes.bookCount}>
-            <GoEye /> {book.views}
+            <GoEye /> {FormatTextUtil.formatNumberToK(book.views)}
           </Box>
         </Tooltip>
         {/* stock */}
         {book.inLibrary && (
           <Tooltip title={"stock"} placement="top">
             <Box className={classes.bookCount}>
-              <SiBookstack /> {book.booksLeft}
+              <SiBookstack /> {FormatTextUtil.formatNumberToK(book.booksLeft)}
             </Box>
           </Tooltip>
         )}
         {/* wishlist */}
         <Tooltip title={"wishlists"} placement="top">
           <Box className={classes.bookCount}>
-            <IoMdHeart /> {book.wishlistCount}
+            <IoMdHeart /> {FormatTextUtil.formatNumberToK(book.wishlistCount)}
           </Box>
         </Tooltip>
         {/* reviews */}
         <Tooltip title={"reviews"} placement="top">
           <Box className={classes.bookCount}>
-            <BiSolidMessageDetail /> {book.reviewCount}
+            <BiSolidMessageDetail />{" "}
+            {FormatTextUtil.formatNumberToK(book.reviewCount)}
           </Box>
         </Tooltip>
       </Box>

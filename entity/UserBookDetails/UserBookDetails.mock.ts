@@ -1,10 +1,8 @@
-import { BookGenre } from "@/constants/BookGenre";
 import { mockBook } from "../Book/Book.mock";
 import { BookDetails } from "./UserBookDetails";
 
 export const mockbookDetails: BookDetails = {
   userID: "123456",
-  hasPendingBooks: true,
   pendingBooksCount: 2,
   pendingBooksList: [mockBook.ID],
   checkedOutBooksCount: 2,
@@ -12,7 +10,7 @@ export const mockbookDetails: BookDetails = {
   reservedBooksCount: 2,
   reservedBookList: [mockBook.ID],
   wishlistBooks: [mockBook.ID],
-  favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+  favoriteGenres: ["adventure", "science-fiction"],
   completedBooksCount: 2,
   completedBooksList: [mockBook.ID],
   createdAt: new Date(),
@@ -22,7 +20,6 @@ export const mockbookDetails: BookDetails = {
 export const mockbookDetailsArray: BookDetails[] = [
   {
     userID: "123456",
-    hasPendingBooks: true,
     pendingBooksCount: 10,
     pendingBooksList: [mockBook.ID],
     checkedOutBooksCount: 30,
@@ -30,7 +27,7 @@ export const mockbookDetailsArray: BookDetails[] = [
     reservedBooksCount: 10,
     reservedBookList: [mockBook.ID],
     wishlistBooks: [mockBook.ID],
-    favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+    favoriteGenres: ["adventure", "science-fiction"],
     completedBooksCount: 2,
     completedBooksList: [mockBook.ID],
     createdAt: new Date(),
@@ -38,7 +35,6 @@ export const mockbookDetailsArray: BookDetails[] = [
   },
   {
     userID: "123457",
-    hasPendingBooks: true,
     pendingBooksCount: 20,
     pendingBooksList: [mockBook.ID],
     checkedOutBooksCount: 20,
@@ -46,7 +42,7 @@ export const mockbookDetailsArray: BookDetails[] = [
     reservedBooksCount: 30,
     reservedBookList: [mockBook.ID],
     wishlistBooks: [mockBook.ID],
-    favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+    favoriteGenres: ["adventure", "science-fiction"],
     completedBooksCount: 2,
     completedBooksList: [mockBook.ID],
     createdAt: new Date(),
@@ -54,7 +50,6 @@ export const mockbookDetailsArray: BookDetails[] = [
   },
   {
     userID: "123458",
-    hasPendingBooks: true,
     pendingBooksCount: 30,
     pendingBooksList: [mockBook.ID],
     checkedOutBooksCount: 10,
@@ -62,7 +57,7 @@ export const mockbookDetailsArray: BookDetails[] = [
     reservedBooksCount: 20,
     reservedBookList: [mockBook.ID],
     wishlistBooks: [mockBook.ID],
-    favoriteGenres: [BookGenre.Adventure, BookGenre.ScienceFiction],
+    favoriteGenres: ["adventure", "science-fiction"],
     completedBooksCount: 2,
     completedBooksList: [mockBook.ID],
     createdAt: new Date(),

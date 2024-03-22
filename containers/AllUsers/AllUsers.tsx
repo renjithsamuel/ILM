@@ -1,6 +1,6 @@
 import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useAllUsers } from "./AllUsers.hooks";
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem, Select, TablePagination } from "@mui/material";
 import { useAllUsersStyles } from "./AllUsers.styles";
 import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
 
@@ -11,9 +11,13 @@ interface allUsersParams {
 export const AllUsers = ({}: allUsersParams) => {
   const {
     pendingUsers,
-    getBookDetails,
     sortByOrder,
     sortByValue,
+    pageNumber,
+    rowsPerPage,
+    totalPages,
+    handleRowsPerPage,
+    handlePageNumber,
     handleSortValue,
     handleSortOrder,
   } = useAllUsers({});
@@ -34,7 +38,6 @@ export const AllUsers = ({}: allUsersParams) => {
             label="Sort By"
             onChange={handleSortValue}
           >
-            <MenuItem value={UserBookDetailType.Pending}>Pending</MenuItem>
             <MenuItem value={UserBookDetailType.Reserved}>Reserved</MenuItem>
             <MenuItem value={UserBookDetailType.CheckedOut}>
               Checked Out
@@ -61,18 +64,30 @@ export const AllUsers = ({}: allUsersParams) => {
         </FormControl>
       </Box>
       <Box>
-        {pendingUsers.map((user, index) => {
-          return (
-            <PendingUserItem
-              key={index}
-              userID={user.userID}
-              userName={user.name}
-              email={user.email}
-              bookDetails={getBookDetails(user.userID)}
-              sortByValue={sortByValue}
-            />
-          );
-        })}
+        {pendingUsers &&
+          pendingUsers.length > 0 &&
+          pendingUsers?.map((user) => {
+            return (
+              <PendingUserItem
+                key={user.userID}
+                userID={user.userID}
+                userName={user.name}
+                email={user.email}
+                bookDetails={user.bookDetails}
+                sortByValue={sortByValue}
+              />
+            );
+          })}
+      </Box>
+      <Box className={classes.paginationWrap}>
+        <TablePagination
+          component="div"
+          count={totalPages}
+          page={pageNumber}
+          onPageChange={handlePageNumber}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleRowsPerPage}
+        />
       </Box>
     </Box>
   );

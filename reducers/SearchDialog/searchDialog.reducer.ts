@@ -3,6 +3,7 @@ import { RSearchDialog } from "./searchDialog";
 import { SearchDialogTypes } from "./searchDialog.types";
 import {
   EntityTypes,
+  SearchByValue,
   SearchSortValue,
   SortOrder,
   SortPresence,
@@ -13,9 +14,11 @@ export const initialSearchDialogValues: RSearchDialog.ISearchDialog = {
   openDialog: true,
   searchResultList: [],
   sortByValue: SearchSortValue.wishlistCount,
+  searchByValue: SearchByValue.title,
   sortByOrder: SortOrder.asc,
-  sortByEntity: EntityTypes.BookAndUser,
-  sortByPresence: SortPresence.both,
+  sortByEntity: EntityTypes.BookEntity,
+  pageNumber: 1,
+  rowsPerPage: 10,
 };
 
 export const searchDialogReducer: Reducer<
@@ -42,6 +45,12 @@ export const searchDialogReducer: Reducer<
         searchResultList: payload.searchResults,
       };
 
+    case SearchDialogTypes.SetSearchByValue:
+      return {
+        ...state,
+        searchByValue: payload.searchByValue,
+      };
+
     case SearchDialogTypes.SetSortByValue:
       return {
         ...state,
@@ -60,10 +69,16 @@ export const searchDialogReducer: Reducer<
         sortByEntity: payload.sortByEntity,
       };
 
-    case SearchDialogTypes.SetSortByPresence:
+    case SearchDialogTypes.SetPageNumber:
       return {
         ...state,
-        sortByPresence: payload.sortByPresence,
+        pageNumber: payload.pageNumber,
+      };
+
+    case SearchDialogTypes.SetRowsPerPage:
+      return {
+        ...state,
+        rowsPerPage: payload.rowsPerPage,
       };
 
     default:

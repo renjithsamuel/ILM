@@ -1,6 +1,6 @@
 import { Role } from "@/constants/Role";
 import { IBook } from "../Book/Book";
-import { BookGenre } from "@/constants/BookGenre";
+import { BookDetails, IBookDetails } from "../UserBookDetails/UserBookDetails";
 
 export interface IUser {
   userID: string;
@@ -17,6 +17,7 @@ export interface IUser {
   fineAmount: number;
   password?: string;
   isPaymentDone: boolean;
+  bookDetails?: IBookDetails;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -36,6 +37,7 @@ export class User implements IUser {
   password?: string;
   fineAmount: number;
   isPaymentDone: boolean;
+  bookDetails?: BookDetails;
   createdAt: Date;
   updatedAt: Date;
 
@@ -54,6 +56,7 @@ export class User implements IUser {
     this.isPaymentDone = user.isPaymentDone;
     this.fineAmount = user.fineAmount;
     this.password = user.password;
+    this.bookDetails = user.bookDetails;
     this.createdAt = user.createdAt;
     this.updatedAt = user.updatedAt;
   }

@@ -1,3 +1,4 @@
+import { AlertType } from "@/types/AlertType";
 import {
   Dispatch,
   FC,
@@ -11,8 +12,8 @@ import {
 type TPageContext = {
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
-  errorMessage: string;
-  setErrorMessage: Dispatch<SetStateAction<string>>;
+  snackBarError: AlertType | undefined;
+  setSnackBarError: Dispatch<SetStateAction<AlertType | undefined>>
   currentSideMenu: string;
   setCurrentSideMenu: Dispatch<SetStateAction<string>>;
   DialogBox: JSX.Element | undefined;
@@ -31,7 +32,7 @@ export const PageContextProvider: FC<UserContextProviderProps> = ({
   children,
 }) => {
   const [searchText, setSearchText] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [snackBarError, setSnackBarError] = useState<AlertType | undefined>();
   const [currentSideMenu, setCurrentSideMenu] = useState<string>("");
   const [DialogBox, setDialogBox] = useState<JSX.Element | undefined>(
     undefined
@@ -42,8 +43,8 @@ export const PageContextProvider: FC<UserContextProviderProps> = ({
       value={{
         searchText,
         setSearchText,
-        errorMessage,
-        setErrorMessage,
+        snackBarError,
+        setSnackBarError,
         currentSideMenu,
         setCurrentSideMenu,
         DialogBox,

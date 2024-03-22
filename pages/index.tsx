@@ -5,7 +5,7 @@ import { BaseLayout } from "@/containers/BaseLayout/BaseLayout";
 export default function Home() {
   return (
     <BaseLayout
-      authenticatedOnly={false}
+      authenticatedOnly={true}
       showSearchBar
       pageName={sideMenuItems.AllBooks.name}
     >

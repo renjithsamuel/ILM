@@ -12,8 +12,9 @@ import { AlertSnackbar } from "@/components/AlertSnackbar/AlertSnackbar";
 import { Role } from "@/constants/Role";
 import { FC, ReactNode } from "react";
 import { useBaseLayoutStyles } from "./BaseLayout.styles";
-import Link from "next/link";
-import { themeValues } from "@/constants/ThemeConstants";
+import { LoginDialog } from "@/components/LoginDialog/LoginDialog";
+import { UnAuthorizedPage } from "@/components/UnAuthorizedPage/UnAuthorizedPage";
+import { ConnectingToServerDialog } from "@/components/ConnectingToServerDialog/ConnectingToServerDialog";
 
 interface BaseLayoutProps {
   showSearchBar?: boolean;
@@ -45,70 +46,39 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
     handleCloseAlertSnackbar,
     isAlertSnackbarOpen,
     menuItems,
+    inUnauthorizedPage,
   } = useBaseLayout({
     authenticatedOnly,
   });
 
   const classes = useBaseLayoutStyles();
 
+  if (inUnauthorizedPage) {
+    return <UnAuthorizedPage />;
+  }
+
   if (authenticatedOnly) {
-    if (isLoading) {
-      return (
-        <Box className={classes.progressBarContainer}>
-          <CircularProgress />
-        </Box>
-      );
-    }
-
-    if (isFetched && !authenticated) {
-      return (
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          height="80vh"
-          gap={4}
-        >
-          <Typography variant="h2">403 - Forbidden</Typography>
-          <Typography variant="h5" color="textSecondary">
-            You Need To Log In To Access
-          </Typography>
-          <Link href="/login">
-            <Button
-              variant="contained"
-              sx={{
-                color: themeValues.color.textColor,
-                backgroundColor: themeValues.color.color1,
-                "&:hover": {
-                  backgroundColor: themeValues.color.color3,
-                },
-              }}
-            >
-              Go to Login
-            </Button>
-          </Link>
-        </Box>
-      );
-    }
-
-    if (isFetched && isSuccess && authenticated) {
-      return (
-        <Box>
-          <NavBar showSearchBar pageName={pageName} menuItems={menuItems}>
-            {children}
-          </NavBar>
-          <AlertSnackbar open={isAlertSnackbarOpen}>
-            <Alert
-              onClose={handleCloseAlertSnackbar}
-              severity={alertSnackbarMessage?.severity}
-            >
-              {alertSnackbarMessage?.message}
-            </Alert>
-          </AlertSnackbar>
-        </Box>
-      );
-    }
+    return (
+      <Box>
+        {/* <LoginDialog /> */}
+        {false ? (
+          <ConnectingToServerDialog />
+        ) : (
+          (!authenticated || !isSuccess) && <LoginDialog />
+        )}
+        <NavBar showSearchBar pageName={pageName} menuItems={menuItems}>
+          {children}
+        </NavBar>
+        <AlertSnackbar open={isAlertSnackbarOpen}>
+          <Alert
+            onClose={handleCloseAlertSnackbar}
+            severity={alertSnackbarMessage?.severity}
+          >
+            {alertSnackbarMessage?.message}
+          </Alert>
+        </AlertSnackbar>
+      </Box>
+    );
   }
 
   return (

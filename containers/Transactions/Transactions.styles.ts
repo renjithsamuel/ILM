@@ -55,4 +55,29 @@ export const useTransactionsStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+  noBooksText: {
+    width: "80vw",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: "600",
+    marginTop: theme.spacing(20),
+    [theme.breakpoints.up("md")]: {
+      fontSize: "28px",
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      fontSize: "25px",
+    },
+    [theme.breakpoints.between("xs", "sm")]: {
+      fontSize: "20px",
+    },
+  },
+  paginationWrap: {
+    width: "80vw",
+    position: "sticky",
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));

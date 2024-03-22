@@ -78,7 +78,7 @@ export const NavBar = ({
         <Box className={classes.sideNavContainer}>
           {menuItems.map((menuItem, index) => {
             return (
-              <Link key={index} href={menuItem?.link}>
+              <Link key={menuItem.link} href={menuItem?.link}>
                 <Box
                   // onClick={() => handleSideMenuClick(menuItem.link)}
                   className={clsx(classes.sideMenuItem, {

@@ -1,8 +1,8 @@
-import { Theme } from "@material-ui/core";
 import {
   Snackbar,
   SnackbarOrigin,
   SnackbarProps,
+  Theme,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -19,7 +19,7 @@ export const AlertSnackbar: FC<AlertSnackbarProps> = ({
 }) => {
   const customtheme = useTheme();
   const largeView = useMediaQuery<Theme>((theme: Theme) =>
-    customtheme.breakpoints.up("sm")
+  customtheme.breakpoints.up("sm")
   );
 
   const anchorOrigin: SnackbarOrigin = largeView

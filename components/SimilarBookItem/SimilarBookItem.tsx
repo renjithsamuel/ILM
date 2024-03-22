@@ -1,6 +1,5 @@
 import { Book } from "@/entity/Book/Book";
-import { Box } from "@material-ui/core";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useSimilarBookItemStyles } from "./SimilarBookItem.styles";
 import clsx from "clsx";
@@ -15,9 +14,9 @@ export const SimilarBookItem = ({ book }: SimilarBookItemProps) => {
 
   return (
     <Box className={clsx(classes.similarBookItemRoot)}>
-      <Link href={`/allbooks/${book.ID}`}>
+      <Link href={`/allbooks/${book.ISBN}`}>
         <div className={clsx(classes.bookContainer, "bookContainer")}>
-          <Image
+          <img
             src={book.coverImage}
             width={150}
             height={200}

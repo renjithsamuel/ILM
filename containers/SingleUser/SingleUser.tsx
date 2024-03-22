@@ -1,12 +1,13 @@
 import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useSingleUser } from "./SingleUser.hooks";
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { useSingleUserStyles } from "./SingleUser.styles";
 import { User } from "@/entity/User/User";
 import { BookDetails } from "@/entity/UserBookDetails/UserBookDetails";
 import dayjs from "dayjs";
 import Link from "next/link";
-import Image from "next/image";
+import { themeValues } from "@/constants/ThemeConstants";
+import { FormatTextUtil } from "@/utils/formatText";
 
 interface singleUserParams {
   // book: Book;
@@ -21,13 +22,16 @@ export const SingleUser = ({}: singleUserParams) => {
       {/* user cover image and profile */}
       <Box className={classes.userCover}>
         <Box className={classes.userImageWrap}>
-          <Image
+          {/* <Image
             src={user?.profileImageUrl}
             width={135}
             height={130}
             alt={user.name || `user`}
             className={classes.userImage}
-          />
+          /> */}
+          <Avatar className={classes.userImage}>
+            {user?.name && FormatTextUtil.formatFirstWord(user?.name)}
+          </Avatar>
         </Box>
       </Box>
       {/* user details */}
@@ -39,7 +43,7 @@ export const SingleUser = ({}: singleUserParams) => {
                 {userDetail.label}
               </Typography>
               <Typography variant="body1" className={classes.userDetailValue}>
-                {userDetail.getUserValue(user)}
+                {user && userDetail.getUserValue(user)}
               </Typography>
             </Box>
           );
@@ -68,14 +72,17 @@ export const SingleUser = ({}: singleUserParams) => {
 };
 
 const userDetailsArray = [
-  { label: "User Name", getUserValue: (user: User) => user.name },
   {
-    label: "Date Of Birth",
-    getUserValue: (user: User) => dayjs(user.dateOfBirth).format("DD-MM-YYYY"),
+    label: "User Name",
+    getUserValue: (user: User) => FormatTextUtil.formatFirstWord(user.name),
   },
   {
-    label: "Member Since",
+    label: "Joined On",
     getUserValue: (user: User) => dayjs(user.joinedDate).format("DD-MM-YYYY"),
+  },
+  {
+    label: "Role",
+    getUserValue: (user: User) => FormatTextUtil.formatFirstWord(user.role),
   },
 ];
 
@@ -84,30 +91,24 @@ const bookDetailsArray = [
     label: "Books Reserved",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.reservedBooksCount,
-    getLink: (user: User) => `/users/${user.userID}/reserved`,
-  },
-  {
-    label: "Books Pending",
-    getBookDetailsValue: (bkDetails: BookDetails) =>
-      bkDetails.pendingBooksCount,
-    getLink: (user: User) => `/users/${user.userID}/pending`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/reserved`,
   },
   {
     label: "Books Checked Out",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.checkedOutBooksCount,
-    getLink: (user: User) => `/users/${user.userID}/checkedout`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/checkedout`,
   },
   {
     label: "Wishlisted Books",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.wishlistBooks.length,
-    getLink: (user: User) => `/users/${user.userID}/wishlists`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/wishlists`,
   },
   {
     label: "Completed Books",
     getBookDetailsValue: (bkDetails: BookDetails) =>
       bkDetails.completedBooksList.length,
-    getLink: (user: User) => `/users/${user.userID}/completed`,
+    getLink: (user: User | undefined) => `/users/${user?.userID}/completed`,
   },
 ];

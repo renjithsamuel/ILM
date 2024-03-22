@@ -25,7 +25,7 @@ export const PredictiveAnalysisItem = ({
           <Box className={classes.predictLeft}>
             {/* Book Image */}
             <Box className={classes.bookImageWrap}>
-              <Image
+              <img
                 src={book.coverImage}
                 width={50}
                 height={60}
@@ -81,7 +81,7 @@ export const PredictiveAnalysisItem = ({
               {book.inLibrary && (
                 <Tooltip title={"stock"} placement="top">
                   <Box className={classes.bookCount}>
-                    <SiBookstack /> {book.booksLeft}
+                    {"Stock "} <SiBookstack /> {book.booksLeft}
                   </Box>
                 </Tooltip>
               )}
@@ -89,7 +89,7 @@ export const PredictiveAnalysisItem = ({
               {book.inLibrary && (
                 <Tooltip title={"approximate demand"} placement="top">
                   <Box className={classes.bookCount}>
-                    <GoChecklist /> {book?.approximateDemand}
+                    {"Demand "} <GoChecklist /> {book?.approximateDemand}
                   </Box>
                 </Tooltip>
               )}

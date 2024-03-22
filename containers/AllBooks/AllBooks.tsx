@@ -2,11 +2,13 @@ import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useAllBooks } from "./AllBooks.hooks";
 import {
   Box,
+  CircularProgress,
   FormControl,
   Grid,
   InputLabel,
   MenuItem,
   Select,
+  TablePagination,
   Typography,
 } from "@mui/material";
 import { useAllBooksStyles } from "./AllBooks.styles";
@@ -18,6 +20,7 @@ import {
   SortOrder,
   SortPresence,
 } from "@/constants/GlobalConstants";
+import { GoogleOrderByValues } from "@/constants/GoogleAPI";
 
 interface allBooksParams {
   // book: Book;
@@ -26,12 +29,16 @@ interface allBooksParams {
 export const AllBooks = ({}: allBooksParams) => {
   const {
     bookList,
+    pageNumber,
+    rowsPerPage,
+    totalItems,
+    isGetNewAllBooksLoading,
     sortByOrder,
     sortByValue,
-    sortByPresence,
-    handleSortPresence,
     handleSortOrder,
     handleSortValue,
+    handleRowsPerPage,
+    handlePageNumber,
   } = useAllBooks({});
   const classes = useAllBooksStyles();
 
@@ -82,28 +89,24 @@ export const AllBooks = ({}: allBooksParams) => {
             <MenuItem value={SortOrder.desc}>Descending</MenuItem>
           </Select>
         </FormControl>
-        {/* Presence */}
-        <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
-          <InputLabel id="demo-controlled-open-select-label">
-            Presence
-          </InputLabel>
-          <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            value={sortByPresence}
-            label="Order By"
-            onChange={handleSortPresence}
-          >
-            <MenuItem value={SortPresence.both}>Both</MenuItem>
-            <MenuItem value={SortPresence.inLibrary}>In Library</MenuItem>
-            <MenuItem value={SortPresence.others}>Others</MenuItem>
-          </Select>
-        </FormControl>
       </Box>
+
       <Grid container spacing={2} className={classes.booksContainer}>
-        {bookList?.length > 0 ? (
-          bookList.map((book: Book, index) => (
-            <Grid item key={index} xs={6} sm={4} md={3}>
+        {isGetNewAllBooksLoading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "65vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : bookList && bookList?.length > 0 ? (
+          bookList.map((book: Book) => (
+            <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <BookGridItem book={book} />
             </Grid>
           ))
@@ -113,6 +116,29 @@ export const AllBooks = ({}: allBooksParams) => {
           </Typography>
         )}
       </Grid>
+      <Box className={classes.paginationWrap}>
+        <TablePagination
+          component="div"
+          count={totalItems}
+          page={pageNumber}
+          onPageChange={handlePageNumber}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleRowsPerPage}
+        />
+      </Box>
     </Box>
   );
 };
+
+{
+  /* <MenuItem value={GoogleOrderByValues.author}>author</MenuItem> */
+}
+{
+  /* <MenuItem value={GoogleOrderByValues.newest}>newest</MenuItem> */
+}
+{
+  /* <MenuItem value={GoogleOrderByValues.oldest}>oldest</MenuItem> */
+}
+{
+  /* <MenuItem value={GoogleOrderByValues.relevance}>relevance</MenuItem> */
+}

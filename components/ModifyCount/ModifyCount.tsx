@@ -2,14 +2,27 @@ import { Box, Button, Dialog, TextField, Typography } from "@mui/material";
 import { useModifyCountStyles } from "./ModifyCount.styles";
 import { useModifyCount } from "./ModifyCount.hooks";
 import { Dispatch, SetStateAction } from "react";
+import { Book } from "@/entity/Book/Book";
 
 interface modifyCountParams {
   setIsModifyCountOpen: Dispatch<SetStateAction<boolean | undefined>>;
+  book: Book;
 }
 
-export const ModifyCount = ({ setIsModifyCountOpen }: modifyCountParams) => {
-  const { fullScreen, openDialog, handleCloseDialog } = useModifyCount({
+export const ModifyCount = ({
+  setIsModifyCountOpen,
+  book,
+}: modifyCountParams) => {
+  const {
+    stockValue,
+    fullScreen,
+    openDialog,
+    handleCloseDialog,
+    handleUpdateQuantity,
+    handleStockValue,
+  } = useModifyCount({
     setIsModifyCountOpen,
+    book,
   });
   const classes = useModifyCountStyles();
   return (
@@ -29,11 +42,16 @@ export const ModifyCount = ({ setIsModifyCountOpen }: modifyCountParams) => {
               id="outlined-required"
               label="Count"
               type="number"
-              defaultValue={0}
+              defaultValue={stockValue}
+              onChange={(e) => handleStockValue(parseInt(e.target.value))}
             />
           </Box>
           <Box className={classes.countBtns}>
-            <Button variant="contained" className={classes.countBtn}>
+            <Button
+              variant="contained"
+              className={classes.countBtn}
+              onClick={handleUpdateQuantity}
+            >
               Update
             </Button>
             <Button

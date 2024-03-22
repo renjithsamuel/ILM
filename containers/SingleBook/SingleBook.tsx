@@ -1,20 +1,27 @@
 import { Book } from "@/entity/Book/Book";
 import {
   Box,
+  Button,
   Dialog,
   Divider,
+  FormControl,
   Grid,
+  InputLabel,
   List,
+  MenuItem,
   Rating,
+  Select,
+  TablePagination,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { useSingleBookStyles } from "./SingleBook.styles";
 import { useSingleBook } from "./SingleBook.hooks";
-import Image from "next/image";
-import { bookKeyValues } from "@/constants/GlobalConstants";
+import {
+  ReviewSortValue,
+  singleBookKeyValues,
+} from "@/constants/GlobalConstants";
 import { BookGridItem } from "@/components/BookGridItem/BookGridItem";
-import { Button } from "@material-ui/core";
 import { mockBooks } from "@/entity/Book/Book.mock";
 import { SimilarBookItem } from "@/components/SimilarBookItem/SimilarBookItem";
 import clsx from "clsx";
@@ -33,6 +40,7 @@ import { themeValues } from "@/constants/ThemeConstants";
 import { BiSolidMessageDetail } from "react-icons/bi";
 import { AddComment } from "@/components/AddComment/AddComment";
 import { CommentItem } from "@/components/CommentItem/CommentItem";
+import { FormatTextUtil } from "@/utils/formatText";
 
 interface singleBookParams {
   // book: Book;
@@ -41,6 +49,8 @@ interface singleBookParams {
 export const SingleBook = ({}: singleBookParams) => {
   const classes = useSingleBookStyles();
   const {
+    isBookCompleted,
+    checkoutData,
     commentList,
     book,
     userType,
@@ -52,6 +62,16 @@ export const SingleBook = ({}: singleBookParams) => {
     handleModifyCount,
     handleAddToLibrary,
     setIsModifyCountOpen,
+    handleCheckoutFlow,
+    handleAddToWishList,
+    // pagination and sorting
+    totalPages,
+    sortByValue,
+    pageNumber,
+    rowsPerPage,
+    handleRowsPerPage,
+    handlePageNumber,
+    handleSortValue,
   } = useSingleBook({});
 
   if (!book) {
@@ -62,10 +82,17 @@ export const SingleBook = ({}: singleBookParams) => {
   return (
     <Box className={classes.singleBookRoot}>
       {/* add comment popup */}
-      {isAddCommentOpen && <AddComment handleAddComment={handleAddComment} />}
+      {isAddCommentOpen && checkoutData && (
+        <AddComment
+          handleAddComment={handleAddComment}
+          user={user}
+          book={book}
+          checkout={checkoutData}
+        />
+      )}
       {/* modify count popup */}
       {isModifyCountOpen && (
-        <ModifyCount setIsModifyCountOpen={setIsModifyCountOpen} />
+        <ModifyCount setIsModifyCountOpen={setIsModifyCountOpen} book={book} />
       )}
 
       <Box className={classes.singleBookContent}>
@@ -73,7 +100,7 @@ export const SingleBook = ({}: singleBookParams) => {
           {/* book image */}
           <Link href={book?.previewLink || ""} target="_blank">
             <Box className={classes.singleBookImage}>
-              <Image
+              <img
                 src={book?.coverImage}
                 width={150}
                 height={220}
@@ -91,7 +118,7 @@ export const SingleBook = ({}: singleBookParams) => {
           <Divider />
           {/*  book  details*/}
           <Box className={classes.singleBookDetails}>
-            {bookKeyValues.map((keyValues, index) => {
+            {singleBookKeyValues.map((keyValues, index) => {
               if (keyValues.key === "shelfNumber" && !book.inLibrary) return;
               return (
                 <Box key={index} className={classes.singleBookItemWrap}>
@@ -117,27 +144,30 @@ export const SingleBook = ({}: singleBookParams) => {
               {/* views */}
               <Tooltip title={"views"} placement="bottom">
                 <Box className={classes.bookCount}>
-                  <GoEye /> {book.views}
+                  <GoEye /> {FormatTextUtil.formatNumberToK(book.views)}
                 </Box>
               </Tooltip>
               {/* stock */}
               {book.inLibrary && (
                 <Tooltip title={"stock"} placement="bottom">
                   <Box className={classes.bookCount}>
-                    <SiBookstack /> {book.booksLeft}
+                    <SiBookstack />{" "}
+                    {FormatTextUtil.formatNumberToK(book.booksLeft)}
                   </Box>
                 </Tooltip>
               )}
               {/* wishlist */}
               <Tooltip title={"wishlists"} placement="bottom">
                 <Box className={classes.bookCount}>
-                  <IoMdHeart /> {book.wishlistCount}
+                  <IoMdHeart />{" "}
+                  {FormatTextUtil.formatNumberToK(book.wishlistCount)}
                 </Box>
               </Tooltip>
               {/* reviews */}
               <Tooltip title={"reviews"} placement="bottom">
                 <Box className={classes.bookCount}>
-                  <BiSolidMessageDetail /> {book.reviewCount}
+                  <BiSolidMessageDetail />{" "}
+                  {FormatTextUtil.formatNumberToK(book.reviewCount)}
                 </Box>
               </Tooltip>
             </Box>
@@ -162,34 +192,42 @@ export const SingleBook = ({}: singleBookParams) => {
               also once checked out the no of days activates updating checkedout date, everytime the transaction page loads 
               need to update DB on the, fineamount and return date exceeding it 
             */}
-            {userType === Role.Patrons && book.inLibrary && (
-              <Tooltip
-                title={
-                  !user.isPaymentDone
-                    ? "membership required"
-                    : book.booksLeft === 0
-                    ? "out of stock"
-                    : ""
-                }
-                placement="top"
-              >
-                <Box>
-                  <Button
-                    variant="contained"
-                    className={classes.reserveNowBtn}
-                    disabled={
-                      book.booksLeft === 0 || !user.isPaymentDone ? true : false
-                    }
-                  >
-                    Reserve Now
-                  </Button>
-                </Box>
-              </Tooltip>
-            )}
+            {(userType === Role.Librarian || userType === Role.Patrons) &&
+              book.inLibrary && (
+                <Tooltip
+                  title={
+                    !user.isPaymentDone
+                      ? "membership required"
+                      : book.booksLeft === 0
+                        ? "out of stock"
+                        : ""
+                  }
+                  placement="top"
+                >
+                  <Box>
+                    <Button
+                      variant="contained"
+                      className={classes.reserveNowBtn}
+                      disabled={
+                        book.booksLeft === 0 || !user.isPaymentDone
+                          ? true
+                          : false
+                      }
+                      onClick={() => handleCheckoutFlow(book.ID)}
+                    >
+                      Reserve Now
+                    </Button>
+                  </Box>
+                </Tooltip>
+              )}
             {/* wishlist btn */}
-            {userType === Role.Patrons && (
-              <Button variant="contained" className={classes.wishlistBtn}>
-                <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
+            {(userType === Role.Librarian || userType === Role.Patrons) && (
+              <Button
+                variant="contained"
+                className={classes.wishlistBtn}
+                onClick={handleAddToWishList}
+              >
+                <Typography variant="body2" sx={{ mr: theme.spacing(0.3) }}>
                   {wishlisted ? "Wishlisted" : "Wishlist"}
                 </Typography>
                 <IoHeartSharp size={theme.spacing(2.2)} />
@@ -200,17 +238,34 @@ export const SingleBook = ({}: singleBookParams) => {
             {/* todo remove for librarian */}
             {userType === Role.Patrons ||
               (userType === Role.Librarian && (
-                <Button
-                  variant="contained"
-                  className={classes.reserveNowBtn}
-                  onClick={handleAddComment}
+                <Tooltip
+                  title={
+                    isBookCompleted
+                      ? "Comment Already Added"
+                      : !checkoutData?.isReturned
+                        ? "Read Book To Add Comment"
+                        : ""
+                  }
+                  placement="right"
                 >
-                  <Typography variant="body2" sx={{ mr: theme.spacing(0.6) }}>
-                    {"Completed"}
-                  </Typography>
-                  <MdOutlineDone size={theme.spacing(2.2)} />
-                  {"  "}
-                </Button>
+                  <Box>
+                    <Button
+                      variant="contained"
+                      className={classes.reserveNowBtn}
+                      disabled={isBookCompleted || !checkoutData?.isReturned}
+                      onClick={handleAddComment}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{ mr: theme.spacing(0.6) }}
+                      >
+                        {"Completed"}
+                      </Typography>
+                      <MdOutlineDone size={theme.spacing(2.2)} />
+                      {"  "}
+                    </Button>
+                  </Box>
+                </Tooltip>
               ))}
             {/* checkout btn  */}
             {/* todo when checking out go to /transactions/{isbn} capture it and add in search filed */}
@@ -245,17 +300,61 @@ export const SingleBook = ({}: singleBookParams) => {
           >
           </Document> */}
         </Box>
+        {/* comments */}
         <Box>
-          <Typography variant="h6" className={classes.commentsLabel}>
-            {"Comments"}
-          </Typography>
+          <Box className={classes.commentLabelWrap}>
+            <Typography variant="h6" className={classes.commentsLabel}>
+              {"Comments"}
+            </Typography>
+            <Box className={classes.sortByContainer}>
+              {/* sort by */}
+              <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+                <InputLabel id="demo-controlled-open-select-label">
+                  Sort By
+                </InputLabel>
+                <Select
+                  labelId="demo-controlled-open-select-label"
+                  id="demo-controlled-open-select"
+                  value={sortByValue}
+                  label="Sort By"
+                  onChange={handleSortValue}
+                >
+                  <MenuItem value={ReviewSortValue.likes}>
+                    {ReviewSortValue.likes}
+                  </MenuItem>
+                  <MenuItem value={ReviewSortValue.newest}>
+                    {ReviewSortValue.newest}
+                  </MenuItem>
+                  <MenuItem value={ReviewSortValue.oldest}>
+                    {ReviewSortValue.oldest}
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Box>
           <Box className={classes.singleBookComments}>
             {/* Book Comments, Currently Under Work */}
-            <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-              {commentList.map((item, index) => (
-                <CommentItem review={item} key={index} />
-              ))}
+            <List sx={{ width: "100%", bgcolor: "transparent" }}>
+              {commentList && commentList.length > 0 ? (
+                commentList.map((item) => (
+                  <CommentItem review={item} key={item.ID} />
+                ))
+              ) : (
+                <Typography variant="h4" className={classes.noBooksText}>
+                  No Comments
+                </Typography>
+              )}
             </List>
+          </Box>
+          <Box className={classes.paginationWrap}>
+            <TablePagination
+              component="div"
+              count={totalPages}
+              page={pageNumber}
+              onPageChange={handlePageNumber}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleRowsPerPage}
+            />
           </Box>
         </Box>
       </Box>
@@ -266,7 +365,7 @@ export const SingleBook = ({}: singleBookParams) => {
         </Typography>
         {mockBooks?.length > 0 ? (
           mockBooks.map((book: Book, index) => (
-            <Grid item key={index} xs={6} sm={4} md={3}>
+            <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <SimilarBookItem book={book} />
             </Grid>
           ))

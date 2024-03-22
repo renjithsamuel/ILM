@@ -10,8 +10,7 @@ export const useSearchDialogStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     gap: theme.spacing(1),
     borderRadius: themeValues.border.borderRadius,
-    width: "38vw",
-    maxHeight: "70vh",
+    width: "43vw",
     position: "relative",
   },
   searchInputWrap: {
@@ -74,5 +73,17 @@ export const useSearchDialogStyles = makeStyles((theme) => ({
     justifyContent: "start",
     width: "100%",
     marginBottom: theme.spacing(2),
+  },
+  paginationWrap: {
+    zIndex: 1,
+    backgroundColor: themeValues.color.white,
+    borderRadius: themeValues.border.borderRadiusHigh,
+    boxShadow: themeValues.shadow.boxShadowboxy,
+    width: "auto",
+    position: "sticky",
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));

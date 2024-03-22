@@ -12,13 +12,13 @@ export const BookShelf = ({ books }: BookShelfProps) => {
 
   return (
     <Box className={classes.booksContainerRoot}>
-      <Typography className={classes.bookShelfTexts} >
+      <Typography className={classes.bookShelfTexts}>
         Recommendations
       </Typography>
       <Grid container spacing={3} className={classes.booksContainer}>
         {books?.length > 0 ? (
-          books.map((book: Book, index) => (
-            <Grid item key={index} xs={6} sm={4} md={3}>
+          books.map((book: Book) => (
+            <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <BookGridItem book={book} />
             </Grid>
           ))

@@ -7,6 +7,5 @@ export const mockGraphData: GraphData[] = [
   { month: "april", numberOfActiveUsers: 1354, numberOfCheckouts: 720 },
   { month: "may", numberOfActiveUsers: 1445, numberOfCheckouts: 930 },
   { month: "june", numberOfActiveUsers: 1624, numberOfCheckouts: 1230 },
-  { month: "july", numberOfActiveUsers: 1732, numberOfCheckouts: 1100
- },
+  { month: "july", numberOfActiveUsers: 1732, numberOfCheckouts: 1100 },
 ];

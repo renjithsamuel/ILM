@@ -1,20 +1,12 @@
-import { Tooltip } from "@material-ui/core";
 import {
   Box,
-  Button,
-  Checkbox,
   Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Divider,
   FormControl,
-  FormControlLabel,
   InputLabel,
   MenuItem,
   Select,
-  Typography,
+  TablePagination,
 } from "@mui/material";
 import { useSearchDialogStyles } from "./SearchDialog.styles";
 import { themeValues } from "@/constants/ThemeConstants";
@@ -25,6 +17,7 @@ import { SetStateAction } from "react";
 import { IoIosSearch } from "react-icons/io";
 import {
   EntityTypes,
+  SearchByValue,
   SearchSortValue,
   SortOrder,
   SortPresence,
@@ -44,14 +37,20 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
     sortByValue,
     searchResultList,
     sortByEntity,
-    sortByPresence,
-    handleSortPresence,
+    searchByValue,
     handleSearch,
     handleClickOpenDialog,
     handleCloseDialog,
     handleSortValue,
     handleSortOrder,
     handleSortEntity,
+    handleSearchByValue,
+    // pagination and sorting
+    totalPages,
+    pageNumber,
+    rowsPerPage,
+    handleRowsPerPage,
+    handlePageNumber,
   } = useSearchDialog({ setIsSearchClicked });
   const classes = useSearchDialogStyles();
 
@@ -62,7 +61,15 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
         open={openDialog}
         onClose={handleCloseDialog}
         aria-labelledby="responsive-dialog-title"
-        sx={{ backdropFilter: "blur(2px)" }}
+        sx={{
+          backdropFilter: "blur(2px)",
+          "& .MuiDialog-container": {
+            "& .MuiPaper-root": {
+              width: "100%",
+              maxWidth: "fit-content", // Set your width here
+            },
+          },
+        }}
       >
         <Box className={classes.searchDialogContentRoot}>
           {/*search input box */}
@@ -103,27 +110,27 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
                       );
                     })
                   : sortByEntity === EntityTypes.BookEntity
-                  ? sortByValueItems.bookSortByValues.map((item, index) => {
-                      return (
-                        <MenuItem value={item.value} key={index}>
-                          {item.label}
-                        </MenuItem>
-                      );
-                    })
-                  : [
-                      ...sortByValueItems.bookSortByValues,
-                      ...sortByValueItems.userSortByValues,
-                    ].map((item, index) => {
-                      return (
-                        <MenuItem value={item.value} key={index}>
-                          {item.label}
-                        </MenuItem>
-                      );
-                    })}
+                    ? sortByValueItems.bookSortByValues.map((item, index) => {
+                        return (
+                          <MenuItem value={item.value} key={index}>
+                            {item.label}
+                          </MenuItem>
+                        );
+                      })
+                    : [
+                        ...sortByValueItems.bookSortByValues,
+                        ...sortByValueItems.userSortByValues,
+                      ].map((item, index) => {
+                        return (
+                          <MenuItem value={item.value} key={index}>
+                            {item.label}
+                          </MenuItem>
+                        );
+                      })}
               </Select>
             </FormControl>
             {/* order */}
-            <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel id="demo-controlled-open-select-label">
                 Order By
               </InputLabel>
@@ -139,7 +146,7 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
               </Select>
             </FormControl>
             {/* Entity */}
-            <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+            <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
               <InputLabel id="demo-controlled-open-select-label">
                 Entity
               </InputLabel>
@@ -150,9 +157,48 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
                 label="Order By"
                 onChange={handleSortEntity}
               >
-                <MenuItem value={EntityTypes.BookAndUser}>Both</MenuItem>
                 <MenuItem value={EntityTypes.BookEntity}>Book</MenuItem>
                 <MenuItem value={EntityTypes.UserEntity}>User</MenuItem>
+              </Select>
+            </FormControl>
+            {/* search by */}
+            <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+              <InputLabel id="demo-controlled-open-select-label">
+                Search By
+              </InputLabel>
+              <Select
+                labelId="demo-controlled-open-select-label"
+                id="demo-controlled-open-select"
+                value={searchByValue}
+                label="Search By"
+                onChange={handleSearchByValue}
+              >
+                {sortByEntity === EntityTypes.UserEntity
+                  ? searchByValues.userSearchByValues.map((item, index) => {
+                      return (
+                        <MenuItem value={item.value} key={index}>
+                          {item.label}
+                        </MenuItem>
+                      );
+                    })
+                  : sortByEntity === EntityTypes.BookEntity
+                    ? searchByValues.bookSearchByValues.map((item, index) => {
+                        return (
+                          <MenuItem value={item.value} key={index}>
+                            {item.label}
+                          </MenuItem>
+                        );
+                      })
+                    : [
+                        ...searchByValues.userSearchByValues,
+                        ...searchByValues.bookSearchByValues,
+                      ].map((item, index) => {
+                        return (
+                          <MenuItem value={item.value} key={index}>
+                            {item.label}
+                          </MenuItem>
+                        );
+                      })}
               </Select>
             </FormControl>
           </Box>
@@ -172,22 +218,17 @@ export const SearchDialog = ({ setIsSearchClicked }: searchDialogParams) => {
                 );
               })}
           </Box>
-          {sortByEntity === EntityTypes.BookEntity && (
-            <Box
-              className={classes.sortByPresence}
-              onClick={handleSortPresence}
-            >
-              <Checkbox
-                sx={{
-                  padding: 0,
-                }}
-                checked={sortByPresence === SortPresence.inLibrary}
-                disabled={sortByEntity !== EntityTypes.BookEntity}
-                onChange={handleSortPresence}
-              />
-              <Typography variant="body1">{"In Library"}</Typography>
-            </Box>
-          )}
+          {/* pagination */}
+          <Box className={classes.paginationWrap}>
+            <TablePagination
+              component="div"
+              count={totalPages}
+              page={pageNumber}
+              onPageChange={handlePageNumber}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleRowsPerPage}
+            />
+          </Box>
         </Box>
       </Dialog>
     </>
@@ -249,6 +290,37 @@ const sortByValueItems = {
     {
       value: SearchSortValue.shelfNumber,
       label: "shelf number",
+    },
+  ],
+};
+
+const searchByValues = {
+  bookSearchByValues: [
+    {
+      value: SearchByValue.author,
+      label: "Author",
+    },
+    {
+      value: SearchByValue.title,
+      label: "Title",
+    },
+    {
+      value: SearchByValue.genre,
+      label: "Genre",
+    },
+    {
+      value: SearchByValue.isbn,
+      label: "ISBN",
+    },
+  ],
+  userSearchByValues: [
+    {
+      value: SearchByValue.email,
+      label: "Email",
+    },
+    {
+      value: SearchByValue.username,
+      label: "Name",
     },
   ],
 };

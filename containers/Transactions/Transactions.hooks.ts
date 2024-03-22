@@ -1,8 +1,10 @@
+import { useGetAllCheckoutsAPI } from "@/api/Checkout/getAllCheckouts";
 import {
   SortOrder,
   TransactionSortValue,
   globalConstants,
 } from "@/constants/GlobalConstants";
+import { usePageContext } from "@/context/PageContext";
 import { mockBooks } from "@/entity/Book/Book.mock";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
 import { mockCheckoutTickets } from "@/entity/CheckoutTicket/CheckoutTicket.mock";
@@ -15,9 +17,19 @@ import { useEffect, useState } from "react";
 interface transactionsHookProps {}
 
 interface transactionsHook {
-  checkedOutList: CheckoutTicket[];
+  checkedOutList: CheckoutTicket[] | undefined;
   sortByOrder: SortOrder;
   sortByValue: TransactionSortValue;
+  pageNumber: number;
+  rowsPerPage: number;
+  totalPages: number;
+  handleRowsPerPage: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handlePageNumber: (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    val: number
+  ) => void;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
   handleSearch: (val: string) => void;
@@ -27,12 +39,38 @@ interface transactionsHook {
 export const useTransactions =
   ({}: transactionsHookProps): transactionsHook => {
     const router = useRouter();
-    const [checkedOutList, setCheckedOutList] = useState<CheckoutTicket[]>([]);
+
+    // pagination related
+    const [pageNumber, setPageNumber] = useState<number>(1);
+    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
+    const { setSnackBarError } = usePageContext();
     const [searchText, setSearchText] = useState<string>("");
     const [sortByValue, setSortByValue] = useState<TransactionSortValue>(
       TransactionSortValue.fineAmount
     );
     const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
+
+    const { data: ticketsData, isError: isTicketError } = useGetAllCheckoutsAPI(
+      {
+        orderBy: sortByOrder,
+        sortBy: sortByValue,
+        limit: rowsPerPage,
+        page: pageNumber,
+      }
+    );
+
+    console.log("ticketsData", ticketsData?.data);
+
+    useEffect(() => {
+      if (isTicketError) {
+        setSnackBarError({
+          ErrorMessage: "get checkout tickets failed",
+          ErrorSeverity: "error",
+        });
+        return;
+      }
+    }, [isTicketError]);
 
     // can come from single book page direct search here
     useEffect(() => {
@@ -57,21 +95,35 @@ export const useTransactions =
       setSearchText(value);
     };
 
-    useEffect(() => {
-      let tempCheckoutList: CheckoutTicket[] = mockCheckoutTickets;
-      tempCheckoutList = tempCheckoutList.map((item) => {
-        item.user = mockUsers.find((user) => user.userID === item.userID);
-        item.book = mockBooks.find((book) => book.ID === item.bookID);
-        return item;
-      });
-      tempCheckoutList && setCheckedOutList(tempCheckoutList);
-    }, []);
+    // pagination
+    const handleRowsPerPage = (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ): void => {
+      if (event.target.value) {
+        setRowsPerPage(Number.parseInt(event.target.value, 10));
+        setPageNumber(1); // Reset page number when rows per page changes
+      }
+    };
+
+    const handlePageNumber = (
+      event: React.MouseEvent<HTMLButtonElement> | null,
+      val: number
+    ): void => {
+      if (val) {
+        setPageNumber(val);
+      }
+    };
 
     return {
-      checkedOutList,
+      checkedOutList: ticketsData?.data.checkoutTickets,
+      totalPages: ticketsData?.data.totalPages ?? -1,
       searchText,
       sortByOrder,
       sortByValue,
+      pageNumber,
+      rowsPerPage,
+      handleRowsPerPage,
+      handlePageNumber,
       handleSortOrder,
       handleSortValue,
       handleSearch,

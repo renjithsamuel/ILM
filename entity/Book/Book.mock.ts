@@ -1,4 +1,4 @@
-import { BookGenre } from "@/constants/BookGenre";
+import { mockUser } from "../User/User.mock";
 import { Book, IBook } from "./Book";
 
 const bookData: IBook = {
@@ -6,13 +6,13 @@ const bookData: IBook = {
   ISBN: "123456",
   title: "The Great Gatsby",
   author: "F. Scott Fitzgerald",
-  genre: BookGenre.Travel,
+  genre: "travel",
   publishedDate: "1925",
   desc: "A novel about the American Dream",
   previewLink:
     "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
   coverImage:
-    "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg",
   shelfNumber: 12,
   inLibrary: true,
   booksLeft: 2,
@@ -23,6 +23,9 @@ const bookData: IBook = {
   createdAt: new Date(),
   updatedAt: new Date(),
   approximateDemand: 20,
+  reviewsList: [mockUser.userID],
+  wishList: [mockUser.userID],
+  viewsList: [mockUser.userID],
 };
 
 export const mockBook = new Book(bookData);
@@ -33,13 +36,13 @@ const mockBooksInterfaceArray: IBook[] = [
     ISBN: "123456",
     title: "The Great Gatsby",
     author: "F. Scott Fitzgerald",
-    genre: BookGenre.Adventure,
+    genre: "adventure",
     publishedDate: "1925",
     desc: "A novel about the American Dream",
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
-      "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg",
     shelfNumber: 12,
     inLibrary: true,
     booksLeft: 3,
@@ -50,19 +53,22 @@ const mockBooksInterfaceArray: IBook[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
     approximateDemand: 20,
+    reviewsList: [mockUser.userID],
+    wishList: [mockUser.userID],
+    viewsList: [mockUser.userID],
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79028",
     ISBN: "123456",
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
-    genre: BookGenre.ScienceFiction,
+    genre: "fiction",
     publishedDate: "1960",
     desc: "A story of racial injustice and moral growth",
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
-      "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg",
     shelfNumber: 12,
     inLibrary: true,
     booksLeft: 0,
@@ -73,19 +79,22 @@ const mockBooksInterfaceArray: IBook[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
     approximateDemand: 20,
+    reviewsList: [mockUser.userID],
+    wishList: [mockUser.userID],
+    viewsList: [mockUser.userID],
   },
   {
     ID: "3e74718b-3855-43ba-ae2c-4be8ccc79029",
     ISBN: "123456",
     title: "1984",
     author: "George Orwell",
-    genre: BookGenre.Biography,
+    genre: "biography",
     publishedDate: "1949",
     desc: "A novel depicting a totalitarian society",
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
     coverImage:
-      "http://books.google.com/books/content?id=f2ieoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg",
     shelfNumber: 12,
     inLibrary: false,
     booksLeft: 1,
@@ -96,6 +105,9 @@ const mockBooksInterfaceArray: IBook[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
     approximateDemand: 20,
+    reviewsList: [mockUser.userID],
+    wishList: [mockUser.userID],
+    viewsList: [mockUser.userID],
   },
 ];
 

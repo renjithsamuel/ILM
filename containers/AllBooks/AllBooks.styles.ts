@@ -16,14 +16,9 @@ export const useAllBooksStyles = makeStyles((theme) => ({
     padding: theme.spacing(1.5),
     marginBottom: theme.spacing(1),
   },
-  sortByContainer: {
-    display: "flex",
-    width: "25vw",
-    alignSelf: "start",
-    gap: theme.spacing(2),
-  },
   noBooksText: {
     width: "80vw",
+    marginTop: theme.spacing(20),
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -37,5 +32,19 @@ export const useAllBooksStyles = makeStyles((theme) => ({
     [theme.breakpoints.between("xs", "sm")]: {
       fontSize: "20px",
     },
+  },
+  sortByContainer: {
+    display: "flex",
+    width: "25vw",
+    alignSelf: "start",
+    gap: theme.spacing(2),
+  },
+  paginationWrap: {
+    width: "80vw",
+    position: "sticky",
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));

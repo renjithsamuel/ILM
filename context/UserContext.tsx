@@ -17,7 +17,7 @@ type TUserContext = {
 };
 
 export const UserContext = createContext<TUserContext>(
-  {} as unknown as TUserContext
+  {} as unknown as TUserContext,
 );
 
 interface UserContextProviderProps {

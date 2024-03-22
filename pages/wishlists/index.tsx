@@ -9,7 +9,7 @@ export default function SingleUserPage() {
       showSearchBar
       pageName={sideMenuItems.WishLists.name}
     >
-      <UserBooksList/>
+      <UserBooksList />
     </BaseLayout>
   );
 }
