@@ -1,4 +1,4 @@
-import { useUpdateUserAPI } from "@/api/User/updateUser";
+import { useUpdateUserAPI } from "@/goconnection/User/updateUser";
 import { Role } from "@/constants/Role";
 import { usePageContext } from "@/context/PageContext";
 import { useUserContext } from "@/context/UserContext";

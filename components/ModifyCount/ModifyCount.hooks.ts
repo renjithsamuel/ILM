@@ -1,5 +1,5 @@
-import { queryClient } from "@/api";
-import { useUpdateBookAPI } from "@/api/Book/updateBook";
+import { queryClient } from "@/goconnection";
+import { useUpdateBookAPI } from "@/goconnection/Book/updateBook";
 import { QueryKeys } from "@/constants/Querykeys";
 import { usePageContext } from "@/context/PageContext";
 import { Book } from "@/entity/Book/Book";
@@ -44,7 +44,7 @@ export const useModifyCount = ({
 
   const handleUpdateQuantity = async () => {
     await updateBookQuantity({ book: { ...book, booksLeft: stockValue } });
-    handleCloseDialog()
+    handleCloseDialog();
   };
 
   const handleStockValue = (value: number) => {

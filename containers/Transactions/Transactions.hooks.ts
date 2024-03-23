@@ -1,4 +1,4 @@
-import { useGetAllCheckoutsAPI } from "@/api/Checkout/getAllCheckouts";
+import { useGetAllCheckoutsAPI } from "@/goconnection/Checkout/getAllCheckouts";
 import {
   SortOrder,
   TransactionSortValue,

@@ -1,4 +1,4 @@
-import { useGetAllUsersAPI } from "@/api/User/getAllUsers";
+import { useGetAllUsersAPI } from "@/goconnection/User/getAllUsers";
 import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
 import { Role } from "@/constants/Role";
 import { usePageContext } from "@/context/PageContext";
