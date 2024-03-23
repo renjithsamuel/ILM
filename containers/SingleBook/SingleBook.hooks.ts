@@ -1,9 +1,9 @@
-import { useGetBookAPI } from "@/api/Book/getBook";
-import { useUpdateBookAPI } from "@/api/Book/updateBook";
-import { useUpdateBookDetailsAPI } from "@/api/BookDetails/updateBookDetails";
-import { useCreateCheckoutAPI } from "@/api/Checkout/createCheckout";
-import { useGetCheckoutByUserIDAPI } from "@/api/Checkout/getCheckoutByUserID";
-import { useGetAllReviewsByBookIDAPI } from "@/api/Review/getReviews";
+import { useGetBookAPI } from "@/goconnection/Book/getBook";
+import { useUpdateBookAPI } from "@/goconnection/Book/updateBook";
+import { useUpdateBookDetailsAPI } from "@/goconnection/BookDetails/updateBookDetails";
+import { useCreateCheckoutAPI } from "@/goconnection/Checkout/createCheckout";
+import { useGetCheckoutByUserIDAPI } from "@/goconnection/Checkout/getCheckoutByUserID";
+import { useGetAllReviewsByBookIDAPI } from "@/goconnection/Review/getReviews";
 import { ReviewSortValue, SortOrder } from "@/constants/GlobalConstants";
 import { Role } from "@/constants/Role";
 import { usePageContext } from "@/context/PageContext";

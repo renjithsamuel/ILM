@@ -1,6 +1,6 @@
-import { useUpdateBookAPI } from "@/api/Book/updateBook";
-import { useUpdateBookDetailsAPI } from "@/api/BookDetails/updateBookDetails";
-import { useCreateReviewAPI } from "@/api/Review/createReview";
+import { useUpdateBookAPI } from "@/goconnection/Book/updateBook";
+import { useUpdateBookDetailsAPI } from "@/goconnection/BookDetails/updateBookDetails";
+import { useCreateReviewAPI } from "@/goconnection/Review/createReview";
 import { usePageContext } from "@/context/PageContext";
 import { Book } from "@/entity/Book/Book";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";

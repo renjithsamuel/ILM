@@ -1,5 +1,5 @@
-import { useLoginUserAPI } from "@/api/User/loginUser";
-import { useRegisterUserAPI } from "@/api/User/registerUser";
+import { useLoginUserAPI } from "@/goconnection/User/loginUser";
+import { useRegisterUserAPI } from "@/goconnection/User/registerUser";
 import { usePageContext } from "@/context/PageContext";
 import { User } from "@/entity/User/User";
 import { mockUsers } from "@/entity/User/User.mock";

@@ -1,4 +1,4 @@
-import { useGetUserByIDAPI } from "@/api/User/getUserByUserID";
+import { useGetUserByIDAPI } from "@/goconnection/User/getUserByUserID";
 import { usePageContext } from "@/context/PageContext";
 import { useUserContext } from "@/context/UserContext";
 import { User } from "@/entity/User/User";
