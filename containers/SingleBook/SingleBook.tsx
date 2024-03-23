@@ -49,6 +49,7 @@ interface singleBookParams {
 export const SingleBook = ({}: singleBookParams) => {
   const classes = useSingleBookStyles();
   const {
+    similarBooks,
     isBookCompleted,
     checkoutData,
     commentList,
@@ -363,8 +364,8 @@ export const SingleBook = ({}: singleBookParams) => {
         <Typography variant="body1" className={classes.similarBooksText}>
           Similar{" "}
         </Typography>
-        {mockBooks?.length > 0 ? (
-          mockBooks.map((book: Book, index) => (
+        {similarBooks?.length > 0 ? (
+          similarBooks.map((book: Book, index) => (
             <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <SimilarBookItem book={book} />
             </Grid>

@@ -1,12 +1,8 @@
-import { queryClient } from "@/api";
-import { useUpdateBookAPI } from "@/api/Book/updateBook";
-import { useUpdateCheckoutAPI } from "@/api/Checkout/updateCheckout";
-import { QueryKeys } from "@/constants/Querykeys";
+import { useUpdateCheckoutAPI } from "@/goconnection/Checkout/updateCheckout";
 import { usePageContext } from "@/context/PageContext";
-import { Book } from "@/entity/Book/Book";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
 import { useMediaQuery, useTheme } from "@mui/material";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface modifyFineAmountHookProps {
   checkoutItem: CheckoutTicket;

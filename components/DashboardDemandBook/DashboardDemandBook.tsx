@@ -14,7 +14,7 @@ export const DashboardDemandBook = ({ book }: DashboardDemandBookProps) => {
 
   return (
     <Box className={clsx(classes.dashboardDemandBookRoot)}>
-      <Link href={`/allbooks/${book.ID}`}>
+      <Link href={`/allbooks/${book.ISBN}`}>
         <div className={clsx(classes.bookContainer, "bookContainer")}>
           <img
             src={book.coverImage}

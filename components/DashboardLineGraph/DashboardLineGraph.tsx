@@ -46,7 +46,7 @@ export const DashboardLineGraph = ({}: dashboardLineGraphParams) => {
           />
           <Line
             type="monotone"
-            dataKey="numberOfActiveUsers"
+            dataKey="noOfActiveUsers"
             label={"Number Of Active Users"}
             strokeOpacity={state.opacity.uv}
             stroke={themeValues.color.color1}
@@ -54,7 +54,7 @@ export const DashboardLineGraph = ({}: dashboardLineGraphParams) => {
           />
           <Line
             type="monotone"
-            dataKey="numberOfCheckouts"
+            dataKey="noOfCheckouts"
             label={"Number Of Checkouts"}
             strokeOpacity={state.opacity.uv}
             stroke={themeValues.color.color3}

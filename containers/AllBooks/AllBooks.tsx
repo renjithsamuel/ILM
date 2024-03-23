@@ -129,16 +129,3 @@ export const AllBooks = ({}: allBooksParams) => {
     </Box>
   );
 };
-
-{
-  /* <MenuItem value={GoogleOrderByValues.author}>author</MenuItem> */
-}
-{
-  /* <MenuItem value={GoogleOrderByValues.newest}>newest</MenuItem> */
-}
-{
-  /* <MenuItem value={GoogleOrderByValues.oldest}>oldest</MenuItem> */
-}
-{
-  /* <MenuItem value={GoogleOrderByValues.relevance}>relevance</MenuItem> */
-}

@@ -15,6 +15,7 @@ import { User } from "@/entity/User/User";
 import { SelectChangeEvent } from "@mui/material";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import { useGetSimilarBooksAPI } from "@/goconnection/Book/getSimilarBooks";
 interface SingleBookHookProps {}
 
 interface SingleBookHook {
@@ -23,6 +24,7 @@ interface SingleBookHook {
   checkoutData: CheckoutTicket | undefined;
   userType: Role;
   user: User;
+  similarBooks: Book[];
   wishlisted: boolean;
   isModifyCountOpen: boolean | undefined;
   isAddCommentOpen: boolean | undefined;
@@ -57,6 +59,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const [isModifyCountOpen, setIsModifyCountOpen] = useState<boolean>();
   const [isAddCommentOpen, setIsAddCommentOpen] = useState<boolean>();
   const [isBookCompleted, setIsBookCompleted] = useState<boolean>(false);
+  const [similarBooks, setSimilarBooks] = useState<Book[]>([]);
 
   // pagination related
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -80,6 +83,20 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     bookID,
     !!bookID
   );
+
+  // get similar books
+  const {
+    data: similarBooksData,
+    isError: issimilarBooksError,
+    isSuccess: isSimilarBooksSuccess,
+  } = useGetSimilarBooksAPI({ isbn: bookID }, !!bookID);
+
+  useEffect(() => {
+    if (isSimilarBooksSuccess && similarBooksData.data) {
+      setSimilarBooks(similarBooksData.data);
+    }
+  }, [isSimilarBooksSuccess]);
+
   // get checkout
   const { data: checkoutsData, isError: isGetCheckoutError } =
     useGetCheckoutByUserIDAPI(
@@ -137,7 +154,6 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     setIsAddCommentOpen(!isAddCommentOpen);
   };
 
-  // todo handleAddToLibrary
   const handleAddToLibrary = () => {
     if (bookData?.data && !bookData?.data.inLibrary) {
       bookData?.data &&
@@ -345,6 +361,16 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     }
   }, [isGetReviewError]);
 
+  // similar books
+  useEffect(() => {
+    if (issimilarBooksError) {
+      setSnackBarError({
+        ErrorMessage: "Similar Books Failed!",
+        ErrorSeverity: "warning",
+      });
+    }
+  }, [issimilarBooksError]);
+
   // checkout data
   const checkoutReturned = checkoutsData?.data.find((item) => item.isReturned);
 
@@ -373,6 +399,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   };
 
   return {
+    similarBooks,
     checkoutData: checkoutReturned,
     commentList: reviewsData?.data.reviews,
     totalPages: reviewsData?.data.totalPages ?? -1,

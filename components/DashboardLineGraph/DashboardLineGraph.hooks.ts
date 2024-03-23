@@ -1,7 +1,10 @@
+import { usePageContext } from "@/context/PageContext";
 import { GraphData } from "@/entity/GraphData/GraphData";
 import { mockGraphData } from "@/entity/GraphData/GraphData.mock";
 import { User } from "@/entity/User/User";
 import { mockUsers } from "@/entity/User/User.mock";
+import { useGetLineGraphDataAPI } from "@/goconnection/Dashboard/getLineGraphData";
+import dayjs from "dayjs";
 import { useCallback, useEffect, useState } from "react";
 import { Payload } from "recharts/types/component/DefaultLegendContent";
 
@@ -16,6 +19,22 @@ interface dashboardLineGraphHook {
 
 export const useDashboardLineGraphLineGraph =
   ({}: dashboardLineGraphHookProps): dashboardLineGraphHook => {
+    const { setSnackBarError } = usePageContext();
+    const {
+      data: graphDataResponse,
+      isError: isGraphDataError,
+      isSuccess: isGraphDataSuccess,
+    } = useGetLineGraphDataAPI();
+
+    useEffect(() => {
+      if (isGraphDataError) {
+        setSnackBarError({
+          ErrorMessage: "fetch graph failed!",
+          ErrorSeverity: "error",
+        });
+      }
+    }, [isGraphDataError]);
+
     const [graphData, setGraphData] = useState<GraphData[]>([]);
 
     const [state, setState] = useState({
@@ -27,8 +46,11 @@ export const useDashboardLineGraphLineGraph =
 
     //  getGraphData(currentUser._id);
     useEffect(() => {
-      setGraphData(mockGraphData);
-    }, []);
+      if (isGraphDataSuccess && graphDataResponse?.data) {
+        console.log("graphDataResponse?.data", graphDataResponse?.data);
+        setGraphData(graphDataResponse?.data);
+      }
+    }, [isGraphDataSuccess]);
 
     let handleMouseEnter = (o: Payload) => {
       const { dataKey } = o;
