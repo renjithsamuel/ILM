@@ -2,7 +2,7 @@
 
 The Library Management System is a web application designed to streamline library operations, enhance user engagement, and automate various tasks. It caters to two main user types: patrons and librarians. Built with Next.js, TypeScript, Golang, and PostgreSQL, this application focuses on providing a seamless experience for managing book collections, wishlists, reservations, and checkouts.
 
-Live site: [Library Management System](#)
+Live site: [Library Management System](https://ilm-library-lemon.vercel.app/dashboard)
 
 ## Features
 

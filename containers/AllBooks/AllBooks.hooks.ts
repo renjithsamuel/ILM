@@ -1,4 +1,4 @@
-import { useGetNewBooksGoogleAPI } from "@/api/Book/getNewBooksGoogle";
+import { useGetNewBooksGoogleAPI } from "@/goconnection/Book/getNewBooksGoogle";
 import {
   BookSortValue,
   SortOrder,

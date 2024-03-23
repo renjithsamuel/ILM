@@ -17,7 +17,7 @@ import {
   searchDialogReducer,
 } from "@/reducers/SearchDialog/searchDialog.reducer";
 import { SearchDialogTypes } from "@/reducers/SearchDialog/searchDialog.types";
-import { useSearchDialogAPI } from "@/api/Search/searchDialog";
+import { useSearchDialogAPI } from "@/goconnection/Search/searchDialog";
 import { FormatTextUtil } from "@/utils/formatText";
 import { string } from "yup";
 

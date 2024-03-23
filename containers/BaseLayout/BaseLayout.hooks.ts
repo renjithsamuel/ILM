@@ -1,4 +1,4 @@
-import { useGetUserAPI } from "@/api/User/getUser";
+import { useGetUserAPI } from "@/goconnection/User/getUser";
 import {
   PageSeparation,
   globalConstants,

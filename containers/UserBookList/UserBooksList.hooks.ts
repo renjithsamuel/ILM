@@ -1,5 +1,5 @@
-import { useGetAllBooksFromBookDetailsAPI } from "@/api/Book/getAllBooksFromBookDetails";
-import { useGetUserByIDAPI } from "@/api/User/getUserByUserID";
+import { useGetAllBooksFromBookDetailsAPI } from "@/goconnection/Book/getAllBooksFromBookDetails";
+import { useGetUserByIDAPI } from "@/goconnection/User/getUserByUserID";
 import { UserBookDetailType } from "@/constants/GlobalConstants";
 import { Role } from "@/constants/Role";
 import { usePageContext } from "@/context/PageContext";

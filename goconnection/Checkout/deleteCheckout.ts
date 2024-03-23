@@ -32,7 +32,8 @@ export const useDeleteCheckoutAPI = (): UseMutationResult<
   >(deleteCheckoutAPI, {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKeys.GET_ALL_CHECKOUTS);
-      queryClient.invalidateQueries(QueryKeys.GET_CHECKOUT);
+      queryClient.invalidateQueries(QueryKeys.GET_CHECKOUT_BY_ID);
+      queryClient.invalidateQueries(QueryKeys.GET_CHECKOUT_WITH_USERID);
     },
   });
 };

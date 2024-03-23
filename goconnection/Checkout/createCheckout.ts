@@ -34,9 +34,9 @@ export const useCreateCheckoutAPI = (): UseMutationResult<
     CreateCheckoutRequest
   >(createCheckoutAPI, {
     onSuccess: () => {
-      queryClient.invalidateQueries(QueryKeys.CREATE_CHECKOUT);
       queryClient.invalidateQueries(QueryKeys.GET_ALL_CHECKOUTS);
-      queryClient.invalidateQueries(QueryKeys.GET_CHECKOUT);
+      queryClient.invalidateQueries(QueryKeys.GET_CHECKOUT_BY_ID);
+      queryClient.invalidateQueries(QueryKeys.GET_CHECKOUT_WITH_USERID);
     },
   });
 };

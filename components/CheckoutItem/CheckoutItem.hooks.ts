@@ -1,7 +1,7 @@
-import { useUpdateBookAPI } from "@/api/Book/updateBook";
-import { useUpdateBookDetailsAPI } from "@/api/BookDetails/updateBookDetails";
-import { useDeleteCheckoutAPI } from "@/api/Checkout/deleteCheckout";
-import { useUpdateCheckoutAPI } from "@/api/Checkout/updateCheckout";
+import { useUpdateBookAPI } from "@/goconnection/Book/updateBook";
+import { useUpdateBookDetailsAPI } from "@/goconnection/BookDetails/updateBookDetails";
+import { useDeleteCheckoutAPI } from "@/goconnection/Checkout/deleteCheckout";
+import { useUpdateCheckoutAPI } from "@/goconnection/Checkout/updateCheckout";
 import { usePageContext } from "@/context/PageContext";
 import { useUserContext } from "@/context/UserContext";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
