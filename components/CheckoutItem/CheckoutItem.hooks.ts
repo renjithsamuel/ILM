@@ -7,7 +7,7 @@ import { useUserContext } from "@/context/UserContext";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
 import { User } from "@/entity/User/User";
 import { mockUsers } from "@/entity/User/User.mock";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface checkoutItemHookProps {
   checkoutItem: CheckoutTicket;
@@ -15,10 +15,12 @@ interface checkoutItemHookProps {
 
 interface checkoutItemHook {
   isExtendOpen: boolean;
+  isModifyFineAmountOpen: boolean;
   handleCheckout: () => Promise<void>;
   handleReturn: () => Promise<void>;
   handleExtendOpen: () => void;
   handleExtend: (value: number) => void;
+  handleModifyFineAmount: () => void;
   handleDeleteCheckout: () => Promise<void>;
 }
 
@@ -28,6 +30,8 @@ export const useCheckoutItem = ({
   const { user } = useUserContext();
   const { setSnackBarError } = usePageContext();
   const [isExtendOpen, setIsExtendOpen] = useState<boolean>(false);
+  const [isModifyFineAmountOpen, setIsModifyFineAmountOpen] =
+    useState<boolean>(false);
   const {
     mutateAsync: updateCheckoutTicket,
     isError: isUpdateCheckoutError,
@@ -115,6 +119,10 @@ export const useCheckoutItem = ({
         numberOfDays: value,
       },
     });
+  };
+
+  const handleModifyFineAmount = () => {
+    setIsModifyFineAmountOpen(!isModifyFineAmountOpen);
   };
 
   const handleExtendOpen = () => {
@@ -219,6 +227,8 @@ export const useCheckoutItem = ({
 
   return {
     isExtendOpen,
+    isModifyFineAmountOpen,
+    handleModifyFineAmount,
     handleCheckout,
     handleReturn,
     handleExtendOpen,

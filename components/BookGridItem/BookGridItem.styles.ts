@@ -59,6 +59,7 @@ export const useBookGridItemStyles = makeStyles((theme) => ({
   bookContent: {
     display: "flex",
     flexDirection: "column",
+    width: "100%",
     gap: theme.spacing(1),
     marginTop: theme.spacing(1),
   },

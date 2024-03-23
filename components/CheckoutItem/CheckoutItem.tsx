@@ -20,7 +20,8 @@ import Link from "next/link";
 import { FormatTextUtil } from "@/utils/formatText";
 import { useCheckoutItem } from "./CheckoutItem.hooks";
 import { ExtendCheckout } from "../ExtendCheckout/ExtendCheckout";
-
+import { BiMoneyWithdraw } from "react-icons/bi";
+import { ModifyFineAmount } from "../ModifyFineAmount/ModifyFineAmount";
 interface checkoutItemParams {
   checkoutItem: CheckoutTicket;
 }
@@ -28,6 +29,8 @@ interface checkoutItemParams {
 export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
   const {
     isExtendOpen,
+    isModifyFineAmountOpen,
+    handleModifyFineAmount,
     handleCheckout,
     handleReturn,
     handleExtendOpen,
@@ -45,6 +48,13 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
           handleExtendOpen={handleExtendOpen}
           handleExtend={handleExtend}
           numberOfDays={checkoutItem.numberOfDays}
+        />
+      )}
+      {/* modify fine Amount popup */}
+      {isModifyFineAmountOpen && (
+        <ModifyFineAmount
+          handleModifyFineAmount={handleModifyFineAmount}
+          checkoutItem={checkoutItem}
         />
       )}
       <Accordion>
@@ -345,6 +355,23 @@ export const CheckoutItem = ({ checkoutItem }: checkoutItemParams) => {
                 <MdOutlineShoppingCartCheckout
                   size={themeValues.spacing(2.2)}
                 />
+              </Button>
+              {/* Add Fine Amount */}
+              <Button
+                variant="contained"
+                className={classes.actionBtn}
+                disabled={
+                  !!checkoutItem.isReturned || !checkoutItem.isCheckedOut
+                }
+                onClick={handleModifyFineAmount}
+              >
+                <Typography
+                  variant="body2"
+                  sx={{ mr: themeValues.spacing(0.6) }}
+                >
+                  {!checkoutItem?.fineAmount ? "Add Fine" : "Modify Fine"}
+                </Typography>
+                <BiMoneyWithdraw size={themeValues.spacing(2.2)} />
               </Button>
               {/* checkout */}
               <Button

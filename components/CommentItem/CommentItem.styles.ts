@@ -44,7 +44,8 @@ export const useCommentItemStyles = makeStyles((theme) => ({
   },
   ratingWrap: {
     position: "absolute",
-    right: 0,
+    right: theme.spacing(3),
     justifySelf: "end",
+    alignSelf: "start",
   },
 }));

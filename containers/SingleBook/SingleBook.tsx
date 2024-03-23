@@ -135,7 +135,7 @@ export const SingleBook = ({}: singleBookParams) => {
                 name="read-only"
                 value={book.rating}
                 readOnly
-                precision={0.5}
+                precision={1}
                 color={themeValues.color.color1}
               />
             </Box>
