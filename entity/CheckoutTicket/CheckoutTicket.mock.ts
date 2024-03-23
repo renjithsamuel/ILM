@@ -8,7 +8,7 @@ export const mockCheckoutTicket: CheckoutTicket = {
   isReturned: false,
   numberOfDays: 15,
   fineAmount: 0,
-  reservatedOn: new Date(),
+  reservedOn: new Date(),
   checkedOutOn: new Date(),
   returnedDate: undefined,
   createdAt: new Date(),

@@ -7,7 +7,7 @@ const bookData: IBook = {
   title: "The Great Gatsby",
   author: "F. Scott Fitzgerald",
   genre: "travel",
-  publishedDate: "1925",
+  publishedDate: new Date(),
   desc: "A novel about the American Dream",
   previewLink:
     "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
@@ -37,7 +37,7 @@ const mockBooksInterfaceArray: IBook[] = [
     title: "The Great Gatsby",
     author: "F. Scott Fitzgerald",
     genre: "adventure",
-    publishedDate: "1925",
+    publishedDate: new Date(),
     desc: "A novel about the American Dream",
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
@@ -63,7 +63,7 @@ const mockBooksInterfaceArray: IBook[] = [
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
     genre: "fiction",
-    publishedDate: "1960",
+    publishedDate: new Date(),
     desc: "A story of racial injustice and moral growth",
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
@@ -89,7 +89,7 @@ const mockBooksInterfaceArray: IBook[] = [
     title: "1984",
     author: "George Orwell",
     genre: "biography",
-    publishedDate: "1949",
+    publishedDate: new Date(),
     desc: "A novel depicting a totalitarian society",
     previewLink:
       "http://books.google.co.in/books?id=f2ieoAEACAAJ&dq=The+Hunger+Games&hl=&cd=1&source=gbs_api",
