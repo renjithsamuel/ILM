@@ -7,8 +7,12 @@ import { QueryKeys } from "@/constants/Querykeys";
 export type GetUserByIDResponse = AxiosResponse<User>;
 export type GetUserByIDAPIResponse = { user: IUser };
 
-export const getUserByIDAPI = async (userID : string): Promise<GetUserByIDResponse> => {
-  const response = await PrivateAxios.get<GetUserByIDAPIResponse>(`/users/${userID}`);
+export const getUserByIDAPI = async (
+  userID: string,
+): Promise<GetUserByIDResponse> => {
+  const response = await PrivateAxios.get<GetUserByIDAPIResponse>(
+    `/users/${userID}`,
+  );
 
   const user = new User(response?.data.user);
   return {
@@ -19,13 +23,13 @@ export const getUserByIDAPI = async (userID : string): Promise<GetUserByIDRespon
 
 export const useGetUserByIDAPI = (
   userID: string,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetUserByIDResponse, AxiosError> => {
   return useQuery<GetUserByIDResponse, AxiosError>(
     [QueryKeys.GET_USER_BY_ID, userID],
     () => getUserByIDAPI(userID),
     {
       enabled,
-    }
+    },
   );
 };

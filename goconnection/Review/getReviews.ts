@@ -27,11 +27,11 @@ export const getAllReviewsByBookIDAPI = async ({
   sortBy,
 }: GetAllReviewsByBookIDRequest): Promise<GetAllReviewsByBookIDResponse> => {
   const response = await PrivateAxios.get<GetAllReviewsByBookIDAPIResponse>(
-    `/allreviews/${bookID}?sortBy=${sortBy}&page=${page}&limit=${limit}`
+    `/allreviews/${bookID}?sortBy=${sortBy}&page=${page}&limit=${limit}`,
   );
 
   let reviews: Review[] = response.data.reviews.map(
-    (ticket) => new Review(ticket)
+    (ticket) => new Review(ticket),
   );
 
   return {
@@ -42,13 +42,13 @@ export const getAllReviewsByBookIDAPI = async ({
 
 export const useGetAllReviewsByBookIDAPI = (
   request: GetAllReviewsByBookIDRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetAllReviewsByBookIDResponse, AxiosError> => {
   return useQuery<GetAllReviewsByBookIDResponse, AxiosError>(
     [QueryKeys.GET_REVIEWS, { ...request }],
     () => getAllReviewsByBookIDAPI(request),
     {
       enabled: enabled && !!request.bookID,
-    }
+    },
   );
 };

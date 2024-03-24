@@ -24,7 +24,7 @@ export const useUserBooksList =
     const { setSnackBarError } = usePageContext();
     const [requiredUserID, setRequiredUserID] = useState<string>("");
     const [bookDetailsFrom, setBookDetailsFrom] = useState<UserBookDetailType>(
-      UserBookDetailType.WishLists
+      UserBookDetailType.WishLists,
     );
     const router = useRouter();
 
@@ -40,7 +40,7 @@ export const useUserBooksList =
         bookDetailsFrom: bookDetailsFrom,
         userID: requiredUserID,
       },
-      requiredUserID != "" && !!bookDetailsFrom
+      requiredUserID != "" && !!bookDetailsFrom,
     );
 
     // get books from the user's book details list and give enabled thing -> bookDetailsFrom

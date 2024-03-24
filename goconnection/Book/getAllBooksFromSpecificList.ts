@@ -15,7 +15,7 @@ export const getAllBooksFromSpecificAPI = async ({
 }: GetAllBooksFromSpecificRequest): Promise<GetAllBooksFromSpecificResponse> => {
   const response = await PrivateAxios.post<GetAllBooksFromSpecificAPIResponse>(
     `/allbooks/specific`,
-    booksList
+    booksList,
   );
   let books: Book[] = response.data.books.map((user) => new Book(user));
 
@@ -27,13 +27,13 @@ export const getAllBooksFromSpecificAPI = async ({
 
 export const useGetAllBooksFromSpecificFromSpecificListAPI = (
   request: GetAllBooksFromSpecificRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetAllBooksFromSpecificResponse, AxiosError> => {
   return useQuery<GetAllBooksFromSpecificResponse, AxiosError>(
     [QueryKeys.GET_ALL_BOOKS_FROM_SPECIFIC_LIST],
     () => getAllBooksFromSpecificAPI(request),
     {
       enabled: enabled && !!request.booksList,
-    }
+    },
   );
 };

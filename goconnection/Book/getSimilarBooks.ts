@@ -14,7 +14,7 @@ export const getSimilarBooksAPI = async ({
   isbn,
 }: GetSimilarBooksRequest): Promise<GetSimilarBooksResponse> => {
   const response = await PrivateAxios.get<GetSimilarBooksAPIResponse>(
-    `/similarbooks/${isbn}`
+    `/similarbooks/${isbn}`,
   );
 
   let books: Book[] = response.data.books.map((item) => new Book(item));
@@ -27,13 +27,13 @@ export const getSimilarBooksAPI = async ({
 
 export const useGetSimilarBooksAPI = (
   request: GetSimilarBooksRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetSimilarBooksResponse, AxiosError> => {
   return useQuery<GetSimilarBooksResponse, AxiosError>(
     [QueryKeys.GET_SIMILAR_BOOKS, request.isbn],
     () => getSimilarBooksAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

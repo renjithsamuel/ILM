@@ -1,6 +1,14 @@
 import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useAllUsers } from "./AllUsers.hooks";
-import { Box, CircularProgress, FormControl, InputLabel, MenuItem, Select, TablePagination } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TablePagination,
+} from "@mui/material";
 import { useAllUsersStyles } from "./AllUsers.styles";
 import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
 
@@ -77,7 +85,8 @@ export const AllUsers = ({}: allUsersParams) => {
           >
             <CircularProgress />
           </Box>
-        ) : pendingUsers &&
+        ) : (
+          pendingUsers &&
           pendingUsers.length > 0 &&
           pendingUsers?.map((user) => {
             return (
@@ -90,7 +99,8 @@ export const AllUsers = ({}: allUsersParams) => {
                 sortByValue={sortByValue}
               />
             );
-          })}
+          })
+        )}
       </Box>
       <Box className={classes.paginationWrap}>
         <TablePagination

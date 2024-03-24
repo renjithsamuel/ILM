@@ -11,7 +11,7 @@ export type GetBoardDataAPIResponse = {
 
 export const getBoardDataAPI = async (): Promise<GetBoardDataResponse> => {
   const response = await PrivateAxios.get<GetBoardDataAPIResponse>(
-    `/dashboards/databoard`
+    `/dashboards/databoard`,
   );
   return {
     ...response,
@@ -20,13 +20,13 @@ export const getBoardDataAPI = async (): Promise<GetBoardDataResponse> => {
 };
 
 export const useGetBoardDataAPI = (
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetBoardDataResponse, AxiosError> => {
   return useQuery<GetBoardDataResponse, AxiosError>(
     [QueryKeys.GET_DATA_BOARD],
     () => getBoardDataAPI(),
     {
       enabled,
-    }
+    },
   );
 };

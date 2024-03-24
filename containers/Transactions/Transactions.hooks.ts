@@ -21,11 +21,11 @@ interface transactionsHook {
   totalPages: number;
   isTicketLoading: boolean;
   handleRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handlePageNumber: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ) => void;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
@@ -44,7 +44,7 @@ export const useTransactions =
     const { setSnackBarError } = usePageContext();
     const [searchText, setSearchText] = useState<string>("");
     const [sortByValue, setSortByValue] = useState<TransactionSortValue>(
-      TransactionSortValue.fineAmount
+      TransactionSortValue.fineAmount,
     );
     const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
@@ -93,7 +93,7 @@ export const useTransactions =
 
     // pagination
     const handleRowsPerPage = (
-      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ): void => {
       if (event.target.value) {
         setRowsPerPage(Number.parseInt(event.target.value, 10));
@@ -103,7 +103,7 @@ export const useTransactions =
 
     const handlePageNumber = (
       event: React.MouseEvent<HTMLButtonElement> | null,
-      val: number
+      val: number,
     ): void => {
       if (val) {
         setPageNumber(val);

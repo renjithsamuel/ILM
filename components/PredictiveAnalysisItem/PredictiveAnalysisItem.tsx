@@ -17,7 +17,6 @@ interface predictiveAnalysisItemParams {
 export const PredictiveAnalysisItem = ({
   book,
 }: predictiveAnalysisItemParams) => {
-
   const classes = usePredictiveAnalysisItemStyles();
   return (
     <>

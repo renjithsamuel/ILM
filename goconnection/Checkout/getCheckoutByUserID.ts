@@ -22,11 +22,11 @@ export const getCheckoutByUserIDAPI = async ({
   userID,
 }: GetCheckoutByUserIDRequest): Promise<GetCheckoutByUserIDResponse> => {
   const response = await PrivateAxios.get<GetCheckoutByUserIDAPIResponse>(
-    `/allcheckouts/${bookID}/${userID}`
+    `/allcheckouts/${bookID}/${userID}`,
   );
 
   const checkoutTickets = response.data.checkoutTickets.map(
-    (item) => new CheckoutTicket(item)
+    (item) => new CheckoutTicket(item),
   );
 
   return {
@@ -38,13 +38,13 @@ export const getCheckoutByUserIDAPI = async ({
 export const useGetCheckoutByUserIDAPI = (
   bookID: string | undefined,
   userID: string,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetCheckoutByUserIDResponse, AxiosError> => {
   return useQuery<GetCheckoutByUserIDResponse, AxiosError>(
     [QueryKeys.GET_CHECKOUT_WITH_USERID, bookID, userID],
     () => getCheckoutByUserIDAPI({ bookID, userID }),
     {
       enabled: enabled && !!bookID,
-    }
+    },
   );
 };

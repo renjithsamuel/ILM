@@ -38,7 +38,7 @@ export const searchDialogAPI = async ({
   type,
 }: SearchDialogRequest): Promise<SearchDialogResponse> => {
   const response = await PrivateAxios.get<SearchDialogAPIResponse>(
-    `/search?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}&searchText=${searchText}&searchBy=${searchBy}&type=${type}`
+    `/search?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}&searchText=${searchText}&searchBy=${searchBy}&type=${type}`,
   );
 
   let books: Book[] = [];
@@ -63,13 +63,13 @@ export const searchDialogAPI = async ({
 
 export const useSearchDialogAPI = (
   request: SearchDialogRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<SearchDialogResponse, AxiosError> => {
   return useQuery<SearchDialogResponse, AxiosError>(
     [QueryKeys.SEARCH_DIALOG, { ...request }],
     () => searchDialogAPI(request),
     {
       enabled: enabled,
-    }
+    },
   );
 };

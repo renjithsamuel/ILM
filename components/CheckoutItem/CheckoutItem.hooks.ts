@@ -135,7 +135,7 @@ export const useCheckoutItem = ({
       if (res.status >= 300) return;
       // update reserved book for this user
       const removedArray = (user.bookDetails?.reservedBookList || []).filter(
-        (item) => !!checkoutItem?.book && item !== checkoutItem?.book.ISBN
+        (item) => !!checkoutItem?.book && item !== checkoutItem?.book.ISBN,
       );
 
       checkoutItem.book &&

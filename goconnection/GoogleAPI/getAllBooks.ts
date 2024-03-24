@@ -29,7 +29,7 @@ export const getGoogleAllBooksAPI = async ({
   orderBy,
 }: GoogleGetAllBooksRequest): Promise<GoogleGetAllBooksResponse> => {
   const response = await GoogleBooksAxios.get<GoogleGetAllBooksAPIResponse>(
-    `v1/volumes?q=orderBy=${orderBy}&startIndex=${startIndex}&maxResults=${maxResults}&key=${GoogleApiKey}`
+    `v1/volumes?q=orderBy=${orderBy}&startIndex=${startIndex}&maxResults=${maxResults}&key=${GoogleApiKey}`,
   );
 
   let books: Book[] = response.data.items.map(
@@ -57,7 +57,7 @@ export const getGoogleAllBooksAPI = async ({
         previewLink: item.volumeInfo.previewLink,
         ID: "",
         updatedAt: new Date(),
-      })
+      }),
   );
 
   return {
@@ -68,13 +68,13 @@ export const getGoogleAllBooksAPI = async ({
 
 export const useGoogleGetAllBooksAPI = (
   request: GoogleGetAllBooksRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GoogleGetAllBooksResponse, AxiosError> => {
   return useQuery<GoogleGetAllBooksResponse, AxiosError>(
     [QueryKeys.GET_ALL_BOOKS],
     () => getGoogleAllBooksAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

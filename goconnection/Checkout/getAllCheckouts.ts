@@ -29,11 +29,11 @@ export const getAllCheckoutsAPI = async ({
   sortBy,
 }: GetAllCheckoutsRequest): Promise<GetAllCheckoutsResponse> => {
   const response = await PrivateAxios.get<GetAllCheckoutsAPIResponse>(
-    `/allcheckouts?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}`
+    `/allcheckouts?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}`,
   );
 
   let checkoutTickets: CheckoutTicket[] = response.data.checkoutTickets.map(
-    (ticket) => new CheckoutTicket(ticket)
+    (ticket) => new CheckoutTicket(ticket),
   );
 
   return {
@@ -44,13 +44,13 @@ export const getAllCheckoutsAPI = async ({
 
 export const useGetAllCheckoutsAPI = (
   request: GetAllCheckoutsRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetAllCheckoutsResponse, AxiosError> => {
   return useQuery<GetAllCheckoutsResponse, AxiosError>(
     [QueryKeys.GET_ALL_CHECKOUTS, { ...request }],
     () => getAllCheckoutsAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

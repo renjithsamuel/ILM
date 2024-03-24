@@ -23,7 +23,7 @@ export const getAllUsersAPI = async ({
   sortBy,
 }: GetAllUsersRequest): Promise<GetAllUsersResponse> => {
   const response = await PrivateAxios.get<GetAllUsersAPIResponse>(
-    `/allusers?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}`
+    `/allusers?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}`,
   );
 
   let users: User[] = response.data.users.map((user) => new User(user));
@@ -36,13 +36,13 @@ export const getAllUsersAPI = async ({
 
 export const useGetAllUsersAPI = (
   request: GetAllUsersRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetAllUsersResponse, AxiosError> => {
   return useQuery<GetAllUsersResponse, AxiosError>(
     [QueryKeys.GET_USERS, { ...request }],
     () => getAllUsersAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

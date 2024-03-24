@@ -19,7 +19,7 @@ export const useCommentItem = ({
   const { setSnackBarError } = usePageContext();
   const { data: getUserResponse, isError: isGetUserError } = useGetUserByIDAPI(
     review.userID,
-    !!review.userID
+    !!review.userID,
   );
 
   useEffect(() => {

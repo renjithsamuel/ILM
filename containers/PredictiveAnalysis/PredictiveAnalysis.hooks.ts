@@ -15,11 +15,11 @@ interface predictiveAnalysisHook {
   rowsPerPage: number;
   isPredictiveAnalysisLoading: boolean;
   handleRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handlePageNumber: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ) => void;
 }
 
@@ -61,7 +61,7 @@ export const usePredictiveAnalysis =
 
     // pagination
     const handleRowsPerPage = (
-      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ): void => {
       if (event.target.value) {
         setRowsPerPage(Number.parseInt(event.target.value, 10));
@@ -71,7 +71,7 @@ export const usePredictiveAnalysis =
 
     const handlePageNumber = (
       event: React.MouseEvent<HTMLButtonElement> | null,
-      val: number
+      val: number,
     ): void => {
       if (val) {
         setPageNumber(val);

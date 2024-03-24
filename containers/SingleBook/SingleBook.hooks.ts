@@ -40,15 +40,15 @@ interface SingleBookHook {
   totalPages: number;
   pageNumber: number;
   rowsPerPage: number;
-  isSimilarBooksLoading : boolean;
-  isCommentsLoading : boolean;
-  isBookLoading : boolean;
+  isSimilarBooksLoading: boolean;
+  isCommentsLoading: boolean;
+  isBookLoading: boolean;
   handleRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handlePageNumber: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
 }
@@ -69,7 +69,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const [sortByValue, setSortByValue] = useState<ReviewSortValue>(
-    ReviewSortValue.newest
+    ReviewSortValue.newest,
   );
 
   const { user } = useUserContext();
@@ -82,16 +82,17 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   } = useUpdateBookAPI();
 
   // get book
-  const { data: bookData, isError: isBookError, isLoading:  isBookLoading } = useGetBookAPI(
-    bookID,
-    !!bookID
-  );
+  const {
+    data: bookData,
+    isError: isBookError,
+    isLoading: isBookLoading,
+  } = useGetBookAPI(bookID, !!bookID);
 
   // get similar books
   const {
     data: similarBooksData,
     isError: issimilarBooksError,
-    isLoading:isSimilarBooksLoading,
+    isLoading: isSimilarBooksLoading,
     isSuccess: isSimilarBooksSuccess,
   } = useGetSimilarBooksAPI({ isbn: bookID }, !!bookID);
 
@@ -106,19 +107,22 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     useGetCheckoutByUserIDAPI(
       bookData?.data.ID,
       user.userID,
-      !!bookData?.data.ID && !!user.userID
+      !!bookData?.data.ID && !!user.userID,
     );
   // get all reviews
-  const { data: reviewsData, isError: isGetReviewError , isLoading: isCommentsLoading} =
-    useGetAllReviewsByBookIDAPI(
-      {
-        bookID: bookData?.data.ID,
-        sortBy: sortByValue,
-        limit: rowsPerPage,
-        page: pageNumber,
-      },
-      !!bookData?.data.ID
-    );
+  const {
+    data: reviewsData,
+    isError: isGetReviewError,
+    isLoading: isCommentsLoading,
+  } = useGetAllReviewsByBookIDAPI(
+    {
+      bookID: bookData?.data.ID,
+      sortBy: sortByValue,
+      limit: rowsPerPage,
+      page: pageNumber,
+    },
+    !!bookData?.data.ID,
+  );
 
   const {
     mutateAsync: createCheckout,
@@ -136,7 +140,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
 
   const wishlisted: boolean =
     !!user.bookDetails?.wishlistBooks.find(
-      (item) => item === bookData?.data.ISBN
+      (item) => item === bookData?.data.ISBN,
     ) ?? true;
 
   const handleModifyCount = () => {
@@ -213,7 +217,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     // need to update book with wishlist count
     if (wishlisted && user.bookDetails && bookData?.data.ISBN) {
       let removedArray = (user.bookDetails.wishlistBooks || []).filter(
-        (item) => item !== bookData?.data.ISBN
+        (item) => item !== bookData?.data.ISBN,
       );
       // remove book isbn in book details
       if (user.bookDetails && bookData?.data.ISBN) {
@@ -227,7 +231,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
         if (res.status >= 300) return;
         // remove userid from wishlist arr of book
         removedArray = (bookData?.data?.wishList || []).filter(
-          (item) => item !== user.userID
+          (item) => item !== user.userID,
         );
         updateBook({
           book: {
@@ -267,7 +271,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   useEffect(() => {
     if (!!bookData?.data) {
       const isUserNotViewed = !(bookData?.data.viewsList || []).includes(
-        user.userID
+        user.userID,
       );
       // if user haven't viewed yet add him to the viewList
       if (isUserNotViewed) {
@@ -381,7 +385,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
 
   // pagination
   const handleRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     if (event.target.value) {
       setRowsPerPage(Number.parseInt(event.target.value, 10));
@@ -391,7 +395,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
 
   const handlePageNumber = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ): void => {
     if (val) {
       setPageNumber(val);

@@ -12,7 +12,7 @@ export type GetLineGraphDataAPIResponse = { graphData: IGraphData[] };
 export const getLineGraphDataAPI =
   async (): Promise<GetLineGraphDataResponse> => {
     const response = await PrivateAxios.get<GetLineGraphDataAPIResponse>(
-      `/dashboards/linegraph`
+      `/dashboards/linegraph`,
     );
 
     let graphArray: GraphData[] = response.data.graphData.map(
@@ -22,7 +22,7 @@ export const getLineGraphDataAPI =
           month: new Date(item.month).toLocaleString("default", {
             month: "short",
           }),
-        })
+        }),
     );
 
     return {
@@ -32,13 +32,13 @@ export const getLineGraphDataAPI =
   };
 
 export const useGetLineGraphDataAPI = (
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetLineGraphDataResponse, AxiosError> => {
   return useQuery<GetLineGraphDataResponse, AxiosError>(
     [QueryKeys.GET_LINE_GRAPH_DATA],
     () => getLineGraphDataAPI(),
     {
       enabled,
-    }
+    },
   );
 };

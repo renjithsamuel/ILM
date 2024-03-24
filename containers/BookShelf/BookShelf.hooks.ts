@@ -15,11 +15,11 @@ interface bookShelfHook {
   rowsPerPage: number;
   isRecommendedbooksLoading: boolean;
   handleRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handlePageNumber: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ) => void;
 }
 
@@ -33,7 +33,7 @@ export const useBookShelf = ({}: bookShelfHookProps): bookShelfHook => {
   const {
     data: recommendedbooksResponse,
     isError: isRecommendedbooksError,
-    isLoading : isRecommendedbooksLoading,
+    isLoading: isRecommendedbooksLoading,
     isSuccess: isRecommendedbooksSuccess,
   } = useGetRecommendedBooksAPI({
     limit: rowsPerPage,
@@ -57,7 +57,7 @@ export const useBookShelf = ({}: bookShelfHookProps): bookShelfHook => {
 
   // pagination
   const handleRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     if (event.target.value) {
       setRowsPerPage(Number.parseInt(event.target.value, 10));
@@ -67,7 +67,7 @@ export const useBookShelf = ({}: bookShelfHookProps): bookShelfHook => {
 
   const handlePageNumber = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ): void => {
     if (val) {
       setPageNumber(val);

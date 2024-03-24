@@ -10,7 +10,7 @@ import {
 import { useLoginDialogStyles } from "./LoginDialog.styles";
 import { themeValues } from "@/constants/ThemeConstants";
 import { useLoginDialog } from "./LoginDialog.hooks";
-import { Formik, Form, Field} from "formik";
+import { Formik, Form, Field } from "formik";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { IoEye } from "react-icons/io5";
 import { Role } from "@/constants/Role";
@@ -59,7 +59,7 @@ export const LoginDialog = ({}: loginDialogParams) => {
           >
             {/* login */}
             {isLogin
-              ? ({ errors, touched, isValid }: any) => (
+              ? ({ errors, touched, isValid, values }: any) => (
                   <Form
                     style={{
                       width: "100%",
@@ -75,6 +75,8 @@ export const LoginDialog = ({}: loginDialogParams) => {
                       label="Email"
                       name="email"
                       fullWidth
+                      InputLabelProps={{ shrink: values.email }}
+                      value={values.email}
                       error={touched.email && !!errors.email}
                       helperText={touched.email && errors.email}
                     />
@@ -83,8 +85,10 @@ export const LoginDialog = ({}: loginDialogParams) => {
                       as={TextField}
                       label="Password"
                       name="password"
+                      value={values.password}
                       type={!isVisible ? "password" : "text"}
                       InputProps={{
+                        shrink: values.password,
                         endAdornment: (
                           <InputAdornment
                             position="end"
@@ -114,7 +118,7 @@ export const LoginDialog = ({}: loginDialogParams) => {
                   </Form>
                 )
               : // register
-                ({ errors, touched, isValid }: any) => (
+                ({ errors, touched, isValid, values }: any) => (
                   <Form
                     style={{
                       width: "100%",
@@ -132,6 +136,10 @@ export const LoginDialog = ({}: loginDialogParams) => {
                               className={classes.textField}
                               as={TextField}
                               label="Role"
+                              value={values[param.keyForDB]}
+                              InputLabelProps={{
+                                shrink: values[param.keyForDB],
+                              }}
                               name="role"
                               fullWidth
                               select
@@ -152,8 +160,10 @@ export const LoginDialog = ({}: loginDialogParams) => {
                             as={TextField}
                             label={param.inputPlaceHolder}
                             name={param.keyForDB}
+                            value={values[param.keyForDB]}
                             type={!isVisible ? param.inputType : "text"}
                             InputProps={{
+                              shrink: values[param.keyForDB],
                               endAdornment: (
                                 <InputAdornment
                                   position="end"
@@ -188,7 +198,9 @@ export const LoginDialog = ({}: loginDialogParams) => {
                             label={param.inputPlaceHolder}
                             name={param.keyForDB}
                             type={param.inputType}
+                            value={values[param.keyForDB]}
                             fullWidth
+                            InputLabelProps={{ shrink: values[param.keyForDB] }}
                             error={
                               touched[param.keyForDB] &&
                               !!errors[param.keyForDB]

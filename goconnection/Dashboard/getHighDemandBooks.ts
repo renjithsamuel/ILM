@@ -10,11 +10,11 @@ export type GetHighDemandBooksAPIResponse = { highDemandBooks: IBook[] };
 export const getHighDemandBooksAPI =
   async (): Promise<GetHighDemandBooksResponse> => {
     const response = await PrivateAxios.get<GetHighDemandBooksAPIResponse>(
-      `/dashboards/highdemand`
+      `/dashboards/highdemand`,
     );
 
     let books: Book[] = response.data.highDemandBooks.map(
-      (item) => new Book(item)
+      (item) => new Book(item),
     );
 
     return {
@@ -24,13 +24,13 @@ export const getHighDemandBooksAPI =
   };
 
 export const useGetHighDemandBooksAPI = (
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetHighDemandBooksResponse, AxiosError> => {
   return useQuery<GetHighDemandBooksResponse, AxiosError>(
     [QueryKeys.GET_HIGH_DEMAND],
     () => getHighDemandBooksAPI(),
     {
       enabled,
-    }
+    },
   );
 };

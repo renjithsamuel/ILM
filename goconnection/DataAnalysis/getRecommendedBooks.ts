@@ -22,7 +22,7 @@ export const getRecommendedBooksAPI = async ({
   limit,
 }: GetRecommendedBooksRequest): Promise<GetRecommendedBooksResponse> => {
   const response = await PrivateAxios.get<GetRecommendedBooksAPIResponse>(
-    `/dataanalysis/recommendedbooks?page=${page}&limit=${limit}`
+    `/dataanalysis/recommendedbooks?page=${page}&limit=${limit}`,
   );
 
   let books: Book[] = response.data.books.map((item) => new Book(item));
@@ -35,13 +35,13 @@ export const getRecommendedBooksAPI = async ({
 
 export const useGetRecommendedBooksAPI = (
   request: GetRecommendedBooksRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetRecommendedBooksResponse, AxiosError> => {
   return useQuery<GetRecommendedBooksResponse, AxiosError>(
     [QueryKeys.GET_RECOMMENDED_BOOKS, { ...request }],
     () => getRecommendedBooksAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

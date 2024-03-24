@@ -23,7 +23,7 @@ export const getPredictiveAnalysisAPI = async ({
   limit,
 }: GetPredictiveAnalysisRequest): Promise<GetPredictiveAnalysisResponse> => {
   const response = await PrivateAxios.get<GetPredictiveAnalysisAPIResponse>(
-    `/dataanalysis/approximatedemand?page=${page}&limit=${limit}`
+    `/dataanalysis/approximatedemand?page=${page}&limit=${limit}`,
   );
 
   let books: Book[] = response.data.books.map((item) => new Book(item));
@@ -36,13 +36,13 @@ export const getPredictiveAnalysisAPI = async ({
 
 export const useGetPredictiveAnalysisAPI = (
   request: GetPredictiveAnalysisRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetPredictiveAnalysisResponse, AxiosError> => {
   return useQuery<GetPredictiveAnalysisResponse, AxiosError>(
     [QueryKeys.GET_APPROXIMATE_DEMAND, { ...request }],
     () => getPredictiveAnalysisAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

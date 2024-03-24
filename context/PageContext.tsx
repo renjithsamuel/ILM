@@ -13,7 +13,7 @@ type TPageContext = {
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
   snackBarError: AlertType | undefined;
-  setSnackBarError: Dispatch<SetStateAction<AlertType | undefined>>
+  setSnackBarError: Dispatch<SetStateAction<AlertType | undefined>>;
   currentSideMenu: string;
   setCurrentSideMenu: Dispatch<SetStateAction<string>>;
   DialogBox: JSX.Element | undefined;
@@ -21,7 +21,7 @@ type TPageContext = {
 };
 
 export const PageContext = createContext<TPageContext>(
-  {} as unknown as TPageContext
+  {} as unknown as TPageContext,
 );
 
 interface UserContextProviderProps {
@@ -35,7 +35,7 @@ export const PageContextProvider: FC<UserContextProviderProps> = ({
   const [snackBarError, setSnackBarError] = useState<AlertType | undefined>();
   const [currentSideMenu, setCurrentSideMenu] = useState<string>("");
   const [DialogBox, setDialogBox] = useState<JSX.Element | undefined>(
-    undefined
+    undefined,
   );
 
   return (

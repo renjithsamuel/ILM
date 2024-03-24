@@ -17,6 +17,7 @@ import { PredictiveAnalysisItem } from "@/components/PredictiveAnalysisItem/Pred
 
 interface predictiveAnalysisParams {}
 
+// you will only get items which are added to library and has some amount of rating, views, wishlists, reviews
 export const PredictiveAnalysis = ({}: predictiveAnalysisParams) => {
   const {
     bookList,
@@ -34,19 +35,18 @@ export const PredictiveAnalysis = ({}: predictiveAnalysisParams) => {
         {/* PredictiveAnalysisItems */}
         <Grid container spacing={2} className={classes.booksContainer}>
           {isPredictiveAnalysisLoading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-              height: "65vh",
-            }}
-          >
-            <CircularProgress />
-          </Box>
-        ) 
-         : bookList?.length > 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "65vh",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : bookList?.length > 0 ? (
             bookList.map((book: Book, index) => (
               <PredictiveAnalysisItem book={book} key={index} />
             ))

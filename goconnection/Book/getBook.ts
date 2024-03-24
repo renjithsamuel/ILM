@@ -19,13 +19,13 @@ export const getBookAPI = async (ISBN: string): Promise<GetBookResponse> => {
 
 export const useGetBookAPI = (
   ISBN: string,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetBookResponse, AxiosError> => {
   return useQuery<GetBookResponse, AxiosError>(
     [QueryKeys.GET_BOOK, ISBN],
     () => getBookAPI(ISBN),
     {
       enabled,
-    }
+    },
   );
 };
