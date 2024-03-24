@@ -15,12 +15,13 @@ interface allUsersHook {
   totalPages: number;
   pageNumber: number;
   rowsPerPage: number;
+  isPendingUsersLoading: boolean;
   handleRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handlePageNumber: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ) => void;
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
@@ -34,7 +35,7 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const [sortByValue, setSortByValue] = useState<UserBookDetailType>(
-    UserBookDetailType.WishLists
+    UserBookDetailType.WishLists,
   );
   const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
@@ -68,7 +69,7 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
 
   // pagination
   const handleRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     if (event.target.value) {
       setRowsPerPage(Number.parseInt(event.target.value, 10));
@@ -78,7 +79,7 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
 
   const handlePageNumber = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ): void => {
     if (val) {
       setPageNumber(val);
@@ -102,6 +103,7 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
     sortByOrder,
     pageNumber,
     rowsPerPage,
+    isPendingUsersLoading,
     handleRowsPerPage,
     handlePageNumber,
     handleSortValue,

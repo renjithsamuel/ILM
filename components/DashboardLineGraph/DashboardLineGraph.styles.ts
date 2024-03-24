@@ -10,7 +10,6 @@ export const useDashboardLineGraphStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     borderRadius: themeValues.border.borderRadiusHigh,
     boxShadow: themeValues.shadow.boxShadowLight,
-    transition: themeValues.transition.defaultTansition,
     "&:hover": {
       boxShadow: themeValues.shadow.boxShadowAttatched,
       cursor: "pointer",

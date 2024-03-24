@@ -18,7 +18,7 @@ export const getCheckoutByIDAPI = async ({
   checkoutID,
 }: GetCheckoutByIDRequest): Promise<GetCheckoutByIDResponse> => {
   const response = await PrivateAxios.get<GetCheckoutByIDAPIResponse>(
-    `/checkouts/${checkoutID}`
+    `/checkouts/${checkoutID}`,
   );
 
   return {
@@ -29,13 +29,13 @@ export const getCheckoutByIDAPI = async ({
 
 export const useGetCheckoutByIDAPI = (
   checkoutID: string,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetCheckoutByIDResponse, AxiosError> => {
   return useQuery<GetCheckoutByIDResponse, AxiosError>(
     [QueryKeys.GET_CHECKOUT_BY_ID, checkoutID],
     () => getCheckoutByIDAPI({ checkoutID }),
     {
       enabled,
-    }
+    },
   );
 };

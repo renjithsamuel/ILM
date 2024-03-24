@@ -56,7 +56,6 @@ export default function App({
   );
 }
 
-// pending
-// settings
+// graph
 // predictive analysis
-// rating
+// recommendations

@@ -13,9 +13,7 @@ export type UpdateBookResponse = {
 
 export const updateBookAPI = async ({
   book,
-}: UpdateBookRequest): Promise<
-  AxiosResponse<UpdateBookResponse>
-> => {
+}: UpdateBookRequest): Promise<AxiosResponse<UpdateBookResponse>> => {
   return PrivateAxios.put(`/books`, book);
 };
 

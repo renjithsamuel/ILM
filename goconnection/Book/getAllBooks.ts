@@ -24,7 +24,7 @@ export const getAllBooksAPI = async ({
   sortBy,
 }: GetAllBooksResponseRequest): Promise<GetAllBooksResponse> => {
   const response = await PrivateAxios.get<GetAllBooksAPIResponse>(
-    `/allbooks?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}`
+    `/allbooks?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}`,
   );
 
   let books: Book[] = response.data.books.map((user) => new Book(user));
@@ -37,13 +37,13 @@ export const getAllBooksAPI = async ({
 
 export const useGetAllBooksAPI = (
   request: GetAllBooksResponseRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetAllBooksResponse, AxiosError> => {
   return useQuery<GetAllBooksResponse, AxiosError>(
-    [QueryKeys.GET_ALL_BOOKS, {...request}],
+    [QueryKeys.GET_ALL_BOOKS, { ...request }],
     () => getAllBooksAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

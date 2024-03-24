@@ -24,6 +24,7 @@ import { RiDashboardFill } from "react-icons/ri";
 import { BsBookshelf } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
 import { useRouter } from "next/router";
+import { useGetTokenExpiryAPI } from "@/goconnection/User/getTokenExpiry";
 
 type BaseLayoutHook = {
   user: User;
@@ -77,6 +78,8 @@ export const useBaseLayout = ({
     isLoading,
     isFetched,
   } = useGetUserAPI(!!getAccessToken());
+
+  const { data: tokenexpiryResponse } = useGetTokenExpiryAPI();
   // mocking
   // const getUserResponse = { data: mockUser };
   // const isError = false;
@@ -100,6 +103,20 @@ export const useBaseLayout = ({
     }
   }, [getUserResponse?.data, isSuccess]);
 
+  // check for token expiry
+  useEffect(() => {
+    if (!!tokenexpiryResponse) {
+      if (
+        tokenexpiryResponse.status == 401 &&
+        tokenexpiryResponse?.data.message == "token has expired"
+      ) {
+        // logout
+        Cookie.logout();
+        setAuthenticated(false);
+      }
+    }
+  }, [tokenexpiryResponse]);
+
   const {
     alertSnackbarMessage,
     handleCloseAlertSnackbar,
@@ -121,7 +138,7 @@ export const useBaseLayout = ({
     ) {
       openAlertSnackbar(
         snackBarError?.ErrorMessage,
-        snackBarError?.ErrorSeverity
+        snackBarError?.ErrorSeverity,
       );
       setSnackBarError(undefined);
       setTimeout(() => {
@@ -216,9 +233,6 @@ export const useBaseLayout = ({
       let tempCurrentMenu = router?.pathname?.split("/")[1];
       tempCurrentMenu = `/${tempCurrentMenu}`;
       // check for valid user's valid page?
-      console.log(PageSeparation.LibrarianPages.includes(tempCurrentMenu));
-      console.log(user);
-
       if (user.role === Role.Librarian) {
         if (!PageSeparation.LibrarianPages.includes(tempCurrentMenu)) {
           setInUnauthorizedPage(true);

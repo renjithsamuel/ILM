@@ -9,10 +9,11 @@ interface connectingToServerDialogHook {
   fullScreen: boolean;
 }
 
-export const useConnectingToServerDialog = ({}: connectingToServerDialogHookProps): connectingToServerDialogHook => {
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  return {
-    fullScreen,
+export const useConnectingToServerDialog =
+  ({}: connectingToServerDialogHookProps): connectingToServerDialogHook => {
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+    return {
+      fullScreen,
+    };
   };
-};

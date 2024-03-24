@@ -23,11 +23,11 @@ interface allBooksHook {
   handleSortOrder: (event: SelectChangeEvent) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
   handleRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handlePageNumber: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ) => void;
 }
 
@@ -37,7 +37,7 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [bookList, setBookList] = useState<Book[]>([]);
   const [sortByValue, setSortByValue] = useState<BookSortValue>(
-    BookSortValue.wishlistCount
+    BookSortValue.wishlistCount,
   );
   const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
   // Fetch books from Google API
@@ -59,7 +59,7 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
   }, [getNewAllBooksData?.data.books]);
 
   const handleRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     if (event.target.value) {
       setRowsPerPage(Number.parseInt(event.target.value, 10));
@@ -69,7 +69,7 @@ export const useAllBooks = ({}: allBooksHookProps): allBooksHook => {
 
   const handlePageNumber = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ): void => {
     if (val) {
       setPageNumber(val);

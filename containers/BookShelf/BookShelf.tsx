@@ -1,13 +1,29 @@
-import { Box, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Grid,
+  TablePagination,
+  Typography,
+} from "@mui/material";
 import { useBookShelfStyles } from "./BookShelf.styles";
 import { Book } from "@/entity/Book/Book";
 import { BookGridItem } from "@/components/BookGridItem/BookGridItem";
+import { useBookShelf } from "./BookShelf.hooks";
 
 interface BookShelfProps {
   books: Book[];
 }
 
 export const BookShelf = ({ books }: BookShelfProps) => {
+  const {
+    bookList,
+    totalPages,
+    pageNumber,
+    rowsPerPage,
+    isRecommendedbooksLoading,
+    handleRowsPerPage,
+    handlePageNumber,
+  } = useBookShelf({});
   const classes = useBookShelfStyles();
 
   return (
@@ -16,8 +32,20 @@ export const BookShelf = ({ books }: BookShelfProps) => {
         Recommendations
       </Typography>
       <Grid container spacing={3} className={classes.booksContainer}>
-        {books?.length > 0 ? (
-          books.map((book: Book) => (
+        {isRecommendedbooksLoading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "65vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : bookList?.length > 0 ? (
+          bookList.map((book: Book) => (
             <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <BookGridItem book={book} />
             </Grid>
@@ -28,6 +56,17 @@ export const BookShelf = ({ books }: BookShelfProps) => {
           </Typography>
         )}
       </Grid>
+      {/* pagination */}
+      <Box className={classes.paginationWrap}>
+        <TablePagination
+          component="div"
+          count={totalPages}
+          page={pageNumber}
+          onPageChange={handlePageNumber}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleRowsPerPage}
+        />
+      </Box>
     </Box>
   );
 };

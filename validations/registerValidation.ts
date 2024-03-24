@@ -9,7 +9,7 @@ export const createRegisterValidation = (): Yup.AnySchema =>
     role: Yup.string()
       .oneOf(
         ["librarian", "patrons"],
-        "Role must be either librarian or patron"
+        "Role must be either librarian or patron",
       )
       .required("Role is required"),
     // dateOfBirth: Yup.date()
@@ -27,11 +27,11 @@ export const createRegisterValidation = (): Yup.AnySchema =>
     //     }
     //   ),
     email: Yup.string().email("Invalid email").required("Email is required"),
-    password : Yup.string()
-    .required("Password is required")
-    .min(8, "Must be more than 8 characters")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
-      "Password must contain at least one capital, small and special character"
-    )
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Must be more than 8 characters")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
+        "Password must contain at least one capital, small and special character",
+      ),
   });

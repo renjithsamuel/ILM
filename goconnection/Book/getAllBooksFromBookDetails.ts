@@ -12,11 +12,11 @@ export type GetAllBooksFromBookDetailsResponse = AxiosResponse<Book[]>;
 export type GetAllBooksFromBookDetailsAPIResponse = { books: IBook[] };
 
 export const getAllBooksFromBookDetailsAPI = async (
-  getAllBooksFromBookDetailsRequest: GetAllBooksFromBookDetailsRequest
+  getAllBooksFromBookDetailsRequest: GetAllBooksFromBookDetailsRequest,
 ): Promise<GetAllBooksFromBookDetailsResponse> => {
   const response =
     await PrivateAxios.get<GetAllBooksFromBookDetailsAPIResponse>(
-      `/allbooks/${getAllBooksFromBookDetailsRequest.userID}/${getAllBooksFromBookDetailsRequest.bookDetailsFrom}`
+      `/allbooks/${getAllBooksFromBookDetailsRequest.userID}/${getAllBooksFromBookDetailsRequest.bookDetailsFrom}`,
     );
 
   let books: Book[] = response.data.books.map((user) => new Book(user));
@@ -29,13 +29,13 @@ export const getAllBooksFromBookDetailsAPI = async (
 
 export const useGetAllBooksFromBookDetailsAPI = (
   request: GetAllBooksFromBookDetailsRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetAllBooksFromBookDetailsResponse, AxiosError> => {
   return useQuery<GetAllBooksFromBookDetailsResponse, AxiosError>(
     [QueryKeys.GET_ALL_BOOKS_FROM_BOOK_DETAILS, { ...request }],
     () => getAllBooksFromBookDetailsAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

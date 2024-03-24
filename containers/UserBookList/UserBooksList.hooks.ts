@@ -16,6 +16,7 @@ interface userbookslistHookProps {}
 interface userbookslistHook {
   bookList: Book[] | undefined;
   bookDetailsFrom: string;
+  isBookListLoading: boolean;
 }
 
 export const useUserBooksList =
@@ -23,21 +24,24 @@ export const useUserBooksList =
     const { setSnackBarError } = usePageContext();
     const [requiredUserID, setRequiredUserID] = useState<string>("");
     const [bookDetailsFrom, setBookDetailsFrom] = useState<UserBookDetailType>(
-      UserBookDetailType.WishLists
+      UserBookDetailType.WishLists,
     );
     const router = useRouter();
 
     const userID = router.query.userID as string;
     const { user: contextUser } = useUserContext();
 
-    const { data: bookListData, isError: isBookListError } =
-      useGetAllBooksFromBookDetailsAPI(
-        {
-          bookDetailsFrom: bookDetailsFrom,
-          userID: requiredUserID,
-        },
-        requiredUserID != "" && !!bookDetailsFrom
-      );
+    const {
+      data: bookListData,
+      isError: isBookListError,
+      isLoading: isBookListLoading,
+    } = useGetAllBooksFromBookDetailsAPI(
+      {
+        bookDetailsFrom: bookDetailsFrom,
+        userID: requiredUserID,
+      },
+      requiredUserID != "" && !!bookDetailsFrom,
+    );
 
     // get books from the user's book details list and give enabled thing -> bookDetailsFrom
     // send bookDetailsFrom and userID to backend
@@ -73,6 +77,7 @@ export const useUserBooksList =
     }, [userID]);
 
     return {
+      isBookListLoading,
       bookList: bookListData?.data,
       bookDetailsFrom,
     };

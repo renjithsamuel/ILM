@@ -20,7 +20,7 @@ export const PredictiveAnalysisItem = ({
   const classes = usePredictiveAnalysisItemStyles();
   return (
     <>
-      <Link href={`/allbooks/${book.ID}`}>
+      <Link href={`/allbooks/${book.ISBN}`}>
         <Box className={classes.predictiveAnalysisItemRoot}>
           <Box className={classes.predictLeft}>
             {/* Book Image */}
@@ -52,7 +52,7 @@ export const PredictiveAnalysisItem = ({
                 name="read-only"
                 value={book.rating}
                 readOnly
-                precision={0.5}
+                precision={1}
                 color={themeValues.color.color1}
               />
             </Box>
@@ -78,21 +78,19 @@ export const PredictiveAnalysisItem = ({
                 </Box>
               </Tooltip>
               {/* stock */}
-              {book.inLibrary && (
-                <Tooltip title={"stock"} placement="top">
-                  <Box className={classes.bookCount}>
-                    {"Stock "} <SiBookstack /> {book.booksLeft}
-                  </Box>
-                </Tooltip>
-              )}
+              <Tooltip title={"stock"} placement="top">
+                <Box className={classes.bookCount}>
+                  {"Stock "} <SiBookstack /> {book.booksLeft}
+                </Box>
+              </Tooltip>
+
               {/* approximate demand */}
-              {book.inLibrary && (
-                <Tooltip title={"approximate demand"} placement="top">
-                  <Box className={classes.bookCount}>
-                    {"Demand "} <GoChecklist /> {book?.approximateDemand}
-                  </Box>
-                </Tooltip>
-              )}
+
+              <Tooltip title={"approximate demand"} placement="top">
+                <Box className={classes.bookCount}>
+                  {"Demand "} <GoChecklist /> {book?.approximateDemand}
+                </Box>
+              </Tooltip>
             </Box>
           </Box>
         </Box>

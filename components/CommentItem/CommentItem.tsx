@@ -50,7 +50,7 @@ export const CommentItem = ({ review }: commentItemParams) => {
             <Typography variant="body1" sx={{ wordWrap: "break-word" }}>
               {FormatTextUtil.formatFirstWord(review.commentHeading).slice(
                 0,
-                50
+                50,
               ) + "..."}
             </Typography>
           </Box>
@@ -65,7 +65,7 @@ export const CommentItem = ({ review }: commentItemParams) => {
             name="read-only"
             value={review.rating}
             readOnly
-            precision={0.5}
+            precision={1}
             color={themeValues.color.color1}
           />
         </Box>

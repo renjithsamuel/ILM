@@ -50,12 +50,16 @@ export const bookKeyValues: BookKeyValues[] = [
   {
     name: "Title",
     key: "title",
-    get: (book: Book) => book?.title?.slice(0, 30) + "..",
+    get: (book: Book) => book?.title?.slice(0, 20) + "..",
   },
-  { name: "Author", key: "author", get: (book: Book) => book.author },
+  {
+    name: "Author",
+    key: "author",
+    get: (book: Book) => book?.author?.slice(0, 20) + "..",
+  },
   { name: "Genre", key: "subject", get: (book: Book) => book.genre },
   {
-    name: "Published Date",
+    name: "Published On",
     key: "publishedDate",
     get: (book: Book) => dayjs(book.publishedDate).format("MMMM D, YYYY"),
   },
@@ -69,7 +73,7 @@ export const bookKeyValues: BookKeyValues[] = [
     key: "desc",
     get: (book: Book) => {
       const words = book?.desc?.split(" ");
-      return words?.slice(0, 8).join(" ") + ".";
+      return words?.slice(0, 8).join(" ");
     },
   },
 ];
@@ -97,7 +101,7 @@ export const singleBookKeyValues: BookKeyValues[] = [
     key: "desc",
     get: (book: Book) => {
       const words = book?.desc?.split(" ");
-      return words?.slice(0, 20).join(" ") + ".";
+      return words?.slice(0, 20).join(" ");
     },
   },
 ];

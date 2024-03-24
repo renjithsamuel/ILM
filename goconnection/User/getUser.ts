@@ -19,13 +19,13 @@ export const getUserAPI = async (): Promise<GetUserResponse> => {
 };
 
 export const useGetUserAPI = (
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetUserResponse, AxiosError> => {
   return useQuery<GetUserResponse, AxiosError>(
     [QueryKeys.GET_USER],
     () => getUserAPI(),
     {
       enabled,
-    }
+    },
   );
 };

@@ -114,7 +114,7 @@ export const AddComment = ({
                     sx={{ mt: 0 }}
                     name="simple-controlled"
                     value={ratingValue}
-                    precision={0.5}
+                    precision={1}
                     onChange={(event, newValue) => {
                       handleRatingValue(newValue);
                     }}

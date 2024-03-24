@@ -45,11 +45,11 @@ interface searchDialogHook {
   pageNumber: number;
   rowsPerPage: number;
   handleRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handlePageNumber: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ) => void;
 }
 
@@ -61,7 +61,7 @@ export const useSearchDialog = ({
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [state, dispatch] = useReducer(
     searchDialogReducer,
-    initialSearchDialogValues
+    initialSearchDialogValues,
   );
 
   // api request
@@ -210,7 +210,7 @@ export const useSearchDialog = ({
 
   // pagination
   const handleRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     if (event.target.value) {
       dispatch({
@@ -226,7 +226,7 @@ export const useSearchDialog = ({
 
   const handlePageNumber = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ): void => {
     if (val) {
       dispatch({

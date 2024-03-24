@@ -33,4 +33,12 @@ export const useBookShelfStyles = makeStyles((theme) => ({
     fontWeight: themeValues.font.fontWeightThick,
     marginBottom: theme.spacing(1),
   },
+  paginationWrap: {
+    width: "80vw",
+    position: "sticky",
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));

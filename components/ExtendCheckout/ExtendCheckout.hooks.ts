@@ -13,7 +13,7 @@ interface extendCheckoutHook {
   fullScreen: boolean;
   openDialog: boolean;
   handleCloseDialog: () => void;
-  handleModifyDays: (val: number) => void
+  handleModifyDays: (val: number) => void;
 }
 
 export const useExtendCheckout = ({

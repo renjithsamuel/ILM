@@ -12,8 +12,14 @@ import { FormatTextUtil } from "@/utils/formatText";
 interface settingsParams {}
 
 export const Settings = ({}: settingsParams) => {
-  const { user, theme, handleTheme, handleLogout, handleSwitchRole, handlePayment } =
-    useSettings({});
+  const {
+    user,
+    theme,
+    handleTheme,
+    handleLogout,
+    handleSwitchRole,
+    handlePayment,
+  } = useSettings({});
   const classes = useSettingsStyles();
 
   return (
@@ -66,10 +72,10 @@ export const Settings = ({}: settingsParams) => {
                   className={classes.ActionButton}
                   disabled={item.isButtonDisabled(user)}
                   onClick={() => {
-                    if (item.name === "Membership Payment" ) {
+                    if (item.name === "Membership Payment") {
                       handlePayment();
                       return;
-                    }  
+                    }
                     if (item.name === "Logout") {
                       handleLogout();
                       return;

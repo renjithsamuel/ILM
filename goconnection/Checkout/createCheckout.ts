@@ -16,7 +16,7 @@ export type CreateCheckoutResponse = {
 };
 
 export const createCheckoutAPI = async (
-  request: CreateCheckoutRequest
+  request: CreateCheckoutRequest,
 ): Promise<AxiosResponse<CreateCheckoutResponse>> => {
   return PrivateAxios.post(`/checkouts`, request);
 };

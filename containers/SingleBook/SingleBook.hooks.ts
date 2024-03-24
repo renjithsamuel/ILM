@@ -15,6 +15,7 @@ import { User } from "@/entity/User/User";
 import { SelectChangeEvent } from "@mui/material";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import { useGetSimilarBooksAPI } from "@/goconnection/Book/getSimilarBooks";
 interface SingleBookHookProps {}
 
 interface SingleBookHook {
@@ -23,6 +24,7 @@ interface SingleBookHook {
   checkoutData: CheckoutTicket | undefined;
   userType: Role;
   user: User;
+  similarBooks: Book[];
   wishlisted: boolean;
   isModifyCountOpen: boolean | undefined;
   isAddCommentOpen: boolean | undefined;
@@ -38,12 +40,15 @@ interface SingleBookHook {
   totalPages: number;
   pageNumber: number;
   rowsPerPage: number;
+  isSimilarBooksLoading: boolean;
+  isCommentsLoading: boolean;
+  isBookLoading: boolean;
   handleRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handlePageNumber: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ) => void;
   handleSortValue: (event: SelectChangeEvent) => void;
 }
@@ -57,13 +62,14 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const [isModifyCountOpen, setIsModifyCountOpen] = useState<boolean>();
   const [isAddCommentOpen, setIsAddCommentOpen] = useState<boolean>();
   const [isBookCompleted, setIsBookCompleted] = useState<boolean>(false);
+  const [similarBooks, setSimilarBooks] = useState<Book[]>([]);
 
   // pagination related
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const [sortByValue, setSortByValue] = useState<ReviewSortValue>(
-    ReviewSortValue.newest
+    ReviewSortValue.newest,
   );
 
   const { user } = useUserContext();
@@ -76,28 +82,47 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   } = useUpdateBookAPI();
 
   // get book
-  const { data: bookData, isError: isBookError } = useGetBookAPI(
-    bookID,
-    !!bookID
-  );
+  const {
+    data: bookData,
+    isError: isBookError,
+    isLoading: isBookLoading,
+  } = useGetBookAPI(bookID, !!bookID);
+
+  // get similar books
+  const {
+    data: similarBooksData,
+    isError: issimilarBooksError,
+    isLoading: isSimilarBooksLoading,
+    isSuccess: isSimilarBooksSuccess,
+  } = useGetSimilarBooksAPI({ isbn: bookID }, !!bookID);
+
+  useEffect(() => {
+    if (isSimilarBooksSuccess && similarBooksData.data) {
+      setSimilarBooks(similarBooksData.data);
+    }
+  }, [isSimilarBooksSuccess]);
+
   // get checkout
   const { data: checkoutsData, isError: isGetCheckoutError } =
     useGetCheckoutByUserIDAPI(
       bookData?.data.ID,
       user.userID,
-      !!bookData?.data.ID && !!user.userID
+      !!bookData?.data.ID && !!user.userID,
     );
   // get all reviews
-  const { data: reviewsData, isError: isGetReviewError } =
-    useGetAllReviewsByBookIDAPI(
-      {
-        bookID: bookData?.data.ID,
-        sortBy: sortByValue,
-        limit: rowsPerPage,
-        page: pageNumber,
-      },
-      !!bookData?.data.ID
-    );
+  const {
+    data: reviewsData,
+    isError: isGetReviewError,
+    isLoading: isCommentsLoading,
+  } = useGetAllReviewsByBookIDAPI(
+    {
+      bookID: bookData?.data.ID,
+      sortBy: sortByValue,
+      limit: rowsPerPage,
+      page: pageNumber,
+    },
+    !!bookData?.data.ID,
+  );
 
   const {
     mutateAsync: createCheckout,
@@ -115,7 +140,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
 
   const wishlisted: boolean =
     !!user.bookDetails?.wishlistBooks.find(
-      (item) => item === bookData?.data.ISBN
+      (item) => item === bookData?.data.ISBN,
     ) ?? true;
 
   const handleModifyCount = () => {
@@ -123,7 +148,6 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   };
 
   const handleAddComment = () => {
-    console.log("checkoutData?.data", checkoutsData?.data);
     if (
       !checkoutsData?.data ||
       (!!checkoutsData?.data && checkoutsData?.data?.length) < 0
@@ -137,7 +161,6 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     setIsAddCommentOpen(!isAddCommentOpen);
   };
 
-  // todo handleAddToLibrary
   const handleAddToLibrary = () => {
     if (bookData?.data && !bookData?.data.inLibrary) {
       bookData?.data &&
@@ -194,7 +217,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     // need to update book with wishlist count
     if (wishlisted && user.bookDetails && bookData?.data.ISBN) {
       let removedArray = (user.bookDetails.wishlistBooks || []).filter(
-        (item) => item !== bookData?.data.ISBN
+        (item) => item !== bookData?.data.ISBN,
       );
       // remove book isbn in book details
       if (user.bookDetails && bookData?.data.ISBN) {
@@ -208,7 +231,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
         if (res.status >= 300) return;
         // remove userid from wishlist arr of book
         removedArray = (bookData?.data?.wishList || []).filter(
-          (item) => item !== user.userID
+          (item) => item !== user.userID,
         );
         updateBook({
           book: {
@@ -247,11 +270,9 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   // views updation
   useEffect(() => {
     if (!!bookData?.data) {
-      console.log("!!bookData?.data", !!bookData?.data);
       const isUserNotViewed = !(bookData?.data.viewsList || []).includes(
-        user.userID
+        user.userID,
       );
-      console.log("isUserNotViewed", isUserNotViewed);
       // if user haven't viewed yet add him to the viewList
       if (isUserNotViewed) {
         updateBook({
@@ -270,7 +291,6 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     if (!!bookData?.data) {
       const tempIsBookCompleted: boolean =
         !!user.bookDetails?.completedBooksList.includes(bookData?.data.ISBN);
-      console.log("tempIsBookCompleted", tempIsBookCompleted);
       if (tempIsBookCompleted != undefined) {
         setIsBookCompleted(tempIsBookCompleted);
       }
@@ -345,6 +365,16 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     }
   }, [isGetReviewError]);
 
+  // similar books
+  useEffect(() => {
+    if (issimilarBooksError) {
+      setSnackBarError({
+        ErrorMessage: "Similar Books Failed!",
+        ErrorSeverity: "warning",
+      });
+    }
+  }, [issimilarBooksError]);
+
   // checkout data
   const checkoutReturned = checkoutsData?.data.find((item) => item.isReturned);
 
@@ -355,7 +385,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
 
   // pagination
   const handleRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     if (event.target.value) {
       setRowsPerPage(Number.parseInt(event.target.value, 10));
@@ -365,7 +395,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
 
   const handlePageNumber = (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    val: number
+    val: number,
   ): void => {
     if (val) {
       setPageNumber(val);
@@ -373,6 +403,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   };
 
   return {
+    similarBooks,
     checkoutData: checkoutReturned,
     commentList: reviewsData?.data.reviews,
     totalPages: reviewsData?.data.totalPages ?? -1,
@@ -383,6 +414,9 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     isModifyCountOpen,
     isAddCommentOpen,
     isBookCompleted,
+    isSimilarBooksLoading,
+    isCommentsLoading,
+    isBookLoading,
     handleAddComment,
     setIsModifyCountOpen,
     handleModifyCount,

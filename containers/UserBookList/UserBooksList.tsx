@@ -1,6 +1,6 @@
 import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useUserBooksList } from "./UserBooksList.hooks";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import { useUserBooksListStyles } from "./UserBooksList.styles";
 import { Book } from "@/entity/Book/Book";
 import { BookGridItem } from "@/components/BookGridItem/BookGridItem";
@@ -11,7 +11,7 @@ interface userbookslistParams {
 }
 
 export const UserBooksList = ({}: userbookslistParams) => {
-  const { bookList, bookDetailsFrom } = useUserBooksList({});
+  const { bookList, bookDetailsFrom, isBookListLoading } = useUserBooksList({});
   const classes = useUserBooksListStyles();
 
   return (
@@ -20,7 +20,19 @@ export const UserBooksList = ({}: userbookslistParams) => {
         {FormatTextUtil.formatFirstWord(bookDetailsFrom)}
       </Typography>
       <Grid container spacing={2} className={classes.booksContainer}>
-        {bookList && bookList?.length > 0 ? (
+        {isBookListLoading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "65vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : bookList && bookList?.length > 0 ? (
           bookList.map((book: Book, index) => (
             <Grid item key={index} xs={6} sm={4} md={3}>
               <BookGridItem book={book} />

@@ -1,6 +1,4 @@
 import { themeValues } from "@/constants/ThemeConstants";
 import { makeStyles } from "@mui/styles";
 
-export const useBaseLayoutStyles = makeStyles((theme) => ({
-
-}));
+export const useBaseLayoutStyles = makeStyles((theme) => ({}));

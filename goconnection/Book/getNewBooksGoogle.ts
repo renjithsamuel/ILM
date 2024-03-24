@@ -28,7 +28,7 @@ export const getGoogleAllBooksAPI = async ({
   sortBy,
 }: GetNewBooksGoogleRequest): Promise<GetNewBooksGoogleResponse> => {
   const response = await PrivateAxios.get<GetNewBooksGoogleAPIResponse>(
-    `/allbooks/google?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}`
+    `/allbooks/google?sortBy=${sortBy}&orderBy=${orderBy}&page=${page}&limit=${limit}`,
   );
 
   let books: Book[] = response.data.books.map((book) => new Book(book));
@@ -40,13 +40,13 @@ export const getGoogleAllBooksAPI = async ({
 
 export const useGetNewBooksGoogleAPI = (
   request: GetNewBooksGoogleRequest,
-  enabled = true
+  enabled = true,
 ): UseQueryResult<GetNewBooksGoogleResponse, AxiosError> => {
   return useQuery<GetNewBooksGoogleResponse, AxiosError>(
     [QueryKeys.GET_ALL_NEW_BOOKS_GOOGLE, { ...request }],
     () => getGoogleAllBooksAPI(request),
     {
       enabled,
-    }
+    },
   );
 };

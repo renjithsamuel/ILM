@@ -1,6 +1,14 @@
 import { PendingUserItem } from "@/components/PendingUserItem/PendingUserItem";
 import { useAllUsers } from "./AllUsers.hooks";
-import { Box, FormControl, InputLabel, MenuItem, Select, TablePagination } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TablePagination,
+} from "@mui/material";
 import { useAllUsersStyles } from "./AllUsers.styles";
 import { SortOrder, UserBookDetailType } from "@/constants/GlobalConstants";
 
@@ -16,6 +24,7 @@ export const AllUsers = ({}: allUsersParams) => {
     pageNumber,
     rowsPerPage,
     totalPages,
+    isPendingUsersLoading,
     handleRowsPerPage,
     handlePageNumber,
     handleSortValue,
@@ -64,7 +73,20 @@ export const AllUsers = ({}: allUsersParams) => {
         </FormControl>
       </Box>
       <Box>
-        {pendingUsers &&
+        {isPendingUsersLoading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "65vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          pendingUsers &&
           pendingUsers.length > 0 &&
           pendingUsers?.map((user) => {
             return (
@@ -77,7 +99,8 @@ export const AllUsers = ({}: allUsersParams) => {
                 sortByValue={sortByValue}
               />
             );
-          })}
+          })
+        )}
       </Box>
       <Box className={classes.paginationWrap}>
         <TablePagination
