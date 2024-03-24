@@ -1,6 +1,8 @@
 import { BookSortValue, SortOrder } from "@/constants/GlobalConstants";
+import { usePageContext } from "@/context/PageContext";
 import { Book } from "@/entity/Book/Book";
 import { mockBooks } from "@/entity/Book/Book.mock";
+import { useGetPredictiveAnalysisAPI } from "@/goconnection/DataAnalysis/getPredictiveAnalysis";
 import { SelectChangeEvent } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -8,11 +10,10 @@ interface predictiveAnalysisHookProps {}
 
 interface predictiveAnalysisHook {
   bookList: Book[];
-  sortByOrder: SortOrder;
-  sortByValue: BookSortValue;
   totalPages: number;
   pageNumber: number;
   rowsPerPage: number;
+  isPredictiveAnalysisLoading: boolean;
   handleRowsPerPage: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -20,34 +21,43 @@ interface predictiveAnalysisHook {
     event: React.MouseEvent<HTMLButtonElement> | null,
     val: number
   ) => void;
-  handleSortOrder: (event: SelectChangeEvent) => void;
-  handleSortValue: (event: SelectChangeEvent) => void;
 }
 
 export const usePredictiveAnalysis =
   ({}: predictiveAnalysisHookProps): predictiveAnalysisHook => {
     // pagination related
+    const { setSnackBarError } = usePageContext();
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
     const [bookList, setBookList] = useState<Book[]>([]);
-    const [sortByValue, setSortByValue] = useState<BookSortValue>(
-      BookSortValue.wishlistCount
-    );
-    const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
-
-    useEffect(() => {
-      setBookList(mockBooks);
+    const {
+      data: predictiveAnalysisBooksResponse,
+      isError: isPredictiveAnalysisError,
+      isSuccess: isPredictiveAnalysisSuccess,
+      isLoading: isPredictiveAnalysisLoading,
+    } = useGetPredictiveAnalysisAPI({
+      limit: rowsPerPage,
+      page: pageNumber,
     });
 
-    const handleSortValue = (event: SelectChangeEvent): void => {
-      event.target.value && setSortByValue(event.target.value as BookSortValue);
-    };
-    const handleSortOrder = (event: SelectChangeEvent): void => {
-      (event.target.value === SortOrder.asc ||
-        event.target.value === SortOrder.desc) &&
-        setSortByOrder(event.target.value as SortOrder);
-    };
+    useEffect(() => {
+      if (isPredictiveAnalysisError) {
+        setSnackBarError({
+          ErrorMessage: "fetch book failed!",
+          ErrorSeverity: "error",
+        });
+      }
+    }, [isPredictiveAnalysisError]);
+
+    useEffect(() => {
+      if (
+        isPredictiveAnalysisSuccess &&
+        predictiveAnalysisBooksResponse?.data.books
+      ) {
+        setBookList(predictiveAnalysisBooksResponse?.data.books);
+      }
+    }, [isPredictiveAnalysisSuccess]);
 
     // pagination
     const handleRowsPerPage = (
@@ -70,14 +80,11 @@ export const usePredictiveAnalysis =
 
     return {
       bookList,
-      totalPages: -1,
-      sortByOrder,
-      sortByValue,
+      totalPages: predictiveAnalysisBooksResponse?.data.totalPages ?? -1,
       pageNumber,
       rowsPerPage,
+      isPredictiveAnalysisLoading,
       handleRowsPerPage,
       handlePageNumber,
-      handleSortOrder,
-      handleSortValue,
     };
   };

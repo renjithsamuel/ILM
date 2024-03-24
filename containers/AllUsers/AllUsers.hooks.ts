@@ -15,6 +15,7 @@ interface allUsersHook {
   totalPages: number;
   pageNumber: number;
   rowsPerPage: number;
+  isPendingUsersLoading: boolean
   handleRowsPerPage: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -102,6 +103,7 @@ export const useAllUsers = ({}: allUsersHookProps): allUsersHook => {
     sortByOrder,
     pageNumber,
     rowsPerPage,
+    isPendingUsersLoading,
     handleRowsPerPage,
     handlePageNumber,
     handleSortValue,

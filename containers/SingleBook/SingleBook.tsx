@@ -2,6 +2,7 @@ import { Book } from "@/entity/Book/Book";
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   Divider,
   FormControl,
@@ -51,6 +52,7 @@ export const SingleBook = ({}: singleBookParams) => {
   const {
     similarBooks,
     isBookCompleted,
+    isSimilarBooksLoading,
     checkoutData,
     commentList,
     book,
@@ -59,6 +61,8 @@ export const SingleBook = ({}: singleBookParams) => {
     wishlisted,
     isModifyCountOpen,
     isAddCommentOpen,
+    isCommentsLoading,
+    isBookLoading,
     handleAddComment,
     handleModifyCount,
     handleAddToLibrary,
@@ -119,17 +123,31 @@ export const SingleBook = ({}: singleBookParams) => {
           <Divider />
           {/*  book  details*/}
           <Box className={classes.singleBookDetails}>
-            {singleBookKeyValues.map((keyValues, index) => {
-              if (keyValues.key === "shelfNumber" && !book.inLibrary) return;
-              return (
-                <Box key={index} className={classes.singleBookItemWrap}>
-                  <Box className={classes.bookItemKey}>{keyValues.name}</Box>
-                  <Box className={classes.bookItemValue}>
-                    {keyValues.get(book)}
+            {isBookLoading ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "65vh",
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : (
+              singleBookKeyValues.map((keyValues, index) => {
+                if (keyValues.key === "shelfNumber" && !book.inLibrary) return;
+                return (
+                  <Box key={index} className={classes.singleBookItemWrap}>
+                    <Box className={classes.bookItemKey}>{keyValues.name}</Box>
+                    <Box className={classes.bookItemValue}>
+                      {keyValues.get(book)}
+                    </Box>
                   </Box>
-                </Box>
-              );
-            })}
+                );
+              })
+            )}
             {/* book rating  */}
             <Box className={classes.bookRating}>
               <Rating
@@ -336,7 +354,19 @@ export const SingleBook = ({}: singleBookParams) => {
           <Box className={classes.singleBookComments}>
             {/* Book Comments, Currently Under Work */}
             <List sx={{ width: "100%", bgcolor: "transparent" }}>
-              {commentList && commentList.length > 0 ? (
+              {isCommentsLoading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "65vh",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              ) : commentList && commentList.length > 0 ? (
                 commentList.map((item) => (
                   <CommentItem review={item} key={item.ID} />
                 ))
@@ -364,7 +394,19 @@ export const SingleBook = ({}: singleBookParams) => {
         <Typography variant="body1" className={classes.similarBooksText}>
           Similar{" "}
         </Typography>
-        {similarBooks?.length > 0 ? (
+        {isSimilarBooksLoading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "65vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : similarBooks?.length > 0 ? (
           similarBooks.map((book: Book, index) => (
             <Grid item key={book.ID} xs={6} sm={4} md={3}>
               <SimilarBookItem book={book} />

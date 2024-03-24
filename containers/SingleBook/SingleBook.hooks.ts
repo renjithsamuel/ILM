@@ -40,6 +40,9 @@ interface SingleBookHook {
   totalPages: number;
   pageNumber: number;
   rowsPerPage: number;
+  isSimilarBooksLoading : boolean;
+  isCommentsLoading : boolean;
+  isBookLoading : boolean;
   handleRowsPerPage: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -79,7 +82,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   } = useUpdateBookAPI();
 
   // get book
-  const { data: bookData, isError: isBookError } = useGetBookAPI(
+  const { data: bookData, isError: isBookError, isLoading:  isBookLoading } = useGetBookAPI(
     bookID,
     !!bookID
   );
@@ -88,6 +91,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   const {
     data: similarBooksData,
     isError: issimilarBooksError,
+    isLoading:isSimilarBooksLoading,
     isSuccess: isSimilarBooksSuccess,
   } = useGetSimilarBooksAPI({ isbn: bookID }, !!bookID);
 
@@ -105,7 +109,7 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
       !!bookData?.data.ID && !!user.userID
     );
   // get all reviews
-  const { data: reviewsData, isError: isGetReviewError } =
+  const { data: reviewsData, isError: isGetReviewError , isLoading: isCommentsLoading} =
     useGetAllReviewsByBookIDAPI(
       {
         bookID: bookData?.data.ID,
@@ -140,7 +144,6 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   };
 
   const handleAddComment = () => {
-    console.log("checkoutData?.data", checkoutsData?.data);
     if (
       !checkoutsData?.data ||
       (!!checkoutsData?.data && checkoutsData?.data?.length) < 0
@@ -263,11 +266,9 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
   // views updation
   useEffect(() => {
     if (!!bookData?.data) {
-      console.log("!!bookData?.data", !!bookData?.data);
       const isUserNotViewed = !(bookData?.data.viewsList || []).includes(
         user.userID
       );
-      console.log("isUserNotViewed", isUserNotViewed);
       // if user haven't viewed yet add him to the viewList
       if (isUserNotViewed) {
         updateBook({
@@ -286,7 +287,6 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     if (!!bookData?.data) {
       const tempIsBookCompleted: boolean =
         !!user.bookDetails?.completedBooksList.includes(bookData?.data.ISBN);
-      console.log("tempIsBookCompleted", tempIsBookCompleted);
       if (tempIsBookCompleted != undefined) {
         setIsBookCompleted(tempIsBookCompleted);
       }
@@ -410,6 +410,9 @@ export const useSingleBook = ({}: SingleBookHookProps): SingleBookHook => {
     isModifyCountOpen,
     isAddCommentOpen,
     isBookCompleted,
+    isSimilarBooksLoading,
+    isCommentsLoading,
+    isBookLoading,
     handleAddComment,
     setIsModifyCountOpen,
     handleModifyCount,

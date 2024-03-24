@@ -5,11 +5,7 @@ import {
   globalConstants,
 } from "@/constants/GlobalConstants";
 import { usePageContext } from "@/context/PageContext";
-import { mockBooks } from "@/entity/Book/Book.mock";
 import { CheckoutTicket } from "@/entity/CheckoutTicket/CheckoutTicket";
-import { mockCheckoutTickets } from "@/entity/CheckoutTicket/CheckoutTicket.mock";
-import { mockUsers } from "@/entity/User/User.mock";
-import { debounce } from "@/utils/debounce";
 import { SelectChangeEvent } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -23,6 +19,7 @@ interface transactionsHook {
   pageNumber: number;
   rowsPerPage: number;
   totalPages: number;
+  isTicketLoading: boolean;
   handleRowsPerPage: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -51,16 +48,16 @@ export const useTransactions =
     );
     const [sortByOrder, setSortByOrder] = useState<SortOrder>(SortOrder.asc);
 
-    const { data: ticketsData, isError: isTicketError } = useGetAllCheckoutsAPI(
-      {
-        orderBy: sortByOrder,
-        sortBy: sortByValue,
-        limit: rowsPerPage,
-        page: pageNumber,
-      }
-    );
-
-    console.log("ticketsData", ticketsData?.data);
+    const {
+      data: ticketsData,
+      isError: isTicketError,
+      isLoading: isTicketLoading,
+    } = useGetAllCheckoutsAPI({
+      orderBy: sortByOrder,
+      sortBy: sortByValue,
+      limit: rowsPerPage,
+      page: pageNumber,
+    });
 
     useEffect(() => {
       if (isTicketError) {
@@ -76,7 +73,6 @@ export const useTransactions =
     useEffect(() => {
       if (router.asPath) {
         const querySearchText = router.asPath.split("?")[1];
-        console.log(router.asPath);
         if (querySearchText) {
           setSearchText(querySearchText);
         }
@@ -122,6 +118,7 @@ export const useTransactions =
       sortByValue,
       pageNumber,
       rowsPerPage,
+      isTicketLoading,
       handleRowsPerPage,
       handlePageNumber,
       handleSortOrder,

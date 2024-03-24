@@ -216,9 +216,6 @@ export const useBaseLayout = ({
       let tempCurrentMenu = router?.pathname?.split("/")[1];
       tempCurrentMenu = `/${tempCurrentMenu}`;
       // check for valid user's valid page?
-      console.log(PageSeparation.LibrarianPages.includes(tempCurrentMenu));
-      console.log(user);
-
       if (user.role === Role.Librarian) {
         if (!PageSeparation.LibrarianPages.includes(tempCurrentMenu)) {
           setInUnauthorizedPage(true);

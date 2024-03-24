@@ -143,7 +143,6 @@ export const useAddComment = ({
   };
 
   const handleRatingValue = (newValue: number | null) => {
-    console.log(newValue);
     setRatingValue(newValue);
   };
 

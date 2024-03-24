@@ -27,8 +27,6 @@ export const useDashboard = ({}: dashboardHookProps): dashboardHook => {
     }
   }, [isHighDemandError]);
 
-  console.log("highDemandResponse.data", highDemandResponse?.data);
-
   useEffect(() => {
     if (isHighDemandSuccess && highDemandResponse.data) {
       setHighDemandBooks(highDemandResponse.data);

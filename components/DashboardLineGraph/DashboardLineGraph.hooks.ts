@@ -47,7 +47,6 @@ export const useDashboardLineGraphLineGraph =
     //  getGraphData(currentUser._id);
     useEffect(() => {
       if (isGraphDataSuccess && graphDataResponse?.data) {
-        console.log("graphDataResponse?.data", graphDataResponse?.data);
         setGraphData(graphDataResponse?.data);
       }
     }, [isGraphDataSuccess]);

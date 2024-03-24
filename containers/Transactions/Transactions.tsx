@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -33,6 +34,7 @@ export const Transactions = ({}: transactionsParams) => {
     sortByValue,
     pageNumber,
     rowsPerPage,
+    isTicketLoading,
     handleRowsPerPage,
     handlePageNumber,
     handleSortOrder,
@@ -127,7 +129,19 @@ export const Transactions = ({}: transactionsParams) => {
         </Box>
         {/* accordion wrap */}
         <Box>
-          {checkedOutList && checkedOutList.length > 0 ? (
+          {isTicketLoading ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "65vh",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : checkedOutList && checkedOutList.length > 0 ? (
             checkedOutList.map((item) => (
               <CheckoutItem key={item.ID} checkoutItem={item} />
             ))

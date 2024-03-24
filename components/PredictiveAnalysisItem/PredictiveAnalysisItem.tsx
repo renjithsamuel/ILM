@@ -17,10 +17,11 @@ interface predictiveAnalysisItemParams {
 export const PredictiveAnalysisItem = ({
   book,
 }: predictiveAnalysisItemParams) => {
+
   const classes = usePredictiveAnalysisItemStyles();
   return (
     <>
-      <Link href={`/allbooks/${book.ID}`}>
+      <Link href={`/allbooks/${book.ISBN}`}>
         <Box className={classes.predictiveAnalysisItemRoot}>
           <Box className={classes.predictLeft}>
             {/* Book Image */}
@@ -78,21 +79,19 @@ export const PredictiveAnalysisItem = ({
                 </Box>
               </Tooltip>
               {/* stock */}
-              {book.inLibrary && (
-                <Tooltip title={"stock"} placement="top">
-                  <Box className={classes.bookCount}>
-                    {"Stock "} <SiBookstack /> {book.booksLeft}
-                  </Box>
-                </Tooltip>
-              )}
+              <Tooltip title={"stock"} placement="top">
+                <Box className={classes.bookCount}>
+                  {"Stock "} <SiBookstack /> {book.booksLeft}
+                </Box>
+              </Tooltip>
+
               {/* approximate demand */}
-              {book.inLibrary && (
-                <Tooltip title={"approximate demand"} placement="top">
-                  <Box className={classes.bookCount}>
-                    {"Demand "} <GoChecklist /> {book?.approximateDemand}
-                  </Box>
-                </Tooltip>
-              )}
+
+              <Tooltip title={"approximate demand"} placement="top">
+                <Box className={classes.bookCount}>
+                  {"Demand "} <GoChecklist /> {book?.approximateDemand}
+                </Box>
+              </Tooltip>
             </Box>
           </Box>
         </Box>
