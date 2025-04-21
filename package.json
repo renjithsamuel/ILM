@@ -1,0 +1,45 @@
+{
+  "name": "ilm-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx}\""
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@mui/material": "^5.15.6",
+    "@mui/styles": "^5.15.6",
+    "@react-pdf/renderer": "^3.3.5",
+    "@tanstack/react-query": "^5.17.19",
+    "axios": "^1.6.7",
+    "clsx": "^2.1.0",
+    "cookies-next": "^4.1.0",
+    "dayjs": "^1.11.10",
+    "formik": "^2.4.5",
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-icons": "^5.0.1",
+    "react-query": "^3.39.3",
+    "recharts": "^2.12.2",
+    "yup": "^1.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "prettier": "^3.2.5",
+    "typescript": "^5"
+  }
+}

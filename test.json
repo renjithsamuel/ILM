@@ -1,0 +1,908 @@
+
+{
+    "kind": "books#volumes",
+    "totalItems": 6023,
+    "items": [
+      {
+        "kind": "books#volume",
+        "id": "fjZhDwAAQBAJ",
+        "etag": "pbUW6MU4Jx8",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/fjZhDwAAQBAJ",
+        "volumeInfo": {
+          "title": "Learning ServiceNow",
+          "subtitle": "Administration and development on the Now platform, for powerful IT automation, 2nd Edition",
+          "authors": [
+            "Tim Woodruff"
+          ],
+          "publisher": "Packt Publishing Ltd",
+          "publishedDate": "2018-06-20",
+          "description": "IT service management automation at your fingertips Key Features Learn to leverage ServiceNow’s capabilities for improved IT automation by following step-by-step, practical instructions Build core administration, development, and maintenance skills with IT service management in ServiceNow Improve your workflow efficiency by designing and creating responsive and automated workflows, business logic, and front-end automation Book Description This book is an updated version of Learning ServiceNow, that will cover the new and updated features of the ServiceNow platform. It will show you how to put important ServiceNow features to work in the real world, while introducing key concepts via examples of managing and automating IT services. It'll help you build a solid foundation of knowledge, and will demonstrate how to effectively implement and configure modules within ServiceNow. We'll show you how to configure and administer your instance, and then move on to building strong user interfaces and creating powerful workflows. We also cover other key elements of ServiceNow, such as notifications, security, reporting, and custom development. You will learn how to improve and automate your business' workflow and processes. By the end of this book, you will be able to successfully configure and manage ServiceNow like a pro. What you will learn Read and write clear, effective code for the ServiceNow platform Identify and avoid common pitfalls and missteps that could seriously impact future progress and upgradeability Use debugging tools to troubleshoot when things go wrong Discover tips and tricks from top ServiceNow developers, architects, and administrators. Find out what the pros wish they knew when they were starting out Who this book is for This book is for IT professionals and administrators who are planning to or are already trying to implement ServiceNow in their organization for Enterprise IT service management tasks. Some familiarity with web technologies (JavaScript) would be helpful. Prior ServiceNow experience is not necessary.",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9781788837378"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "1788837371"
+            }
+          ],
+          "readingModes": {
+            "text": true,
+            "image": true
+          },
+          "pageCount": 389,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": true,
+          "contentVersion": "1.3.3.0.preview.3",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=fjZhDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=fjZhDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=fjZhDwAAQBAJ&printsec=frontcover&dq=orderBy%3Dnewest&hl=&cd=1&source=gbs_api",
+          "infoLink": "https://play.google.com/store/books/details?id=fjZhDwAAQBAJ&source=gbs_api",
+          "canonicalVolumeLink": "https://play.google.com/store/books/details?id=fjZhDwAAQBAJ"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "FOR_SALE",
+          "isEbook": true,
+          "listPrice": {
+            "amount": 3866.85,
+            "currencyCode": "INR"
+          },
+          "retailPrice": {
+            "amount": 3866.85,
+            "currencyCode": "INR"
+          },
+          "buyLink": "https://play.google.com/store/books/details?id=fjZhDwAAQBAJ&rdid=book-fjZhDwAAQBAJ&rdot=1&source=gbs_api",
+          "offers": [
+            {
+              "finskyOfferType": 1,
+              "listPrice": {
+                "amountInMicros": 3866850000,
+                "currencyCode": "INR"
+              },
+              "retailPrice": {
+                "amountInMicros": 3866850000,
+                "currencyCode": "INR"
+              }
+            }
+          ]
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": true
+          },
+          "pdf": {
+            "isAvailable": true
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=fjZhDwAAQBAJ&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "IT service management automation at your fingertips Key Features Learn to leverage ServiceNow’s capabilities for improved IT automation by following step-by-step, practical instructions Build core administration, development, and ..."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "zTa9BwAAQBAJ",
+        "etag": "6uUz6U13b6A",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/zTa9BwAAQBAJ",
+        "volumeInfo": {
+          "title": "WooCommerce Cookbook",
+          "authors": [
+            "Patrick Rauland"
+          ],
+          "publisher": "Packt Publishing Ltd",
+          "publishedDate": "2015-03-31",
+          "description": "If you have ever built or managed a WordPress site and want to add e-commerce functionality into your site, WooCommerce and this book are perfect for you. Learning how to use WooCommerce through this series of recipes will give you a solid platform to add any future e-commerce needs.",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9781784398545"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "1784398543"
+            }
+          ],
+          "readingModes": {
+            "text": true,
+            "image": true
+          },
+          "pageCount": 248,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": true,
+          "contentVersion": "2.2.3.0.preview.3",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=zTa9BwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=zTa9BwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=zTa9BwAAQBAJ&pg=PA71&dq=orderBy%3Dnewest&hl=&cd=2&source=gbs_api",
+          "infoLink": "https://play.google.com/store/books/details?id=zTa9BwAAQBAJ&source=gbs_api",
+          "canonicalVolumeLink": "https://play.google.com/store/books/details?id=zTa9BwAAQBAJ"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "FOR_SALE",
+          "isEbook": true,
+          "listPrice": {
+            "amount": 3515.21,
+            "currencyCode": "INR"
+          },
+          "retailPrice": {
+            "amount": 3515.21,
+            "currencyCode": "INR"
+          },
+          "buyLink": "https://play.google.com/store/books/details?id=zTa9BwAAQBAJ&rdid=book-zTa9BwAAQBAJ&rdot=1&source=gbs_api",
+          "offers": [
+            {
+              "finskyOfferType": 1,
+              "listPrice": {
+                "amountInMicros": 3515210000,
+                "currencyCode": "INR"
+              },
+              "retailPrice": {
+                "amountInMicros": 3515210000,
+                "currencyCode": "INR"
+              }
+            }
+          ]
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": true
+          },
+          "pdf": {
+            "isAvailable": true
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=zTa9BwAAQBAJ&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "... \u003cb\u003enewest\u003c/b\u003e functionality to sorting dropdown add_filter( &#39;woocommerce_get_catalog_ordering_args&#39;, &#39;woocommerce_cookbook_get_catalog_ordering_args&#39; ); function woocommerce_cookbook_get_catalog_ordering_args( $args ) { // get the \u003cb\u003eorderby\u003c/b\u003e&nbsp;..."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "UEOZBAAAQBAJ",
+        "etag": "iE3r3y7CXPA",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/UEOZBAAAQBAJ",
+        "volumeInfo": {
+          "title": "Write Modern Web Apps with the MEAN Stack",
+          "subtitle": "Mongo, Express, AngularJS, and Node.js",
+          "authors": [
+            "Jeff Dickey"
+          ],
+          "publisher": "Peachpit Press",
+          "publishedDate": "2014-09-24",
+          "description": "Traditionally, web applications have been architected so that the back-end houses all the front-end code. This has resulted in heavy projects that are difficult to manage and scale. This book will explain a new way to write web applications by treating the front-end as if it were a third-party (such as a mobile client). This book, written by a practicing MEAN developer, will take a holistic approach to using the MEAN JavaScript platform for creating modern web applications and lay out how to use the MEAN (Mongo, Express, AngularJS, and Node.js) set of tools to create a web application, from installation and setup of the tools to debugging and deploying your app. After an introduction to how web development is changing and the advantages of using the MEAN stack, the author jumps into an introduction to each tool and then dives into using the complete JavaScript-based application stack to build, test, and deploy apps.",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9780133962376"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "0133962377"
+            }
+          ],
+          "readingModes": {
+            "text": true,
+            "image": true
+          },
+          "pageCount": 257,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": true,
+          "contentVersion": "1.6.5.0.preview.3",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=UEOZBAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=UEOZBAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=UEOZBAAAQBAJ&pg=PA57&dq=orderBy%3Dnewest&hl=&cd=3&source=gbs_api",
+          "infoLink": "https://play.google.com/store/books/details?id=UEOZBAAAQBAJ&source=gbs_api",
+          "canonicalVolumeLink": "https://play.google.com/store/books/details?id=UEOZBAAAQBAJ"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "FOR_SALE",
+          "isEbook": true,
+          "listPrice": {
+            "amount": 1607.7,
+            "currencyCode": "INR"
+          },
+          "retailPrice": {
+            "amount": 1607.7,
+            "currencyCode": "INR"
+          },
+          "buyLink": "https://play.google.com/store/books/details?id=UEOZBAAAQBAJ&rdid=book-UEOZBAAAQBAJ&rdot=1&source=gbs_api",
+          "offers": [
+            {
+              "finskyOfferType": 1,
+              "listPrice": {
+                "amountInMicros": 1607700000,
+                "currencyCode": "INR"
+              },
+              "retailPrice": {
+                "amountInMicros": 1607700000,
+                "currencyCode": "INR"
+              }
+            }
+          ]
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+          "epub": {
+            "isAvailable": false
+          },
+          "pdf": {
+            "isAvailable": false
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=UEOZBAAAQBAJ&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "... \u003cb\u003eorderBy\u003c/b\u003e predicate to the ng-repeat directive in /layouts/posts.html: Angular will now correctly order the posts by the \u003cb\u003edate\u003c/b\u003e you added to your Mongoose schema. Note that aside from adding it to the model schema, you didn&#39;t have to write&nbsp;..."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "i5ffgL9KEg8C",
+        "etag": "F4tW47UALlw",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/i5ffgL9KEg8C",
+        "volumeInfo": {
+          "title": "Excel 2007 For Dummies",
+          "authors": [
+            "Greg Harvey"
+          ],
+          "publisher": "John Wiley & Sons",
+          "publishedDate": "2011-02-10",
+          "description": "One look at Excel 2007, with its new Office Button, Quick Access toolbar, and Ribbon, and you realize you’re not in Kansas anymore. Well, have no fear— Excel 2007 for Dummies is here! If you’ve never worked with a computer spreadsheet, or if you’ve had some experience with earlier versions of Excel but need help transitioning, here you’ll find everything you need to create, edit, format, and print your own worksheets (without sacrificing your sanity!). Excel 2007 for Dummies covers all the fundamental techniques, concentrating on only the easiest, most user-friendly ways to get things done. You’ll discover how to: Rearrange, delete and insert new information Keep track of and organize data in a single worksheet Transfer data between the sheets of different workbooks Create a chart using the data in a worksheet Add hyperlinks and graphics to worksheets And more! Plus, in keeping with Excel 2007’s more graphical and colorful look, Excel 2007 for Dummies has taken on some color of its own, with full-color plates in the mid-section of the book illustrating exactly what you’ll see on your screen. Whether you read it from cover to cover or skip to the sections that answer your specific questions, the simple guidance in this book will have you excelling at home or in the office no time.",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9781118050590"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "1118050592"
+            }
+          ],
+          "readingModes": {
+            "text": true,
+            "image": true
+          },
+          "pageCount": 408,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "averageRating": 5,
+          "ratingsCount": 3,
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": true,
+          "contentVersion": "0.2.5.0.preview.3",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=i5ffgL9KEg8C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=i5ffgL9KEg8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=i5ffgL9KEg8C&pg=PA330&dq=orderBy%3Dnewest&hl=&cd=4&source=gbs_api",
+          "infoLink": "http://books.google.co.in/books?id=i5ffgL9KEg8C&dq=orderBy%3Dnewest&hl=&source=gbs_api",
+          "canonicalVolumeLink": "https://books.google.com/books/about/Excel_2007_For_Dummies.html?hl=&id=i5ffgL9KEg8C"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "NOT_FOR_SALE",
+          "isEbook": false
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.co.in/books/download/Excel_2007_For_Dummies-sample-epub.acsm?id=i5ffgL9KEg8C&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "pdf": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.co.in/books/download/Excel_2007_For_Dummies-sample-pdf.acsm?id=i5ffgL9KEg8C&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=i5ffgL9KEg8C&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "... sort option on its drop-down list: Sort A to Z or Sort Z to A in a text field Sort Smallest to Largest or Sort Largest to Smallest in a number field Sort Oldest to Newest or \u003cb\u003eSort Newest\u003c/b\u003e to Oldest in a date field Excel then reorders all&nbsp;..."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "gPqlCgAAQBAJ",
+        "etag": "CkzqKVCDZUI",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/gPqlCgAAQBAJ",
+        "volumeInfo": {
+          "title": "Excel 2016 For Dummies",
+          "authors": [
+            "Greg Harvey"
+          ],
+          "publisher": "John Wiley & Sons",
+          "publishedDate": "2015-10-02",
+          "description": "Excel 2016 For Dummies (9781119077015) is now being published as Excel 2016 For Dummies (9781119293439). While this version features an older Dummies cover and design, the content is the same as the new release and should not be considered a different product. Let your Excel skills sore to new heights with this bestselling guide Updated to reflect the latest changes to the Microsoft Office suite, this new edition of Excel For Dummies quickly and painlessly gets you up to speed on mastering the world's most widely used spreadsheet tool. Written by bestselling author Greg Harvey, it has been completely revised and updated to offer you the freshest and most current information to make using the latest version of Excel easy and stress-free. If the thought of looking at spreadsheet makes your head swell, you've come to the right place. Whether you've used older versions of this popular program or have never gotten a headache from looking at all those grids, this hands-on guide will get you up and running with the latest installment of the software, Microsoft Excel 2016. In no time, you'll begin creating and editing worksheets, formatting cells, entering formulas, creating and editing charts, inserting graphs, designing database forms, and more. Plus, you'll get easy-to-follow guidance on mastering more advanced skills, like adding hyperlinks to worksheets, saving worksheets as web pages, adding worksheet data to an existing web page, and so much more. Save spreadsheets in the Cloud to work on them anywhere Use Excel 2016 on a desktop, laptop, or tablet Share spreadsheets via email, online meetings, and social media sites Analyze data with PivotTables If you're new to Excel and want to spend more time on your actual work than figuring out how to make it work for you, this new edition of Excel 2016 For Dummies sets you up for success.",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9781119077039"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "1119077036"
+            }
+          ],
+          "readingModes": {
+            "text": false,
+            "image": true
+          },
+          "pageCount": 435,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": false,
+          "contentVersion": "1.2.1.0.preview.1",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=gPqlCgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=gPqlCgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=gPqlCgAAQBAJ&pg=PA341&dq=orderBy%3Dnewest&hl=&cd=5&source=gbs_api",
+          "infoLink": "http://books.google.co.in/books?id=gPqlCgAAQBAJ&dq=orderBy%3Dnewest&hl=&source=gbs_api",
+          "canonicalVolumeLink": "https://books.google.com/books/about/Excel_2016_For_Dummies.html?hl=&id=gPqlCgAAQBAJ"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "NOT_FOR_SALE",
+          "isEbook": false
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": false
+          },
+          "pdf": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.co.in/books/download/Excel_2016_For_Dummies-sample-pdf.acsm?id=gPqlCgAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=gPqlCgAAQBAJ&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "... sort option on its dropdown list: ▷✓ Sort A to Z or Sort Z to A in a text field ▷✓ Sort Smallest to Largest or Sort Largest to Smallest in a number field ▷✓ Sort Oldest to Newest or \u003cb\u003eSort Newest\u003c/b\u003e to Oldest in a date field Excel then&nbsp;..."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "rbvymhMMjkUC",
+        "etag": "+tGpeeQQ690",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/rbvymhMMjkUC",
+        "volumeInfo": {
+          "title": "Excel 2013 For Dummies",
+          "authors": [
+            "Greg Harvey"
+          ],
+          "publisher": "John Wiley & Sons",
+          "publishedDate": "2013-01-16",
+          "description": "The bestselling Excel book - completely updated for Excel 2013! As the world's leading spreadsheet application, Excel has an enormous user base. The release of Office 2013 brings major changes to Excel, so Excel For Dummies comes to the rescue once more! Featuring the friendly For Dummies style, this popular guide shows beginners how to get up and running with Excel while also helping more experienced users get comfortable with the newest features. Walks you through the exciting new features of Excel 2013 Presents everything you need to know to perform basic Excel 2013 tasks Covers creating and editing worksheets and charts, formatting cells, entering formulas, inserting graphs, designing database forms, and adding database records Discusses printing, adding hyperlinks to worksheets, saving worksheets as web pages, adding existing worksheet data to an existing web page, and much more Whether you're new to Excel or are looking to get up and running with the 2013 version, Excel 2013 For Dummies has everything you need to know!",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9781118550007"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "1118550005"
+            }
+          ],
+          "readingModes": {
+            "text": true,
+            "image": true
+          },
+          "pageCount": 416,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": true,
+          "contentVersion": "1.11.9.0.preview.3",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=rbvymhMMjkUC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=rbvymhMMjkUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=rbvymhMMjkUC&pg=PT426&dq=orderBy%3Dnewest&hl=&cd=6&source=gbs_api",
+          "infoLink": "https://play.google.com/store/books/details?id=rbvymhMMjkUC&source=gbs_api",
+          "canonicalVolumeLink": "https://play.google.com/store/books/details?id=rbvymhMMjkUC"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "FOR_SALE",
+          "isEbook": true,
+          "listPrice": {
+            "amount": 470.82,
+            "currencyCode": "INR"
+          },
+          "retailPrice": {
+            "amount": 329.57,
+            "currencyCode": "INR"
+          },
+          "buyLink": "https://play.google.com/store/books/details?id=rbvymhMMjkUC&rdid=book-rbvymhMMjkUC&rdot=1&source=gbs_api",
+          "offers": [
+            {
+              "finskyOfferType": 1,
+              "listPrice": {
+                "amountInMicros": 470820000,
+                "currencyCode": "INR"
+              },
+              "retailPrice": {
+                "amountInMicros": 329570000,
+                "currencyCode": "INR"
+              }
+            }
+          ]
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.co.in/books/download/Excel_2013_For_Dummies-sample-epub.acsm?id=rbvymhMMjkUC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "pdf": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.co.in/books/download/Excel_2013_For_Dummies-sample-pdf.acsm?id=rbvymhMMjkUC&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=rbvymhMMjkUC&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "... \u003cb\u003eorder by\u003c/b\u003e state and maybe even by city. To have Excel correctly \u003cb\u003esort\u003c/b\u003e the records in a data list, you must specify which ... \u003cb\u003enewest\u003c/b\u003e. Descending order: This is the reverse of alphabetical order from Z to A, numerical order from largest to&nbsp;..."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "RhziOINLvHsC",
+        "etag": "3bCTEMmOKI8",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/RhziOINLvHsC",
+        "volumeInfo": {
+          "title": "Teach Yourself VISUALLY Access 2010",
+          "authors": [
+            "Faithe Wempen"
+          ],
+          "publisher": "John Wiley & Sons",
+          "publishedDate": "2011-04-06",
+          "description": "The visual way to get up to speed on Access 2010 It's one thing to gain access to Access. It's another thing entirely to figure out how to do all the things you want to do in Access, because the software is not all that intuitive. This full-color guide clearly shows you how to get the most out of Access 2010, including how to enter new records; create, edit, and design tables and forms; organize, analyze, and share data; generate concise reports; and much more. With pages of step-by-step instructions, graphics, and helpful advice, this is the visual learner's Access book-keep this on your desk and flip to what you need, any time! Explores the very latest features, functions, and tools of Access 2010, a database software tool that is part of the new Microsoft Office 2010 Teaches you how to enter new records and create, edit, and design tables and forms Explains how to organize, analyze, and share data; generate concise reports; add smart tags to tables, save backup copies of your data; and more Demonstrates through step-by-step instructions and numerous, full-color screen shots and graphics, so you can see exactly how to perform tasks This unparalleled book contains everything you need to know to use Access 2010 effectively.",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9781118081853"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "1118081854"
+            }
+          ],
+          "readingModes": {
+            "text": true,
+            "image": true
+          },
+          "pageCount": 352,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": false,
+          "contentVersion": "2.6.6.0.preview.3",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=RhziOINLvHsC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=RhziOINLvHsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=RhziOINLvHsC&pg=PA36&dq=orderBy%3Dnewest&hl=&cd=7&source=gbs_api",
+          "infoLink": "https://play.google.com/store/books/details?id=RhziOINLvHsC&source=gbs_api",
+          "canonicalVolumeLink": "https://play.google.com/store/books/details?id=RhziOINLvHsC"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "FOR_SALE",
+          "isEbook": true,
+          "listPrice": {
+            "amount": 2941.74,
+            "currencyCode": "INR"
+          },
+          "retailPrice": {
+            "amount": 2941.74,
+            "currencyCode": "INR"
+          },
+          "buyLink": "https://play.google.com/store/books/details?id=RhziOINLvHsC&rdid=book-RhziOINLvHsC&rdot=1&source=gbs_api",
+          "offers": [
+            {
+              "finskyOfferType": 1,
+              "listPrice": {
+                "amountInMicros": 2941740000,
+                "currencyCode": "INR"
+              },
+              "retailPrice": {
+                "amountInMicros": 2941740000,
+                "currencyCode": "INR"
+              }
+            }
+          ]
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.co.in/books/download/Teach_Yourself_VISUALLY_Access_2010-sample-epub.acsm?id=RhziOINLvHsC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "pdf": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.co.in/books/download/Teach_Yourself_VISUALLY_Access_2010-sample-pdf.acsm?id=RhziOINLvHsC&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=RhziOINLvHsC&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "... \u003cb\u003esort\u003c/b\u003e in descending \u003cb\u003eorder by\u003c/b\u003e choosing \u003cb\u003eSort\u003c/b\u003e Z to A from the shortcut menu. The data is sorted. Note: Depending on the field type, the \u003cb\u003esort\u003c/b\u003e options may be different. For example, for a \u003cb\u003eDate\u003c/b\u003e/Time field, the commands are \u003cb\u003eSort\u003c/b\u003e Oldest to \u003cb\u003eNewest\u003c/b\u003e&nbsp;..."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "fp5mBgAAQBAJ",
+        "etag": "uJ85V6sIRTk",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/fp5mBgAAQBAJ",
+        "volumeInfo": {
+          "title": "Microsoft Office 2010 with Microsoft Office 2010 Evaluation Software",
+          "authors": [
+            "Microsoft Official Academic Course"
+          ],
+          "publisher": "John Wiley & Sons",
+          "publishedDate": "2012-01-24",
+          "description": "The Microsoft Official Academic Courseware (MOAC) Office 2010 Series is the only Official Academic Course Material. The new and enhanced MOAC/ Microsoft Office 2010 System features Enhanced Wiley Desktop Editions as well as many other enhanced features designed to re-enforce workforce skills. The addition of animated tutorials in the Enhanced Wiley Desktop Editions and WileyPLUS courses, textbooks include additional materials on different skill levels to help users keep pace. WileyPLUS and an automatic Office assignment grader provides immediate feedback on every assignment, to help users practice and hone skills at their own pace. MOAC/ Microsoft Office 2010 System is built from the ground-up around the MOS® certification objectives- making it a great way to learn all the workforce-oriented tasks required for certification. The Test Bank now offers greater flexibility and provides more than 75 questions and 3 projects per lesson, as well as automated grading via OfficeGrader. Furthermore, the latest edition's use of color in screen captures allows users to follow on screen much easier, as screen captures will look the exact same as the application. Additional projects throughout the book helps users comprehend how a task is applied on the job. OfficeGrader functionality added to WileyPLUS provides immediate feedback on all homework, assignments, and projects and additional animated tutorials on key Office tasks provides additional help on difficult topics.",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9780470908501"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "0470908505"
+            }
+          ],
+          "readingModes": {
+            "text": false,
+            "image": true
+          },
+          "pageCount": 1296,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "averageRating": 1,
+          "ratingsCount": 1,
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": false,
+          "contentVersion": "0.1.0.0.preview.1",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=fp5mBgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=fp5mBgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=fp5mBgAAQBAJ&pg=PA1161&dq=orderBy%3Dnewest&hl=&cd=8&source=gbs_api",
+          "infoLink": "http://books.google.co.in/books?id=fp5mBgAAQBAJ&dq=orderBy%3Dnewest&hl=&source=gbs_api",
+          "canonicalVolumeLink": "https://books.google.com/books/about/Microsoft_Office_2010_with_Microsoft_Off.html?hl=&id=fp5mBgAAQBAJ"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "NOT_FOR_SALE",
+          "isEbook": false
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": false
+          },
+          "pdf": {
+            "isAvailable": true,
+            "acsTokenLink": "http://books.google.co.in/books/download/Microsoft_Office_2010_with_Microsoft_Off-sample-pdf.acsm?id=fp5mBgAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=fp5mBgAAQBAJ&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "... Sort A to Z or Sort Z to A; for numbers, you will choose Sort Smallest to Largest or Sort Largest to Smallest; and for dates, you will choose Sort Oldest to Newest or \u003cb\u003eSort Newest\u003c/b\u003e to Oldest. Lesson 5 has more information about sorting in&nbsp;..."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "BZlQ1CZEAX4C",
+        "etag": "n1NyYCdF4Fc",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/BZlQ1CZEAX4C",
+        "volumeInfo": {
+          "title": "Excel 2013 Formulas and Functions",
+          "authors": [
+            "Paul McFedries"
+          ],
+          "publisher": "Que Publishing",
+          "publishedDate": "2013-02-14",
+          "description": "Master core Excel 2013 tools for building powerful, reliable spreadsheets! Excel expert Paul McFedries shows how to use Excel 2013’s core features to solve problems and get the answers you need. Using real-world examples, McFedries helps you get the absolute most out of features and improvements ranging from FlashFill to Excel’s newest functions. Along the way, you discover the fastest, best ways to handle essential day-to-day tasks ranging from generating account numbers to projecting the impact of inflation. Becoming an Excel expert has never been easier! You’ll find crystal-clear instructions; insider insights; even complete step-by-step projects for building timesheets, projecting cash flow, aging receivables, analyzing defects, and more.. • Quickly create powerful spreadsheets with FlashFill • Use conditional formatting to instantly reveal anomalies, problems, or opportunities • Analyze your data with standard tables and PivotTables • Use complex criteria to filter data in lists • Understand correlations between data • Perform sophisticated what-if analyses • Use regression to track trends and make forecasts • Build loan, investment, and discount formulas • Validate data, troubleshoot problems, and build more accurate, trustworthy spreadsheets About MrExcel Library: Every book in the MrExcel Library pinpoints a specific set of crucial Excel tasks and presents focused skills and examples for performing them rapidly and effectively. Selected by Bill Jelen, Microsoft Excel MVP and mastermind behind the leading Excel solutions website MrExcel.com, these books will • Dramatically increase your productivity—saving you 50 hours a year or more • Present proven, creative strategies for solving real-world problems • Show you how to get great results, no matter how much data you have • Help you avoid critical mistakes that even experienced users make CATEGORY: Spreadsheets COVERS: Microsoft Office Excel 2013",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9780133260700"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "0133260704"
+            }
+          ],
+          "readingModes": {
+            "text": true,
+            "image": true
+          },
+          "pageCount": 777,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": true,
+          "contentVersion": "1.9.10.0.preview.3",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=BZlQ1CZEAX4C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=BZlQ1CZEAX4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=BZlQ1CZEAX4C&pg=PT413&dq=orderBy%3Dnewest&hl=&cd=9&source=gbs_api",
+          "infoLink": "https://play.google.com/store/books/details?id=BZlQ1CZEAX4C&source=gbs_api",
+          "canonicalVolumeLink": "https://play.google.com/store/books/details?id=BZlQ1CZEAX4C"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "FOR_SALE",
+          "isEbook": true,
+          "listPrice": {
+            "amount": 1815.66,
+            "currencyCode": "INR"
+          },
+          "retailPrice": {
+            "amount": 1815.66,
+            "currencyCode": "INR"
+          },
+          "buyLink": "https://play.google.com/store/books/details?id=BZlQ1CZEAX4C&rdid=book-BZlQ1CZEAX4C&rdot=1&source=gbs_api",
+          "offers": [
+            {
+              "finskyOfferType": 1,
+              "listPrice": {
+                "amountInMicros": 1815660000,
+                "currencyCode": "INR"
+              },
+              "retailPrice": {
+                "amountInMicros": 1815660000,
+                "currencyCode": "INR"
+              }
+            }
+          ]
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+          "epub": {
+            "isAvailable": false
+          },
+          "pdf": {
+            "isAvailable": false
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=BZlQ1CZEAX4C&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "... \u003cb\u003eorder by\u003c/b\u003e customer name, account number, part number, or any other field. You even ... \u003cb\u003eNewest\u003c/b\u003e for a \u003cb\u003edate\u003c/b\u003e field); for a descending \u003cb\u003esort\u003c/b\u003e, click \u003cb\u003eSort\u003c/b\u003e Z to A (or \u003cb\u003eSort\u003c/b\u003e ... \u003cb\u003eSort\u003c/b\u003e dialog box to \u003cb\u003esort\u003c/b\u003e the. Sorting a Table Performing a More Complex \u003cb\u003eSort\u003c/b\u003e."
+        }
+      },
+      {
+        "kind": "books#volume",
+        "id": "crkrDwAAQBAJ",
+        "etag": "zV3Z5nFKsCg",
+        "selfLink": "https://www.googleapis.com/books/v1/volumes/crkrDwAAQBAJ",
+        "volumeInfo": {
+          "title": "Learning ServiceNow",
+          "authors": [
+            "Tim Woodruff"
+          ],
+          "publisher": "Packt Publishing Ltd",
+          "publishedDate": "2017-03-30",
+          "description": "IT Service management at your fingertips About This Book Leverage ServiceNow's capabilities to achieve improved service management and excellent results in your IT operations by following step-by-step, practical instructions Build core administration, management, and maintenance skills with IT service management and IT operations management Improve your workflow efficiency by designing and creating responsive and automated workflows Who This Book Is For This book is for IT professionals and administrators who are planning to or are already trying to implement ServiceNow in their organization for Enterprise IT service management tasks. Some familiarity with web technologies (JavaScript) would be helpful. System administration experience is necessary. What You Will Learn Acquire and configure your own free personal developer instance of ServiceNow Read (and write!) clear, effective requirements for ServiceNow development Avoid common pitfalls and missteps that could seriously impact future progress and upgradeability Know how to troubleshoot when things go wrong using debugging tools Discover developer “tips and tricks” Pick up great tips from top ServiceNow development and administration professionals, and find out what they wish they knew when they were starting out In Detail This book shows you how to put important ServiceNow features to work in the real world. We will introduce key concepts and examples on managing and automating IT services, and help you build a solid foundation towards this new approach. We'll demonstrate how to effectively implement various system configurations within ServiceNow. We'll show you how to configure and administer your instance, and then move on to building strong user interfaces and creating powerful workflows. We also cover other key elements of ServiceNow, such as alerts and notifications, security, reporting, and custom development. You will learn how to improve your business' workflow, processes, and operational efficiency. By the end of this book, you will be able to successfully configure and manage ServiceNow within your organization. Style and approach This book is a step-by-step practical tutorial to help you quickly deploy and configure ServiceNow in your organization.",
+          "industryIdentifiers": [
+            {
+              "type": "ISBN_13",
+              "identifier": "9781785887536"
+            },
+            {
+              "type": "ISBN_10",
+              "identifier": "178588753X"
+            }
+          ],
+          "readingModes": {
+            "text": true,
+            "image": true
+          },
+          "pageCount": 351,
+          "printType": "BOOK",
+          "categories": [
+            "Computers"
+          ],
+          "averageRating": 4,
+          "ratingsCount": 1,
+          "maturityRating": "NOT_MATURE",
+          "allowAnonLogging": true,
+          "contentVersion": "2.3.4.0.preview.3",
+          "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+          },
+          "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=crkrDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=crkrDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+          },
+          "language": "en",
+          "previewLink": "http://books.google.co.in/books?id=crkrDwAAQBAJ&printsec=frontcover&dq=orderBy%3Dnewest&hl=&cd=10&source=gbs_api",
+          "infoLink": "https://play.google.com/store/books/details?id=crkrDwAAQBAJ&source=gbs_api",
+          "canonicalVolumeLink": "https://play.google.com/store/books/details?id=crkrDwAAQBAJ"
+        },
+        "saleInfo": {
+          "country": "IN",
+          "saleability": "FOR_SALE",
+          "isEbook": true,
+          "listPrice": {
+            "amount": 3866.85,
+            "currencyCode": "INR"
+          },
+          "retailPrice": {
+            "amount": 3866.85,
+            "currencyCode": "INR"
+          },
+          "buyLink": "https://play.google.com/store/books/details?id=crkrDwAAQBAJ&rdid=book-crkrDwAAQBAJ&rdot=1&source=gbs_api",
+          "offers": [
+            {
+              "finskyOfferType": 1,
+              "listPrice": {
+                "amountInMicros": 3866850000,
+                "currencyCode": "INR"
+              },
+              "retailPrice": {
+                "amountInMicros": 3866850000,
+                "currencyCode": "INR"
+              }
+            }
+          ]
+        },
+        "accessInfo": {
+          "country": "IN",
+          "viewability": "PARTIAL",
+          "embeddable": true,
+          "publicDomain": false,
+          "textToSpeechPermission": "ALLOWED",
+          "epub": {
+            "isAvailable": true
+          },
+          "pdf": {
+            "isAvailable": true
+          },
+          "webReaderLink": "http://play.google.com/books/reader?id=crkrDwAAQBAJ&hl=&source=gbs_api",
+          "accessViewStatus": "SAMPLE",
+          "quoteSharingAllowed": false
+        },
+        "searchInfo": {
+          "textSnippet": "IT Service management at your fingertips About This Book Leverage ServiceNow&#39;s capabilities to achieve improved service management and excellent results in your IT operations by following step-by-step, practical instructions Build core ..."
+        }
+      }
+    ]
+  }
+  
